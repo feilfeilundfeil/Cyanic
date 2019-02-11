@@ -62,6 +62,7 @@ open class ConfigurableCell: UICollectionViewCell {
     open func configure(with component: AnyComponent) {
         self.layout = component.layout
         self.contentView.frame.size = self.intrinsicContentSize
+        component.layout.cachedHeight = self.intrinsicContentSize.height
         self.setNeedsLayout()
     }
 

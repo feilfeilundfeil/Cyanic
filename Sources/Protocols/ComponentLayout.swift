@@ -21,6 +21,7 @@ import struct CoreGraphics.CGFloat
 public protocol ComponentLayout: class, Layout {
 
     var disposeBag: DisposeBag { get }
+    var cachedHeight: CGFloat? { get set }
 
 }
 

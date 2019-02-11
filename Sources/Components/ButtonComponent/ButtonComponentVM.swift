@@ -34,4 +34,6 @@ open class ButtonComponentVM<T>: ViewModel {
         return String(describing: self.model)
     }
 
+    open var cachedHeight: CGFloat?
+
 }

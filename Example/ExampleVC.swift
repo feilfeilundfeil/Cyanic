@@ -54,7 +54,7 @@ class ExampleButtonComponent: ButtonComponent<Void> {
         return ButtonComponentLayout(
             type: ButtonLayoutType.custom,
             title: state.title.value,
-            height: 100.0,
+            height: 1000.0,
             contentEdgeInsets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0.0, right: 5.0),
             flexibility: Flexibility.inflexible,
             viewReuseId: "Example Button",

@@ -97,7 +97,8 @@ extension BaseCollectionVC: UICollectionViewDelegateFlowLayout {
         }
 
         let layout: ComponentLayout = self.components[indexPath.item].layout
-        return layout.measurement(within: collectionView.bounds.size).size
+
+        return layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
     }
 
 }
