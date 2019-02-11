@@ -145,4 +145,5 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
     }
 
     public let disposeBag: DisposeBag
+    public var cachedHeight: CGFloat?
 }

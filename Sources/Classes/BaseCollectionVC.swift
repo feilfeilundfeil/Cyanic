@@ -10,10 +10,11 @@ import struct Foundation.IndexPath
 import class Foundation.NSCoder
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 import struct Kio.MetaType
 import class RxCocoa.BehaviorRelay
 import struct RxDataSources.AnimatableSectionModel
-import class RxDataSources.RxCollectionViewSectionedReloadDataSource
+import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
@@ -44,7 +45,7 @@ open class BaseCollectionVC: UIViewController {
         self._cellTypes.forEach { self.collectionView.register($0.base.self, forCellWithReuseIdentifier: $0.base.identifier) }
         self.collectionView.delegate = self
 
-        let dataSource: RxCollectionViewSectionedReloadDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedReloadDataSource<AnimatableSectionModel<String, AnyComponent>>(
+        let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, viewModel: AnyComponent) -> UICollectionViewCell in
                 guard let cell = viewModel.dequeueReusableCell(in: cv, to: viewModel.cellType, for: indexPath) as? ConfigurableCell
                     else { fatalError("Cell not registered to UICollectionView")}
@@ -87,4 +88,16 @@ open class BaseCollectionVC: UIViewController {
 
 }
 
-extension BaseCollectionVC: UICollectionViewDelegateFlowLayout {}
+extension BaseCollectionVC: UICollectionViewDelegateFlowLayout {
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        if self.components.endIndex <= indexPath.item {
+            return CGSize.zero
+        }
+
+        let layout: ComponentLayout = self.components[indexPath.item].layout
+        return layout.measurement(within: collectionView.bounds.size).size
+    }
+
+}

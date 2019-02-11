@@ -14,10 +14,11 @@ public class ButtonComponentState: StateType {
     public let color: BehaviorRelay<UIColor> = BehaviorRelay<UIColor>(value: UIColor.clear)
     public let isEnabled: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: true)
 
-    public static func == (lhs: ButtonComponentState, rhs: ButtonComponentState) -> Bool {
-        return lhs.title.value == rhs.title.value &&
-            lhs.color.value == rhs.color.value &&
-            lhs.isEnabled.value == rhs.isEnabled.value
+    public override func isEqual(to other: StateType) -> Bool {
+        guard let other = other as? ButtonComponentState else { return false }
+        return self.title.value == other.title.value &&
+            self.color.value == other.color.value &&
+            self.isEnabled.value == other.isEnabled.value
     }
 
     public override func hash(into hasher: inout Hasher) {

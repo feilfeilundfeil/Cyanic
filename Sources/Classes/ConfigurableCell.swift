@@ -43,11 +43,6 @@ open class ConfigurableCell: UICollectionViewCell {
         )
             .arrangement(within: self.contentView.bounds)
             .makeViews(in: self.contentView)
-        print(
-            self.contentView.subviews
-                .map { "\(type(of: $0)): \($0.bounds)"}
-                .joined(separator: "\n")
-        )
     }
 
     override public final func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -67,19 +62,7 @@ open class ConfigurableCell: UICollectionViewCell {
     open func configure(with component: AnyComponent) {
         self.layout = component.layout
         self.contentView.frame.size = self.intrinsicContentSize
-        defer { self.setNeedsLayout() }
-    }
-
-    open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         self.setNeedsLayout()
-        self.layoutIfNeeded()
-
-        let size: CGSize
-        size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        var newFrame: CGRect = layoutAttributes.frame
-        newFrame.size.height = CGFloat(ceilf(Float(size.height)))
-        layoutAttributes.frame = newFrame
-        return layoutAttributes
     }
 
 }

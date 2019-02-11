@@ -15,7 +15,7 @@ import RxSwift
 
 class ExampleVC: BaseCollectionVC {
 
-    let relay: BehaviorRelay = BehaviorRelay(value: "Test")
+    let relay: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
     let bag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -30,32 +30,24 @@ class ExampleVC: BaseCollectionVC {
 
         let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: nil)
 
-        button.rx.tap.map { () -> String in
-            let rand = Int.random(in: 1...10)
-
-            switch rand {
-                case 1...5:
-                    return "Hello"
-
-                default:
-                    return "World"
-            }
-        }
-        .bind(to: self.relay)
-        .disposed(by: self.bag)
-
+        button.rx.tap
+//            .map {
+//                _ = self.components.removeFirst()
+//            }
+            .bind(to: self.relay)
+            .disposed(by: self.bag)
 
         self.navigationItem.leftBarButtonItem = button
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+            self.components.remove(at: 1)
+            self.components.remove(at: 0)
+        }
     }
-
-    @objc func doneButtonTapped() {
-
-    }
-
 
 }
 
-class ExampleButtonComponent: ButtonComponent<String> {
+class ExampleButtonComponent: ButtonComponent<Void> {
 
     override var layout: ComponentLayout {
         let state = self.identity as! ButtonComponentState
@@ -79,14 +71,23 @@ class ExampleButtonComponent: ButtonComponent<String> {
 
 }
 
-class ExampleButtonVM: ButtonComponentVM<String> {
+class ExampleButtonVM: ButtonComponentVM<Void> {
 
     override open var title: String {
-        return self.model
+        return UUID().uuidString
     }
 
     override open var color: UIColor {
-        return UIColor.blue
+        let int: Int = Int.random(in: 1...3)
+
+        switch int {
+            case 1:
+                return .green
+            case 2:
+                return .orange
+            default:
+                return .yellow
+        }
     }
 
     override open var isEnabled: Bool {

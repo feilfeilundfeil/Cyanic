@@ -28,7 +28,11 @@ open class StateType: Hashable {
     }
 
     public static func == (lhs: StateType, rhs: StateType) -> Bool {
-        fatalError("Must be overridden")
+        return lhs.isEqual(to: rhs)
+    }
+
+    open func isEqual(to other: StateType) -> Bool {
+        return type(of: other) == type(of: self)
     }
 
     public func hash(into hasher: inout Hasher) {
