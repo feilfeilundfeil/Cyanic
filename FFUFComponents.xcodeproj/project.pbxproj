@@ -24,6 +24,7 @@
 		14C1E3E22210967D0053E318 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E12210967D0053E318 /* State.swift */; };
 		14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */; };
 		14C1E3E62210AE0D0053E318 /* ButtonComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */; };
+		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBC9CB220C54A000597FAA /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CA220C54A000597FAA /* StateType.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */; };
@@ -88,6 +89,7 @@
 		14C1E3E12210967D0053E318 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentVM.swift; sourceTree = "<group>"; };
 		14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentState.swift; sourceTree = "<group>"; };
+		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBC9CA220C54A000597FAA /* StateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		145AD767220B1ED6004F02C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				14C96F062211C2EF00731265 /* Utilities */,
 				14C1E3DC2210491E0053E318 /* Components */,
 				1478E9AF220C5CDA006AF8B3 /* Classes */,
 				14CBC9C9220C415200597FAA /* Protocols */,
@@ -214,12 +217,28 @@
 		14C1E3DC2210491E0053E318 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				14C96F092211EE9600731265 /* ButtonComponent */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		14C96F062211C2EF00731265 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				14C96F072211C30F00731265 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		14C96F092211EE9600731265 /* ButtonComponent */ = {
+			isa = PBXGroup;
+			children = (
 				14C1E3DD2210494E0053E318 /* ButtonComponent.swift */,
 				14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */,
 				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
 				14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */,
 			);
-			path = Components;
+			path = ButtonComponent;
 			sourceTree = "<group>";
 		};
 		14CBC9C9220C415200597FAA /* Protocols */ = {
@@ -494,6 +513,7 @@
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14CBC9CB220C54A000597FAA /* StateType.swift in Sources */,
 				14E424C9220E84B3006BAA4F /* ViewModel.swift in Sources */,
+				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14C1E3E22210967D0053E318 /* State.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseCollectionVC.swift in Sources */,
 				14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */,

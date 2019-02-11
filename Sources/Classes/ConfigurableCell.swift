@@ -43,8 +43,6 @@ open class ConfigurableCell: UICollectionViewCell {
         )
             .arrangement(within: self.contentView.bounds)
             .makeViews(in: self.contentView)
-        print("ContentView: \(self.contentView.bounds)")
-        print(self.contentView.subviews)
         print(
             self.contentView.subviews
                 .map { "\(type(of: $0)): \($0.bounds)"}
@@ -58,21 +56,17 @@ open class ConfigurableCell: UICollectionViewCell {
     }
 
     override public final var intrinsicContentSize: CGSize {
-        return self.sizeThatFits(CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
+        return self.sizeThatFits(
+            CGSize(
+                width: Constants.screenWidth,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+        )
     }
 
     open func configure(with component: AnyComponent) {
         self.layout = component.layout
-        let size: CGSize
-
-        if let layout = self.layout as? SizeLayout<UIView>, let minWidth = layout.minWidth, let minHeight = layout.minHeight {
-            size = CGSize(width: minWidth, height: minHeight)
-        } else {
-            size = UICollectionViewFlowLayout.automaticSize
-        }
-
-        self.contentView.frame.size = size
-
+        self.contentView.frame.size = self.intrinsicContentSize
         defer { self.setNeedsLayout() }
     }
 
@@ -81,16 +75,9 @@ open class ConfigurableCell: UICollectionViewCell {
         self.layoutIfNeeded()
 
         let size: CGSize
-
-        if let layout = self.layout as? SizeLayout<UIView>, let minWidth = layout.minWidth, let minHeight = layout.minHeight {
-            size = CGSize(width: minWidth, height: minHeight)
-        } else {
-            size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        }
-
+        size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
         var newFrame: CGRect = layoutAttributes.frame
         newFrame.size.height = CGFloat(ceilf(Float(size.height)))
-        newFrame.size.width = UIScreen.main.bounds.width
         layoutAttributes.frame = newFrame
         return layoutAttributes
     }

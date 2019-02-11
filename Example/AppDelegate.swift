@@ -17,13 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: 10.0)
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
         let vc = ExampleVC(layout: layout, cellTypes: [ConfigurableCell.self])
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
+
+        print("Auto: \(UICollectionViewFlowLayout.automaticSize)")
         return true
     }
 

@@ -22,3 +22,11 @@ public protocol ComponentLayout: Layout {
     var disposeBag: DisposeBag { get }
 
 }
+
+public extension ComponentLayout where Self: AnyObject {
+
+    static var identifier: String {
+        return String(describing: self)
+    }
+
+}
