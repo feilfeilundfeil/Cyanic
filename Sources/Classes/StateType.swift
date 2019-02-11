@@ -17,7 +17,7 @@
     - You must override the static method == (lhs:rhs:).
     - You must override the hash(into:) method and call super when subclassing otherwise diffing will most likely not work as intended.
 */
-open class StateType {
+open class StateType: Hashable {
 
     public init() {
         guard type(of: self) != StateType.self else {
@@ -26,9 +26,7 @@ open class StateType {
             )
         }
     }
-}
 
-extension StateType: Hashable {
     public static func == (lhs: StateType, rhs: StateType) -> Bool {
         fatalError("Must be overridden")
     }

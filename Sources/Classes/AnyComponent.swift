@@ -11,6 +11,7 @@ import class UIKit.UICollectionViewCell
 import struct UIKit.IndexPath
 import protocol LayoutKit.Layout
 import protocol Differentiator.IdentifiableType
+import class RxSwift.DisposeBag
 
 /**
  Type Erasure class for data structures that conform to Component.
@@ -22,7 +23,7 @@ public final class AnyComponent {
         self.cellType = component.cellType
         self.layout = component.layout
         self.viewModel = component.viewModel
-        
+        self.disposeBag = component.disposeBag
     }
 
     // MARK: Stored Properties
@@ -50,6 +51,8 @@ public final class AnyComponent {
      This ViewModel instance is custom made aka is not generated.
     */
     public let viewModel: ViewModel
+
+    public let disposeBag: DisposeBag
 
     /**
     */

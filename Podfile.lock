@@ -1,4 +1,5 @@
 PODS:
+  - Alacrity (0.4.1)
   - Differentiator (3.1.0)
   - Kio (2.1.3)
   - LayoutKit (10.1.0)
@@ -13,6 +14,7 @@ PODS:
     - RxAtomic (~> 4.4)
 
 DEPENDENCIES:
+  - Alacrity
   - Kio
   - LayoutKit
   - RxDataSources
@@ -20,6 +22,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alacrity
     - Differentiator
     - Kio
     - LayoutKit
@@ -29,6 +32,7 @@ SPEC REPOS:
     - RxSwift
 
 SPEC CHECKSUMS:
+  Alacrity: bfc9d8dcfeb38fd6d471c86e9017987dbbff137f
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Kio: 8f638653e9905962d734bb085b6fa92f0f253922
   LayoutKit: 66478bb3af5ce4519a056d9465bc4c7585d2350b
@@ -37,6 +41,6 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
 
-PODFILE CHECKSUM: 4e2615d43ac1871ee2cfdd5c2fe63ee305f39cfb
+PODFILE CHECKSUM: 105057950a830496c5ef6e939bc04e2acc9f0cd8
 
 COCOAPODS: 1.6.0.rc.2

@@ -8,6 +8,7 @@
 
 import protocol LayoutKit.Layout
 import class RxSwift.DisposeBag
+import class UIKit.UIView
 
 /**
  A ComponentLayout's purpose is to create UIViews necessary of the Component and define its size, location and UI properties such as
@@ -18,6 +19,6 @@ import class RxSwift.DisposeBag
 */
 public protocol ComponentLayout: Layout {
 
-    var disposeBag: DisposeBag? { get set }
+    var disposeBag: DisposeBag { get }
 
 }

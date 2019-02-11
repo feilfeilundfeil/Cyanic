@@ -7,6 +7,8 @@ def pods
   pod 'RxDataSources'
   pod 'LayoutKit'
   pod 'Kio'
+  pod 'Alacrity'
+
 end
 
 target 'FFUFComponents' do

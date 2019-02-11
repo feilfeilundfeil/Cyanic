@@ -7,15 +7,23 @@
 //
 
 import UIKit
+import FFUFComponents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+
+        let vc = ExampleVC(layout: layout, cellTypes: [ConfigurableCell.self])
+        self.window?.rootViewController = UINavigationController(rootViewController: vc)
+        self.window?.makeKeyAndVisible()
         return true
     }
 

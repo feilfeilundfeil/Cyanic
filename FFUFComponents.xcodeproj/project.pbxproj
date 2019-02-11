@@ -11,7 +11,7 @@
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
-		1478E997220C59B9006AF8B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ViewController.swift */; };
+		1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleVC.swift */; };
 		1478E99A220C59B9006AF8B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E998220C59B9006AF8B3 /* Main.storyboard */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
 		1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */; };
@@ -19,6 +19,11 @@
 		1478E9AB220C5B6D006AF8B3 /* FFUFComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1478E9B1220C5D1E006AF8B3 /* BaseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */; };
 		1478E9B3220C5F49006AF8B3 /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */; };
+		14C1E3DE2210494E0053E318 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DD2210494E0053E318 /* ButtonComponent.swift */; };
+		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
+		14C1E3E22210967D0053E318 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E12210967D0053E318 /* State.swift */; };
+		14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */; };
+		14C1E3E62210AE0D0053E318 /* ButtonComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */; };
 		14CBC9CB220C54A000597FAA /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CA220C54A000597FAA /* StateType.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */; };
@@ -71,13 +76,18 @@
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1478E992220C59B9006AF8B3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1478E994220C59B9006AF8B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1478E996220C59B9006AF8B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1478E996220C59B9006AF8B3 /* ExampleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleVC.swift; sourceTree = "<group>"; };
 		1478E999220C59B9006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1478E99B220C59BC006AF8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionVC.swift; sourceTree = "<group>"; };
 		1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
+		14C1E3DD2210494E0053E318 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
+		14C1E3E12210967D0053E318 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentVM.swift; sourceTree = "<group>"; };
+		14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentState.swift; sourceTree = "<group>"; };
 		14CBC9CA220C54A000597FAA /* StateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
@@ -169,6 +179,7 @@
 		145AD767220B1ED6004F02C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				14C1E3DC2210491E0053E318 /* Components */,
 				1478E9AF220C5CDA006AF8B3 /* Classes */,
 				14CBC9C9220C415200597FAA /* Protocols */,
 			);
@@ -179,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				1478E994220C59B9006AF8B3 /* AppDelegate.swift */,
-				1478E996220C59B9006AF8B3 /* ViewController.swift */,
+				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
 				1478E998220C59B9006AF8B3 /* Main.storyboard */,
 				1478E99B220C59BC006AF8B3 /* Assets.xcassets */,
 				1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */,
@@ -195,8 +206,20 @@
 				1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */,
 				14CBC9CA220C54A000597FAA /* StateType.swift */,
 				14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */,
+				14C1E3E12210967D0053E318 /* State.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		14C1E3DC2210491E0053E318 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				14C1E3DD2210494E0053E318 /* ButtonComponent.swift */,
+				14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */,
+				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
+				14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		14CBC9C9220C415200597FAA /* Protocols */ = {
@@ -386,6 +409,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alacrity/Alacrity.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Kio/Kio.framework",
 				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
@@ -398,6 +422,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alacrity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
@@ -463,12 +488,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */,
+				14C1E3E62210AE0D0053E318 /* ButtonComponentState.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				1478E9B3220C5F49006AF8B3 /* AnyComponent.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14CBC9CB220C54A000597FAA /* StateType.swift in Sources */,
 				14E424C9220E84B3006BAA4F /* ViewModel.swift in Sources */,
+				14C1E3E22210967D0053E318 /* State.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseCollectionVC.swift in Sources */,
+				14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */,
+				14C1E3DE2210494E0053E318 /* ButtonComponent.swift in Sources */,
+				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1478E997220C59B9006AF8B3 /* ViewController.swift in Sources */,
+				1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,7 +773,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 808667D7BA5B88327D23895C /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;
@@ -763,7 +793,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A2E7F690C9C294C299E19B52 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;
