@@ -12,6 +12,9 @@ import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import struct Foundation.IndexPath
 
+/**
+ Type Erased wrapper for a Component instance
+*/
 public final class AnyComponent: IdentifiableType {
 
     public init<C: Component>(_ component: C) {
@@ -19,7 +22,6 @@ public final class AnyComponent: IdentifiableType {
         self.cellType = component.cellType
         self.identity = AnyHashable(component.identity)
         self.isShown = component.isShown
-
     }
 
     public let layout: ComponentLayout

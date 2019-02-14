@@ -37,12 +37,20 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
         }
 
+        let randomColor: () -> UIColor = {
+            let randomInt: () -> UInt8 = {
+                return UInt8.random(in: 0...255)
+            }
+
+            return UIColor.kio.color(red: randomInt(), green: randomInt(), blue: randomInt())
+        }
+
         return [
             ButtonComponent(
                 title: "First",
                 id: "First",
                 height: 200.0,
-                backgroundColor: UIColor.blue,
+                backgroundColor: randomColor(),
                 style: style,
                 onTap: { print("Hello World, First") },
                 isShown: { [weak self] () -> Bool in
@@ -54,7 +62,7 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 title: "Second",
                 id: "Second",
                 height: 200.0,
-                backgroundColor: UIColor.yellow,
+                backgroundColor: randomColor(),
                 style: style,
                 onTap: { print("Hello World, Second") },
                 isShown: { [weak self] () -> Bool in
@@ -66,9 +74,9 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 title: "Third",
                 id: "Third",
                 height: 200.0,
-                backgroundColor: UIColor.orange,
+                backgroundColor: randomColor(),
                 style: style,
-                onTap: { print("Hello World, First") },
+                onTap: { print("Hello World, Third") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
@@ -78,9 +86,81 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 title: "Fourth",
                 id: "Fourth",
                 height: 200.0,
-                backgroundColor: UIColor.green,
+                backgroundColor: randomColor(),
                 style: style,
-                onTap: { print("Hello World, First") },
+                onTap: { print("Hello World, Fourth") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Fifth",
+                id: "Fifth",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Fifth") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Sixth",
+                id: "Sixth",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Sixth") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Seventh",
+                id: "Seventh",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Seventh") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Eighth",
+                id: "Eighth",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Eighth") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Ninth",
+                id: "Ninth",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Ninth") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Tenth",
+                id: "Tenth",
+                height: 200.0,
+                backgroundColor: randomColor(),
+                style: style,
+                onTap: { print("Hello World, Tenth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false

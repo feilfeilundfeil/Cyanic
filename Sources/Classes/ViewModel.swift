@@ -25,17 +25,5 @@ open class BaseViewModel<S: Equatable>: ViewModelType {
     public var currentState: S {
         return self.state.value
     }
-//
-//    public final func setState(block: () -> S) {
-//
-//        let firstState: S = block()
-//        let secondState: S = block()
-//
-//        if firstState != secondState {
-//            fatalError("calling setState twice produced different results. This should not happen.")
-//        }
-//
-//        self._state.accept(block())
-//    }
 
 }
