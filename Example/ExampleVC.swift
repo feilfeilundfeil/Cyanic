@@ -35,6 +35,7 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
 
         let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
         }
 
         let randomColor: () -> UIColor = {

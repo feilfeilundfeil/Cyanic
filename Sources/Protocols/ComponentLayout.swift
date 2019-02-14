@@ -10,11 +10,9 @@ import protocol LayoutKit.Layout
 import class RxSwift.DisposeBag
 
 /**
- A ComponentLayout's purpose is to create UIViews necessary of the Component and define its size, location and UI properties such as
- text and/or color. This means that the data binding occurs on this data structure.
-
- A ComponentLayout contains a DisposeBag which allows Rx related features such as data binding (subscriptions) to work and be
- disposed of properly
+ A ComponentLayout is simply a Layout with a disposeBag to properly deallocate Rx related subscriptions.
+ A ComponentLayout calculates the size and location of the subviews in a given CGRect. The subviews are styled based on the
+ data of the Component that owns this ComponentLayout
 */
 public protocol ComponentLayout: class, Layout {
 
