@@ -26,6 +26,8 @@ public protocol Component: IdentifiableType where Identity == Self {
 
     var cellType: ConfigurableCell.Type { get }
 
+    var isShown: () -> Bool { get }
+
     func isEqual(to other: Self) -> Bool
 
 }

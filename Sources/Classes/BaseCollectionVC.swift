@@ -66,8 +66,7 @@ open class BaseCollectionVC: UIViewController {
     public let layout: UICollectionViewLayout
     private var _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ConfigurableCell>>
-    private let disposeBag: DisposeBag = DisposeBag()
-    
+    private let disposeBag: DisposeBag = DisposeBag()    
 
     public var cellTypes: Set<MetaType<ConfigurableCell>> {
         return self._cellTypes
@@ -88,6 +87,8 @@ open class BaseCollectionVC: UIViewController {
 
     public final func requestBuildModels() {
         let components: [AnyComponent] = self.buildModels()
+            .filter { $0.isShown() }
+
         self._components.accept(components)
     }
 

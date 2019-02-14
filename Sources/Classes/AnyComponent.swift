@@ -18,11 +18,14 @@ public final class AnyComponent: IdentifiableType {
         self.layout = component.layout
         self.cellType = component.cellType
         self.identity = AnyHashable(component.identity)
+        self.isShown = component.isShown
+
     }
 
     public let layout: ComponentLayout
     public let cellType: ConfigurableCell.Type
     public let identity: AnyHashable
+    public let isShown: () -> Bool
 
 }
 
