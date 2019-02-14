@@ -6,36 +6,33 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import protocol LayoutKit.Layout
-import protocol Differentiator.IdentifiableType
 import class RxSwift.DisposeBag
+import protocol Differentiator.IdentifiableType
 
 /**
- Component holds information for the state of the component. Might have observables for user input so it can mutate its StateType
-*/
-public protocol Component: IdentifiableType where Identity == StateType {
+ Component is the data model representation of the UICollectionViewCell to be rendered on the BaseCollectionVC.
+ Information it contains:
+ - The ComponentLayout, which defines the following characteristics of the subviews in the the ConfigurableCell
+    - the sizing
+    - the location
+    - UI properties such as backgroundColor
+ - The subclass of ConfigurableCell it will render
+ - The DisposeBag to deallocate any subscriptions on the Rx side.
 
-    var cellType: ConfigurableCell.Type { get }
+*/
+public protocol Component: IdentifiableType where Identity == Self {
 
     var layout: ComponentLayout { get }
 
-    var viewModel: ViewModel { get set }
+    var cellType: ConfigurableCell.Type { get }
 
-    var disposeBag: DisposeBag { get }
+    func isEqual(to other: Self) -> Bool
 
 }
 
 public extension Component {
 
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.identity == rhs.identity
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.identity)
-    }
-
-    public func asAnyComponent() -> AnyComponent {
+    func asAnyComponent() -> AnyComponent {
         return AnyComponent(self)
     }
 

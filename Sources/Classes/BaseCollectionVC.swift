@@ -46,11 +46,11 @@ open class BaseCollectionVC: UIViewController {
         self.collectionView.delegate = self
 
         let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, viewModel: AnyComponent) -> UICollectionViewCell in
-                guard let cell = viewModel.dequeueReusableCell(in: cv, to: viewModel.cellType, for: indexPath) as? ConfigurableCell
+            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
+                guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ConfigurableCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
-                cell.configure(with: viewModel)
+                cell.configure(with: component)
                 print("Cell frame: \(cell.frame)")
                 return cell
             }
@@ -67,11 +67,7 @@ open class BaseCollectionVC: UIViewController {
     private var _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ConfigurableCell>>
     private let disposeBag: DisposeBag = DisposeBag()
-
-    public var components: [AnyComponent] {
-        get { return self._components.value }
-        set { self._components.accept(newValue) }
-    }
+    
 
     public var cellTypes: Set<MetaType<ConfigurableCell>> {
         return self._cellTypes
@@ -86,18 +82,26 @@ open class BaseCollectionVC: UIViewController {
         self._cellTypes.insert(MetaType<ConfigurableCell>(cellType))
     }
 
+    open func buildModels() -> [AnyComponent] {
+        return []
+    }
+
+    public final func requestBuildModels() {
+        let components: [AnyComponent] = self.buildModels()
+        self._components.accept(components)
+    }
+
 }
 
 extension BaseCollectionVC: UICollectionViewDelegateFlowLayout {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        if self.components.endIndex <= indexPath.item {
+        if self._components.value.endIndex <= indexPath.item {
             return CGSize.zero
         }
 
-        let layout: ComponentLayout = self.components[indexPath.item].layout
-
+        let layout: ComponentLayout = self._components.value[indexPath.item].layout
         return layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
     }
 

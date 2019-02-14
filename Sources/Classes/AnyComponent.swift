@@ -2,79 +2,37 @@
 //  AnyComponent.swift
 //  FFUFComponents
 //
-//  Created by Julio Miguel Alorro on 2/7/19.
+//  Created by Julio Miguel Alorro on 2/14/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
+import class RxSwift.DisposeBag
+import protocol Differentiator.IdentifiableType
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
-import struct UIKit.IndexPath
-import protocol LayoutKit.Layout
-import protocol Differentiator.IdentifiableType
-import class RxSwift.DisposeBag
+import struct Foundation.IndexPath
 
-/**
- Type Erasure class for data structures that conform to Component.
-*/
-public final class AnyComponent {
+public final class AnyComponent: IdentifiableType {
 
-    init<ComponentSubclass: Component>(_ component: ComponentSubclass) {
-        self._identity = component.identity
-        self.cellType = component.cellType
+    public init<C: Component>(_ component: C) {
         self.layout = component.layout
-        self.viewModel = component.viewModel
-        self.disposeBag = component.disposeBag
+        self.cellType = component.cellType
+        self.identity = AnyHashable(component.identity)
     }
 
-    // MARK: Stored Properties
-    /**
-     The StateType instance of the Component. Used for the diffing portion in RxDataSources.
-    */
-    private let _identity: StateType
-
-    /**
-     The type information of the ConfigurableCell subclass used to host the UIViews created by the Layout instance.
-    */
-    public let cellType: ConfigurableCell.Type
-
-    /**
-     The Layout instance of the Component. Defines the size and location of the UIViews it will create and binds the data from the ViewModel
-     instance.
-
-     This Layout instance is custom made aka is not generated.
-    */
     public let layout: ComponentLayout
+    public let cellType: ConfigurableCell.Type
+    public let identity: AnyHashable
 
-    /**
-     The ViewModel instance contains the information of the model that will be displayed on UI for this component.
+}
 
-     This ViewModel instance is custom made aka is not generated.
-    */
-    public let viewModel: ViewModel
+public extension AnyComponent {
 
-    public let disposeBag: DisposeBag
-
-    /**
-    */
-    func dequeueReusableCell<ConfigurableCellSubclass: ConfigurableCell>(
-        in collectionView: UICollectionView,
-        to cellType: ConfigurableCellSubclass.Type,
-        for indexPath: IndexPath
-    ) -> UICollectionViewCell? {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: ConfigurableCellSubclass.identifier, for: indexPath)
+    func dequeueReusableCell(in collectionView: UICollectionView, as cellType: ConfigurableCell.Type, for indexPath: IndexPath) -> UICollectionViewCell? {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: cellType.identifier, for: indexPath)
     }
 
 }
-
-// MARK: - IdentifiableType
-
-extension AnyComponent: IdentifiableType {
-
-    public var identity: StateType { return self._identity }
-
-}
-
-// MARK: - Hashable Protocol
 
 extension AnyComponent: Hashable {
 

@@ -15,83 +15,34 @@ import RxSwift
 
 class ExampleVC: BaseCollectionVC {
 
-    let relay: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
+    let relay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     let bag: DisposeBag = DisposeBag()
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.components = [
-            ExampleButtonComponent(model: relay, viewModelType: ExampleButtonVM.self).asAnyComponent(),
-            ExampleButtonComponent(model: relay, viewModelType: ExampleButtonVM.self).asAnyComponent(),
-            ExampleButtonComponent(model: relay, viewModelType: ExampleButtonVM.self).asAnyComponent(),
-            ExampleButtonComponent(model: relay, viewModelType: ExampleButtonVM.self).asAnyComponent(),
+        self.requestBuildModels()
+
+
+    }
+
+    override func buildModels() -> [AnyComponent] {
+
+        let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        }
+
+
+
+        return [
+            ButtonComponent(title: "First", id: "First", height: 1000.0, backgroundColor: UIColor.blue, style: style, onTap: { print("Hello World, First") }),
+            ButtonComponent(title: "Second", id: "Second", height: 200.0, backgroundColor: UIColor.yellow, style: style, onTap: { print("Hello World, Second") })
         ]
-
-        let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: nil)
-
-        button.rx.tap
-//            .map {
-//                _ = self.components.removeFirst()
-//            }
-            .bind(to: self.relay)
-            .disposed(by: self.bag)
-
-        self.navigationItem.leftBarButtonItem = button
-
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
-            self.components.remove(at: 1)
-            self.components.remove(at: 0)
-        }
+            .map(AnyComponent.init)
     }
 
 }
 
-class ExampleButtonComponent: ButtonComponent<Void> {
 
-    override var layout: ComponentLayout {
-        let state = self.identity as! ButtonComponentState
-        return ButtonComponentLayout(
-            type: ButtonLayoutType.custom,
-            title: state.title.value,
-            height: 1000.0,
-            contentEdgeInsets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 0.0, right: 5.0),
-            flexibility: Flexibility.inflexible,
-            viewReuseId: "Example Button",
-            style: AlacrityStyle<UIButton> {
-                $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-                $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            },
-            onTap: {
-                print("Hello")
-            },
-            state: state
-        )
-    }
-
-}
-
-class ExampleButtonVM: ButtonComponentVM<Void> {
-
-    override open var title: String {
-        return UUID().uuidString
-    }
-
-    override open var color: UIColor {
-        let int: Int = Int.random(in: 1...3)
-
-        switch int {
-            case 1:
-                return .green
-            case 2:
-                return .orange
-            default:
-                return .yellow
-        }
-    }
-
-    override open var isEnabled: Bool {
-        return true
-    }
-
-}

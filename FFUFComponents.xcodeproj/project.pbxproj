@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
+		1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC722155B9200A35FFE /* ButtonComponent.swift */; };
+		1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* ViewModel.swift */; };
+		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -18,17 +22,10 @@
 		1478E9AA220C5B6D006AF8B3 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		1478E9AB220C5B6D006AF8B3 /* FFUFComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1478E9B1220C5D1E006AF8B3 /* BaseCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */; };
-		1478E9B3220C5F49006AF8B3 /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */; };
-		14C1E3DE2210494E0053E318 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DD2210494E0053E318 /* ButtonComponent.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
-		14C1E3E22210967D0053E318 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E12210967D0053E318 /* State.swift */; };
-		14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */; };
-		14C1E3E62210AE0D0053E318 /* ButtonComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
-		14CBC9CB220C54A000597FAA /* StateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CA220C54A000597FAA /* StateType.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */; };
-		14E424C9220E84B3006BAA4F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C8220E84B3006BAA4F /* ViewModel.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		2F757312BC100EF1B25D2DAE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054D316CC07E8E310B0D8998 /* Pods_Example.framework */; };
 		57DA062C778CDEE4CC91EA6D /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4688D6F4980D5714DDECBA /* Pods_FFUFComponents.framework */; };
@@ -69,6 +66,10 @@
 		01258669A160C84944C44BBE /* Pods-MvRx-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MvRx-iOS.debug.xcconfig"; path = "Target Support Files/Pods-MvRx-iOS/Pods-MvRx-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		02E5CD7DD6093F46BD1865C1 /* Pods_MvRx_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MvRx_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		054D316CC07E8E310B0D8998 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
+		1437BDC722155B9200A35FFE /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		1437BDC922157C4F00A35FFE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,17 +84,10 @@
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionVC.swift; sourceTree = "<group>"; };
-		1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
-		14C1E3DD2210494E0053E318 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
-		14C1E3E12210967D0053E318 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
-		14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentVM.swift; sourceTree = "<group>"; };
-		14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentState.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		14CBC9CA220C54A000597FAA /* StateType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateType.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
-		14E424C8220E84B3006BAA4F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		1BF2BAE8D12EEC76401C4BE7 /* Pods-Components.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.release.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.release.xcconfig"; sourceTree = "<group>"; };
@@ -206,10 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */,
-				1478E9B2220C5F49006AF8B3 /* AnyComponent.swift */,
-				14CBC9CA220C54A000597FAA /* StateType.swift */,
 				14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */,
-				14C1E3E12210967D0053E318 /* State.swift */,
+				1437BDC52215573300A35FFE /* AnyComponent.swift */,
+				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -233,10 +226,8 @@
 		14C96F092211EE9600731265 /* ButtonComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14C1E3DD2210494E0053E318 /* ButtonComponent.swift */,
-				14C1E3E52210AE0D0053E318 /* ButtonComponentState.swift */,
+				1437BDC722155B9200A35FFE /* ButtonComponent.swift */,
 				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
-				14C1E3E32210A2C00053E318 /* ButtonComponentVM.swift */,
 			);
 			path = ButtonComponent;
 			sourceTree = "<group>";
@@ -245,8 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				14CBC9CC220C57BB00597FAA /* Component.swift */,
-				14E424C8220E84B3006BAA4F /* ViewModel.swift */,
 				14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */,
+				1437BDCB22157FC300A35FFE /* State.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -506,18 +497,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
+				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */,
-				14C1E3E62210AE0D0053E318 /* ButtonComponentState.swift in Sources */,
+				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
-				1478E9B3220C5F49006AF8B3 /* AnyComponent.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
-				14CBC9CB220C54A000597FAA /* StateType.swift in Sources */,
-				14E424C9220E84B3006BAA4F /* ViewModel.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
-				14C1E3E22210967D0053E318 /* State.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseCollectionVC.swift in Sources */,
-				14C1E3E42210A2C00053E318 /* ButtonComponentVM.swift in Sources */,
-				14C1E3DE2210494E0053E318 /* ButtonComponent.swift in Sources */,
+				1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

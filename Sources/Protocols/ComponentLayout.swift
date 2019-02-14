@@ -8,8 +8,6 @@
 
 import protocol LayoutKit.Layout
 import class RxSwift.DisposeBag
-import class UIKit.UIView
-import struct CoreGraphics.CGFloat
 
 /**
  A ComponentLayout's purpose is to create UIViews necessary of the Component and define its size, location and UI properties such as
@@ -21,7 +19,6 @@ import struct CoreGraphics.CGFloat
 public protocol ComponentLayout: class, Layout {
 
     var disposeBag: DisposeBag { get }
-    var cachedHeight: CGFloat? { get set }
 
 }
 
