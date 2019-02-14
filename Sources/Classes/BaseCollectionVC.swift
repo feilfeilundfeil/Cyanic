@@ -23,6 +23,12 @@ import class UIKit.UICollectionViewFlowLayout
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
 
+/**
+ BaseCollectionVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
+ have a reactive UICollectionView. It respondes to new elements emitted by its ViewModel's state.
+
+ BaseCollectionVC is the delegate of the UICollectionView it manages and serves as the data source as well.
+*/
 open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: Initializers
@@ -44,9 +50,14 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
 
     open override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Register the required ConfigurationCell subclasses
         self._cellTypes.forEach { self.collectionView.register($0.base.self, forCellWithReuseIdentifier: $0.base.identifier) }
+
+        // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout, UICollectionViewDelegate and UIScrollViewDelegate
         self.collectionView.delegate = self
 
+        // Delegate the UICollectionViewDataSource management to RxDataSources
         let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ConfigurableCell
@@ -58,11 +69,14 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
             }
         )
 
+        // Call _buildModels method when a new element in ViewModel's state is emitted
+        // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
             .map(self._buildModels)
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
 
+        // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
