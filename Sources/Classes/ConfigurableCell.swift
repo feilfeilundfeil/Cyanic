@@ -9,6 +9,7 @@
 import struct CoreGraphics.CGSize
 import struct CoreGraphics.CGFloat
 import class UIKit.UICollectionViewCell
+import class UIKit.UIColor
 import struct Foundation.IndexPath
 import protocol LayoutKit.Layout
 
@@ -29,12 +30,21 @@ open class ConfigurableCell: UICollectionViewCell {
     */
     private var layout: ComponentLayout?
 
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+        self.layout = nil
+    }
+
     override public final func layoutSubviews() {
-        self.layout?.measurement(
-            within: self.contentView.frame.size
-        )
-            .arrangement(within: self.contentView.bounds)
-            .makeViews(in: self.contentView)
+        if let layout = self.layout {
+            let measurement = layout.measurement(
+                within: self.contentView.frame.size
+            )
+
+            measurement
+                .arrangement(within: self.contentView.bounds)
+                .makeViews(in: self.contentView)
+        }
     }
 
     override public final func sizeThatFits(_ size: CGSize) -> CGSize {

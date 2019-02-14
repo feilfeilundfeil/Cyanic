@@ -20,6 +20,7 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.collectionView.backgroundColor = UIColor.purple
 
         let button: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: nil)
         self.navigationItem.leftBarButtonItem = button
@@ -47,128 +48,161 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
         }
 
         return [
+             // You must call asAnyComponent here otherwise Swift's compiler gets confused
+            StaticTextComponent(
+                id: "First",
+                text: Text.unattributed(
+                """
+                Bacon ipsum dolor amet short ribs jerky spare ribs jowl, ham hock t-bone turkey capicola pork tenderloin. Rump t-bone ground round short loin ribeye alcatra pork chop spare ribs pancetta sausage chuck. Turducken pork sausage landjaeger t-bone. Kevin ground round tail ribeye pig drumstick alcatra bacon sausage.
+
+                Brisket shank pork loin filet mignon, strip steak landjaeger bacon. Fatback swine bresaola frankfurter sausage, bacon venison jowl salami pork loin beef ribs chuck. Filet mignon corned beef pig frankfurter short loin cow pastrami cupim ham. Turducken pancetta kevin salami, shank boudin pastrami meatball flank filet mignon kielbasa spare ribs.
+
+                Doner ham pancetta sausage beef ribs flank tail filet mignon. Turducken leberkas jerky sirloin, tongue doner shank pastrami cupim. Alcatra pork loin prosciutto brisket meatloaf, beef ribs cow pork belly burgdoggen. Corned beef tail pork belly short loin chuck drumstick.
+
+                Salami landjaeger pork chop, burgdoggen beef hamburger short loin alcatra filet mignon capicola tail. Swine cow pork ham hock turkey shoulder short loin porchetta tail buffalo meatloaf shank ham frankfurter. Shoulder pork belly tenderloin turkey ball tip drumstick porchetta. Meatball bresaola spare ribs porchetta shoulder andouille pork buffalo picanha swine beef ribs. T-bone meatloaf chicken capicola, strip steak doner turducken pancetta tenderloin short ribs jerky drumstick brisket.
+
+                Shankle cow beef, rump buffalo short loin sirloin t-bone. Bresaola capicola pork pork loin drumstick turkey pig ball tip strip steak sausage landjaeger biltong short loin. Turkey rump shoulder tri-tip landjaeger, corned beef drumstick flank t-bone. Burgdoggen meatloaf pastrami spare ribs pork loin ham hock turkey.
+                """
+                ),
+                font: UIFont.systemFont(ofSize: 17.0),
+                insets: UIEdgeInsets.zero,
+                style: AlacrityStyle<UILabel> {
+                    $0.backgroundColor = UIColor.gray
+                },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState
+                }
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "First",
                 id: "First",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.red,
                 style: style,
                 onTap: { print("Hello World, First") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState
                 }
-            ),
+            ).asAnyComponent(),
+            StaticSpacingComponent(
+                id: "Second",
+                height: 20.0,
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Second",
                 id: "Second",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.orange,
                 style: style,
                 onTap: { print("Hello World, Second") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Third",
                 id: "Third",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.yellow,
                 style: style,
                 onTap: { print("Hello World, Third") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                    return s.viewModel.currentState
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Fourth",
                 id: "Fourth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.green,
                 style: style,
                 onTap: { print("Hello World, Fourth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Fifth",
                 id: "Fifth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.blue,
                 style: style,
                 onTap: { print("Hello World, Fifth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                    return s.viewModel.currentState
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Sixth",
                 id: "Sixth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.purple,
                 style: style,
                 onTap: { print("Hello World, Sixth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Seventh",
                 id: "Seventh",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.brown,
                 style: style,
                 onTap: { print("Hello World, Seventh") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                    return s.viewModel.currentState
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Eighth",
                 id: "Eighth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.white,
                 style: style,
                 onTap: { print("Hello World, Eighth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Ninth",
                 id: "Ninth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.cyan,
                 style: style,
                 onTap: { print("Hello World, Ninth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                    return s.viewModel.currentState
                 }
-            ),
+            ).asAnyComponent(),
             ButtonComponent(
                 title: "Tenth",
                 id: "Tenth",
                 height: 200.0,
-                backgroundColor: randomColor(),
+                backgroundColor: UIColor.gray,
                 style: style,
                 onTap: { print("Hello World, Tenth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
                     return s.viewModel.currentState == false
                 }
-            ),
+            ).asAnyComponent(),
         ]
-            .map(AnyComponent.init)
     }
 
 }

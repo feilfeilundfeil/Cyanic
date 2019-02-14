@@ -64,7 +64,7 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
-                print("Cell frame: \(cell.frame)")
+                print("Cell Subviews: \(cell.contentView.subviews)")
                 return cell
             }
         )
@@ -78,6 +78,7 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
+            .debug("Components", trimOutput: false)
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)

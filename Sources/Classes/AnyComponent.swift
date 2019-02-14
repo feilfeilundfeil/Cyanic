@@ -50,3 +50,11 @@ extension AnyComponent: Hashable {
     }
 
 }
+
+extension AnyComponent: CustomStringConvertible {
+
+    public var description: String {
+        return self.identity.description
+    }
+
+}
