@@ -11,36 +11,31 @@ import RxCocoa
 import Foundation
 import UIKit
 
-protocol ViewModel {
+protocol ViewModelType {
 
 }
 
-open class AbstractViewModel<S: State>: ViewModel {
+open class BaseViewModel<S: Equatable>: ViewModelType {
 
     public init(initialState: S) {
-        self._state = BehaviorRelay<S>(value: initialState)
+        self.state = BehaviorRelay<S>(value: initialState)
     }
 
-    internal let _state: BehaviorRelay<S>
-
-    public var state: S {
-        return self._state.value
+    public let state: BehaviorRelay<S>
+    public var currentState: S {
+        return self.state.value
     }
-
-    public final func withState(block: (S) -> Void) {
-        block(self._state.value)
-    }
-
-    public final func setState(block: () -> S) {
-
-        let firstState: S = block()
-        let secondState: S = block()
-
-        if firstState != secondState {
-            fatalError("calling setState twice produced different results. This should not happen.")
-        }
-
-        self._state.accept(block())
-    }
+//
+//    public final func setState(block: () -> S) {
+//
+//        let firstState: S = block()
+//        let secondState: S = block()
+//
+//        if firstState != secondState {
+//            fatalError("calling setState twice produced different results. This should not happen.")
+//        }
+//
+//        self._state.accept(block())
+//    }
 
 }

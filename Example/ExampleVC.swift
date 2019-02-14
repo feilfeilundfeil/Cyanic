@@ -13,9 +13,8 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-class ExampleVC: BaseCollectionVC {
+class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
 
-    let relay: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     let bag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -23,22 +22,16 @@ class ExampleVC: BaseCollectionVC {
         self.view.backgroundColor = UIColor.white
 
         let button: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: nil)
-        let relay: BehaviorRelay<Bool> = self.relay
+        self.navigationItem.leftBarButtonItem = button
         button.rx.tap
             .map { () -> Bool in
-                return !relay.value
+                return !self.viewModel.currentState
             }
-            .do(onNext: { [weak self] (value: Bool) -> Void in
-                guard let s = self else { return }
-                s.requestBuildModels()
-            })
-            .bind(to: relay)
+            .bind(to: self.viewModel.state)
             .disposed(by: self.bag)
-
-        self.navigationItem.leftBarButtonItem = button
     }
 
-    override func buildModels() -> [AnyComponent] {
+    override func buildModels(state: Bool) -> [AnyComponent] {
 
         let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -54,7 +47,7 @@ class ExampleVC: BaseCollectionVC {
                 onTap: { print("Hello World, First") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.relay.value
+                    return s.viewModel.currentState
                 }
             ),
             ButtonComponent(
@@ -66,12 +59,40 @@ class ExampleVC: BaseCollectionVC {
                 onTap: { print("Hello World, Second") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.relay.value == false
+                    return s.viewModel.currentState == false
                 }
-            )
+            ),
+            ButtonComponent(
+                title: "Third",
+                id: "Third",
+                height: 200.0,
+                backgroundColor: UIColor.orange,
+                style: style,
+                onTap: { print("Hello World, First") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
+            ButtonComponent(
+                title: "Fourth",
+                id: "Fourth",
+                height: 200.0,
+                backgroundColor: UIColor.green,
+                style: style,
+                onTap: { print("Hello World, First") },
+                isShown: { [weak self] () -> Bool in
+                    guard let s = self else { return true }
+                    return s.viewModel.currentState == false
+                }
+            ),
         ]
             .map(AnyComponent.init)
     }
+
+}
+
+class ExampleViewModel: BaseViewModel<Bool> {
 
 }
 

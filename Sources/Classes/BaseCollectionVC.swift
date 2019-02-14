@@ -23,11 +23,13 @@ import class UIKit.UICollectionViewFlowLayout
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
 
-open class BaseCollectionVC: UIViewController {
+open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
 
-    public init(layout: UICollectionViewLayout, cellTypes: [ConfigurableCell.Type]) {
+    // MARK: Initializers
+    public init(layout: UICollectionViewLayout, cellTypes: [ConfigurableCell.Type], viewModel: ConcreteViewModel) {
         self.layout = layout
         self._cellTypes = Set<MetaType<ConfigurableCell>>(cellTypes.map(MetaType<ConfigurableCell>.init))
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -56,6 +58,11 @@ open class BaseCollectionVC: UIViewController {
             }
         )
 
+        self.viewModel.state
+            .map(self._buildModels)
+            .bind(to: self._components)
+            .disposed(by: self.disposeBag)
+
         self._components.asDriver()
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
@@ -64,7 +71,8 @@ open class BaseCollectionVC: UIViewController {
 
     // MARK: Stored Properties
     public let layout: UICollectionViewLayout
-    private var _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
+    public let viewModel: ConcreteViewModel
+    private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ConfigurableCell>>
     private let disposeBag: DisposeBag = DisposeBag()    
 
@@ -81,20 +89,13 @@ open class BaseCollectionVC: UIViewController {
         self._cellTypes.insert(MetaType<ConfigurableCell>(cellType))
     }
 
-    open func buildModels() -> [AnyComponent] {
-        return []
+    open func buildModels(state: ConcreteState) -> [AnyComponent] {
+        fatalError("You must override this")
     }
 
-    public final func requestBuildModels() {
-        let components: [AnyComponent] = self.buildModels()
-            .filter { $0.isShown() }
-
-        self._components.accept(components)
+    private func _buildModels(state: ConcreteState) -> [AnyComponent] {
+        return self.buildModels(state: state).filter { $0.isShown() }
     }
-
-}
-
-extension BaseCollectionVC: UICollectionViewDelegateFlowLayout {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 

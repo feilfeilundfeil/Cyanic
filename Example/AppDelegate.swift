@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
-        let vc = ExampleVC(layout: layout, cellTypes: [ConfigurableCell.self])
+        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: false)
+
+        let vc = ExampleVC(layout: layout, cellTypes: [ConfigurableCell.self], viewModel: viewModel)
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
 
