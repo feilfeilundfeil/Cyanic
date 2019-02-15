@@ -21,7 +21,7 @@ public final class StaticTextComponent: Component, Hashable {
         insets: UIEdgeInsets = UIEdgeInsets.zero,
         alignment: Alignment = LabelLayoutDefaults.defaultAlignment,
         flexibility: Flexibility = LabelLayoutDefaults.defaultFlexibility,
-        style: AlacrityStyle<UILabel>,
+        style: AlacrityStyle<UITextView>,
         isShown: @escaping () -> Bool = { return true }
     ) {
         self.id = id
@@ -42,7 +42,7 @@ public final class StaticTextComponent: Component, Hashable {
     public let insets: UIEdgeInsets
     public let alignment: Alignment
     public let flexibility: Flexibility
-    public let style: AlacrityStyle<UILabel>
+    public let style: AlacrityStyle<UITextView>
     public let isShown: () -> Bool
 
     // MARK: - Stored Properties
@@ -55,7 +55,7 @@ public final class StaticTextComponent: Component, Hashable {
             font: self.font,
             lineFragmentPadding: self.lineFragmentPadding,
             insets: self.insets,
-            alignment: self.alignment,
+            layoutAlignment: self.alignment,
             flexibility: self.flexibility,
             style: self.style
         )

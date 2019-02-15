@@ -10,28 +10,30 @@ import Alacrity
 import LayoutKit
 import RxSwift
 
-public final class StaticTextComponentLayout: LabelLayout<UILabel>, ComponentLayout {
+public final class StaticTextComponentLayout: TextViewLayout<UITextView>, ComponentLayout {
 
     public init(
         id: String,
         text: Text,
-        font: UIFont,
+        font: UIFont?,
         lineFragmentPadding: CGFloat,
         insets: UIEdgeInsets,
-        alignment: Alignment,
+        layoutAlignment: Alignment,
         flexibility: Flexibility,
-        style: AlacrityStyle<UILabel>
+        style: AlacrityStyle<UITextView>
     ) {
-
         super.init(
             text: text,
             font: font,
-            lineHeight: nil,
-            numberOfLines: 0,
-            alignment: alignment,
+            lineFragmentPadding: lineFragmentPadding,
+            textContainerInset: insets,
+            layoutAlignment: layoutAlignment,
             flexibility: flexibility,
-            viewReuseId: StaticTextComponentLayout.identifier,
-            config: style.style
+            viewReuseId: id,
+            config: style.modifying { (view: UITextView) -> Void in
+                view.isEditable = false
+            }
+            .style
         )
     }
 
