@@ -11,10 +11,9 @@ import UIKit
 
 public final class StaticSpacingComponent: Component, Hashable {
 
-    public init(id: String, height: CGFloat = 0.0, isShown: @escaping () -> Bool = { return true }) {
+    public init(id: String, height: CGFloat = 0.0) {
         self.id = id
         self.height = height
-        self.isShown = isShown
     }
 
     public let id: String
@@ -25,7 +24,6 @@ public final class StaticSpacingComponent: Component, Hashable {
     }
 
     public let cellType: ComponentCell.Type = ComponentCell.self
-    public let isShown: () -> Bool
 
     public var identity: StaticSpacingComponent {
         return self

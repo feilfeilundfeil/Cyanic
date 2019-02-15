@@ -16,6 +16,8 @@
 		1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */; };
 		1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD52215B75100A35FFE /* StaticTextComponent.swift */; };
 		1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */; };
+		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
+		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,6 +82,8 @@
 		1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentLayout.swift; sourceTree = "<group>"; };
 		1437BDD52215B75100A35FFE /* StaticTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponent.swift; sourceTree = "<group>"; };
 		1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FFUFComponents.swift"; sourceTree = "<group>"; };
+		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
+		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -166,6 +170,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1437BDDA2216C14100A35FFE /* ExpandableComponent */ = {
+			isa = PBXGroup;
+			children = (
+				1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */,
+				1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */,
+			);
+			path = ExpandableComponent;
+			sourceTree = "<group>";
+		};
 		145AD743220B1EBE004F02C2 = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +263,7 @@
 				14C96F092211EE9600731265 /* ButtonComponent */,
 				1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */,
 				1437BDD42215B57800A35FFE /* StaticTextComponent */,
+				1437BDDA2216C14100A35FFE /* ExpandableComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -544,9 +558,11 @@
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
+				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
+				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */,

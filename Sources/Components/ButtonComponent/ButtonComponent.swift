@@ -27,8 +27,7 @@ open class ButtonComponent: Component, Hashable {
         alignment: Alignment = ButtonLayoutDefaults.defaultAlignment,
         flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility,
         style: AlacrityStyle<UIButton>,
-        onTap: @escaping () -> Void,
-        isShown: @escaping () -> Bool = { return true }
+        onTap: @escaping () -> Void
     ) {
         self.type = type
         self.title = title
@@ -40,7 +39,6 @@ open class ButtonComponent: Component, Hashable {
         self.flexibility = flexibility
         self.style = style.modifying(with: { $0.backgroundColor = backgroundColor })
         self.onTap = onTap
-        self.isShown = isShown
     }
 
     // MARK: - UI Characteristics
@@ -54,12 +52,11 @@ open class ButtonComponent: Component, Hashable {
     public let flexibility: Flexibility
     public let style: AlacrityStyle<UIButton>
     public let onTap: () -> Void
-    public let isShown: () -> Bool
 
     // MARK: - Stored Properties
     public let cellType: ComponentCell.Type = ComponentCell.self
 
-    public var layout: ComponentLayout {
+    open var layout: ComponentLayout {
         return ButtonComponentLayout(
             type: self.type,
             title: self.title,

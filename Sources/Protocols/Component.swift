@@ -18,7 +18,6 @@ import protocol Differentiator.IdentifiableType
     - the location
     - UI properties such as backgroundColor
  - The subclass of ComponentCell it will render
- - isShown closure that signifies whether it should be part of the screen based on some boolean logi
 */
 public protocol Component: IdentifiableType where Identity == Self {
 
@@ -31,11 +30,6 @@ public protocol Component: IdentifiableType where Identity == Self {
      The ComponentCell subclass used as the root view for the subviews.
     */
     var cellType: ComponentCell.Type { get }
-
-    /**
-     The isShown closure is used as a filter when creating the array of elements for the BaseComponentVC
-    */
-    var isShown: () -> Bool { get }
 
     /**
      The isEqual method is used to compare subclasses with each other. It's a workaround due to == being a static method.

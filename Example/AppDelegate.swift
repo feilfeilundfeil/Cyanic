@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
-        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState(isTrue: true))
+        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState(isTrue: true, expandableDict: ["This is Expandable": false]))
 
         let vc = ExampleVC(layout: layout, cellTypes: [ComponentCell.self], viewModel: viewModel)
         self.window?.rootViewController = UINavigationController(rootViewController: vc)

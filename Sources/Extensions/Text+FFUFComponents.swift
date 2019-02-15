@@ -10,6 +10,15 @@ import LayoutKit
 
 extension Text: Hashable {
 
+    public var value: String {
+        switch self {
+            case .unattributed(let string):
+                return string
+            case .attributed(let string):
+                return string.string
+        }
+    }
+
     public static func == (lhs: Text, rhs: Text) -> Bool {
         switch (lhs, rhs) {
             case let (.attributed(lhsString), attributed(rhsString)):

@@ -69,16 +69,21 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             }
         )
 
-        // Call _buildModels method when a new element in ViewModel's state is emitted
+        // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
-            .map(self._buildModels)
+            .map(self.buildModels)
+            .map { (closures: [() -> [AnyComponent?]]) -> [AnyComponent] in
+                return closures
+                    .flatMap { $0() }  // Flatten because buildModels returns [() -> [AnyComponent?]]. flatMap returns [AnyComponent?]
+                    .compactMap { $0 } // Compact to get rid of the functions that return nil. compactMap returns [AnyComponent]
+            }
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
-//            .debug("Components", trimOutput: false)
+            .debug("Components", trimOutput: false)
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
@@ -104,12 +109,8 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    open func buildModels(state: ConcreteState) -> [AnyComponent] {
-        fatalError("You must override this")
-    }
-
-    private func _buildModels(state: ConcreteState) -> [AnyComponent] {
-        return self.buildModels(state: state).filter { $0.isShown() }
+    open func buildModels(state: ConcreteState) -> [() -> [AnyComponent?]] {
+        fatalError("Override")
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
