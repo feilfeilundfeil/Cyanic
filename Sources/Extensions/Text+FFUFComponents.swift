@@ -13,7 +13,7 @@ extension Text: Hashable {
     public static func == (lhs: Text, rhs: Text) -> Bool {
         switch (lhs, rhs) {
             case let (.attributed(lhsString), attributed(rhsString)):
-                return lhsString == rhsString
+                return lhsString.isEqual(to: rhsString)
             case let (.unattributed(lhsString), .unattributed(rhsString)):
                 return lhsString == rhsString
             default:

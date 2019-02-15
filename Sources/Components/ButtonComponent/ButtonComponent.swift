@@ -57,7 +57,7 @@ open class ButtonComponent: Component, Hashable {
     public let isShown: () -> Bool
 
     // MARK: - Stored Properties
-    public let cellType: ConfigurableCell.Type = ConfigurableCell.self
+    public let cellType: ComponentCell.Type = ComponentCell.self
 
     public var layout: ComponentLayout {
         return ButtonComponentLayout(

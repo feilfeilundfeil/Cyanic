@@ -30,7 +30,7 @@
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
-		14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */; };
+		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		2F757312BC100EF1B25D2DAE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054D316CC07E8E310B0D8998 /* Pods_Example.framework */; };
 		57DA062C778CDEE4CC91EA6D /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4688D6F4980D5714DDECBA /* Pods_FFUFComponents.framework */; };
@@ -97,7 +97,7 @@
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
-		14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableCell.swift; sourceTree = "<group>"; };
+		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		1BF2BAE8D12EEC76401C4BE7 /* Pods-Components.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.release.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.release.xcconfig"; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				1478E9B0220C5D1E006AF8B3 /* BaseCollectionVC.swift */,
-				14E424C6220E5B8D006BAA4F /* ConfigurableCell.swift */,
+				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
 			);
@@ -538,7 +538,7 @@
 			files = (
 				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
-				14E424C7220E5B8D006BAA4F /* ConfigurableCell.swift in Sources */,
+				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,

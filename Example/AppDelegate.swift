@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState(isTrue: true))
 
-        let vc = ExampleVC(layout: layout, cellTypes: [ConfigurableCell.self], viewModel: viewModel)
+        let vc = ExampleVC(layout: layout, cellTypes: [ComponentCell.self], viewModel: viewModel)
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
 

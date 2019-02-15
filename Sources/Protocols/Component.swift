@@ -13,24 +13,24 @@ import protocol Differentiator.IdentifiableType
  Component is the data model representation of the UICollectionViewCell to be rendered on the BaseCollectionVC.
  A Component should be an immutable class because its a data model.
  Information it contains:
- - The ComponentLayout, which defines the following characteristics of the subviews in the the ConfigurableCell
+ - The ComponentLayout, which defines the following characteristics of the subviews in the the ComponentCell
     - the sizing
     - the location
     - UI properties such as backgroundColor
- - The subclass of ConfigurableCell it will render
+ - The subclass of ComponentCell it will render
  - isShown closure that signifies whether it should be part of the screen based on some boolean logi
 */
 public protocol Component: IdentifiableType where Identity == Self {
 
     /**
-     The LayoutKit related class that will calculate size, location and configuration of the subviews in the ConfigurableCell
+     The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     */
     var layout: ComponentLayout { get }
 
     /**
-     The ConfigurableCell subclass used as the root view for the subviews.
+     The ComponentCell subclass used as the root view for the subviews.
     */
-    var cellType: ConfigurableCell.Type { get }
+    var cellType: ComponentCell.Type { get }
 
     /**
      The isShown closure is used as a filter when creating the array of elements for the BaseCollectionVC

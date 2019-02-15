@@ -25,7 +25,7 @@ public final class AnyComponent: IdentifiableType {
     }
 
     public let layout: ComponentLayout
-    public let cellType: ConfigurableCell.Type
+    public let cellType: ComponentCell.Type
     public let identity: AnyHashable
     public let isShown: () -> Bool
 
@@ -33,7 +33,7 @@ public final class AnyComponent: IdentifiableType {
 
 public extension AnyComponent {
 
-    func dequeueReusableCell(in collectionView: UICollectionView, as cellType: ConfigurableCell.Type, for indexPath: IndexPath) -> UICollectionViewCell? {
+    func dequeueReusableCell(in collectionView: UICollectionView, as cellType: ComponentCell.Type, for indexPath: IndexPath) -> UICollectionViewCell? {
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellType.identifier, for: indexPath)
     }
 

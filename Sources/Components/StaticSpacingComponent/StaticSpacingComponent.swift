@@ -24,7 +24,7 @@ public final class StaticSpacingComponent: Component, Hashable {
         return StaticSpacingComponentLayout(height: self.height)
     }
 
-    public let cellType: ConfigurableCell.Type = ConfigurableCell.self
+    public let cellType: ComponentCell.Type = ComponentCell.self
     public let isShown: () -> Bool
 
     public var identity: StaticSpacingComponent {

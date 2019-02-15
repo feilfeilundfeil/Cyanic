@@ -90,7 +90,7 @@ class ExampleVC: BaseCollectionVC<ExampleState, ExampleViewModel> {
             ).asAnyComponent(),
             StaticSpacingComponent(
                 id: "Second",
-                height: 20.0,
+                height: 100.0,
                 isShown: { () -> Bool in
                     return state.isTrue == false
                 }
@@ -124,9 +124,8 @@ class ExampleVC: BaseCollectionVC<ExampleState, ExampleViewModel> {
                 backgroundColor: UIColor.green,
                 style: style,
                 onTap: { print("Hello World, Fourth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState.isTrue == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(

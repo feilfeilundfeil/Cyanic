@@ -32,9 +32,9 @@ import class UIKit.UIViewController
 open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ConfigurableCell.Type], viewModel: ConcreteViewModel) {
+    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], viewModel: ConcreteViewModel) {
         self.layout = layout
-        self._cellTypes = Set<MetaType<ConfigurableCell>>(cellTypes.map(MetaType<ConfigurableCell>.init))
+        self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -60,7 +60,7 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
         // Delegate the UICollectionViewDataSource management to RxDataSources
         let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-                guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ConfigurableCell
+                guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ComponentCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
@@ -88,10 +88,10 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
     public let layout: UICollectionViewLayout
     public let viewModel: ConcreteViewModel
     private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
-    private var _cellTypes: Set<MetaType<ConfigurableCell>>
+    private var _cellTypes: Set<MetaType<ComponentCell>>
     private let disposeBag: DisposeBag = DisposeBag()    
 
-    public var cellTypes: Set<MetaType<ConfigurableCell>> {
+    public var cellTypes: Set<MetaType<ComponentCell>> {
         return self._cellTypes
     }
 
@@ -99,9 +99,9 @@ open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseVie
     open var collectionView: UICollectionView { return self.view as! UICollectionView }
 
     // MARK: Functions
-    public final func add(cellType: ConfigurableCell.Type) {
+    public final func add(cellType: ComponentCell.Type) {
         self.collectionView.register(cellType, forCellWithReuseIdentifier: cellType.identifier)
-        self._cellTypes.insert(MetaType<ConfigurableCell>(cellType))
+        self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
     open func buildModels(state: ConcreteState) -> [AnyComponent] {
