@@ -1,5 +1,5 @@
 //
-//  BaseCollectionVC.swift
+//  BaseComponentVC.swift
 //  FFUFComponents
 //
 //  Created by Julio Miguel Alorro on 2/7/19.
@@ -24,12 +24,12 @@ import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
 
 /**
- BaseCollectionVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
+ BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
  have a reactive UICollectionView. It respondes to new elements emitted by its ViewModel's state.
 
- BaseCollectionVC is the delegate of the UICollectionView it manages and serves as the data source as well.
+ BaseComponentVC is the delegate of the UICollectionView it manages and serves as the data source as well.
 */
-open class BaseCollectionVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
+open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: Initializers
     public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], viewModel: ConcreteViewModel) {

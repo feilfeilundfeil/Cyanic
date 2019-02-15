@@ -10,7 +10,7 @@ import class RxSwift.DisposeBag
 import protocol Differentiator.IdentifiableType
 
 /**
- Component is the data model representation of the UICollectionViewCell to be rendered on the BaseCollectionVC.
+ Component is the data model representation of the UICollectionViewCell to be rendered on the BaseComponentVC.
  A Component should be an immutable class because its a data model.
  Information it contains:
  - The ComponentLayout, which defines the following characteristics of the subviews in the the ComponentCell
@@ -33,7 +33,7 @@ public protocol Component: IdentifiableType where Identity == Self {
     var cellType: ComponentCell.Type { get }
 
     /**
-     The isShown closure is used as a filter when creating the array of elements for the BaseCollectionVC
+     The isShown closure is used as a filter when creating the array of elements for the BaseComponentVC
     */
     var isShown: () -> Bool { get }
 

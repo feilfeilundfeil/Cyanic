@@ -13,7 +13,7 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-class ExampleVC: BaseCollectionVC<ExampleState, ExampleViewModel> {
+class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     let bag: DisposeBag = DisposeBag()
 
