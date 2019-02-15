@@ -12,18 +12,20 @@ extension Text: Hashable {
 
     public static func == (lhs: Text, rhs: Text) -> Bool {
         switch (lhs, rhs) {
-            case let (.unattributed(lhsString), .unattributed(rhsString)): return lhsString == rhsString
-            case let (.attributed(lhsString), attributed(rhsString)): return lhsString == rhsString
-            default: return false
+            case let (.attributed(lhsString), attributed(rhsString)):
+                return lhsString == rhsString
+            case let (.unattributed(lhsString), .unattributed(rhsString)):
+                return lhsString == rhsString
+            default:
+                return false
         }
     }
 
     public func hash(into hasher: inout Hasher) {
         switch self {
-            case .unattributed(let string):
-                hasher.combine(string)
-
             case .attributed(let string):
+                hasher.combine(string)
+            case .unattributed(let string):
                 hasher.combine(string)
         }
     }

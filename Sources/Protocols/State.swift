@@ -9,3 +9,13 @@
 import Foundation
 
 public protocol State: Equatable {}
+
+public extension State {
+
+    func changing(block: (inout Self) -> Void) -> Self {
+        var mutableSelf: Self = self
+        block(&mutableSelf)
+        return mutableSelf
+    }
+
+}

@@ -38,7 +38,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             config: style
                 .modifying { (view: UIButton) -> Void in
                     view.rx.controlEvent(UIControlEvents.touchUpInside)
-                        .debug(viewReuseId, trimOutput: false)
+//                        .debug(viewReuseId, trimOutput: false)
                         .bind(onNext: onTap)
                         .disposed(by: disposeBag)
                 }

@@ -13,7 +13,7 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
+class ExampleVC: BaseCollectionVC<ExampleState, ExampleViewModel> {
 
     let bag: DisposeBag = DisposeBag()
 
@@ -22,18 +22,22 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
         self.view.backgroundColor = UIColor.white
         self.collectionView.backgroundColor = UIColor.purple
 
-        let button: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: nil)
+        let button: UIBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: UIBarButtonItem.SystemItem.done,
+            target: self,
+            action: #selector(buttonTapped)
+        )
         self.navigationItem.leftBarButtonItem = button
-        button.rx.tap
-            .map { () -> Bool in
-                return !self.viewModel.currentState
-            }
-            .bind(to: self.viewModel.state)
-            .disposed(by: self.bag)
     }
 
-    override func buildModels(state: Bool) -> [AnyComponent] {
+    @objc
+    public func buttonTapped() {
+        let newValue: Bool = !self.viewModel.currentState.isTrue
+        self.viewModel.setState(block: { $0.isTrue = newValue })
+    }
 
+    override func buildModels(state: ExampleState) -> [AnyComponent] {
+        print("Current State: \(state.isTrue)")
         let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
             $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
@@ -69,9 +73,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 style: AlacrityStyle<UITextView> {
                     $0.backgroundColor = UIColor.gray
                 },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -81,17 +84,15 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.red,
                 style: style,
                 onTap: { print("Hello World, First") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             StaticSpacingComponent(
                 id: "Second",
                 height: 20.0,
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -101,9 +102,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.orange,
                 style: style,
                 onTap: { print("Hello World, Second") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -113,9 +113,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.yellow,
                 style: style,
                 onTap: { print("Hello World, Third") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -127,7 +126,7 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 onTap: { print("Hello World, Fourth") },
                 isShown: { [weak self] () -> Bool in
                     guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                    return s.viewModel.currentState.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -137,9 +136,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.blue,
                 style: style,
                 onTap: { print("Hello World, Fifth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -149,9 +147,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.purple,
                 style: style,
                 onTap: { print("Hello World, Sixth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -161,9 +158,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.brown,
                 style: style,
                 onTap: { print("Hello World, Seventh") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -173,9 +169,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.white,
                 style: style,
                 onTap: { print("Hello World, Eighth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -185,9 +180,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.cyan,
                 style: style,
                 onTap: { print("Hello World, Ninth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState
+                isShown: { () -> Bool in
+                    return state.isTrue
                 }
             ).asAnyComponent(),
             ButtonComponent(
@@ -197,9 +191,8 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
                 backgroundColor: UIColor.gray,
                 style: style,
                 onTap: { print("Hello World, Tenth") },
-                isShown: { [weak self] () -> Bool in
-                    guard let s = self else { return true }
-                    return s.viewModel.currentState == false
+                isShown: { () -> Bool in
+                    return state.isTrue == false
                 }
             ).asAnyComponent(),
         ]
@@ -207,7 +200,13 @@ class ExampleVC: BaseCollectionVC<Bool, ExampleViewModel> {
 
 }
 
-class ExampleViewModel: BaseViewModel<Bool> {
+class ExampleViewModel: BaseViewModel<ExampleState> {
+
+}
+
+struct ExampleState: State {
+
+    var isTrue: Bool
 
 }
 
