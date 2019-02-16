@@ -44,27 +44,27 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.viewModel.setState(block: { $0.isTrue = newValue })
     }
 
-    override func buildModels(state: ExampleState) -> [() -> [AnyComponent?]] {
+    override func buildModels(state: ExampleState) -> [ComponentResult] {
         return [
-            {
-                return [
-                    StaticTextComponent(
-                        id: "First",
-                        text: Text.unattributed(
-                            """
-                            Bacon
-                            """
-                        ),
-                        font: UIFont.systemFont(ofSize: 17.0),
-                        backgroundColor: UIColor.gray,
-                        insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                        style: AlacrityStyle<UITextView> {
-                            $0.backgroundColor = UIColor.gray
-                        }
-                    ).asAnyComponent()
-                ]
-            },
-            {
+            ComponentResult.component({
+                guard state.isTrue else { return nil }
+
+                return StaticTextComponent(
+                    id: "First",
+                    text: Text.unattributed(
+                        """
+                        Bacon
+                        """
+                    ),
+                    font: UIFont.systemFont(ofSize: 17.0),
+                    backgroundColor: UIColor.gray,
+                    insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                    style: AlacrityStyle<UITextView> {
+                        $0.backgroundColor = UIColor.gray
+                    }
+                ).asAnyComponent()
+            }),
+            ComponentResult.components({
                 var array: [AnyComponent] = []
                 let expandable = ExpandableComponent(
                     text: Text.unattributed("This is Expandable"),
@@ -121,13 +121,13 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 }
 
                 return array
-            },
-            {
+            }),
+            ComponentResult.components({
                 let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                     $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                     $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
-
+                guard state.isTrue == false else { return [] }
                 return [
                     ButtonComponent(
                         title: "First",
@@ -214,7 +214,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                         onTap: { print("Hello World, Tenth") }
                     ).asAnyComponent(),
                 ]
-            }
+            })
         ]
     }
 }

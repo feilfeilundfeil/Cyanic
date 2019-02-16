@@ -16,12 +16,20 @@ import class RxCocoa.BehaviorRelay
 import struct RxDataSources.AnimatableSectionModel
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
+import class RxSwift.MainScheduler
+import RxSwift
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewLayout
 import class UIKit.UICollectionViewFlowLayout
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
+
+fileprivate let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+    qos: DispatchQoS.userInitiated,
+    internalSerialQueueName: "Scheduler",
+    leeway: DispatchTimeInterval.milliseconds(100)
+)
 
 /**
  BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
@@ -72,10 +80,24 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
+            .observeOn(BaseComponentVCScheduler)
             .map(self.buildModels)
-            .map { (closures: [() -> [AnyComponent?]]) -> [AnyComponent] in
-                return closures
-                    .flatMap { $0() }  // Flatten because buildModels returns [() -> [AnyComponent?]]. flatMap returns [AnyComponent?]
+            .map { (closures: [ComponentResult]) -> [AnyComponent] in
+                let components: [[AnyComponent?]] = closures.map { (r: ComponentResult) -> [AnyComponent?] in
+                    switch r {
+                        case .component(let f):
+                            if let result = f() {
+                                return [result]
+                            } else {
+                                return []
+                            }
+
+                        case .components(let fs):
+                            return fs()
+                    }
+                }
+                return components
+                    .flatMap { $0 }  // Flatten because buildModels returns [[AnyComponent?]]. flatMap returns [AnyComponent?]
                     .compactMap { $0 } // Compact to get rid of the functions that return nil. compactMap returns [AnyComponent]
             }
             .bind(to: self._components)
@@ -109,7 +131,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    open func buildModels(state: ConcreteState) -> [() -> [AnyComponent?]] {
+    open func buildModels(state: ConcreteState) -> [ComponentResult] {
         fatalError("Override")
     }
 
