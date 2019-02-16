@@ -127,101 +127,107 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                     $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                     $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
-//                guard state.isTrue == false else { return [] }
+                var components: [AnyComponent] = []
+                return s.resolveArray(&components, block: { (array: inout [AnyComponent]) -> Void in
 
-                var componentsOnlyWhenisTrue: [AnyComponent] = []
+                    s.addComponent(to: &array, with: state, block: { (innerState: ExampleState) -> ButtonComponent? in
+                        guard innerState.isTrue == false else { return nil }
 
-                s.add(to: &componentsOnlyWhenisTrue, with: state, block: { (innerState: ExampleState) -> ButtonComponent? in
-                    guard innerState.isTrue == false else { return nil }
+                        return ButtonComponent(
+                            title: "First",
+                            id: "First",
+                            height: 200.0,
+                            backgroundColor: UIColor.red,
+                            style: style,
+                            onTap: { print("Hello World, First") }
+                        )
+                    })
 
-                    return ButtonComponent(
-                        title: "First",
-                        id: "First",
-                        height: 200.0,
-                        backgroundColor: UIColor.red,
-                        style: style,
-                        onTap: { print("Hello World, First") }
-                    )
+                    s.addComponent(to: &array, with: state, block: { (innerState) -> StaticSpacingComponent? in
+                        return StaticSpacingComponent(
+                            id: "Second",
+                            height: 100.0
+                        )
+                    })
+
+                    s.addComponents(to: &array, with: state, block: { (innerState: ExampleState) -> [ButtonComponent] in
+                        return [
+
+                            ButtonComponent(
+                                title: "Second",
+                                id: "Second",
+                                height: 200.0,
+                                backgroundColor: UIColor.orange,
+                                style: style,
+                                onTap: { print("Hello World, Second") }
+                            ),
+                            ButtonComponent(
+                                title: "Third",
+                                id: "Third",
+                                height: 200.0,
+                                backgroundColor: UIColor.yellow,
+                                style: style,
+                                onTap: { print("Hello World, Third") }
+                            ),
+                            ButtonComponent(
+                                title: "Fourth",
+                                id: "Fourth",
+                                height: 200.0,
+                                backgroundColor: UIColor.green,
+                                style: style,
+                                onTap: { print("Hello World, Fourth") }
+                            ),
+                            ButtonComponent(
+                                title: "Fifth",
+                                id: "Fifth",
+                                height: 200.0,
+                                backgroundColor: UIColor.blue,
+                                style: style,
+                                onTap: { print("Hello World, Fifth") }
+                                ),
+                            ButtonComponent(
+                                title: "Sixth",
+                                id: "Sixth",
+                                height: 200.0,
+                                backgroundColor: UIColor.purple,
+                                style: style,
+                                onTap: { print("Hello World, Sixth") }
+                                ),
+                            ButtonComponent(
+                                title: "Seventh",
+                                id: "Seventh",
+                                height: 200.0,
+                                backgroundColor: UIColor.brown,
+                                style: style,
+                                onTap: { print("Hello World, Seventh") }
+                                ),
+                            ButtonComponent(
+                                title: "Eighth",
+                                id: "Eighth",
+                                height: 200.0,
+                                backgroundColor: UIColor.white,
+                                style: style,
+                                onTap: { print("Hello World, Eighth") }
+                                ),
+                            ButtonComponent(
+                                title: "Ninth",
+                                id: "Ninth",
+                                height: 200.0,
+                                backgroundColor: UIColor.cyan,
+                                style: style,
+                                onTap: { print("Hello World, Ninth") }
+                                ),
+                            ButtonComponent(
+                                title: "Tenth",
+                                id: "Tenth",
+                                height: 200.0,
+                                backgroundColor: UIColor.gray,
+                                style: style,
+                                onTap: { print("Hello World, Tenth") }
+                                ),
+                        ]
+                    })
                 })
-
-                return componentsOnlyWhenisTrue + [
-                    StaticSpacingComponent(
-                        id: "Second",
-                        height: 100.0
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Second",
-                        id: "Second",
-                        height: 200.0,
-                        backgroundColor: UIColor.orange,
-                        style: style,
-                        onTap: { print("Hello World, Second") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Third",
-                        id: "Third",
-                        height: 200.0,
-                        backgroundColor: UIColor.yellow,
-                        style: style,
-                        onTap: { print("Hello World, Third") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Fourth",
-                        id: "Fourth",
-                        height: 200.0,
-                        backgroundColor: UIColor.green,
-                        style: style,
-                        onTap: { print("Hello World, Fourth") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Fifth",
-                        id: "Fifth",
-                        height: 200.0,
-                        backgroundColor: UIColor.blue,
-                        style: style,
-                        onTap: { print("Hello World, Fifth") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Sixth",
-                        id: "Sixth",
-                        height: 200.0,
-                        backgroundColor: UIColor.purple,
-                        style: style,
-                        onTap: { print("Hello World, Sixth") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Seventh",
-                        id: "Seventh",
-                        height: 200.0,
-                        backgroundColor: UIColor.brown,
-                        style: style,
-                        onTap: { print("Hello World, Seventh") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Eighth",
-                        id: "Eighth",
-                        height: 200.0,
-                        backgroundColor: UIColor.white,
-                        style: style,
-                        onTap: { print("Hello World, Eighth") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Ninth",
-                        id: "Ninth",
-                        height: 200.0,
-                        backgroundColor: UIColor.cyan,
-                        style: style,
-                        onTap: { print("Hello World, Ninth") }
-                    ).asAnyComponent(),
-                    ButtonComponent(
-                        title: "Tenth",
-                        id: "Tenth",
-                        height: 200.0,
-                        backgroundColor: UIColor.gray,
-                        style: style,
-                        onTap: { print("Hello World, Tenth") }
-                    ).asAnyComponent(),
-                ]
             })
         ]
     }

@@ -135,9 +135,18 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         fatalError("Override")
     }
 
-    public final func add<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> T?) {
+    public final func addComponent<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> T?) {
         guard let component = block(argument) else { return }
         components.append(component.asAnyComponent())
+    }
+    public final func addComponents<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> [T?]) {
+        let anyComponents: [AnyComponent] = block(argument).compactMap { $0?.asAnyComponent() }
+        components.append(contentsOf: anyComponents)
+    }
+
+    public final func resolveArray(_ array: inout [AnyComponent], block: (inout [AnyComponent]) -> Void) -> [AnyComponent]  {
+        block(&array)
+        return array
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
