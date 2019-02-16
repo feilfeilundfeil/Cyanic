@@ -85,11 +85,11 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .map { (closures: [ComponentResult]) -> [AnyComponent] in
                 let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
                     switch result {
-                        case .possibleComponent(let f):
-                            guard let result = f() else { return [] }
+                        case .possibleComponent(let closure):
+                            guard let result = closure() else { return [] }
                             return [result]
-                        case .possibleComponents(let fs):
-                            return fs()
+                        case .possibleComponents(let closure):
+                            return closure()
                         case .component(let component):
                             return [component]
                         case .components(let components):
