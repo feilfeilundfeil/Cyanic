@@ -9,6 +9,8 @@
 import Foundation
 
 public enum ComponentResult {
-    case component(() -> AnyComponent?)
-    case components(() -> [AnyComponent?])
+    case possibleComponent(() -> AnyComponent?)
+    case possibleComponents(() -> [AnyComponent?])
+    case component(AnyComponent)
+    case components([AnyComponent])
 }

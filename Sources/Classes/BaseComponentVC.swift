@@ -83,17 +83,17 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .observeOn(BaseComponentVCScheduler)
             .map(self.buildModels)
             .map { (closures: [ComponentResult]) -> [AnyComponent] in
-                let components: [[AnyComponent?]] = closures.map { (r: ComponentResult) -> [AnyComponent?] in
-                    switch r {
-                        case .component(let f):
-                            if let result = f() {
-                                return [result]
-                            } else {
-                                return []
-                            }
-
-                        case .components(let fs):
+                let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
+                    switch result {
+                        case .possibleComponent(let f):
+                            guard let result = f() else { return [] }
+                            return [result]
+                        case .possibleComponents(let fs):
                             return fs()
+                        case .component(let component):
+                            return [component]
+                        case .components(let components):
+                            return components
                     }
                 }
                 return components

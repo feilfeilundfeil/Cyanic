@@ -47,7 +47,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
     override func buildModels(state: ExampleState) -> [ComponentResult] {
         let s = self
         return [
-            ComponentResult.component({
+            ComponentResult.possibleComponent({
                 guard state.isTrue else { return nil }
                 return StaticTextComponent(
                     id: "First",
@@ -64,7 +64,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                     }
                 ).asAnyComponent()
             }),
-            ComponentResult.components({
+            ComponentResult.possibleComponents({
                 var array: [AnyComponent] = []
                 let expandable = ExpandableComponent(
                     text: Text.unattributed("This is Expandable"),
@@ -122,7 +122,8 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
                 return array
             }),
-            ComponentResult.components({
+            ComponentResult.component(StaticSpacingComponent(id: "Second", height: 50.0).asAnyComponent()),
+            ComponentResult.possibleComponents({
                 let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                     $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                     $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
