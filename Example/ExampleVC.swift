@@ -45,10 +45,10 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
     }
 
     override func buildModels(state: ExampleState) -> [ComponentResult] {
+        let s = self
         return [
             ComponentResult.component({
                 guard state.isTrue else { return nil }
-
                 return StaticTextComponent(
                     id: "First",
                     text: Text.unattributed(
@@ -127,16 +127,24 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                     $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                     $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
-                guard state.isTrue == false else { return [] }
-                return [
-                    ButtonComponent(
+//                guard state.isTrue == false else { return [] }
+
+                var componentsOnlyWhenisTrue: [AnyComponent] = []
+
+                s.add(to: &componentsOnlyWhenisTrue, with: state, block: { (innerState: ExampleState) -> ButtonComponent? in
+                    guard innerState.isTrue == false else { return nil }
+
+                    return ButtonComponent(
                         title: "First",
                         id: "First",
                         height: 200.0,
                         backgroundColor: UIColor.red,
                         style: style,
                         onTap: { print("Hello World, First") }
-                    ).asAnyComponent(),
+                    )
+                })
+
+                return componentsOnlyWhenisTrue + [
                     StaticSpacingComponent(
                         id: "Second",
                         height: 100.0

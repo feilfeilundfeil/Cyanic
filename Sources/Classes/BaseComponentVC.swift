@@ -135,6 +135,11 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         fatalError("Override")
     }
 
+    public final func add<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> T?) {
+        guard let component = block(argument) else { return }
+        components.append(component.asAnyComponent())
+    }
+
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         if self._components.value.endIndex <= indexPath.item {
