@@ -67,10 +67,11 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             ComponentResult.possibleComponents({
                 var array: [AnyComponent] = []
                 let expandable = ExpandableComponent(
+                    id: "First Expandable",
                     text: Text.unattributed("This is Expandable"),
                     height: 60.0,
                     insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                    isExpanded: state.expandableDict["This is Expandable"] ?? false,
+                    isExpanded: state.expandableDict["First Expandable"] ?? false,
                     subComponents: [
                         StaticTextComponent(
                             id: "1st sub",
@@ -116,7 +117,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
                 array.append(expandable.asAnyComponent())
 
-                if let value = state.expandableDict["This is Expandable"], value {
+                if let value = state.expandableDict["First Expandable"], value {
                     array.append(contentsOf: expandable.subComponents)
                 }
 

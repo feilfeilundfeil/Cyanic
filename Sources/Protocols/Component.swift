@@ -22,6 +22,11 @@ import protocol Differentiator.IdentifiableType
 public protocol Component: IdentifiableType where Identity == Self {
 
     /**
+     The unique ID of the component.
+    */
+    var id: String { get }
+
+    /**
      The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     */
     var layout: ComponentLayout { get }

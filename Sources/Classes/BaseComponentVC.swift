@@ -8,6 +8,8 @@
 
 import struct Foundation.IndexPath
 import class Foundation.NSCoder
+import struct Foundation.DispatchQoS
+import enum Foundation.DispatchTimeInterval
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct CoreGraphics.CGFloat
@@ -17,7 +19,7 @@ import struct RxDataSources.AnimatableSectionModel
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
-import RxSwift
+import class RxSwift.SerialDispatchQueueScheduler
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewLayout
@@ -80,8 +82,9 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
-            .observeOn(BaseComponentVCScheduler)
-            .map(self.buildModels)
+            .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
+            .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
+            .map(self.buildModels)                                             // in executing operations when it is throttled anyway.
             .map { (closures: [ComponentResult]) -> [AnyComponent] in
                 let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
                     switch result {

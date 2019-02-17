@@ -19,7 +19,7 @@ open class BaseViewModel<S: State>: ViewModelType {
         self.state = BehaviorRelay<S>(value: initialState)
     }
 
-    public let state: BehaviorRelay<S>
+    internal let state: BehaviorRelay<S>
 
     public var currentState: S {
         return self.state.value
@@ -30,7 +30,7 @@ open class BaseViewModel<S: State>: ViewModelType {
         let secondState: S = self.currentState.changing(block: block)
 
         guard firstState == secondState else {
-            fatalError("Executing your block twice produced different state. This must not happen!")
+            fatalError("Executing your block twice produced different states. This must not happen!")
         }
 
         self.state.accept(firstState)

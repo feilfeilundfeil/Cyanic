@@ -15,6 +15,7 @@ import UIKit
 public final class ExpandableComponent: Component, Hashable {
 
     public init(
+        id: String,
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
         height: CGFloat = 44.0,
@@ -25,6 +26,7 @@ public final class ExpandableComponent: Component, Hashable {
         subComponents: [AnyComponent],
         relay: BehaviorRelay<(String, Bool)>
     ) {
+        self.id = id
         self.text = text
         self.font = font
         self.height = height
@@ -47,11 +49,13 @@ public final class ExpandableComponent: Component, Hashable {
     public let subComponents: [AnyComponent]
     public let relay: BehaviorRelay<(String, Bool)>
 
+    public let id: String
     public let cellType: ComponentCell.Type = ComponentCell.self
     public let disposeBag: DisposeBag = DisposeBag()
 
     public var layout: ComponentLayout {
         return ExpandableComponentLayout(
+            id: self.id,
             text: self.text,
             font: self.font,
             height: self.height,
@@ -63,10 +67,12 @@ public final class ExpandableComponent: Component, Hashable {
     }
 
     public func isEqual(to other: ExpandableComponent) -> Bool {
-        return self.text == other.text &&
+        return self.id == other.id &&
+            self.text == other.text &&
             self.font == other.font &&
             self.height == other.height &&
-            self.insets == other.insets
+            self.insets == other.insets &&
+            self.isExpanded == other.isExpanded
     }
 
     public static func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
@@ -74,6 +80,7 @@ public final class ExpandableComponent: Component, Hashable {
     }
 
     public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
         hasher.combine(self.text)
         hasher.combine(self.font)
         hasher.combine(self.height)
@@ -81,6 +88,7 @@ public final class ExpandableComponent: Component, Hashable {
         hasher.combine(self.insets.top)
         hasher.combine(self.insets.left)
         hasher.combine(self.insets.right)
+        hasher.combine(self.isExpanded)
     }
 
     public var identity: ExpandableComponent {

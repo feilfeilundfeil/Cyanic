@@ -16,6 +16,7 @@ import RxSwift
 public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     public init(
+        id: String,
         text: Text,
         font: UIFont,
         height: CGFloat,
@@ -57,7 +58,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
                 let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: nil, action: nil)
                 tap.rx.event
                     .map { (_: UITapGestureRecognizer) -> (String, Bool) in
-                        return (text.value, !relay.value.1)
+                        return (id, !relay.value.1)
                     }
                     .debug()
                     .bind(to: relay)
