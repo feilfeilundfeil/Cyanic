@@ -52,6 +52,7 @@ open class ButtonComponent: Component, Hashable {
     public let flexibility: Flexibility
     public let style: AlacrityStyle<UIButton>
     public let onTap: () -> Void
+    public let disposeBag: DisposeBag = .init()
 
     // MARK: - Stored Properties
     public let cellType: ComponentCell.Type = ComponentCell.self
@@ -66,7 +67,7 @@ open class ButtonComponent: Component, Hashable {
             flexibility: self.flexibility,
             viewReuseId: self.id,
             style: self.style,
-            onTap: self.onTap
+            onTap: self.onTap, disposeBag: self.disposeBag
         )
     }
 

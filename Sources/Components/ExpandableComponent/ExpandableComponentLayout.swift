@@ -23,10 +23,9 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         insets: UIEdgeInsets,
         alignment: Alignment,
         labelStyle: AlacrityStyle<UILabel>,
-        relay: BehaviorRelay<(String, Bool)>
-        
+        relay: BehaviorRelay<(String, Bool)>,
+        disposeBag: DisposeBag
     ) {
-        let disposeBag: DisposeBag = DisposeBag()
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
 
         let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
@@ -46,6 +45,8 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayout: labelLayout
         )
 
+        let serial: SerialDisposable = SerialDisposable()
+        serial.disposed(by: disposeBag)
         self.disposeBag = disposeBag
         super.init(
             minWidth: size.width, maxWidth: size.width,
@@ -53,18 +54,21 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             viewReuseId: ExpandableComponentLayout.identifier,
             sublayout: insetLayout,
             config: { (view: UIView) -> Void in
-                guard view.gestureRecognizers == nil else { return }
-                view.isUserInteractionEnabled = true
+
                 let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: nil, action: nil)
-                tap.rx.event
+
+                serial.disposable = tap.rx.event
                     .map { (_: UITapGestureRecognizer) -> (String, Bool) in
                         return (id, !relay.value.1)
                     }
                     .debug()
-                    .bind(to: relay)
-                    .disposed(by: disposeBag)
+                    .subscribe(
+                        onNext: { relay.accept($0) },
+                        onDisposed: { view.removeGestureRecognizer(tap) }
+                    )
 
                 view.addGestureRecognizer(tap)
+                print("Gesture Recognizers: \(view.gestureRecognizers)")
             }
         )
     }

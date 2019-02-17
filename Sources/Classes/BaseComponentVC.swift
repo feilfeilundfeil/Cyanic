@@ -27,7 +27,7 @@ import class UIKit.UICollectionViewFlowLayout
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
 
-fileprivate let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
     qos: DispatchQoS.userInitiated,
     internalSerialQueueName: "Scheduler",
     leeway: DispatchTimeInterval.milliseconds(100)
@@ -82,7 +82,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
-            .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
+            .throttle(0.1, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
             .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
             .map(self.buildModels)                                             // in executing operations when it is throttled anyway.
             .map { (closures: [ComponentResult]) -> [AnyComponent] in

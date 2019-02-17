@@ -62,7 +62,8 @@ public final class ExpandableComponent: Component, Hashable {
             insets: self.insets,
             alignment: self.alignment,
             labelStyle: self.style,
-            relay: self.relay
+            relay: self.relay,
+            disposeBag: self.disposeBag
         )
     }
 

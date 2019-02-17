@@ -22,11 +22,15 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility,
         viewReuseId: String,
         style: AlacrityStyle<UIButton>,
-        onTap: @escaping () -> Void
+        onTap: @escaping () -> Void,
+        disposeBag: DisposeBag
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
-        let disposeBag: DisposeBag = DisposeBag()
-        self.disposeBag = disposeBag
+
+        let serialDisposable: SerialDisposable = SerialDisposable()
+        let bag: DisposeBag = DisposeBag()
+        serialDisposable.disposed(by: bag)
+        self.disposeBag = bag
 
         let buttonLayout = ButtonLayout<UIButton>(
             type: type,
@@ -34,20 +38,19 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             image: ButtonLayoutImage.size(size),
             alignment: alignment,
             flexibility: flexibility,
-            viewReuseId: ButtonComponentLayout.identifier,
+            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)",
             config: style
                 .modifying { (view: UIButton) -> Void in
-                    view.rx.controlEvent(UIControlEvents.touchUpInside)
+                    serialDisposable.disposable = view.rx.controlEvent(UIControlEvents.touchUpInside)
 //                        .debug(viewReuseId, trimOutput: false)
                         .bind(onNext: onTap)
-                        .disposed(by: disposeBag)
                 }
                 .style
         )
 
         let insetLayout: InsetLayout = InsetLayout(
             insets: contentEdgeInsets,
-            viewReuseId: "\(ButtonComponentLayout.identifier)InsetLayout",
+            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)InsetLayout",
             sublayout: buttonLayout
         )
 
@@ -56,9 +59,13 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             minHeight: size.height, maxHeight: size.height,
             alignment: alignment,
             flexibility: flexibility,
-            viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",
+            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)SizeLayout",
             sublayout: insetLayout
         )
+    }
+
+    deinit {
+        print("ButtonButtonComponentLayout was deallocated")
     }
 
     public let disposeBag: DisposeBag

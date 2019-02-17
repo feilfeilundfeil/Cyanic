@@ -20,6 +20,7 @@ open class BaseViewModel<S: State>: ViewModelType {
     }
 
     internal let state: BehaviorRelay<S>
+    public let disposeBag: DisposeBag = DisposeBag()
 
     public var currentState: S {
         return self.state.value
@@ -34,6 +35,7 @@ open class BaseViewModel<S: State>: ViewModelType {
         }
 
         self.state.accept(firstState)
+
     }
 
 }
