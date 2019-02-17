@@ -38,11 +38,11 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             image: ButtonLayoutImage.size(size),
             alignment: alignment,
             flexibility: flexibility,
-            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)",
+            viewReuseId: "\(ButtonComponentLayout.identifier)",
             config: style
                 .modifying { (view: UIButton) -> Void in
                     serialDisposable.disposable = view.rx.controlEvent(UIControlEvents.touchUpInside)
-//                        .debug(viewReuseId, trimOutput: false)
+                        .debug(viewReuseId, trimOutput: false)
                         .bind(onNext: onTap)
                 }
                 .style
@@ -50,7 +50,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
         let insetLayout: InsetLayout = InsetLayout(
             insets: contentEdgeInsets,
-            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)InsetLayout",
+            viewReuseId: "\(ButtonComponentLayout.identifier)InsetLayout",
             sublayout: buttonLayout
         )
 
@@ -59,7 +59,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             minHeight: size.height, maxHeight: size.height,
             alignment: alignment,
             flexibility: flexibility,
-            viewReuseId: "\(ButtonComponentLayout.identifier)\(viewReuseId)SizeLayout",
+            viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",
             sublayout: insetLayout
         )
     }
