@@ -38,7 +38,6 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             image: ButtonLayoutImage.size(size),
             alignment: alignment,
             flexibility: flexibility,
-            viewReuseId: "\(ButtonComponentLayout.identifier)",
             config: style
                 .modifying { (view: UIButton) -> Void in
                     serialDisposable.disposable = view.rx.controlEvent(UIControlEvents.touchUpInside)
