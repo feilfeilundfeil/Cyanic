@@ -11,16 +11,18 @@ import UIKit
 
 public final class StaticSpacingComponent: Component, Hashable {
 
-    public init(id: String, height: CGFloat = 0.0) {
+    public init(id: String, height: CGFloat = 0.0, backgroundColor: UIColor = UIColor.clear) {
         self.id = id
         self.height = height
+        self.backgroundColor = backgroundColor
     }
 
     public let id: String
+    public let backgroundColor: UIColor
     public let height: CGFloat
 
     public var layout: ComponentLayout {
-        return StaticSpacingComponentLayout(height: self.height)
+        return StaticSpacingComponentLayout(height: self.height, backgroundColor: self.backgroundColor)
     }
 
     public let cellType: ComponentCell.Type = ComponentCell.self
@@ -31,7 +33,8 @@ public final class StaticSpacingComponent: Component, Hashable {
 
     public func isEqual(to other: StaticSpacingComponent) -> Bool {
         return self.id == other.id &&
-            self.height == other.height
+            self.height == other.height &&
+            self.backgroundColor == other.backgroundColor
     }
 
     public static func == (lhs: StaticSpacingComponent, rhs: StaticSpacingComponent) -> Bool {
@@ -41,5 +44,6 @@ public final class StaticSpacingComponent: Component, Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(self.height)
         hasher.combine(self.id)
+        hasher.combine(self.backgroundColor)
     }
 }

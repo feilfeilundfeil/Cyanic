@@ -12,7 +12,7 @@ import LayoutKit
 
 public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
-    public init(height: CGFloat) {
+    public init(height: CGFloat, backgroundColor: UIColor) {
         super.init(
             minWidth: Constants.screenWidth,
             maxWidth: Constants.screenWidth,
@@ -21,7 +21,9 @@ public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLa
             flexibility: Flexibility.inflexible,
             viewReuseId: StaticSpacingComponentLayout.identifier,
             sublayout: nil,
-            config: nil
+            config: { (view: UIView) -> Void in
+                view.backgroundColor = backgroundColor
+            }
         )
     }
 

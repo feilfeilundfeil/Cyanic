@@ -12,10 +12,10 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-public final class ExpandableComponent: Component, Hashable {
+public final class ExpandableComponent<Key: RawRepresentable>: Component, Hashable where Key.RawValue == String  {
 
     public init(
-        id: String,
+        key: Key,
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
         height: CGFloat = 44.0,
@@ -23,10 +23,9 @@ public final class ExpandableComponent: Component, Hashable {
         alignment: Alignment = Alignment.centerLeading,
         style: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in },
         isExpanded: Bool,
-        subComponents: [AnyComponent],
-        relay: BehaviorRelay<(String, Bool)>
+        relay: BehaviorRelay<(Key, Bool)>
     ) {
-        self.id = id
+        self.key = key
         self.text = text
         self.font = font
         self.height = height
@@ -34,7 +33,6 @@ public final class ExpandableComponent: Component, Hashable {
         self.alignment = alignment
         self.style = style
         self.isExpanded = isExpanded
-        self.subComponents = subComponents
         self.relay = relay
     }
 
@@ -46,16 +44,18 @@ public final class ExpandableComponent: Component, Hashable {
     public let alignment: Alignment
     public let style: AlacrityStyle<UILabel>
     public let isExpanded: Bool
-    public let subComponents: [AnyComponent]
-    public let relay: BehaviorRelay<(String, Bool)>
+    public let relay: BehaviorRelay<(Key, Bool)>
 
-    public let id: String
+    public let key: Key
+    public var id: String {
+        return self.key.rawValue
+    }
     public let cellType: ComponentCell.Type = ComponentCell.self
     public let disposeBag: DisposeBag = DisposeBag()
 
     public var layout: ComponentLayout {
-        return ExpandableComponentLayout(
-            id: self.id,
+        return ExpandableComponentLayout<Key>(
+            id: self.key,
             text: self.text,
             font: self.font,
             height: self.height,

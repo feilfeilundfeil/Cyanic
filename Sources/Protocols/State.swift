@@ -8,7 +8,11 @@
 
 import Foundation
 
-public protocol State: Equatable {}
+public protocol State: Equatable {
+
+    static var `default`: Self { get }
+
+}
 
 public extension State {
 

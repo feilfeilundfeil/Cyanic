@@ -13,17 +13,17 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
+public final class ExpandableComponentLayout<Key>: SizeLayout<UIView>, ComponentLayout {
 
     public init(
-        id: String,
+        id: Key,
         text: Text,
         font: UIFont,
         height: CGFloat,
         insets: UIEdgeInsets,
         alignment: Alignment,
         labelStyle: AlacrityStyle<UILabel>,
-        relay: BehaviorRelay<(String, Bool)>,
+        relay: BehaviorRelay<(Key, Bool)>,
         disposeBag: DisposeBag
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
@@ -58,7 +58,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
                 let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: nil, action: nil)
 
                 serial.disposable = tap.rx.event
-                    .map { (_: UITapGestureRecognizer) -> (String, Bool) in
+                    .map { (_: UITapGestureRecognizer) -> (Key, Bool) in
                         return (id, !relay.value.1)
                     }
                     .debug()

@@ -16,7 +16,9 @@ import RxSwift
 class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     let bag: DisposeBag = DisposeBag()
-    let expandableRelay: BehaviorRelay<(String, Bool)> = BehaviorRelay<(String, Bool)>(value: ("", false))
+    let expandableRelay: BehaviorRelay<(ExampleState.Expandable, Bool)> = BehaviorRelay<(ExampleState.Expandable, Bool)>(
+        value: (ExampleState.Expandable.first, false)
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +33,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.navigationItem.leftBarButtonItem = button
 
         self.expandableRelay
-            .bind(onNext: { (arg: (String, Bool)) -> Void in
+            .bind(onNext: { (arg: (ExampleState.Expandable, Bool)) -> Void in
                 let (name, isExpanded) = arg
                 self.viewModel.setState(block: { $0.expandableDict[name] = isExpanded })
             })
@@ -44,12 +46,12 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.viewModel.setState(block: { $0.isTrue = newValue })
     }
 
-    override func buildModels(state: ExampleState) -> [ComponentResult] {
+    override func buildModels(state: ExampleState) -> [() -> [AnyComponent?]] {
         let s = self
         return [
-            ComponentResult.possibleComponent({
-                guard state.isTrue else { return nil }
-                return StaticTextComponent(
+            {
+                guard state.isTrue else { return [] }
+                return [StaticTextComponent(
                     id: "First",
                     text: Text.unattributed(
                         """
@@ -62,69 +64,50 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                     style: AlacrityStyle<UITextView> {
                         $0.backgroundColor = UIColor.gray
                     }
-                ).asAnyComponent()
-            }),
-            ComponentResult.possibleComponents({
+                ).asAnyComponent()]
+            },
+            {
                 var array: [AnyComponent] = []
-                let expandable = ExpandableComponent(
-                    id: "First Expandable",
-                    text: Text.unattributed("This is Expandable"),
-                    height: 60.0,
-                    insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                    isExpanded: state.expandableDict["First Expandable"] ?? false,
-                    subComponents: [
-                        StaticTextComponent(
-                            id: "1st sub",
-                            text: Text.unattributed("Bacon ipsum dolor amet short ribs jerky spare ribs jowl, ham hock t-bone turkey capicola pork tenderloin. Rump t-bone ground round short loin ribeye alcatra pork chop spare ribs pancetta sausage chuck. Turducken pork sausage landjaeger t-bone. Kevin ground round tail ribeye pig drumstick alcatra bacon sausage."),
-                            font: UIFont.systemFont(ofSize: 15.0),
-                            backgroundColor: UIColor.gray,
-                            insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                            style: AlacrityStyle<UITextView>({ _ in })
-                        ).asAnyComponent(),
-                        StaticTextComponent(
-                            id: "2nd sub",
-                            text: Text.unattributed(
-                                """
-                                Brisket shank pork loin filet mignon, strip steak landjaeger bacon. Fatback swine bresaola frankfurter sausage, bacon venison jowl salami pork loin beef ribs chuck. Filet mignon corned beef pig frankfurter short loin cow pastrami cupim ham. Turducken pancetta kevin salami, shank boudin pastrami meatball flank filet mignon kielbasa spare ribs.
+                return self.resolveArray(&array, block: { (mutableArray: inout [AnyComponent]) -> Void in
+                    let expandable = ExpandableComponent<ExampleState.Expandable>(
+                        key: ExampleState.Expandable.first,
+                        text: Text.unattributed("This is Expandable"),
+                        height: 60.0,
+                        insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
+                        isExpanded: state.expandableDict[ExampleState.Expandable.first] ?? false,
+                        relay: self.expandableRelay
+                    )
 
-                                Doner ham pancetta sausage beef ribs flank tail filet mignon. Turducken leberkas jerky sirloin, tongue doner shank pastrami cupim. Alcatra pork loin prosciutto brisket meatloaf, beef ribs cow pork belly burgdoggen. Corned beef tail pork belly short loin chuck drumstick.
-                                """
-                            ),
-                            font: UIFont.systemFont(ofSize: 15.0),
-                            backgroundColor: UIColor.green,
-                            insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                            style: AlacrityStyle<UITextView>({ _ in })
-                        ).asAnyComponent(),
-                        StaticTextComponent(
-                            id: "3rd sub",
-                            text: Text.unattributed(
-                                """
-                                Doner ham pancetta sausage beef ribs flank tail filet mignon. Turducken leberkas jerky sirloin, tongue doner shank pastrami cupim. Alcatra pork loin prosciutto brisket meatloaf, beef ribs cow pork belly burgdoggen. Corned beef tail pork belly short loin chuck drumstick.
+                    let randomColor: () -> UIColor = {
+                        return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
+                    }
 
-                                Salami landjaeger pork chop, burgdoggen beef hamburger short loin alcatra filet mignon capicola tail. Swine cow pork ham hock turkey shoulder short loin porchetta tail buffalo meatloaf shank ham frankfurter. Shoulder pork belly tenderloin turkey ball tip drumstick porchetta. Meatball bresaola spare ribs porchetta shoulder andouille pork buffalo picanha swine beef ribs. T-bone meatloaf chicken capicola, strip steak doner turducken pancetta tenderloin short ribs jerky drumstick brisket.
+                    let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
 
-                                Shankle cow beef, rump buffalo short loin sirloin t-bone. Bresaola capicola pork pork loin drumstick turkey pig ball tip strip steak sausage landjaeger biltong short loin. Turkey rump shoulder tri-tip landjaeger, corned beef drumstick flank t-bone. Burgdoggen meatloaf pastrami spare ribs pork loin ham hock turkey.
-                                """
-                            ),
-                            font: UIFont.systemFont(ofSize: 15.0),
-                            backgroundColor: UIColor.blue,
-                            insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                            style: AlacrityStyle<UITextView>({ _ in })
-                        ).asAnyComponent(),
-                    ],
-                    relay: self.expandableRelay
-                )
+                    mutableArray.append(expandable.asAnyComponent())
 
-                array.append(expandable.asAnyComponent())
+                    if expandable.isExpanded {
+                        let items: [AnyComponent] = state.strings.enumerated()
+                            .map {
+                                return StaticTextComponent(
+                                    id: "Text \($0.offset.description)",
+                                    text: Text.unattributed($0.element),
+                                    font: UIFont.systemFont(ofSize: 17.0),
+                                    backgroundColor: randomColor(),
+                                    insets: insets,
+                                    style: AlacrityStyle<UITextView> { _ in }
+                                ).asAnyComponent()
+                            }
 
-                if let value = state.expandableDict["First Expandable"], value {
-                    array.append(contentsOf: expandable.subComponents)
-                }
+                        mutableArray.append(contentsOf: items)
+                    }
 
-                return array
-            }),
-            ComponentResult.component(StaticSpacingComponent(id: "Second", height: 50.0).asAnyComponent()),
-            ComponentResult.possibleComponents({
+                })
+            },
+            {
+                return [StaticSpacingComponent(id: "Second", height: 50.0, backgroundColor: UIColor.lightGray).asAnyComponent()]
+            },
+            {
                 let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                     $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                     $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
@@ -148,7 +131,8 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                     s.addComponent(to: &array, with: state, block: { (innerState) -> StaticSpacingComponent? in
                         return StaticSpacingComponent(
                             id: "Second",
-                            height: 100.0
+                            height: 100.0,
+                            backgroundColor: UIColor.brown
                         )
                     })
 
@@ -230,7 +214,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                         ]
                     })
                 })
-            })
+            }
         ]
     }
 }
@@ -240,10 +224,42 @@ class ExampleViewModel: BaseViewModel<ExampleState> {
 }
 
 struct ExampleState: State {
+    static var `default`: ExampleState {
+        return ExampleState(
+            isTrue: true,
+            expandableDict: ExampleState.Expandable.allCases.reduce(into: [Expandable: Bool](), { (current, element) -> Void in
+                current[element] = false
+            }),
+            strings: [
+                """
+                Bacon ipsum dolor amet short ribs jerky spare ribs jowl, ham hock t-bone turkey capicola pork tenderloin. Rump t-bone ground round short loin ribeye alcatra pork chop spare ribs pancetta sausage chuck. Turducken pork sausage landjaeger t-bone. Kevin ground round tail ribeye pig drumstick alcatra bacon sausage.
+                """,
+                """
+                Brisket shank pork loin filet mignon, strip steak landjaeger bacon. Fatback swine bresaola frankfurter sausage, bacon venison jowl salami pork loin beef ribs chuck. Filet mignon corned beef pig frankfurter short loin cow pastrami cupim ham. Turducken pancetta kevin salami, shank boudin pastrami meatball flank filet mignon kielbasa spare ribs.
+
+                Doner ham pancetta sausage beef ribs flank tail filet mignon. Turducken leberkas jerky sirloin, tongue doner shank pastrami cupim. Alcatra pork loin prosciutto brisket meatloaf, beef ribs cow pork belly burgdoggen. Corned beef tail pork belly short loin chuck drumstick.
+                """,
+                """
+                Doner ham pancetta sausage beef ribs flank tail filet mignon. Turducken leberkas jerky sirloin, tongue doner shank pastrami cupim. Alcatra pork loin prosciutto brisket meatloaf, beef ribs cow pork belly burgdoggen. Corned beef tail pork belly short loin chuck drumstick.
+
+                Salami landjaeger pork chop, burgdoggen beef hamburger short loin alcatra filet mignon capicola tail. Swine cow pork ham hock turkey shoulder short loin porchetta tail buffalo meatloaf shank ham frankfurter. Shoulder pork belly tenderloin turkey ball tip drumstick porchetta. Meatball bresaola spare ribs porchetta shoulder andouille pork buffalo picanha swine beef ribs. T-bone meatloaf chicken capicola, strip steak doner turducken pancetta tenderloin short ribs jerky drumstick brisket.
+
+                Shankle cow beef, rump buffalo short loin sirloin t-bone. Bresaola capicola pork pork loin drumstick turkey pig ball tip strip steak sausage landjaeger biltong short loin. Turkey rump shoulder tri-tip landjaeger, corned beef drumstick flank t-bone. Burgdoggen meatloaf pastrami spare ribs pork loin ham hock turkey.
+                """
+            ]
+        )
+    }
 
     var isTrue: Bool
-    var expandableDict: [String: Bool]
+    var expandableDict: [ExampleState.Expandable: Bool]
+    var strings: [String]
 
+}
+
+extension ExampleState {
+    enum Expandable: String, CaseIterable {
+        case first = "First Expandable"
+    }
 }
 
 

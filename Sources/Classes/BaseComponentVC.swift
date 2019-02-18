@@ -85,23 +85,23 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
             .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
             .map(self.buildModels)                                             // in executing operations when it is throttled anyway.
-            .map { (closures: [ComponentResult]) -> [AnyComponent] in
-                let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
-                    switch result {
-                        case .possibleComponent(let closure):
-                            guard let result = closure() else { return [] }
-                            return [result]
-                        case .possibleComponents(let closure):
-                            return closure()
-                        case .component(let component):
-                            return [component]
-                        case .components(let components):
-                            return components
-                    }
-                }
-                return components
-                    .flatMap { $0 }  // Flatten because buildModels returns [[AnyComponent?]]. flatMap returns [AnyComponent?]
-                    .compactMap { $0 } // Compact to get rid of the functions that return nil. compactMap returns [AnyComponent]
+            .map { (closures: [() -> [AnyComponent?]]) -> [AnyComponent] in
+//                let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
+//                    switch result {
+//                        case .possibleComponent(let closure):
+//                            guard let result = closure() else { return [] }
+//                            return [result]
+//                        case .possibleComponents(let closure):
+//                            return closure()
+//                        case .component(let component):
+//                            return [component]
+//                        case .components(let components):
+//                            return components
+//                    }
+//                }
+                return closures
+                    .flatMap { $0() }  // Flatten because buildModels returns [[AnyComponent?]]. flatMap returns [AnyComponent?]
+                    .compactMap { $0 } // Compact to get rid of the nil elements. compactMap returns [AnyComponent]
             }
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
@@ -134,7 +134,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    open func buildModels(state: ConcreteState) -> [ComponentResult] {
+    open func buildModels(state: ConcreteState) -> [() -> [AnyComponent?]] {
         fatalError("Override")
     }
 
