@@ -86,19 +86,6 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
             .map(self.buildModels)                                             // in executing operations when it is throttled anyway.
             .map { (closures: [() -> [AnyComponent?]]) -> [AnyComponent] in
-//                let components: [[AnyComponent?]] = closures.map { (result: ComponentResult) -> [AnyComponent?] in
-//                    switch result {
-//                        case .possibleComponent(let closure):
-//                            guard let result = closure() else { return [] }
-//                            return [result]
-//                        case .possibleComponents(let closure):
-//                            return closure()
-//                        case .component(let component):
-//                            return [component]
-//                        case .components(let components):
-//                            return components
-//                    }
-//                }
                 return closures
                     .flatMap { $0() }  // Flatten because buildModels returns [[AnyComponent?]]. flatMap returns [AnyComponent?]
                     .compactMap { $0 } // Compact to get rid of the nil elements. compactMap returns [AnyComponent]
