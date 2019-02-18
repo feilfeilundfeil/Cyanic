@@ -23,7 +23,7 @@ public final class ExpandableComponent<Key: RawRepresentable>: Component, Hashab
         alignment: Alignment = Alignment.centerLeading,
         style: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in },
         isExpanded: Bool,
-        relay: BehaviorRelay<(Key, Bool)>
+        relay: PublishRelay<(Key, Bool)>
     ) {
         self.key = key
         self.text = text
@@ -44,7 +44,7 @@ public final class ExpandableComponent<Key: RawRepresentable>: Component, Hashab
     public let alignment: Alignment
     public let style: AlacrityStyle<UILabel>
     public let isExpanded: Bool
-    public let relay: BehaviorRelay<(Key, Bool)>
+    public let relay: PublishRelay<(Key, Bool)>
 
     public let key: Key
     public var id: String {
@@ -63,7 +63,8 @@ public final class ExpandableComponent<Key: RawRepresentable>: Component, Hashab
             alignment: self.alignment,
             labelStyle: self.style,
             relay: self.relay,
-            disposeBag: self.disposeBag
+            disposeBag: self.disposeBag,
+            isExpanded: self.isExpanded
         )
     }
 

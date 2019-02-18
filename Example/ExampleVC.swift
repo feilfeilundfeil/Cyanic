@@ -16,9 +16,7 @@ import RxSwift
 class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     let bag: DisposeBag = DisposeBag()
-    let expandableRelay: BehaviorRelay<(ExampleState.Expandable, Bool)> = BehaviorRelay<(ExampleState.Expandable, Bool)>(
-        value: (ExampleState.Expandable.first, false)
-    )
+    let expandableMonitor: PublishRelay<(ExampleState.Expandable, Bool)> = PublishRelay<(ExampleState.Expandable, Bool)>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,18 +30,16 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         )
         self.navigationItem.leftBarButtonItem = button
 
-        self.expandableRelay
-            .bind(onNext: { (arg: (ExampleState.Expandable, Bool)) -> Void in
-                let (name, isExpanded) = arg
-                self.viewModel.setState(block: { $0.expandableDict[name] = isExpanded })
+        self.expandableMonitor
+            .bind(onNext: { (section: ExampleState.Expandable, isExpanded: Bool) -> Void in
+                self.viewModel.setState(block: { $0.expandableDict[section] = isExpanded })
             })
             .disposed(by: self.bag)
     }
 
     @objc
     public func buttonTapped() {
-        let newValue: Bool = !self.viewModel.currentState.isTrue
-        self.viewModel.setState(block: { $0.isTrue = newValue })
+        self.viewModel.buttonWasTapped()
     }
 
     override func buildModels(state: ExampleState) -> [() -> [AnyComponent?]] {
@@ -75,7 +71,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                         height: 60.0,
                         insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
                         isExpanded: state.expandableDict[ExampleState.Expandable.first] ?? false,
-                        relay: self.expandableRelay
+                        relay: self.expandableMonitor
                     )
 
                     let randomColor: () -> UIColor = {
@@ -221,15 +217,21 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
 class ExampleViewModel: BaseViewModel<ExampleState> {
 
+    func buttonWasTapped() {
+        self.setState { $0.isTrue = !$0.isTrue }
+    }
+
 }
 
 struct ExampleState: State {
     static var `default`: ExampleState {
         return ExampleState(
             isTrue: true,
-            expandableDict: ExampleState.Expandable.allCases.reduce(into: [Expandable: Bool](), { (current, element) -> Void in
-                current[element] = false
-            }),
+            expandableDict: ExampleState.Expandable.allCases
+                .reduce(into: [Expandable: Bool](), { (current, element) -> Void in
+                    current[element] = false
+                }
+            ),
             strings: [
                 """
                 Bacon ipsum dolor amet short ribs jerky spare ribs jowl, ham hock t-bone turkey capicola pork tenderloin. Rump t-bone ground round short loin ribeye alcatra pork chop spare ribs pancetta sausage chuck. Turducken pork sausage landjaeger t-bone. Kevin ground round tail ribeye pig drumstick alcatra bacon sausage.

@@ -23,8 +23,9 @@ public final class ExpandableComponentLayout<Key>: SizeLayout<UIView>, Component
         insets: UIEdgeInsets,
         alignment: Alignment,
         labelStyle: AlacrityStyle<UILabel>,
-        relay: BehaviorRelay<(Key, Bool)>,
-        disposeBag: DisposeBag
+        relay: PublishRelay<(Key, Bool)>,
+        disposeBag: DisposeBag,
+        isExpanded: Bool
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
 
@@ -59,7 +60,7 @@ public final class ExpandableComponentLayout<Key>: SizeLayout<UIView>, Component
 
                 serial.disposable = tap.rx.event
                     .map { (_: UITapGestureRecognizer) -> (Key, Bool) in
-                        return (id, !relay.value.1)
+                        return (id, !isExpanded)
                     }
                     .debug()
                     .subscribe(
@@ -68,7 +69,6 @@ public final class ExpandableComponentLayout<Key>: SizeLayout<UIView>, Component
                     )
 
                 view.addGestureRecognizer(tap)
-                print("Gesture Recognizers: \(view.gestureRecognizers)")
             }
         )
     }
