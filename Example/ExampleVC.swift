@@ -42,176 +42,190 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.viewModel.buttonWasTapped()
     }
 
-    override func buildModels(state: ExampleState) -> [() -> [AnyComponent?]] {
-        let s = self
-        return [
-            {
-                guard state.isTrue else { return [] }
-                return [StaticTextComponent(
-                    id: "First",
-                    text: Text.unattributed(
-                        """
-                        Bacon
-                        """
-                    ),
-                    font: UIFont.systemFont(ofSize: 17.0),
-                    backgroundColor: UIColor.gray,
-                    insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                    style: AlacrityStyle<UITextView> {
-                        $0.backgroundColor = UIColor.gray
-                    }
-                ).asAnyComponent()]
-            },
-            {
-                var array: [AnyComponent] = []
-                return self.resolveArray(&array, block: { (mutableArray: inout [AnyComponent]) -> Void in
-                    let expandable = ExpandableComponent<ExampleState.Expandable>(
-                        key: ExampleState.Expandable.first,
-                        text: Text.unattributed("This is Expandable"),
-                        height: 60.0,
-                        insets: UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0),
-                        isExpanded: state.expandableDict[ExampleState.Expandable.first] ?? false,
-                        relay: self.expandableMonitor
-                    )
-
-                    let randomColor: () -> UIColor = {
-                        return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
-                    }
-
-                    let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-
-                    mutableArray.append(expandable.asAnyComponent())
-
-                    if expandable.isExpanded {
-                        let items: [AnyComponent] = state.strings.enumerated()
-                            .map {
-                                return StaticTextComponent(
-                                    id: "Text \($0.offset.description)",
-                                    text: Text.unattributed($0.element),
-                                    font: UIFont.systemFont(ofSize: 17.0),
-                                    backgroundColor: randomColor(),
-                                    insets: insets,
-                                    style: AlacrityStyle<UITextView> { _ in }
-                                ).asAnyComponent()
-                            }
-
-                        mutableArray.append(contentsOf: items)
-                    }
-
-                })
-            },
-            {
-                return [StaticSpacingComponent(id: "Second", height: 50.0, backgroundColor: UIColor.lightGray).asAnyComponent()]
-            },
-            {
-                let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
-                    $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-                    $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
+    override func buildModels(state: ExampleState, components: inout ComponentsArray) -> ComponentsArray {
+        components.add(
+            StaticTextComponent(
+                id: "First",
+                text: Text.unattributed(
+                    """
+                    Bacon
+                    """
+                ),
+                font: UIFont.systemFont(ofSize: 17.0),
+                backgroundColor: UIColor.gray,
+                insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
+                style: AlacrityStyle<UITextView> {
+                    $0.backgroundColor = UIColor.gray
                 }
-                var components: [AnyComponent] = []
-                return s.resolveArray(&components, block: { (array: inout [AnyComponent]) -> Void in
+            )
+        )
 
-                    s.addComponent(to: &array, with: state, block: { (innerState: ExampleState) -> ButtonComponent? in
-                        guard innerState.isTrue == false else { return nil }
+        let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        let firstExpandable = ExpandableComponent<ExampleState.Expandable>(
+            key: ExampleState.Expandable.first,
+            text: Text.unattributed("This is Expandable"),
+            height: 60.0,
+            insets: insets,
+            isExpanded: state.expandableDict[ExampleState.Expandable.first] ?? false,
+            relay: self.expandableMonitor
+        )
 
-                        return ButtonComponent(
-                            title: "First",
-                            id: "First",
-                            height: 200.0,
-                            backgroundColor: UIColor.red,
-                            style: style,
-                            onTap: { print("Hello World, First") }
-                        )
-                    })
+        components.add(firstExpandable)
 
-                    s.addComponent(to: &array, with: state, block: { (innerState) -> StaticSpacingComponent? in
-                        return StaticSpacingComponent(
-                            id: "Second",
-                            height: 100.0,
-                            backgroundColor: UIColor.brown
-                        )
-                    })
+        let randomColor: () -> UIColor = {
+            return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
+        }
 
-                    s.addComponents(to: &array, with: state, block: { (innerState: ExampleState) -> [ButtonComponent] in
-                        return [
+        if firstExpandable.isExpanded {
 
-                            ButtonComponent(
-                                title: "Second",
-                                id: "Second",
-                                height: 200.0,
-                                backgroundColor: UIColor.orange,
-                                style: style,
-                                onTap: { print("Hello World, Second") }
-                            ),
-                            ButtonComponent(
-                                title: "Third",
-                                id: "Third",
-                                height: 200.0,
-                                backgroundColor: UIColor.yellow,
-                                style: style,
-                                onTap: { print("Hello World, Third") }
-                            ),
-                            ButtonComponent(
-                                title: "Fourth",
-                                id: "Fourth",
-                                height: 200.0,
-                                backgroundColor: UIColor.green,
-                                style: style,
-                                onTap: { print("Hello World, Fourth") }
-                            ),
-                            ButtonComponent(
-                                title: "Fifth",
-                                id: "Fifth",
-                                height: 200.0,
-                                backgroundColor: UIColor.blue,
-                                style: style,
-                                onTap: { print("Hello World, Fifth") }
-                                ),
-                            ButtonComponent(
-                                title: "Sixth",
-                                id: "Sixth",
-                                height: 200.0,
-                                backgroundColor: UIColor.purple,
-                                style: style,
-                                onTap: { print("Hello World, Sixth") }
-                                ),
-                            ButtonComponent(
-                                title: "Seventh",
-                                id: "Seventh",
-                                height: 200.0,
-                                backgroundColor: UIColor.brown,
-                                style: style,
-                                onTap: { print("Hello World, Seventh") }
-                                ),
-                            ButtonComponent(
-                                title: "Eighth",
-                                id: "Eighth",
-                                height: 200.0,
-                                backgroundColor: UIColor.white,
-                                style: style,
-                                onTap: { print("Hello World, Eighth") }
-                                ),
-                            ButtonComponent(
-                                title: "Ninth",
-                                id: "Ninth",
-                                height: 200.0,
-                                backgroundColor: UIColor.cyan,
-                                style: style,
-                                onTap: { print("Hello World, Ninth") }
-                                ),
-                            ButtonComponent(
-                                title: "Tenth",
-                                id: "Tenth",
-                                height: 200.0,
-                                backgroundColor: UIColor.gray,
-                                style: style,
-                                onTap: { print("Hello World, Tenth") }
-                                ),
-                        ]
-                    })
-                })
-            }
-        ]
+            state.strings.enumerated()
+                .map {
+                    return StaticTextComponent(
+                        id: "Text \($0.offset.description)",
+                        text: Text.unattributed($0.element),
+                        font: UIFont.systemFont(ofSize: 17.0),
+                        backgroundColor: randomColor(),
+                        insets: insets,
+                        style: AlacrityStyle<UITextView> { _ in }
+                    )
+                }
+                .forEach {
+                    components.add($0)
+                }
+        }
+
+        components.add(StaticSpacingComponent(id: "Second", height: 50.0, backgroundColor: UIColor.lightGray))
+
+        let secondExpandable = ExpandableComponent<ExampleState.Expandable>(
+            key: ExampleState.Expandable.second,
+            text: Text.unattributed("This is also Expandable"),
+            height: 60.0,
+            insets: insets,
+            isExpanded: state.expandableDict[ExampleState.Expandable.second] ?? false,
+            relay: self.expandableMonitor
+        )
+
+        components.add(secondExpandable)
+
+        if secondExpandable.isExpanded {
+            state.otherStrings.enumerated()
+                .map {
+                    return StaticTextComponent(
+                        id: "Text \($0.offset.description)",
+                        text: Text.unattributed($0.element),
+                        font: UIFont.systemFont(ofSize: 17.0),
+                        backgroundColor: randomColor(),
+                        insets: insets,
+                        style: AlacrityStyle<UITextView> { _ in }
+                    )
+                    }
+                .forEach {
+                    components.add($0)
+                }
+        }
+
+        let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        }
+
+        if state.isTrue {
+            components.add(
+                ButtonComponent(
+                    title: "First",
+                    id: "First",
+                    height: 200.0,
+                    backgroundColor: UIColor.red,
+                    style: style,
+                    onTap: { print("Hello World, First") }
+                )
+            )
+        }
+
+        components.add(
+            StaticSpacingComponent(
+                id: "Second",
+                height: 100.0,
+                backgroundColor: UIColor.brown
+            )
+        )
+
+        components.add([
+            ButtonComponent(
+                title: "Second",
+                id: "Second",
+                height: 200.0,
+                backgroundColor: UIColor.orange,
+                style: style,
+                onTap: { print("Hello World, Second") }
+            ),
+            ButtonComponent(
+                title: "Third",
+                id: "Third",
+                height: 200.0,
+                backgroundColor: UIColor.yellow,
+                style: style,
+                onTap: { print("Hello World, Third") }
+            ),
+            ButtonComponent(
+                title: "Fourth",
+                id: "Fourth",
+                height: 200.0,
+                backgroundColor: UIColor.green,
+                style: style,
+                onTap: { print("Hello World, Fourth") }
+            ),
+            ButtonComponent(
+                title: "Fifth",
+                id: "Fifth",
+                height: 200.0,
+                backgroundColor: UIColor.blue,
+                style: style,
+                onTap: { print("Hello World, Fifth") }
+            ),
+            ButtonComponent(
+                title: "Sixth",
+                id: "Sixth",
+                height: 200.0,
+                backgroundColor: UIColor.purple,
+                style: style,
+                onTap: { print("Hello World, Sixth") }
+            ),
+            ButtonComponent(
+                title: "Seventh",
+                id: "Seventh",
+                height: 200.0,
+                backgroundColor: UIColor.brown,
+                style: style,
+                onTap: { print("Hello World, Seventh") }
+            ),
+            ButtonComponent(
+                title: "Eighth",
+                id: "Eighth",
+                height: 200.0,
+                backgroundColor: UIColor.white,
+                style: style,
+                onTap: { print("Hello World, Eighth") }
+            ),
+            ButtonComponent(
+                title: "Ninth",
+                id: "Ninth",
+                height: 200.0,
+                backgroundColor: UIColor.cyan,
+                style: style,
+                onTap: { print("Hello World, Ninth") }
+            ),
+            ButtonComponent(
+                title: "Tenth",
+                id: "Tenth",
+                height: 200.0,
+                backgroundColor: UIColor.gray,
+                style: style,
+                onTap: { print("Hello World, Tenth") }
+            )
+        ])
+
+        return components
     }
 }
 
@@ -248,6 +262,17 @@ struct ExampleState: State {
 
                 Shankle cow beef, rump buffalo short loin sirloin t-bone. Bresaola capicola pork pork loin drumstick turkey pig ball tip strip steak sausage landjaeger biltong short loin. Turkey rump shoulder tri-tip landjaeger, corned beef drumstick flank t-bone. Burgdoggen meatloaf pastrami spare ribs pork loin ham hock turkey.
                 """
+            ],
+            otherStrings: [
+                """
+                Godfather ipsum dolor sit amet. You can act like a man! I don't trust a doctor who can hardly speak English. What's wrong with being a lawyer? Te salut, Don Corleone. That's my family Kay, that's not me.
+                """,
+                """
+                Do me this favor. I won't forget it. Ask your friends in the neighborhood about me. They'll tell you I know how to return a favor. Why did you go to the police? Why didn't you come to me first? I'm your older brother, Mike, and I was stepped over! It's not personal. It's business. Just when I thought I was out... they pull me back in.
+                """,
+                """
+                It's an old habit. I spent my whole life trying not to be careless. Women and children can afford to be careless, but not men. What's the matter with you? Is this what you've become, a Hollywood finocchio who cries like a woman? "Oh, what do I do? What do I do?" What is that nonsense? Ridiculous! You talk about vengeance. Is vengeance going to bring your son back to you? Or my boy to me? I don't like violence, Tom. I'm a businessman; blood is a big expense.
+                """
             ]
         )
     }
@@ -255,12 +280,14 @@ struct ExampleState: State {
     var isTrue: Bool
     var expandableDict: [ExampleState.Expandable: Bool]
     var strings: [String]
+    var otherStrings: [String]
 
 }
 
 extension ExampleState {
     enum Expandable: String, CaseIterable {
         case first = "First Expandable"
+        case second = "Second Expandable"
     }
 }
 

@@ -79,16 +79,16 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             }
         )
 
+        let s = self
+
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         self.viewModel.state
             .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
             .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
-            .map(self.buildModels)                                             // in executing operations when it is throttled anyway.
-            .map { (closures: [() -> [AnyComponent?]]) -> [AnyComponent] in
-                return closures
-                    .flatMap { $0() }  // Flatten because buildModels returns [[AnyComponent?]]. flatMap returns [AnyComponent?]
-                    .compactMap { $0 } // Compact to get rid of the nil elements. compactMap returns [AnyComponent]
+            .map {                                                             // in executing operations when it is throttled anyway.
+                var components: ComponentsArray = ComponentsArray()
+                return s.buildModels(state: $0, components: &components).components
             }
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
@@ -121,7 +121,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    open func buildModels(state: ConcreteState) -> [() -> [AnyComponent?]] {
+    open func buildModels(state: ConcreteState, components: inout ComponentsArray) -> ComponentsArray {
         fatalError("Override")
     }
 
