@@ -16,7 +16,7 @@ import RxSwift
 class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     let bag: DisposeBag = DisposeBag()
-    let expandableMonitor: PublishRelay<(ExampleState.Expandable, Bool)> = PublishRelay<(ExampleState.Expandable, Bool)>()
+    let expandableMonitor: PublishRelay<(String, Bool)> = PublishRelay<(String, Bool)>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,8 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.navigationItem.leftBarButtonItem = button
 
         self.expandableMonitor
-            .bind(onNext: { (section: ExampleState.Expandable, isExpanded: Bool) -> Void in
+            .bind(onNext: { (arg: (String, Bool)) -> Void in
+                let (section, isExpanded) = arg
                 self.viewModel.setState(block: { $0.expandableDict[section] = isExpanded })
             })
             .disposed(by: self.bag)
@@ -61,12 +62,11 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         )
 
         let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        let firstExpandable = ExpandableComponent<ExampleState.Expandable>(
-            key: ExampleState.Expandable.first,
+        let firstExpandable = ExpandableComponent(
+            id: ExampleState.Expandable.first.rawValue,
             text: Text.unattributed("This is Expandable"),
-            height: 60.0,
             insets: insets,
-            isExpanded: state.expandableDict[ExampleState.Expandable.first] ?? false,
+            isExpanded: state.expandableDict[ExampleState.Expandable.first.rawValue] ?? false,
             relay: self.expandableMonitor
         )
 
@@ -96,12 +96,11 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
         components.add(StaticSpacingComponent(id: "Second", height: 50.0, backgroundColor: UIColor.lightGray))
 
-        let secondExpandable = ExpandableComponent<ExampleState.Expandable>(
-            key: ExampleState.Expandable.second,
-            text: Text.unattributed("This is also Expandable"),
-            height: 60.0,
+        let secondExpandable = ExpandableComponent(
+            id: ExampleState.Expandable.second.rawValue,
+            text: Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"),
             insets: insets,
-            isExpanded: state.expandableDict[ExampleState.Expandable.second] ?? false,
+            isExpanded: state.expandableDict[ExampleState.Expandable.second.rawValue] ?? false,
             relay: self.expandableMonitor
         )
 
@@ -241,8 +240,8 @@ struct ExampleState: State {
     static var `default`: ExampleState {
         return ExampleState(
             isTrue: true,
-            expandableDict: ExampleState.Expandable.allCases
-                .reduce(into: [Expandable: Bool](), { (current, element) -> Void in
+            expandableDict: ExampleState.Expandable.allCases.map { $0.rawValue }
+                .reduce(into: [String: Bool](), { (current, element) -> Void in
                     current[element] = false
                 }
             ),
@@ -278,7 +277,7 @@ struct ExampleState: State {
     }
 
     var isTrue: Bool
-    var expandableDict: [ExampleState.Expandable: Bool]
+    var expandableDict: [String: Bool]
     var strings: [String]
     var otherStrings: [String]
 

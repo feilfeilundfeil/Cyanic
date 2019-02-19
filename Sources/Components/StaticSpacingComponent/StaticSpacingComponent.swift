@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public final class StaticSpacingComponent: Component, Hashable {
+public final class StaticSpacingComponent: Component, AutoEquatable, AutoHashable {
 
     public init(id: String, height: CGFloat = 0.0, backgroundColor: UIColor = UIColor.clear) {
         self.id = id
@@ -25,6 +25,7 @@ public final class StaticSpacingComponent: Component, Hashable {
         return StaticSpacingComponentLayout(height: self.height, backgroundColor: self.backgroundColor)
     }
 
+    //sourcery:skipHashing,skipEquality
     public let cellType: ComponentCell.Type = ComponentCell.self
 
     public var identity: StaticSpacingComponent {
@@ -32,18 +33,6 @@ public final class StaticSpacingComponent: Component, Hashable {
     }
 
     public func isEqual(to other: StaticSpacingComponent) -> Bool {
-        return self.id == other.id &&
-            self.height == other.height &&
-            self.backgroundColor == other.backgroundColor
-    }
-
-    public static func == (lhs: StaticSpacingComponent, rhs: StaticSpacingComponent) -> Bool {
-        return lhs.isEqual(to: rhs)
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.height)
-        hasher.combine(self.id)
-        hasher.combine(self.backgroundColor)
+        return self == other
     }
 }

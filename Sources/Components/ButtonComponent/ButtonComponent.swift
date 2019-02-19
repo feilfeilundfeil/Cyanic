@@ -12,7 +12,7 @@ import RxCocoa
 import LayoutKit
 import Alacrity
 
-open class ButtonComponent: Component, Hashable {
+open class ButtonComponent: Component, AutoEquatable, AutoHashable {
 
     /**
      Initializer
@@ -46,15 +46,22 @@ open class ButtonComponent: Component, Hashable {
     public let title: String
     public let id: String
     public let height: CGFloat
+    //sourcery:skipHashing,skipEquality
     public let insets: UIEdgeInsets
     public let backgroundColor: UIColor
+    //sourcery:skipHashing,skipEquality
     public let alignment: Alignment
+    //sourcery:skipHashing,skipEquality
     public let flexibility: Flexibility
+    //sourcery:skipHashing,skipEquality
     public let style: AlacrityStyle<UIButton>
+    //sourcery:skipHashing,skipEquality
     public let onTap: () -> Void
+    //sourcery:skipHashing,skipEquality
     public let disposeBag: DisposeBag = .init()
 
     // MARK: - Stored Properties
+    //sourcery:skipHashing,skipEquality
     public let cellType: ComponentCell.Type = ComponentCell.self
 
     open var layout: ComponentLayout {
@@ -67,37 +74,16 @@ open class ButtonComponent: Component, Hashable {
             flexibility: self.flexibility,
             viewReuseId: self.id,
             style: self.style,
-            onTap: self.onTap, disposeBag: self.disposeBag
+            onTap: self.onTap,
+            disposeBag: self.disposeBag
         )
-    }
-
-    open func isEqual(to other: ButtonComponent) -> Bool {
-        return self.type == other.type &&
-            self.title == other.title &&
-            self.id == other.id &&
-            self.height == other.height &&
-            self.insets == other.insets &&
-            self.backgroundColor == other.backgroundColor
-    }
-
-    public static func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
-        return lhs.isEqual(to: rhs)
-    }
-
-    open func hash(into hasher: inout Hasher) {
-        hasher.combine(self.type)
-        hasher.combine(self.title)
-        hasher.combine(self.id)
-        hasher.combine(self.height)
-        hasher.combine(self.backgroundColor)
-        hasher.combine(self.insets.bottom)
-        hasher.combine(self.insets.top)
-        hasher.combine(self.insets.left)
-        hasher.combine(self.insets.right)
     }
 
     open var identity: ButtonComponent {
         return self
     }
 
+    public func isEqual(to other: ButtonComponent) -> Bool {
+        return self == other
+    }
 }

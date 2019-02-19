@@ -11,7 +11,7 @@ import CoreGraphics
 import Foundation
 import LayoutKit
 
-public final class StaticTextComponent: Component, Hashable {
+public final class StaticTextComponent: Component, AutoEquatable, AutoHashable {
 
     public init(
         id: String,
@@ -40,12 +40,17 @@ public final class StaticTextComponent: Component, Hashable {
     public let font: UIFont
     public let backgroundColor: UIColor
     public let lineFragmentPadding: CGFloat
+    //sourcery:skipHashing,skipEquality
     public let insets: UIEdgeInsets
+    //sourcery:skipHashing,skipEquality
     public let alignment: Alignment
+    //sourcery:skipHashing,skipEquality
     public let flexibility: Flexibility
+    //sourcery:skipHashing,skipEquality
     public let style: AlacrityStyle<UITextView>
 
     // MARK: - Stored Properties
+    //sourcery:skipHashing,skipEquality
     public let cellType: ComponentCell.Type = ComponentCell.self
 
     public var layout: ComponentLayout {
@@ -62,32 +67,11 @@ public final class StaticTextComponent: Component, Hashable {
         )
     }
 
-    public func isEqual(to other: StaticTextComponent) -> Bool {
-        return self.id == other.id &&
-            self.text == other.text &&
-            self.font == other.font &&
-            self.backgroundColor == other.backgroundColor &&
-            self.lineFragmentPadding == other.lineFragmentPadding &&
-            self.insets == other.insets
-    }
-
-    public static func == (lhs: StaticTextComponent, rhs: StaticTextComponent) -> Bool {
-        return lhs.isEqual(to: rhs)
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-        hasher.combine(self.text)
-        hasher.combine(self.font)
-        hasher.combine(self.backgroundColor)
-        hasher.combine(self.lineFragmentPadding)
-        hasher.combine(self.insets.bottom)
-        hasher.combine(self.insets.top)
-        hasher.combine(self.insets.left)
-        hasher.combine(self.insets.right)
-    }
-
     public var identity: StaticTextComponent {
         return self
+    }
+    
+    public func isEqual(to other: StaticTextComponent) -> Bool {
+        return self == other
     }
 }

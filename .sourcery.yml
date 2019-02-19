@@ -1,0 +1,6 @@
+sources:
+- Sources/Components
+- Sources/Protocols
+templates:
+- Templates
+output: Sources/Sourcery
