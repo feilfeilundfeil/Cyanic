@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+ ComponentsArray is a helper struct that transforms Component instances into AnyComponent instances and adds it to an array.
+*/
 public struct ComponentsArray {
 
     public private(set) var components: [AnyComponent] = []

@@ -17,6 +17,8 @@ import struct Kio.MetaType
 import class RxCocoa.BehaviorRelay
 import struct RxDataSources.AnimatableSectionModel
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
+import struct RxDataSources.AnimationConfiguration
+import enum RxDataSources.UITableViewRowAnimation
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
 import class RxSwift.SerialDispatchQueueScheduler
@@ -26,6 +28,7 @@ import class UIKit.UICollectionViewLayout
 import class UIKit.UICollectionViewFlowLayout
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
+import RxDataSources
 
 internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
     qos: DispatchQoS.userInitiated,
@@ -87,8 +90,9 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
             .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
             .map {                                                             // in executing operations when it is throttled anyway.
-                var components: ComponentsArray = ComponentsArray()
-                return s.buildModels(state: $0, components: &components).components
+                var array: ComponentsArray = ComponentsArray()
+                s.buildModels(state: $0, components: &array)
+                return array.components
             }
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
@@ -121,22 +125,8 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    open func buildModels(state: ConcreteState, components: inout ComponentsArray) -> ComponentsArray {
+    open func buildModels(state: ConcreteState, components: inout ComponentsArray) {
         fatalError("Override")
-    }
-
-    public final func addComponent<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> T?) {
-        guard let component = block(argument) else { return }
-        components.append(component.asAnyComponent())
-    }
-    public final func addComponents<T: Component, Argument>(to components: inout [AnyComponent], with argument: Argument, block: (Argument) -> [T?]) {
-        let anyComponents: [AnyComponent] = block(argument).compactMap { $0?.asAnyComponent() }
-        components.append(contentsOf: anyComponents)
-    }
-
-    public final func resolveArray(_ array: inout [AnyComponent], block: (inout [AnyComponent]) -> Void) -> [AnyComponent]  {
-        block(&array)
-        return array
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

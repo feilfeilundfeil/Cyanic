@@ -42,7 +42,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.viewModel.buttonWasTapped()
     }
 
-    override func buildModels(state: ExampleState, components: inout ComponentsArray) -> ComponentsArray {
+    override func buildModels(state: ExampleState, components: inout ComponentsArray) {
         components.add(
             StaticTextComponent(
                 id: "First",
@@ -60,7 +60,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             )
         )
 
-        let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        let insets: UIEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         let firstExpandable = ExpandableComponent<ExampleState.Expandable>(
             key: ExampleState.Expandable.first,
             text: Text.unattributed("This is Expandable"),
@@ -224,8 +224,6 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 onTap: { print("Hello World, Tenth") }
             )
         ])
-
-        return components
     }
 }
 
