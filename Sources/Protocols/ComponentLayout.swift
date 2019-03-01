@@ -17,7 +17,7 @@ import class RxSwift.DisposeBag
 public protocol ComponentLayout: class, Layout {
 
     /**
-     
+     The DisposeBag to deallocate any subscriptions tied to the lifetime of this ComponentLayout instance.
     */
     var disposeBag: DisposeBag { get }
 
@@ -25,6 +25,9 @@ public protocol ComponentLayout: class, Layout {
 
 public extension ComponentLayout {
 
+    /**
+     The String identifier of the ComponentLayout used for viewReuseId in LayoutKit
+    */
     static var identifier: String {
         return String(describing: self)
     }

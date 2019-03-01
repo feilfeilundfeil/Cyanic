@@ -17,6 +17,11 @@ import struct Foundation.IndexPath
 */
 public final class AnyComponent: IdentifiableType {
 
+    /**
+     Initializer.
+     Keeps the underlying Component in memory and creates a reference to its layout and cellType. ** IMPORTANT ** AnyComponent STORES
+     an instance of the layout from the Component (which is usually a computed property). Keep this in mind.
+    */
     public init<C: Component>(_ component: C) {
         self.layout = component.layout
         self.cellType = component.cellType
