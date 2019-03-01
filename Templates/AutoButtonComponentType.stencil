@@ -1,0 +1,17 @@
+{% for type in types.all %}
+{% if type|annotated:"AutoButtonComponentType" %}
+// sourcery:inline:auto:{{ type.name }}.AutoButtonComponentType
+{% for var in type.allVariables %}
+{% if var.annotations.defaultValue %}
+    {% if var.annotations.isComputed %}
+    {{ type.accessLevel }} var {{ var.name }}: {{ var.typeName }} { {{ var.annotations.defaultValue }} }
+    {% else %}
+    {{ type.accessLevel }} {% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
+    {% endif %}
+
+{% endif %}
+{% endfor %}
+
+// sourcery:end
+{% endif %}
+{% endfor %}

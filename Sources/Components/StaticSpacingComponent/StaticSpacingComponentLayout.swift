@@ -28,8 +28,4 @@ public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLa
     }
 
     public let disposeBag: DisposeBag = DisposeBag()
-
-
-
-
 }

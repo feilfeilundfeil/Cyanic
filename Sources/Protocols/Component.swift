@@ -29,11 +29,14 @@ public protocol Component: IdentifiableType where Identity == Self {
     /**
      The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     */
+    // sourcery: defaultValue = fatalError()
+    // sourcery: isComputed = true
     var layout: ComponentLayout { get }
 
     /**
      The ComponentCell subclass used as the root view for the subviews.
     */
+    // sourcery: defaultValue = ComponentCell.self
     var cellType: ComponentCell.Type { get }
 
     /**
@@ -53,6 +56,10 @@ public extension Component {
     */
     func asAnyComponent() -> AnyComponent {
         return AnyComponent(self)
+    }
+
+    var identity: Self {
+        return self
     }
 
 }

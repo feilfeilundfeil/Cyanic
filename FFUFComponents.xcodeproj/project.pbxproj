@@ -19,6 +19,7 @@
 		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
 		1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDE22218A74900A35FFE /* ComponentResult.swift */; };
+		14496DB622273CE000C5C278 /* ButtonComponent2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent2.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,7 @@
 		1478E9AB220C5B6D006AF8B3 /* FFUFComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsArray.swift */; };
+		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
@@ -38,6 +40,9 @@
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		2F757312BC100EF1B25D2DAE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054D316CC07E8E310B0D8998 /* Pods_Example.framework */; };
 		57DA062C778CDEE4CC91EA6D /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4688D6F4980D5714DDECBA /* Pods_FFUFComponents.framework */; };
+		F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */; };
+		F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */; };
+		F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +92,8 @@
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
 		1437BDE22218A74900A35FFE /* ComponentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentResult.swift; sourceTree = "<group>"; };
+		14496DB522273CE000C5C278 /* ButtonComponent2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent2.swift; sourceTree = "<group>"; };
+		14496DB92228714200C5C278 /* AutoButtonComponentType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoButtonComponentType.stencil; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +109,9 @@
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentVC.swift; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsArray.swift; sourceTree = "<group>"; };
+		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
+		14B01E40222723E200EE0A9A /* AutoHashable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashable.stencil; sourceTree = "<group>"; };
+		14B01E41222723E200EE0A9A /* AutoEquatable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatable.stencil; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -117,6 +127,10 @@
 		A7551C3066C917BE81603EAA /* Pods-FFUFComponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.debug.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.debug.xcconfig"; sourceTree = "<group>"; };
 		C54C627CE1A98CB3D953D1DC /* Pods-MvRx-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MvRx-iOS.release.xcconfig"; path = "Target Support Files/Pods-MvRx-iOS/Pods-MvRx-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		DB4688D6F4980D5714DDECBA /* Pods_FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F000D2A6221C1B6800D10D0D /* .sourcery.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .sourcery.yml; sourceTree = "<group>"; };
+		F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryProtocols.swift; sourceTree = "<group>"; };
+		F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.generated.swift; sourceTree = "<group>"; };
+		F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,11 +205,21 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		14496DB822286A0A00C5C278 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				F000D2A6221C1B6800D10D0D /* .sourcery.yml */,
+				14E424CF220EE51C006BAA4F /* README.md */,
+			);
+			name = Metadata;
+			sourceTree = "<group>";
+		};
 		145AD743220B1EBE004F02C2 = {
 			isa = PBXGroup;
 			children = (
+				14496DB822286A0A00C5C278 /* Metadata */,
 				1478E993220C59B9006AF8B3 /* Example */,
-				14E424CF220EE51C006BAA4F /* README.md */,
+				14B01E3F222723E200EE0A9A /* Templates */,
 				145AD767220B1ED6004F02C2 /* Sources */,
 				145AD74F220B1EBE004F02C2 /* Supporting Files */,
 				145AD75A220B1EBF004F02C2 /* Tests */,
@@ -236,6 +260,7 @@
 		145AD767220B1ED6004F02C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				F000D2A7221C1D6F00D10D0D /* Sourcery */,
 				1437BDE12218A71F00A35FFE /* Enums */,
 				1437BDD72215BA4400A35FFE /* Extensions */,
 				14C96F062211C2EF00731265 /* Utilities */,
@@ -270,6 +295,16 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		14B01E3F222723E200EE0A9A /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				14B01E40222723E200EE0A9A /* AutoHashable.stencil */,
+				14B01E41222723E200EE0A9A /* AutoEquatable.stencil */,
+				14496DB92228714200C5C278 /* AutoButtonComponentType.stencil */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
 		14C1E3DC2210491E0053E318 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +330,8 @@
 			children = (
 				1437BDC722155B9200A35FFE /* ButtonComponent.swift */,
 				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
+				14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */,
+				14496DB522273CE000C5C278 /* ButtonComponent2.swift */,
 			);
 			path = ButtonComponent;
 			sourceTree = "<group>";
@@ -302,6 +339,7 @@
 		14CBC9C9220C415200597FAA /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */,
 				14CBC9CC220C57BB00597FAA /* Component.swift */,
 				14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */,
 				1437BDCB22157FC300A35FFE /* State.swift */,
@@ -333,6 +371,15 @@
 				A10C6AD818E24FE18DFA0253 /* Pods-FFUFComponents.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F000D2A7221C1D6F00D10D0D /* Sourcery */ = {
+			isa = PBXGroup;
+			children = (
+				F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */,
+				F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */,
+			);
+			path = Sourcery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,15 +621,20 @@
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */,
+				14496DB622273CE000C5C278 /* ButtonComponent2.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
+				F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
+				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
+				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
+				F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

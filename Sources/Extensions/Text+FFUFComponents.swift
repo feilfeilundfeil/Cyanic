@@ -33,9 +33,9 @@ extension Text: Hashable {
     public func hash(into hasher: inout Hasher) {
         switch self {
             case .attributed(let string):
-                hasher.combine(string)
+                string.hash(into: &hasher)
             case .unattributed(let string):
-                hasher.combine(string)
+                string.hash(into: &hasher)
         }
     }
 }
