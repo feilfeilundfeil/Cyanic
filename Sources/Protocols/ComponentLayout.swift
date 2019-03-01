@@ -16,6 +16,9 @@ import class RxSwift.DisposeBag
 */
 public protocol ComponentLayout: class, Layout {
 
+    /**
+     
+    */
     var disposeBag: DisposeBag { get }
 
 }

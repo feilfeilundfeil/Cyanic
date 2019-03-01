@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
-		1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC722155B9200A35FFE /* ButtonComponent.swift */; };
 		1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* ViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
 		1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */; };
@@ -19,7 +18,7 @@
 		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
 		1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDE22218A74900A35FFE /* ComponentResult.swift */; };
-		14496DB622273CE000C5C278 /* ButtonComponent2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent2.swift */; };
+		14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +37,10 @@
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
+		14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */; };
+		14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */; };
+		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
+		14F6BD802229738A008B0692 /* Changeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7F2229738A008B0692 /* Changeable.swift */; };
 		2F757312BC100EF1B25D2DAE /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054D316CC07E8E310B0D8998 /* Pods_Example.framework */; };
 		57DA062C778CDEE4CC91EA6D /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4688D6F4980D5714DDECBA /* Pods_FFUFComponents.framework */; };
 		F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */; };
@@ -81,7 +84,6 @@
 		02E5CD7DD6093F46BD1865C1 /* Pods_MvRx_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MvRx_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		054D316CC07E8E310B0D8998 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
-		1437BDC722155B9200A35FFE /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		1437BDC922157C4F00A35FFE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponent.swift; sourceTree = "<group>"; };
@@ -92,8 +94,8 @@
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
 		1437BDE22218A74900A35FFE /* ComponentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentResult.swift; sourceTree = "<group>"; };
-		14496DB522273CE000C5C278 /* ButtonComponent2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent2.swift; sourceTree = "<group>"; };
-		14496DB92228714200C5C278 /* AutoButtonComponentType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoButtonComponentType.stencil; sourceTree = "<group>"; };
+		14496DB522273CE000C5C278 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		14496DB92228714200C5C278 /* AutoComponentType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoComponentType.stencil; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,10 @@
 		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponentType.swift; sourceTree = "<group>"; };
+		14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentType.swift; sourceTree = "<group>"; };
+		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
+		14F6BD7F2229738A008B0692 /* Changeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Changeable.swift; sourceTree = "<group>"; };
 		1BF2BAE8D12EEC76401C4BE7 /* Pods-Components.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.release.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.release.xcconfig"; sourceTree = "<group>"; };
 		379343E1E991BEC236B9E5E4 /* Pods_Components.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Components.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D096C09BD0609B0F240F8D0 /* Pods-Components.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Components.debug.xcconfig"; path = "Target Support Files/Pods-Components/Pods-Components.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 		1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */ = {
 			isa = PBXGroup;
 			children = (
+				14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */,
 				1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */,
 				1437BDD02215AFF900A35FFE /* StaticSpacingComponentLayout.swift */,
 			);
@@ -174,6 +181,7 @@
 		1437BDD42215B57800A35FFE /* StaticTextComponent */ = {
 			isa = PBXGroup;
 			children = (
+				14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */,
 				1437BDD52215B75100A35FFE /* StaticTextComponent.swift */,
 				1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */,
 			);
@@ -191,6 +199,7 @@
 		1437BDDA2216C14100A35FFE /* ExpandableComponent */ = {
 			isa = PBXGroup;
 			children = (
+				14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */,
 				1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */,
 				1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */,
 			);
@@ -300,7 +309,7 @@
 			children = (
 				14B01E40222723E200EE0A9A /* AutoHashable.stencil */,
 				14B01E41222723E200EE0A9A /* AutoEquatable.stencil */,
-				14496DB92228714200C5C278 /* AutoButtonComponentType.stencil */,
+				14496DB92228714200C5C278 /* AutoComponentType.stencil */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -328,10 +337,9 @@
 		14C96F092211EE9600731265 /* ButtonComponent */ = {
 			isa = PBXGroup;
 			children = (
-				1437BDC722155B9200A35FFE /* ButtonComponent.swift */,
-				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
 				14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */,
-				14496DB522273CE000C5C278 /* ButtonComponent2.swift */,
+				14496DB522273CE000C5C278 /* ButtonComponent.swift */,
+				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
 			);
 			path = ButtonComponent;
 			sourceTree = "<group>";
@@ -343,6 +351,7 @@
 				14CBC9CC220C57BB00597FAA /* Component.swift */,
 				14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */,
 				1437BDCB22157FC300A35FFE /* State.swift */,
+				14F6BD7F2229738A008B0692 /* Changeable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -613,15 +622,18 @@
 			files = (
 				149D5B8F221B33A100482F28 /* ComponentsArray.swift in Sources */,
 				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
+				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
+				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
+				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
 				1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */,
-				14496DB622273CE000C5C278 /* ButtonComponent2.swift in Sources */,
+				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */,
@@ -631,8 +643,8 @@
 				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
+				14F6BD802229738A008B0692 /* Changeable.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
-				1437BDC822155B9200A35FFE /* ButtonComponent.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 				F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */,
 			);

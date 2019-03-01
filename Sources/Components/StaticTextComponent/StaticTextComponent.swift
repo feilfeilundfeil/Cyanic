@@ -6,53 +6,23 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Alacrity
-import CoreGraphics
-import Foundation
-import LayoutKit
+import class LayoutKit.TextViewLayoutDefaults
+import class UIKit.UIColor
+import class UIKit.UIFont
+import class UIKit.UITextView
+import enum LayoutKit.Text
+import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
+import struct UIKit.UIEdgeInsets
+import struct LayoutKit.Alignment
+import struct LayoutKit.Flexibility
 
-public final class StaticTextComponent: Component, AutoEquatable, AutoHashable {
+// sourcery: AutoEquatable,AutoHashable
+public struct StaticTextComponent: StaticTextComponentType, Changeable {
 
-    public init(
-        id: String,
-        text: Text,
-        font: UIFont = UIFont.systemFont(ofSize: 13.0),
-        backgroundColor: UIColor = UIColor.clear,
-        lineFragmentPadding: CGFloat = 0.0,
-        insets: UIEdgeInsets = UIEdgeInsets.zero,
-        alignment: Alignment = Alignment.centerLeading,
-        flexibility: Flexibility = TextViewLayoutDefaults.defaultFlexibility,
-        style: AlacrityStyle<UITextView>
-    ) {
-        self.id = id
-        self.text = text
-        self.font = font
-        self.backgroundColor = backgroundColor
-        self.lineFragmentPadding = lineFragmentPadding
-        self.insets = insets
-        self.alignment = alignment
-        self.flexibility = flexibility
-        self.style = style
-    }
+    public var id: String
 
-    public let id: String
-    public let text: Text
-    public let font: UIFont
-    public let backgroundColor: UIColor
-    public let lineFragmentPadding: CGFloat
-    //sourcery:skipHashing,skipEquality
-    public let insets: UIEdgeInsets
-    //sourcery:skipHashing,skipEquality
-    public let alignment: Alignment
-    //sourcery:skipHashing,skipEquality
-    public let flexibility: Flexibility
-    //sourcery:skipHashing,skipEquality
-    public let style: AlacrityStyle<UITextView>
-
-    // MARK: - Stored Properties
-    //sourcery:skipHashing,skipEquality
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
+    // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout {
         return StaticTextComponentLayout(
             id: self.id,
@@ -67,11 +37,38 @@ public final class StaticTextComponent: Component, AutoEquatable, AutoHashable {
         )
     }
 
+    // sourcery: skipHashing, skipEquality 
+    public let cellType: ComponentCell.Type = ComponentCell.self
+
+    public var text: Text = Text.unattributed("")
+
+    public var font: UIFont = UIFont.systemFont(ofSize: 13.0)
+
+    public var backgroundColor: UIColor = UIColor.clear
+
+    public var lineFragmentPadding: CGFloat = 0.0
+
+    // sourcery: skipHashing, skipEquality 
+    public var insets: UIEdgeInsets = UIEdgeInsets.zero
+
+    // sourcery: skipHashing, skipEquality 
+    public var alignment: Alignment = Alignment.centerLeading
+
+    // sourcery: skipHashing, skipEquality 
+    public var flexibility: Flexibility = TextViewLayoutDefaults.defaultFlexibility
+
+    // sourcery: skipHashing, skipEquality 
+    public var style: AlacrityStyle<UITextView> = AlacrityStyle<UITextView> { _ in }
+
     public var identity: StaticTextComponent {
         return self
     }
-    
-    public func isEqual(to other: StaticTextComponent) -> Bool {
-        return self == other
+
+}
+
+public extension StaticTextComponent {
+
+    init(id: String) {
+        self.id = id
     }
 }

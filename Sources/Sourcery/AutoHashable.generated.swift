@@ -7,35 +7,31 @@
 // MARK: - AutoHashable for classes, protocols, structs
 // MARK: - ButtonComponent AutoHashable
 extension ButtonComponent: Hashable {
-    open func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         self.type.hash(into: &hasher)
         self.title.hash(into: &hasher)
-        self.id.hash(into: &hasher)
         self.height.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
-    }
-}
-// MARK: - ButtonComponent2 AutoHashable
-extension ButtonComponent2: Hashable {
-    public func hash(into hasher: inout Hasher) {
+        self.id.hash(into: &hasher)
     }
 }
 // MARK: - ExpandableComponent AutoHashable
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
+        self.id.hash(into: &hasher)
         self.text.hash(into: &hasher)
         self.font.hash(into: &hasher)
+        self.backgroundColor.hash(into: &hasher)
         self.height.hash(into: &hasher)
         self.isExpanded.hash(into: &hasher)
-        self.id.hash(into: &hasher)
     }
 }
 // MARK: - StaticSpacingComponent AutoHashable
 extension StaticSpacingComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.id.hash(into: &hasher)
-        self.backgroundColor.hash(into: &hasher)
         self.height.hash(into: &hasher)
+        self.backgroundColor.hash(into: &hasher)
     }
 }
 // MARK: - StaticTextComponent AutoHashable

@@ -6,33 +6,33 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Foundation
-import UIKit
+import class UIKit.UIColor
+import struct CoreGraphics.CGFloat
 
-public final class StaticSpacingComponent: Component, AutoEquatable, AutoHashable {
+// sourcery: AutoEquatable,AutoHashable
+public struct StaticSpacingComponent: StaticSpacingComponentType, Changeable {
 
-    public init(id: String, height: CGFloat = 0.0, backgroundColor: UIColor = UIColor.clear) {
-        self.id = id
-        self.height = height
-        self.backgroundColor = backgroundColor
-    }
+    public var identity: StaticSpacingComponent { return self }
 
-    public let id: String
-    public let backgroundColor: UIColor
-    public let height: CGFloat
+    public var id: String
 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout {
         return StaticSpacingComponentLayout(height: self.height, backgroundColor: self.backgroundColor)
     }
 
-    //sourcery:skipHashing,skipEquality
+    // sourcery: skipHashing, skipEquality
     public let cellType: ComponentCell.Type = ComponentCell.self
 
-    public var identity: StaticSpacingComponent {
-        return self
+    public var height: CGFloat = 0.0
+
+    public var backgroundColor: UIColor = UIColor.clear
+}
+
+public extension StaticSpacingComponent {
+
+    init(id: String) {
+        self.id = id
     }
 
-    public func isEqual(to other: StaticSpacingComponent) -> Bool {
-        return self == other
-    }
 }

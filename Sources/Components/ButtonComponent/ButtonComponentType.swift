@@ -6,7 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.DisposeBag
 import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
@@ -28,25 +27,27 @@ public protocol ButtonComponentType: Component {
     var height: CGFloat { get set }
 
     // sourcery: defaultValue = UIEdgeInsets.zero
+    // sourcery: skipHashing, skipEquality
     var insets: UIEdgeInsets { get set }
 
     // sourcery: defaultValue = UIColor.clear
     var backgroundColor: UIColor { get set }
 
     // sourcery: defaultValue = ButtonLayoutDefaults.defaultAlignment
+    // sourcery: skipHashing, skipEquality
     var alignment: Alignment { get set }
 
     // sourcery: defaultValue = ButtonLayoutDefaults.defaultFlexibility
+    // sourcery: skipHashing, skipEquality
     var flexibility: Flexibility { get set }
 
     // sourcery: defaultValue = AlacrityStyle<UIButton> { _ in }
+    // sourcery: skipHashing, skipEquality
     var style: AlacrityStyle<UIButton> { get set }
 
     // sourcery: defaultValue = { print("Hello World \(#file)") }
+    // sourcery: skipHashing, skipEquality
     var onTap: () -> Void { get set }
-
-    // sourcery: defaultValue = DisposeBag()
-    var disposeBag: DisposeBag { get }
 
 }
 

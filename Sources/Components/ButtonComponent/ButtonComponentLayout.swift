@@ -16,21 +16,21 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
     public init(
         type: ButtonLayoutType,
         title: String,
+        backgroundColor: UIColor,
         height: CGFloat,
         contentEdgeInsets: UIEdgeInsets = UIEdgeInsets.zero,
         alignment: Alignment = ButtonLayoutDefaults.defaultAlignment,
         flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility,
         viewReuseId: String,
         style: AlacrityStyle<UIButton>,
-        onTap: @escaping () -> Void,
-        disposeBag: DisposeBag
+        onTap: @escaping () -> Void
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
 
         let serialDisposable: SerialDisposable = SerialDisposable()
-        let bag: DisposeBag = DisposeBag()
-        serialDisposable.disposed(by: bag)
-        self.disposeBag = bag
+        let disposeBag: DisposeBag = DisposeBag()
+        serialDisposable.disposed(by: disposeBag)
+        self.disposeBag = disposeBag
 
         let buttonLayout = ButtonLayout<UIButton>(
             type: type,
@@ -59,7 +59,10 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             alignment: alignment,
             flexibility: flexibility,
             viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",
-            sublayout: insetLayout
+            sublayout: insetLayout,
+            config: { (view: UIView) -> Void in
+                view.backgroundColor = backgroundColor
+            }
         )
     }
 

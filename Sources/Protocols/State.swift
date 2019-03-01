@@ -8,18 +8,11 @@
 
 import Foundation
 
-public protocol State: Equatable {
+/**
+ State is the data structure representing the state of your screen.
+*/
+public protocol State: Equatable, Changeable {
 
     static var `default`: Self { get }
-
-}
-
-public extension State {
-
-    func changing(block: (inout Self) -> Void) -> Self {
-        var mutableSelf: Self = self
-        block(&mutableSelf)
-        return mutableSelf
-    }
 
 }

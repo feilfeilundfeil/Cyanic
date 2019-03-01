@@ -45,30 +45,29 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     override func buildModels(state: ExampleState, components: inout ComponentsArray) {
         components.add(
-            StaticTextComponent(
-                id: "First",
-                text: Text.unattributed(
-                    """
-                    Bacon
-                    """
-                ),
-                font: UIFont.systemFont(ofSize: 17.0),
-                backgroundColor: UIColor.gray,
-                insets: UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0),
-                style: AlacrityStyle<UITextView> {
+            StaticTextComponent(id: "First").changing {
+                $0.text = Text.unattributed("Bacon")
+                $0.font = UIFont.systemFont(ofSize: 17.0)
+                $0.backgroundColor = UIColor.gray
+                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+                $0.style = AlacrityStyle<UITextView> {
                     $0.backgroundColor = UIColor.gray
                 }
-            )
+            }
         )
-
         let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        let firstId: String = ExampleState.Expandable.first.rawValue
         let firstExpandable = ExpandableComponent(
-            id: ExampleState.Expandable.first.rawValue,
-            text: Text.unattributed("This is Expandable"),
-            insets: insets,
-            isExpanded: state.expandableDict[ExampleState.Expandable.first.rawValue] ?? false,
+            id: firstId,
+            isExpanded: state.expandableDict[firstId] ?? false,
             relay: self.expandableMonitor
         )
+            .changing {
+                $0.text = Text.unattributed("This is expandable")
+                $0.backgroundColor = UIColor.white
+                $0.height = 55.0
+                $0.insets = insets
+            }
 
         components.add(firstExpandable)
 
@@ -79,45 +78,53 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         if firstExpandable.isExpanded {
 
             state.strings.enumerated()
-                .map {
-                    return StaticTextComponent(
-                        id: "Text \($0.offset.description)",
-                        text: Text.unattributed($0.element),
-                        font: UIFont.systemFont(ofSize: 17.0),
-                        backgroundColor: randomColor(),
-                        insets: insets,
-                        style: AlacrityStyle<UITextView> { _ in }
-                    )
+                .map { (offset: Int, element: String) -> StaticTextComponent in
+                    return StaticTextComponent(id: "Text \(offset.description)")
+                        .changing {
+                            $0.text = Text.unattributed(element)
+                            $0.font = UIFont.systemFont(ofSize: 17.0)
+                            $0.backgroundColor = randomColor()
+                            $0.insets = insets
+                        }
                 }
                 .forEach {
                     components.add($0)
                 }
         }
 
-        components.add(StaticSpacingComponent(id: "Second", height: 50.0, backgroundColor: UIColor.lightGray))
+        components.add(
+            StaticSpacingComponent(id: "Second").changing {
+                $0.height = 50.0
+                $0.backgroundColor = UIColor.black
+            }
+        )
+
+        let secondId: String = ExampleState.Expandable.second.rawValue
 
         let secondExpandable = ExpandableComponent(
-            id: ExampleState.Expandable.second.rawValue,
-            text: Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"),
-            insets: insets,
-            isExpanded: state.expandableDict[ExampleState.Expandable.second.rawValue] ?? false,
+            id: secondId,
+            isExpanded: state.expandableDict[secondId] ?? false,
             relay: self.expandableMonitor
         )
+            .changing {
+                $0.text = Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")")
+                $0.insets = insets
+                $0.backgroundColor = UIColor.lightGray
+            }
 
         components.add(secondExpandable)
 
         if secondExpandable.isExpanded {
             state.otherStrings.enumerated()
-                .map {
-                    return StaticTextComponent(
-                        id: "Text \($0.offset.description)",
-                        text: Text.unattributed($0.element),
-                        font: UIFont.systemFont(ofSize: 17.0),
-                        backgroundColor: randomColor(),
-                        insets: insets,
-                        style: AlacrityStyle<UITextView> { _ in }
-                    )
-                    }
+                .map { (offset: Int, value: String) -> StaticTextComponent in
+                    return StaticTextComponent(id: "Other \(offset.description)")
+                        .changing {
+                            $0.text = Text.unattributed(value)
+                            $0.font = UIFont.systemFont(ofSize: 17.0)
+                            $0.backgroundColor = randomColor()
+                            $0.insets = insets
+                        }
+                }
                 .forEach {
                     components.add($0)
                 }
@@ -128,102 +135,70 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
         }
 
-        let first = ButtonComponent(
-            title: "First",
-            id: "First",
-            height: 200.0,
-            backgroundColor: UIColor.red,
-            style: style,
-            onTap: { print("Hello World, First") }
-        )
+        let first = ButtonComponent(id: "First").changing { (button: inout ButtonComponent) -> Void in
+            let id = button.id
+            button.height = 200.0
+            button.title = id
+            button.backgroundColor = UIColor.red
+            button.style = style
+            button.onTap = { print("Hello World, \(id)") }
+        }
 
-        let second = ButtonComponent(
-            title: "Second",
-            id: "Second",
-            height: 200.0,
-            backgroundColor: UIColor.orange,
-            style: style,
-            onTap: { print("Hello World, Second") }
-        )
+        let second = ButtonComponent(id: "Second").changing { (button: inout ButtonComponent) -> Void in
+            let id = button.id
+            button.height = 200.0
+            button.title = button.id
+            button.backgroundColor = UIColor.orange
+            button.style = style
+            button.onTap = { print("Hello World, \(id)") }
+        }
 
         if state.isTrue {
             components.add(first)
         }
 
         components.add(
-            StaticSpacingComponent(
-                id: "Second",
-                height: 100.0,
-                backgroundColor: UIColor.brown
-            )
+            StaticSpacingComponent(id: "Second").changing {
+                $0.height = 100.0
+                $0.backgroundColor = UIColor.brown
+            }
         )
+
+        let block: (UIColor, inout ButtonComponent) -> Void = { (color: UIColor, button: inout ButtonComponent) -> Void in
+            let id = button.id
+            button.title = id
+            button.height = 200.0
+            button.backgroundColor = color
+            button.style = style
+            button.onTap = { print("Hello World, \(id)") }
+        }
 
         components.add([
             second,
-            ButtonComponent(
-                title: "Third",
-                id: "Third",
-                height: 200.0,
-                backgroundColor: UIColor.yellow,
-                style: style,
-                onTap: { print("Hello World, Third") }
-            ),
-            ButtonComponent(
-                title: "Fourth",
-                id: "Fourth",
-                height: 200.0,
-                backgroundColor: UIColor.green,
-                style: style,
-                onTap: { print("Hello World, Fourth") }
-            ),
-            ButtonComponent(
-                title: "Fifth",
-                id: "Fifth",
-                height: 200.0,
-                backgroundColor: UIColor.blue,
-                style: style,
-                onTap: { print("Hello World, Fifth") }
-            ),
-            ButtonComponent(
-                title: "Sixth",
-                id: "Sixth",
-                height: 200.0,
-                backgroundColor: UIColor.purple,
-                style: style,
-                onTap: { print("Hello World, Sixth") }
-            ),
-            ButtonComponent(
-                title: "Seventh",
-                id: "Seventh",
-                height: 200.0,
-                backgroundColor: UIColor.brown,
-                style: style,
-                onTap: { print("Hello World, Seventh") }
-            ),
-            ButtonComponent(
-                title: "Eighth",
-                id: "Eighth",
-                height: 200.0,
-                backgroundColor: UIColor.white,
-                style: style,
-                onTap: { print("Hello World, Eighth") }
-            ),
-            ButtonComponent(
-                title: "Ninth",
-                id: "Ninth",
-                height: 200.0,
-                backgroundColor: UIColor.cyan,
-                style: style,
-                onTap: { print("Hello World, Ninth") }
-            ),
-            ButtonComponent(
-                title: "Tenth",
-                id: "Tenth",
-                height: 200.0,
-                backgroundColor: UIColor.gray,
-                style: style,
-                onTap: { print("Hello World, Tenth") }
-            )
+            ButtonComponent(id: "Third").changing {
+                block(.yellow, &$0)
+            },
+            ButtonComponent(id: "Fourth").changing {
+                block(.green, &$0)
+            },
+            ButtonComponent(id: "Fifth").changing {
+                block(.blue, &$0)
+            },
+            ButtonComponent(id: "Sixth").changing {
+                block(.purple, &$0)
+            },
+            ButtonComponent(id: "Seventh").changing {
+               block(.brown, &$0)
+            },
+            ButtonComponent(id: "Eighth").changing {
+                block(.white, &$0)
+            },
+            ButtonComponent(id: "Ninth").changing {
+                block(.cyan, &$0)
+            },
+            ButtonComponent(id: "Tenth").changing {
+                block(.gray, &$0)
+            },
         ])
     }
 }

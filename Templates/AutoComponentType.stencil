@@ -1,0 +1,23 @@
+{% for type in types.all %}
+{% if type|annotated:"AutoComponentType" %}
+// sourcery:inline:auto:{{ type.name }}.AutoComponentType
+{% for var in type.allVariables %}
+{% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
+{% if var.annotations.defaultValue %}
+{% if var.annotations.isComputed %}
+    {{ type.accessLevel }} var {{ var.name }}: {{ var.typeName }} { {{ var.annotations.defaultValue }} }
+
+{% else %}
+    {{ type.accessLevel }} {% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
+
+{% endif %}
+{% else %}
+    {{ type.accessLevel }} {% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
+
+{% endif %}
+{% endfor %}
+    {{ type.accessLevel }} var identity: {{ type.name }} { return self }
+
+// sourcery:end
+{% endif %}
+{% endfor %}

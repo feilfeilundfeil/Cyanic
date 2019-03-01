@@ -1,6 +1,9 @@
 sources:
-- Sources/Components
-- Sources/Protocols
+    - Sources/Components
+    - Sources/Protocols
 templates:
-- Templates
-output: Sources/Sourcery
+    - Templates
+output:
+    Sources/Sourcery
+disableCache:
+    true

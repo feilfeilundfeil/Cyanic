@@ -11,40 +11,26 @@ import protocol Differentiator.IdentifiableType
 
 /**
  Component is the data model representation of the UICollectionViewCell to be rendered on the BaseComponentVC.
- A Component should be an immutable class because its a data model.
- Information it contains:
- - The ComponentLayout, which defines the following characteristics of the subviews in the the ComponentCell
-    - the sizing
-    - the location
-    - UI properties such as backgroundColor
- - The subclass of ComponentCell it will render
+ A Component should be an immutable struct because its a data model. Types conforming to Component should be a struct and it should contain
+ UI specific characteristics related to the content that should be displayed in the ComponentCell.
 */
 public protocol Component: IdentifiableType where Identity == Self {
 
-    /**
-     The unique ID of the component.
-    */
-    var id: String { get }
+    // sourcery: id = true
+    /// The unique id of the Component. This is mutable because structs are the only data structure that should conform to Component
+    /// this allows deep copying of Component structs via Copyable protocol
+    var id: String { get set }
 
-    /**
-     The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
-    */
     // sourcery: defaultValue = fatalError()
     // sourcery: isComputed = true
+    // sourcery: skipHashing,skipEquality
+    /// The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     var layout: ComponentLayout { get }
 
-    /**
-     The ComponentCell subclass used as the root view for the subviews.
-    */
     // sourcery: defaultValue = ComponentCell.self
+    // sourcery: skipHashing,skipEquality
+    /// The ComponentCell subclass used as the root view for the subviews.
     var cellType: ComponentCell.Type { get }
-
-    /**
-     The isEqual method is used to compare subclasses with each other. It's a workaround due to == being a static method.
-     - parameter other: The other instance this instance is being compared to.
-     - Returns: Bool
-    */
-    func isEqual(to other: Self) -> Bool
 
 }
 
@@ -56,10 +42,6 @@ public extension Component {
     */
     func asAnyComponent() -> AnyComponent {
         return AnyComponent(self)
-    }
-
-    var identity: Self {
-        return self
     }
 
 }

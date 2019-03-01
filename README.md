@@ -1,15 +1,22 @@
 FFUFComponents
 ======================================
 
+## TODO
+- Update the documentation of each file
+- Refactor Components into structs [✅ 01.03.2019]
+- Create Stencil templates for said structs to generate default values for properties [✅ 01.03.2019 but could still be refined]
+- Create the "Changeable" protocol and have these structs conform to it [✅ 01.03.2019]
+    - Changeable protocol allows structs to be mutated (copied) in place
+- Create the Stencil template containing the logic to generate extensions for BaseComponentsVC
+- Create a UITableView subclass with identical functionality as the BaseComponentsVC
+- Create a Run Script Phase in the FFUFComponents target  that refereshes the AutoEquatable and AutoHashables of the basic Components  that come with this framework
+- Refine the README.md to fully explain what the architecture is and the best practices.
+
 ## Architecture
 
 - When building a component based screen. The following is a general view of how the architecture should be created:
 
-    - BaseCollectionVC
-        - [AnyComponents] array
-            - YourComponents wrapped in an AnyComponent class
-                - identity => the state of your component
-                - cellType => the ComponentCell.Type used as the root UIView for the Component
-                - layout => the Layout, which contains information on what subviews are created and their defined size, location, and appearance (data binding). May contain user input related observables which are relayed to the Component, the Component then writes it to the identity.
-                - viewModel => the ViewModel, which acts as a wrapper around the model to be presented. Only exposes the data needed from the model. May contain read related observables on the model
+    - ViewModel
+    - State
+    - BaseComponentVC
 
