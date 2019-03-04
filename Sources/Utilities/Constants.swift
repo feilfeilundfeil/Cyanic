@@ -10,5 +10,8 @@ import class UIKit.UIScreen
 import struct CoreGraphics.CGFloat
 
 internal enum Constants {
-    internal static let screenWidth: CGFloat = UIScreen.main.bounds.width
+    internal static var screenWidth: CGFloat {
+        print(UIScreen.main.bounds.width)
+        return UIScreen.main.bounds.width
+    }
 }

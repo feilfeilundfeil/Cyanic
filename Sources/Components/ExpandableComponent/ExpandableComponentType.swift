@@ -6,6 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
+import class FFUFWidgets.ChevronView
 import class RxCocoa.PublishRelay
 import class RxSwift.DisposeBag
 import class UIKit.UIColor
@@ -14,16 +15,14 @@ import class UIKit.UILabel
 import enum LayoutKit.Text
 import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
 public protocol ExpandableComponentType: Component {
 
-    // sourcery: defaultValue = "Text.unattributed("")"
-    var text: Text { get set }
-
-    // sourcery: defaultValue = "UIFont.systemFont(ofSize: 17.0)"
-    var font: UIFont { get set }
+    // sourcery: skipHashing, skipEquality
+    var contentLayout: ExpandableContentLayout { get set }
 
     // sourcery: defaultValue = UIColor.clear
     var backgroundColor: UIColor { get set }
@@ -39,9 +38,12 @@ public protocol ExpandableComponentType: Component {
     // sourcery: skipHashing, skipEquality
     var alignment: Alignment { get set }
 
-    // sourcery: defaultValue = AlacrityStyle<UILabel> { _ in }
+    // sourcery: defaultValue = "CGSize(width: 12.0, height: 12.0)"
+    var chevronSize: CGSize { get set }
+
+    // sourcery: defaultValue = AlacrityStyle<ChevronView> { _ in }
     // sourcery: skipHashing, skipEquality
-    var style: AlacrityStyle<UILabel> { get set }
+    var chevronStyle: AlacrityStyle<ChevronView> { get set }
 
     var isExpanded: Bool { get set }
 

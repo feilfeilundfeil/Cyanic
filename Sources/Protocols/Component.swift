@@ -16,22 +16,11 @@ import protocol Differentiator.IdentifiableType
 
  A Component is what is used to diff between two collections by RxDataSources.
 */
-public protocol Component: IdentifiableType, Changeable where Identity == Self {
+public protocol Component: IdentifiableType, Changeable, UserInterfaceModel where Identity == Self {
 
     /// The unique id of the Component. This is mutable because structs are the only data structure that should conform to Component
     /// this allows deep copying of Component structs via Copyable protocol
     var id: String { get set }
-
-    // sourcery: defaultValue = fatalError()
-    // sourcery: isComputed = true
-    // sourcery: skipHashing,skipEquality
-    /// The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
-    var layout: ComponentLayout { get }
-
-    // sourcery: defaultValue = ComponentCell.self
-    // sourcery: skipHashing,skipEquality
-    /// The ComponentCell subclass used as the root view for the subviews.
-    var cellType: ComponentCell.Type { get }
 
 }
 

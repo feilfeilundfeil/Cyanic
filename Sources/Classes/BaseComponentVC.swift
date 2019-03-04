@@ -19,6 +19,8 @@ import class UIKit.UICollectionViewLayout
 import class UIKit.UIViewController
 import enum Foundation.DispatchTimeInterval
 import enum RxDataSources.UITableViewRowAnimation
+import protocol UIKit.UICollectionViewDelegateFlowLayout
+import protocol UIKit.UIViewControllerTransitionCoordinator
 import struct Foundation.IndexPath
 import struct Foundation.DispatchQoS
 import struct CoreGraphics.CGRect
@@ -27,7 +29,6 @@ import struct CoreGraphics.CGFloat
 import struct Kio.MetaType
 import struct RxDataSources.AnimatableSectionModel
 import struct RxDataSources.AnimationConfiguration
-import protocol UIKit.UICollectionViewDelegateFlowLayout
 
 /**
  The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
@@ -60,7 +61,10 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
 
     // MARK:  UIViewController Lifecycle Methods
     override open func loadView() {
-        self.view = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
+        let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view = collectionView
     }
 
     open override func viewDidLoad() {
@@ -108,6 +112,11 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
+    }
+
+    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        self.collectionView.reloadData()
     }
 
     // MARK: Stored Properties
@@ -174,7 +183,8 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         }
 
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
-        return layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
+        let size: CGSize = layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
+        return size
     }
 
 }

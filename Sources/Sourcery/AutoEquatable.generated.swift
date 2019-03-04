@@ -38,8 +38,6 @@ public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
 extension ExpandableComponent: Equatable {}
 public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.id == rhs.id else { return false }
-    guard lhs.text == rhs.text else { return false }
-    guard lhs.font == rhs.font else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.height == rhs.height else { return false }
     guard lhs.isExpanded == rhs.isExpanded else { return false }

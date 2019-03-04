@@ -7,6 +7,7 @@
 //
 
 import Alacrity
+import FFUFWidgets
 import LayoutKit
 import RxSwift
 import RxCocoa
@@ -21,13 +22,13 @@ public struct ExpandableComponent: ExpandableComponentType {
     public var layout: ComponentLayout {
         return ExpandableComponentLayout(
             id: self.id,
-            text: self.text,
-            font: self.font,
+            contentLayout: self.contentLayout,
             backgroundColor: self.backgroundColor,
             height: self.height,
             insets: self.insets,
             alignment: self.alignment,
-            labelStyle: self.style,
+            chevronSize: self.chevronSize,
+            chevronStyle: self.chevronStyle,
             relay: self.relay,
             disposeBag: self.disposeBag,
             isExpanded: self.isExpanded
@@ -37,9 +38,8 @@ public struct ExpandableComponent: ExpandableComponentType {
     // sourcery: skipHashing, skipEquality 
     public let cellType: ComponentCell.Type = ComponentCell.self
 
-    public var text: Text = Text.unattributed("")
-
-    public var font: UIFont = UIFont.systemFont(ofSize: 17.0)
+    // sourcery: skipHashing, skipEquality 
+    public var contentLayout: ExpandableContentLayout
 
     public var backgroundColor: UIColor = UIColor.clear
 
@@ -51,8 +51,10 @@ public struct ExpandableComponent: ExpandableComponentType {
     // sourcery: skipHashing, skipEquality 
     public var alignment: Alignment = Alignment.centerLeading
 
-    // sourcery: skipHashing, skipEquality 
-    public var style: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in }
+    public var chevronSize: CGSize = CGSize(width: 12.0, height: 12.0)
+
+    // sourcery: skipHashing, skipEquality
+    public var chevronStyle: AlacrityStyle<ChevronView> = AlacrityStyle<ChevronView> { _ in }
 
     public var isExpanded: Bool
 
@@ -67,8 +69,9 @@ public struct ExpandableComponent: ExpandableComponentType {
 
 public extension ExpandableComponent {
 
-    init(id: String, isExpanded: Bool, relay: PublishRelay<(String, Bool)>) {
+    init(id: String, contentLayout: ExpandableContentLayout, isExpanded: Bool, relay: PublishRelay<(String, Bool)>) {
         self.id = id
+        self.contentLayout = contentLayout
         self.isExpanded = isExpanded
         self.relay = relay
     }

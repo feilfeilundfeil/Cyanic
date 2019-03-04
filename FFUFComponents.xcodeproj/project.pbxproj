@@ -35,6 +35,8 @@
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBAFEB222D1351002D2768 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* ViewModelType.swift */; };
+		14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */; };
+		14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
@@ -118,6 +120,8 @@
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBAFEA222D1351002D2768 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContentLayout.swift; sourceTree = "<group>"; };
+		14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceModel.swift; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */,
 				1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */,
 				1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */,
+				14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */,
 			);
 			path = ExpandableComponent;
 			sourceTree = "<group>";
@@ -228,8 +233,8 @@
 		145AD743220B1EBE004F02C2 = {
 			isa = PBXGroup;
 			children = (
-				14496DB822286A0A00C5C278 /* Metadata */,
 				1478E993220C59B9006AF8B3 /* Example */,
+				14496DB822286A0A00C5C278 /* Metadata */,
 				14B01E3F222723E200EE0A9A /* Templates */,
 				145AD767220B1ED6004F02C2 /* Sources */,
 				145AD74F220B1EBE004F02C2 /* Supporting Files */,
@@ -355,6 +360,7 @@
 				1437BDCB22157FC300A35FFE /* State.swift */,
 				14F6BD7F2229738A008B0692 /* Changeable.swift */,
 				14CBAFEA222D1351002D2768 /* ViewModelType.swift */,
+				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -547,6 +553,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alacrity/Alacrity.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/FFUFWidgets/FFUFWidgets.framework",
 				"${BUILT_PRODUCTS_DIR}/Kio/Kio.framework",
 				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
@@ -560,6 +567,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alacrity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FFUFWidgets.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
@@ -632,6 +640,7 @@
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
+				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
@@ -650,6 +659,7 @@
 				14F6BD802229738A008B0692 /* Changeable.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
+				14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */,
 				F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

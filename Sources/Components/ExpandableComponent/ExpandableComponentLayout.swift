@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import FFUFWidgets
 import Alacrity
 import Foundation
 import LayoutKit
 import RxCocoa
 import RxSwift
+import FFUFWidgets
 
 /**
  The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>
@@ -20,34 +22,61 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
 
     public init(
         id: String,
-        text: Text,
-        font: UIFont,
+        contentLayout: ExpandableContentLayout,
         backgroundColor: UIColor,
         height: CGFloat,
         insets: UIEdgeInsets,
         alignment: Alignment,
-        labelStyle: AlacrityStyle<UILabel>,
+        chevronSize: CGSize,
+        chevronStyle: AlacrityStyle<ChevronView>,
         relay: PublishRelay<(String, Bool)>,
         disposeBag: DisposeBag,
         isExpanded: Bool
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
 
-        let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
-            text: text,
-            font: font,
-            numberOfLines: 0,
-            alignment: LabelLayoutDefaults.defaultAlignment,
-            flexibility: LabelLayoutDefaults.defaultFlexibility,
-            viewReuseId: "\(ExpandableComponentLayout.identifier)Label",
-            config: labelStyle.style
+        let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
+            insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),
+            sublayout: contentLayout
         )
 
-        let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
-            insets: insets,
+        let flexibleLayout: SizeLayout<UIView> = SizeLayout<UIView>(
+            size: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height),
+            alignment: Alignment.center,
+            flexibility: Flexibility.flexible,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)flexibleSpace"
+        )
+
+        let chevronLayout: SizeLayout<ChevronView> = SizeLayout<ChevronView>(
+            size: chevronSize,
+            alignment: Alignment.center,
+            flexibility: Flexibility.inflexible,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)Chevron",
+            config:  chevronStyle
+                .modifying(with: { (view: ChevronView) -> Void in
+                    switch isExpanded {
+                        case true: view.direction = .up
+                        case false: view.direction = .down
+                    }
+                })
+                .style
+        )
+
+        let chevronInsetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
+            insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: insets.right),
             alignment: alignment,
-            viewReuseId: "\(ExpandableComponentLayout.identifier)Inset",
-            sublayout: labelLayout
+            flexibility: chevronLayout.flexibility,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)ChevronInset",
+            sublayout: chevronLayout
+        )
+
+        let stackLayout: StackLayout<UIView> = StackLayout<UIView>(
+            axis: Axis.horizontal,
+            spacing: 0.0,
+            distribution: StackLayoutDistribution.fillFlexing,
+            alignment: Alignment.fillLeading,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)HorizontalStack",
+            sublayouts: [contentInsetLayout, flexibleLayout, chevronInsetLayout]
         )
 
         let serial: SerialDisposable = SerialDisposable()
@@ -57,7 +86,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             minWidth: size.width, maxWidth: size.width,
             minHeight: size.height, maxHeight: size.height,
             viewReuseId: ExpandableComponentLayout.identifier,
-            sublayout: insetLayout,
+            sublayout: stackLayout,
             config: { (view: UIView) -> Void in
                 view.backgroundColor = backgroundColor
                 let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: nil, action: nil)

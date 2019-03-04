@@ -19,11 +19,10 @@ public final class AnyComponent: IdentifiableType {
 
     /**
      Initializer.
-     Keeps the underlying Component in memory and creates a reference to its layout and cellType. ** IMPORTANT ** AnyComponent STORES
-     an instance of the layout from the Component (which is usually a computed property). Keep this in mind.
+     Keeps the underlying Component in memory and creates a reference to its layout and cellType. 
     */
     public init<C: Component>(_ component: C) {
-        self.layout = component.layout
+//        self.layout = component.layout
         self.cellType = component.cellType
         self.identity = AnyHashable(component.identity)
     }
@@ -31,7 +30,9 @@ public final class AnyComponent: IdentifiableType {
     /**
      The layout from the Component.
     */
-    public let layout: ComponentLayout
+    public var layout: ComponentLayout {
+        return (self.identity.base as! UserInterfaceModel).layout
+    }
 
     /**
      The cellType from the Component.
