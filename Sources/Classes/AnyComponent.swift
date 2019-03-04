@@ -7,9 +7,9 @@
 //
 
 import class RxSwift.DisposeBag
-import protocol Differentiator.IdentifiableType
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
+import protocol Differentiator.IdentifiableType
 import struct Foundation.IndexPath
 
 /**

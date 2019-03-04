@@ -11,10 +11,12 @@ import protocol Differentiator.IdentifiableType
 
 /**
  Component is the data model representation of the UICollectionViewCell to be rendered on the BaseComponentVC.
- A Component should be an immutable struct because its a data model. Types conforming to Component should be a struct and it should contain
- UI specific characteristics related to the content that should be displayed in the ComponentCell.
+ A Component should be an immutable struct and it should contain UI specific characteristics related to the content
+ that should be displayed in the ComponentCell.
+
+ A Component is what is used to diff between two collections by RxDataSources.
 */
-public protocol Component: IdentifiableType where Identity == Self {
+public protocol Component: IdentifiableType, Changeable where Identity == Self {
 
     /// The unique id of the Component. This is mutable because structs are the only data structure that should conform to Component
     /// this allows deep copying of Component structs via Copyable protocol

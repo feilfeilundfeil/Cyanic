@@ -13,7 +13,7 @@ import RxCocoa
 import UIKit
 
 // sourcery: AutoEquatable,AutoHashable
-public struct ExpandableComponent: ExpandableComponentType, Changeable {
+public struct ExpandableComponent: ExpandableComponentType {
 
     public var id: String
 

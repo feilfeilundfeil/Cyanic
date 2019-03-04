@@ -10,7 +10,7 @@ import class UIKit.UIColor
 import struct CoreGraphics.CGFloat
 
 // sourcery: AutoEquatable,AutoHashable
-public struct StaticSpacingComponent: StaticSpacingComponentType, Changeable {
+public struct StaticSpacingComponent: StaticSpacingComponentType {
 
     public var identity: StaticSpacingComponent { return self }
 

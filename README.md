@@ -2,6 +2,7 @@ FFUFComponents
 ======================================
 
 ## TODO
+- Create a Composite ViewModel that is able to manage other ViewModels (who have their own state)
 - Update the documentation of each file
 - Refactor Components into structs [✅ 01.03.2019]
 - Create Stencil templates for said structs to generate default values for properties [✅ 01.03.2019 but could still be refined]

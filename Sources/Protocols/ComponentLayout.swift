@@ -6,8 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import protocol LayoutKit.Layout
 import class RxSwift.DisposeBag
+import protocol LayoutKit.Layout
 
 /**
  A ComponentLayout is simply a Layout with a disposeBag to properly deallocate Rx related subscriptions.

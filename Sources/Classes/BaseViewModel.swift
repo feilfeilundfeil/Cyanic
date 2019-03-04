@@ -1,17 +1,13 @@
 //
-//  ViewModel.swift
+//  BaseViewModel.swift
 //  FFUFComponents
 //
 //  Created by Julio Miguel Alorro on 2/14/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import RxSwift
-import RxCocoa
-import Foundation
-import UIKit
-
-protocol ViewModelType {}
+import class RxCocoa.BehaviorRelay
+import class RxSwift.DisposeBag
 
 open class BaseViewModel<S: State>: ViewModelType {
 

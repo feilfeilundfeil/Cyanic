@@ -17,7 +17,7 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable
-public struct ButtonComponent: ButtonComponentType, Changeable {
+public struct ButtonComponent: ButtonComponentType {
 
     public var type: ButtonLayoutType = ButtonLayoutType.system
 

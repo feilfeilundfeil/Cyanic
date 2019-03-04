@@ -6,8 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Foundation
-
 /**
  State is the data structure representing the state of your screen.
 */

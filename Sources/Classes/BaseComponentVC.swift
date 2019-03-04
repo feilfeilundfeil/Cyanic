@@ -14,8 +14,8 @@ import class RxSwift.MainScheduler
 import class RxSwift.SerialDispatchQueueScheduler
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
-import class UIKit.UICollectionViewLayout
 import class UIKit.UICollectionViewFlowLayout
+import class UIKit.UICollectionViewLayout
 import class UIKit.UIViewController
 import enum Foundation.DispatchTimeInterval
 import enum RxDataSources.UITableViewRowAnimation

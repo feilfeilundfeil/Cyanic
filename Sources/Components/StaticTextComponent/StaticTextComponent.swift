@@ -18,7 +18,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
 // sourcery: AutoEquatable,AutoHashable
-public struct StaticTextComponent: StaticTextComponentType, Changeable {
+public struct StaticTextComponent: StaticTextComponentType {
 
     public var id: String
 
@@ -60,9 +60,7 @@ public struct StaticTextComponent: StaticTextComponentType, Changeable {
     // sourcery: skipHashing, skipEquality 
     public var style: AlacrityStyle<UITextView> = AlacrityStyle<UITextView> { _ in }
 
-    public var identity: StaticTextComponent {
-        return self
-    }
+    public var identity: StaticTextComponent { return self }
 
 }
 

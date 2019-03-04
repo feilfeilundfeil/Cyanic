@@ -13,6 +13,9 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
+/**
+ The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>
+*/
 public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     public init(
