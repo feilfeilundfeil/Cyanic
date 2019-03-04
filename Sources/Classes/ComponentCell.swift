@@ -27,6 +27,7 @@ open class ComponentCell: UICollectionViewCell {
 
     // MARK: Layout
     /**
+     The current ComponentLayout instance that created and arranged the subviews in the contentView of this ComponentCell.
     */
     private var layout: ComponentLayout?
 
@@ -61,6 +62,10 @@ open class ComponentCell: UICollectionViewCell {
         )
     }
 
+    /**
+     Binds the layout from the AnyComponent instance, sets the contentView.frame.size to the cell's intrinsicContentSize
+     and calls setNeedsLayout.
+    */
     open func configure(with component: AnyComponent) {
         self.layout = component.layout
         self.contentView.frame.size = self.intrinsicContentSize

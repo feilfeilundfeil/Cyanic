@@ -6,19 +6,9 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct Foundation.IndexPath
 import class Foundation.NSCoder
-import struct Foundation.DispatchQoS
-import enum Foundation.DispatchTimeInterval
-import struct CoreGraphics.CGRect
-import struct CoreGraphics.CGSize
-import struct CoreGraphics.CGFloat
-import struct Kio.MetaType
 import class RxCocoa.BehaviorRelay
-import struct RxDataSources.AnimatableSectionModel
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
-import struct RxDataSources.AnimationConfiguration
-import enum RxDataSources.UITableViewRowAnimation
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
 import class RxSwift.SerialDispatchQueueScheduler
@@ -26,10 +16,22 @@ import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewLayout
 import class UIKit.UICollectionViewFlowLayout
-import protocol UIKit.UICollectionViewDelegateFlowLayout
 import class UIKit.UIViewController
-import RxDataSources
+import enum Foundation.DispatchTimeInterval
+import enum RxDataSources.UITableViewRowAnimation
+import struct Foundation.IndexPath
+import struct Foundation.DispatchQoS
+import struct CoreGraphics.CGRect
+import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
+import struct Kio.MetaType
+import struct RxDataSources.AnimatableSectionModel
+import struct RxDataSources.AnimationConfiguration
+import protocol UIKit.UICollectionViewDelegateFlowLayout
 
+/**
+ The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
+*/
 internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
     qos: DispatchQoS.userInitiated,
     internalSerialQueueName: "Scheduler",
@@ -86,12 +88,15 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
 
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
-        self.viewModel.state
-            .throttle(0.5, latest: true, scheduler: BaseComponentVCScheduler)  // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-            .observeOn(BaseComponentVCScheduler)                               // UICollectionView has problems with fast updates. No point in
-            .map {                                                             // in executing operations when it is throttled anyway.
+        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
+        // UICollectionView has problems with fast updates. No point in
+        // in executing operations when it is throttled anyway.
+        self.viewModel.state.asObservable()
+            .throttle(0.5, scheduler: BaseComponentVCScheduler)
+            .observeOn(BaseComponentVCScheduler)
+            .map { (state: ConcreteState) -> [AnyComponent] in
                 var array: ComponentsArray = ComponentsArray()
-                s.buildModels(state: $0, components: &array)
+                s.buildModels(state: state, components: &array)
                 return array.components
             }
             .bind(to: self._components)
@@ -106,27 +111,60 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
     }
 
     // MARK: Stored Properties
+    /**
+     The layout of the UICollectionView
+    */
     public let layout: UICollectionViewLayout
+
+    /**
+     The ViewModel instance that manages the business logic of this instance of BaseComponentVC
+    */
     public let viewModel: ConcreteViewModel
+
+    /**
+     The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
+    */
     private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ComponentCell>>
     private let disposeBag: DisposeBag = DisposeBag()    
 
-    public var cellTypes: Set<MetaType<ComponentCell>> {
-        return self._cellTypes
-    }
+    /**
+     A Set containing the different kinds of ComponentCell subclasses registered for this UICollectionView.
+    */
+    public var cellTypes: Set<MetaType<ComponentCell>> { return self._cellTypes }
 
     // MARK: Views
+    /**
+     The UICollectionView instance managed by this BaseComponentVC subclass.
+    */
     open var collectionView: UICollectionView { return self.view as! UICollectionView }
 
     // MARK: Functions
+    /**
+     Adds a new ComponentCell subclass to the cellTypes Set and registers it to the UICollectionView if it doesn't have it.
+     Otherwise, does nothing.
+     - parameters:
+        - cellType: The ComponentCell.Type
+    */
     public final func add(cellType: ComponentCell.Type) {
+        let newMetaType: MetaType<ComponentCell> = MetaType<ComponentCell>(cellType)
+        guard !self._cellTypes.contains(newMetaType) else { return }
+
         self.collectionView.register(cellType, forCellWithReuseIdentifier: cellType.identifier)
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
+    /**
+     This method is responsible for creating the [AnyComponent] array.
+     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time the State
+     of the ViewModel changes.
+
+     - parameters:
+        - state: The latest snapshot of the State object of the ViewModel
+        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
+    */
     open func buildModels(state: ConcreteState, components: inout ComponentsArray) {
-        fatalError("Override")
+        fatalError("You must override this")
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

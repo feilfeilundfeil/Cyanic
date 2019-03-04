@@ -16,7 +16,6 @@ import protocol Differentiator.IdentifiableType
 */
 public protocol Component: IdentifiableType where Identity == Self {
 
-    // sourcery: id = true
     /// The unique id of the Component. This is mutable because structs are the only data structure that should conform to Component
     /// this allows deep copying of Component structs via Copyable protocol
     var id: String { get set }

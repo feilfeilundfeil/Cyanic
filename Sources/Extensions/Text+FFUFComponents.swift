@@ -10,6 +10,9 @@ import LayoutKit
 
 extension Text: Hashable {
 
+    /**
+     The associated string value of either the String from .unattributed or the NSAttributedString.string from .attributed cases.
+    */
     public var value: String {
         switch self {
             case .unattributed(let string):
