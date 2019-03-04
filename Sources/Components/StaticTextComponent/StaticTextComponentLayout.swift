@@ -6,9 +6,20 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Alacrity
-import LayoutKit
-import RxSwift
+import class LayoutKit.SizeLayout
+import class LayoutKit.TextViewLayout
+import class RxSwift.DisposeBag
+import class UIKit.UIFont
+import class UIKit.UIColor
+import class UIKit.UITextView
+import class UIKit.UIView
+import enum LayoutKit.Text
+import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
+import struct LayoutKit.Alignment
+import struct LayoutKit.Flexibility
+import struct UIKit.UIEdgeInsets
 
 public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayout {
 

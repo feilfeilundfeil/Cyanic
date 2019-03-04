@@ -6,12 +6,15 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Alacrity
-import FFUFWidgets
-import LayoutKit
-import RxSwift
-import RxCocoa
-import UIKit
+import class FFUFWidgets.ChevronView
+import class RxSwift.DisposeBag
+import class RxCocoa.PublishRelay
+import class UIKit.UIColor
+import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
+import struct LayoutKit.Alignment
+import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable
 public struct ExpandableComponent: ExpandableComponentType {

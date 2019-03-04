@@ -6,10 +6,25 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import LayoutKit
-import RxSwift
-import RxCocoa
-import Alacrity
+import class LayoutKit.ButtonLayout
+import class LayoutKit.ButtonLayoutDefaults
+import class LayoutKit.InsetLayout
+import class LayoutKit.SizeLayout
+import class RxSwift.DisposeBag
+import class RxSwift.SerialDisposable
+import class UIKit.UIButton
+import class UIKit.UIColor
+import class UIKit.UIControl
+import class UIKit.UIView
+import enum LayoutKit.ButtonLayoutImage
+import enum LayoutKit.ButtonLayoutType
+import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
+import struct LayoutKit.Alignment
+import struct LayoutKit.Flexibility
+import struct UIKit.UIEdgeInsets
+import struct UIKit.UIControlEvents
 
 open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
@@ -40,7 +55,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             flexibility: flexibility,
             config: style
                 .modifying { (view: UIButton) -> Void in
-                    serialDisposable.disposable = view.rx.controlEvent(UIControlEvents.touchUpInside)
+                    serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
                         .debug(viewReuseId, trimOutput: false)
                         .bind(onNext: onTap)
                 }

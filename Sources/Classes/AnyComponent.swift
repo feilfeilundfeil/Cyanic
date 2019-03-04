@@ -22,7 +22,6 @@ public final class AnyComponent: IdentifiableType {
      Keeps the underlying Component in memory and creates a reference to its layout and cellType. 
     */
     public init<C: Component>(_ component: C) {
-//        self.layout = component.layout
         self.cellType = component.cellType
         self.identity = AnyHashable(component.identity)
     }

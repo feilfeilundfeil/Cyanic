@@ -6,14 +6,24 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import UIKit
-import FFUFWidgets
-import Alacrity
-import Foundation
-import LayoutKit
-import RxCocoa
-import RxSwift
-import FFUFWidgets
+import class FFUFWidgets.ChevronView
+import class RxSwift.DisposeBag
+import class RxSwift.SerialDisposable
+import class LayoutKit.InsetLayout
+import class LayoutKit.SizeLayout
+import class LayoutKit.StackLayout
+import class UIKit.UIColor
+import class UIKit.UITapGestureRecognizer
+import class UIKit.UIView
+import class RxCocoa.PublishRelay
+import enum LayoutKit.Axis
+import enum LayoutKit.StackLayoutDistribution
+import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
+import struct LayoutKit.Alignment
+import struct LayoutKit.Flexibility
+import struct UIKit.UIEdgeInsets
 
 /**
  The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>

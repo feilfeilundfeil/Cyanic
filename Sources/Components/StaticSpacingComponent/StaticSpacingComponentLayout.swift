@@ -6,9 +6,13 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Foundation
-import RxSwift
-import LayoutKit
+import class LayoutKit.SizeLayout
+import class RxSwift.DisposeBag
+import class UIKit.UIColor
+import class UIKit.UIView
+import struct CoreGraphics.CGFloat
+import struct LayoutKit.Alignment
+import struct LayoutKit.Flexibility
 
 public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
