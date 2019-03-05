@@ -17,6 +17,7 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable
+/// ButtonComponent is a Component that represents a UIButton.
 public struct ButtonComponent: ButtonComponentType {
 
     public var type: ButtonLayoutType = ButtonLayoutType.system
@@ -68,6 +69,11 @@ public struct ButtonComponent: ButtonComponentType {
 
 public extension ButtonComponent {
 
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - parameters:
+     - id: The unique identifier of the ButtonComponent.
+    */
     init(id: String) {
         self.id = id
     }

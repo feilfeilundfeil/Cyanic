@@ -18,6 +18,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
 // sourcery: AutoEquatable,AutoHashable
+/// StaticTextComponent is a Component that represents static text to be displayed in a UICollectionViewCell.
 public struct StaticTextComponent: StaticTextComponentType {
 
     public var id: String
@@ -25,7 +26,6 @@ public struct StaticTextComponent: StaticTextComponentType {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout {
         return StaticTextComponentLayout(
-            id: self.id,
             text: self.text,
             font: self.font,
             backgroundColor: self.backgroundColor,
@@ -66,6 +66,11 @@ public struct StaticTextComponent: StaticTextComponentType {
 
 public extension StaticTextComponent {
 
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - parameters:
+        - id: The unique identifier of the StaticTextComponent.
+    */
     init(id: String) {
         self.id = id
     }

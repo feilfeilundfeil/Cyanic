@@ -26,16 +26,34 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 import struct UIKit.UIControlEvents
 
+/**
+ The ButtonComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
+ associated with ButtonComponent.
+*/
 open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
+    /**
+     Initializer
+     - parameters:
+        - type: The ButtonLayoutType of the ButtonLayout.
+        - title: The title to be displayed on UIButton's titleLabel.
+        - backgroundColor: The backgroundColor for the entire content.
+        - height: The height of the entire content.
+        - contentEdgeInsets: The insets on the UIButton relative to its root UIView.
+        - alignment: The alignment of the ButtonLayout and SizeLayout.
+        - flexibility: The flexibility of the ButtonLayout and SizeLayout.
+        - viewReuseId: The unique id of the ButtonComponent used for debugging.
+        - style: The styling to be applied on the UIButton.
+        - onTap: The code executed when the UIButton is tapped.
+    */
     public init(
         type: ButtonLayoutType,
         title: String,
         backgroundColor: UIColor,
         height: CGFloat,
-        contentEdgeInsets: UIEdgeInsets = UIEdgeInsets.zero,
-        alignment: Alignment = ButtonLayoutDefaults.defaultAlignment,
-        flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility,
+        contentEdgeInsets: UIEdgeInsets,
+        alignment: Alignment,
+        flexibility: Flexibility,
         viewReuseId: String,
         style: AlacrityStyle<UIButton>,
         onTap: @escaping () -> Void

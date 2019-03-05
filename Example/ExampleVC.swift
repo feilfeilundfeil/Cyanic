@@ -142,6 +142,8 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
             $0.setTitleColor(UIColor.black, for: UIControl.State.normal)
+            $0.layer.cornerRadius = 10.0
+            $0.layer.backgroundColor = $0.backgroundColor?.cgColor
         }
 
         let first = ButtonComponent(id: "First").changing { (button: inout ButtonComponent) -> Void in
@@ -177,8 +179,9 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             let id = button.id
             button.title = id
             button.height = 200.0
-            button.backgroundColor = color
-            button.style = style
+//            button.backgroundColor = UIColor.white
+            button.style = style.modifying(with: { $0.backgroundColor = color })
+            button.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
             button.onTap = { print("Hello World, \(id)") }
         }
 

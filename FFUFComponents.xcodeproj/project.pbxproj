@@ -17,14 +17,12 @@
 		1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */; };
 		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
-		1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDE22218A74900A35FFE /* ComponentResult.swift */; };
 		14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* Tests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleVC.swift */; };
-		1478E99A220C59B9006AF8B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E998220C59B9006AF8B3 /* Main.storyboard */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
 		1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */; };
 		1478E9AA220C5B6D006AF8B3 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
@@ -96,7 +94,6 @@
 		1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FFUFComponents.swift"; sourceTree = "<group>"; };
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
-		1437BDE22218A74900A35FFE /* ComponentResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentResult.swift; sourceTree = "<group>"; };
 		14496DB522273CE000C5C278 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		14496DB92228714200C5C278 /* AutoComponentType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoComponentType.stencil; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,7 +105,6 @@
 		1478E992220C59B9006AF8B3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1478E994220C59B9006AF8B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1478E996220C59B9006AF8B3 /* ExampleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleVC.swift; sourceTree = "<group>"; };
-		1478E999220C59B9006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1478E99B220C59BC006AF8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -213,14 +209,6 @@
 			path = ExpandableComponent;
 			sourceTree = "<group>";
 		};
-		1437BDE12218A71F00A35FFE /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				1437BDE22218A74900A35FFE /* ComponentResult.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
 		14496DB822286A0A00C5C278 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				F000D2A7221C1D6F00D10D0D /* Sourcery */,
-				1437BDE12218A71F00A35FFE /* Enums */,
 				1437BDD72215BA4400A35FFE /* Extensions */,
 				14C96F062211C2EF00731265 /* Utilities */,
 				14C1E3DC2210491E0053E318 /* Components */,
@@ -292,7 +279,6 @@
 			children = (
 				1478E994220C59B9006AF8B3 /* AppDelegate.swift */,
 				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
-				1478E998220C59B9006AF8B3 /* Main.storyboard */,
 				1478E99B220C59BC006AF8B3 /* Assets.xcassets */,
 				1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */,
 				1478E9A0220C59BC006AF8B3 /* Info.plist */,
@@ -535,7 +521,6 @@
 			files = (
 				1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */,
 				1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */,
-				1478E99A220C59B9006AF8B3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,7 +629,6 @@
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
-				1437BDE32218A74900A35FFE /* ComponentResult.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
@@ -697,14 +681,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1478E998220C59B9006AF8B3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1478E999220C59B9006AF8B3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

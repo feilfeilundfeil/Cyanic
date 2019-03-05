@@ -21,10 +21,25 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
+/**
+ The StaticTextComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
+ associated with StaticTextComponent.
+*/
 public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
+    /**
+     Initializer.
+     - parameters:
+        - text: The text to be displayed on the UITextView.
+        - font: UIFont of the UITextView.
+        - backgroundColor: The backgroundColor for the entire content.
+        - lineFragmentPadding: The lineFragmentPadding of the TextLayout.
+        - insets: The insets for textContainerInset of the TextLayout.
+        - layoutAlignment: The Alignment of the TextLayout
+        - flexibility: The flexibility of the TextLayout.
+        - style: The styling applied to the UITextView.
+    */
     public init(
-        id: String,
         text: Text,
         font: UIFont,
         backgroundColor: UIColor,
@@ -41,7 +56,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             textContainerInset: insets,
             layoutAlignment: layoutAlignment,
             flexibility: flexibility,
-            viewReuseId: id,
+            viewReuseId: "\(StaticTextComponentLayout.identifier)TextView",
             config: AlacrityStyle<UITextView> {
                 $0.backgroundColor = UIColor.clear
                 $0.isEditable = false

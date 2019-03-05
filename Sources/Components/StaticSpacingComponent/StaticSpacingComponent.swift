@@ -10,6 +10,7 @@ import class UIKit.UIColor
 import struct CoreGraphics.CGFloat
 
 // sourcery: AutoEquatable,AutoHashable
+/// StaticSpacingComponent is a Component that represents static spacing between content / other Components.
 public struct StaticSpacingComponent: StaticSpacingComponentType {
 
     public var identity: StaticSpacingComponent { return self }
@@ -31,6 +32,11 @@ public struct StaticSpacingComponent: StaticSpacingComponentType {
 
 public extension StaticSpacingComponent {
 
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - parameters:
+     - id: The unique identifier of the StaticSpacingComponent.
+    */
     init(id: String) {
         self.id = id
     }

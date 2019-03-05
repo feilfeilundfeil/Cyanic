@@ -27,7 +27,7 @@ import struct UIKit.UIEdgeInsets
 
 /**
  The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
- associated with the ExpandableComponent.
+ associated with ExpandableComponent.
 */
 public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
 

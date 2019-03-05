@@ -14,6 +14,10 @@ import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
+/**
+ The StaticSpacingComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
+ associated with StaticSpacingComponent.
+*/
 public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     public init(height: CGFloat, backgroundColor: UIColor) {
