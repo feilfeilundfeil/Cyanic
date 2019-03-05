@@ -26,17 +26,31 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
 /**
- The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>
+ The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
+ associated with the ExpandableComponent.
 */
 public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
+    /**
+     Initializer
+     - parameters:
+        - id: The unique identifier used by the ExpandableComponent as a means to map the isExpanded state to the PublishRelay.
+        - contentLayout: The Layout that creates, sizes, and arranges the content-specific UI. Excludes the ChevronView.
+        - backgroundColor: The backgroundColor of the entire content.
+        - height: The height specified for the root UIView.
+        - insets: The insets of the entire content including the ChevronView.
+        - chevronSize: The size applied to the ChevronView.
+        - chevronStyle: The style applied to the ChevronView
+        - relay: The PublishRelay that emits the id and isExpanded state of the ExpandableComponent when the UI is tapped.
+        - disposeBag: The disposeBag of the ExpandableComponent used to dispose of Rx related subscriptions.
+        - isExpanded: The state of the ExpandableComponent used to determine the next Bool value to be emitted by the PublishRelay.
+    */
     public init(
         id: String,
         contentLayout: ExpandableContentLayout,
         backgroundColor: UIColor,
         height: CGFloat,
         insets: UIEdgeInsets,
-        alignment: Alignment,
         chevronSize: CGSize,
         chevronStyle: AlacrityStyle<ChevronView>,
         relay: PublishRelay<(String, Bool)>,
@@ -74,7 +88,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
 
         let chevronInsetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
             insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: insets.right),
-            alignment: alignment,
+            alignment: Alignment.center,
             flexibility: chevronLayout.flexibility,
             viewReuseId: "\(ExpandableComponentLayout.identifier)ChevronInset",
             sublayout: chevronLayout

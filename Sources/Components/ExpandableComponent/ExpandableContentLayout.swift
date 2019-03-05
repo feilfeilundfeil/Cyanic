@@ -29,8 +29,19 @@ import struct UIKit.UIEdgeInsets
 
 open class ExpandableContentLayout: InsetLayout<UIView> {}
 
+/**
+ A Layout for an ExpandableComponent that consists of a single UILabel.
+*/
 public final class LabelContentLayout: ExpandableContentLayout {
 
+    /**
+     Initializer
+     - parameters:
+        - text: String / NSAttributedString to be displayed on the UILabel.
+        - font: UIFont used for the String. Default value is UIFont.systemFont(ofSize: 17.0)
+        - alignment: Alignment. Default value is Alignment.center
+        - style: Styling to be applied on the UILabel. Default value is an empty style.
+    */
     public init(
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
@@ -61,8 +72,22 @@ public final class LabelContentLayout: ExpandableContentLayout {
 
 }
 
+/**
+ A Layout for an ExpandableComponent that consists of a UIImageView and a UILabel.
+*/
 public final class ImageLabelContentLayout: ExpandableContentLayout {
 
+    /**
+     Initializer
+     - parameters:
+        - text: String / NSAttributedString to be displayed on the UILabel.
+        - font: UIFont used for the String. Default value is UIFont.systemFont(ofSize: 17.0)
+        - labelStyle: Styling to be applied on the UILabel. Default value is an empty style.
+        - imageSize: The size for the UIImageView.
+        - imageAlignment: Alignment. The default value is Aligment.aspectFit.
+        - imageStyle: Styling to be applied on the UIImageView. The UIImage should be set here. Default value is an empty style.
+        - spacing: The spacing between the UILabel and UIImageView.
+    */
     public init(
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
