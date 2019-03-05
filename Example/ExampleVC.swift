@@ -31,9 +31,8 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.navigationItem.leftBarButtonItem = button
 
         self.expandableMonitor
-            .bind(onNext: { (arg: (String, Bool)) -> Void in
-                let (section, isExpanded) = arg
-                self.viewModel.setState(block: { $0.expandableDict[section] = isExpanded })
+            .bind(onNext: { (id: String, isExpanded: Bool) -> Void in
+                self.viewModel.setState(block: { $0.expandableDict[id] = isExpanded })
             })
             .disposed(by: self.bag)
     }
