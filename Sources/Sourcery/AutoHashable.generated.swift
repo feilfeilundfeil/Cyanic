@@ -21,6 +21,7 @@ extension ExpandableComponent: Hashable {
         self.id.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.height.hash(into: &hasher)
+        self.chevronSize.hash(into: &hasher)
         self.isExpanded.hash(into: &hasher)
     }
 }
