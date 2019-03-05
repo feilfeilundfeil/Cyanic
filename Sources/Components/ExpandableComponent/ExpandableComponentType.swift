@@ -58,9 +58,4 @@ public protocol ExpandableComponentType: Component {
     /// The PublishRelay that keeps track of the isExpanded state of the ExpandableComponentType. This PublishRelay should come from
     /// the ViewModel or BaseComponentVC.
     var relay: PublishRelay<(String, Bool)> { get }
-
-    // sourcery: defaultValue = DisposeBag()
-    // sourcery: skipHashing,skipEquality
-    /// The disposeBag that where Rx related subscriptions are disposed.
-    var disposeBag: DisposeBag { get }
 }

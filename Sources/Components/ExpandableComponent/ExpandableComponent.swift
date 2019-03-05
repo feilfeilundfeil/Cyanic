@@ -18,7 +18,7 @@ import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable
 /// An ExpandableComponent is a Component that represents an expandable UI element that shows / hides other UI elements grouped with it.
-public struct ExpandableComponent: ExpandableComponentType {
+public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var id: String
 
@@ -33,7 +33,6 @@ public struct ExpandableComponent: ExpandableComponentType {
             chevronSize: self.chevronSize,
             chevronStyle: self.chevronStyle,
             relay: self.relay,
-            disposeBag: self.disposeBag,
             isExpanded: self.isExpanded
         )
     }
@@ -61,10 +60,12 @@ public struct ExpandableComponent: ExpandableComponentType {
     // sourcery: skipHashing, skipEquality 
     public let relay: PublishRelay<(String, Bool)>
 
-    // sourcery: skipHashing, skipEquality
-    public let disposeBag: DisposeBag = DisposeBag()
-
     public var identity: ExpandableComponent { return self }
+
+    public func onSelect() {
+        let newState: (id: String, isExpanded: Bool) = (self.id, !self.isExpanded)
+        self.relay.accept(newState)
+    }
 }
 
 public extension ExpandableComponent {

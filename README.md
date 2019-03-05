@@ -1,4 +1,4 @@
-FFUFComponents
+# FFUFComponents
 ======================================
 
 ## TODO
@@ -14,10 +14,16 @@ FFUFComponents
 - Refine the README.md to fully explain what the architecture is and the best practices.
 
 ## Architecture
+======================================
+## Core Concepts
 
-- When building a component based screen. The following is a general view of how the architecture should be created:
+### State
+    - State is a struct that contains properties related to rendering your screen
+ 
+### ViewModel
+    - ViewModel contains the business logic necessary to render your screen. ViewModels own state and its state can be observed
+    
+### BaseComponentVC
+    - BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource
 
-    - ViewModel
-    - State
-    - BaseComponentVC
 

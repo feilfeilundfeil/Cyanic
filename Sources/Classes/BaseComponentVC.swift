@@ -176,6 +176,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         fatalError("You must override this")
     }
 
+    // MARK: UICollectionViewDelegateFlowLayout Methods
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         if self._components.value.endIndex <= indexPath.item {
@@ -185,6 +186,13 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
         let size: CGSize = layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
         return size
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        let component: AnyComponent = self._components.value[indexPath.item]
+        guard let selectable = component.identity.base as? Selectable else { return }
+        selectable.onSelect()
     }
 
 }

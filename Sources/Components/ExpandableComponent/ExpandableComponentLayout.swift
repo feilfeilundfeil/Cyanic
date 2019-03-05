@@ -8,12 +8,10 @@
 
 import class FFUFWidgets.ChevronView
 import class RxSwift.DisposeBag
-import class RxSwift.SerialDisposable
 import class LayoutKit.InsetLayout
 import class LayoutKit.SizeLayout
 import class LayoutKit.StackLayout
 import class UIKit.UIColor
-import class UIKit.UITapGestureRecognizer
 import class UIKit.UIView
 import class RxCocoa.PublishRelay
 import enum LayoutKit.Axis
@@ -54,7 +52,6 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         chevronSize: CGSize,
         chevronStyle: AlacrityStyle<ChevronView>,
         relay: PublishRelay<(String, Bool)>,
-        disposeBag: DisposeBag,
         isExpanded: Bool
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
@@ -103,9 +100,6 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayouts: [contentInsetLayout, flexibleLayout, chevronInsetLayout]
         )
 
-        let serial: SerialDisposable = SerialDisposable()
-        serial.disposed(by: disposeBag)
-        self.disposeBag = disposeBag
         super.init(
             minWidth: size.width, maxWidth: size.width,
             minHeight: size.height, maxHeight: size.height,
@@ -113,22 +107,9 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayout: stackLayout,
             config: { (view: UIView) -> Void in
                 view.backgroundColor = backgroundColor
-                let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: nil, action: nil)
-
-                serial.disposable = tap.rx.event
-                    .map { (_: UITapGestureRecognizer) -> (String, Bool) in
-                        return (id, !isExpanded)
-                    }
-                    .debug()
-                    .subscribe(
-                        onNext: { relay.accept($0) },
-                        onDisposed: { view.removeGestureRecognizer(tap) }
-                    )
-
-                view.addGestureRecognizer(tap)
             }
         )
     }
 
-    public let disposeBag: DisposeBag
+    public let disposeBag: DisposeBag = DisposeBag()
 }
