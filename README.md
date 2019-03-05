@@ -1,5 +1,5 @@
 # FFUFComponents
-======================================
+* * *
 
 ## TODO
 - Create a Composite ViewModel that is able to manage other ViewModels (who have their own state)
@@ -14,16 +14,16 @@
 - Refine the README.md to fully explain what the architecture is and the best practices.
 
 ## Architecture
-======================================
+* * *
 ## Core Concepts
 
 ### State
-    - State is a struct that contains properties related to rendering your screen
+- State is a struct that contains properties related to rendering your screen
  
 ### ViewModel
-    - ViewModel contains the business logic necessary to render your screen. ViewModels own state and its state can be observed
+- ViewModel contains the business logic necessary to render your screen. ViewModels own state and its state can be observed
     
 ### BaseComponentVC
-    - BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource
+- BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource
 
 

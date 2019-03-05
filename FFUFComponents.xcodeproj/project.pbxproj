@@ -122,6 +122,8 @@
 		14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceModel.swift; sourceTree = "<group>"; };
 		14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+FFUFComponents.swift"; sourceTree = "<group>"; };
 		14CBB02A222E7C1C002D2768 /* SelectableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableComponent.swift; sourceTree = "<group>"; };
+		14CBB02C222E8CF3002D2768 /* FFUFComponents.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = FFUFComponents.podspec; sourceTree = "<group>"; };
+		14CBB02D222E8E26002D2768 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
@@ -217,8 +219,10 @@
 		14496DB822286A0A00C5C278 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				14CBB02C222E8CF3002D2768 /* FFUFComponents.podspec */,
 				F000D2A6221C1B6800D10D0D /* .sourcery.yml */,
 				14E424CF220EE51C006BAA4F /* README.md */,
+				14CBB02D222E8E26002D2768 /* LICENSE */,
 			);
 			name = Metadata;
 			sourceTree = "<group>";
