@@ -19,6 +19,7 @@ extension ButtonComponent: Hashable {
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.id.hash(into: &hasher)
+        self.contentLayout.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.height.hash(into: &hasher)
         self.chevronSize.hash(into: &hasher)

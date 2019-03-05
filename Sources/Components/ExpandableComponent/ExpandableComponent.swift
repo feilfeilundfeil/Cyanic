@@ -40,7 +40,6 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality 
     public let cellType: ComponentCell.Type = ComponentCell.self
 
-    // sourcery: skipHashing, skipEquality 
     public var contentLayout: ExpandableContentLayout
 
     public var backgroundColor: UIColor = UIColor.clear

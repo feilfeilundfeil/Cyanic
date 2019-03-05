@@ -27,7 +27,26 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-open class ExpandableContentLayout: InsetLayout<UIView> {}
+open class ExpandableContentLayout: InsetLayout<UIView>, Hashable {
+    public static func == (lhs: ExpandableContentLayout, rhs: ExpandableContentLayout) -> Bool {
+        return lhs.isEqual(to: rhs)
+    }
+
+    /**
+     Method used for equality checks.
+     - parameters:
+        - other: ExpandableContentLayout instance to be compared with.
+     - Returns: Bool
+    */
+    open func isEqual(to other: ExpandableContentLayout) -> Bool {
+        fatalError("Must override this")
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        fatalError("Must override this")
+    }
+
+}
 
 /**
  A Layout for an ExpandableComponent that consists of a single UILabel.
@@ -58,7 +77,8 @@ public final class LabelContentLayout: ExpandableContentLayout {
             viewReuseId: "\(ExpandableComponentLayout.identifier)ContentLabel",
             config: style.style
         )
-
+        self.text = text
+        self.font = font
         super.init(
             insets: UIEdgeInsets.zero,
             alignment: alignment,
@@ -68,6 +88,27 @@ public final class LabelContentLayout: ExpandableContentLayout {
             config: nil
         )
 
+    }
+
+    /**
+     Text of the UILabel
+    */
+    public let text: Text
+
+    /**
+     UIFont of the UILabel
+    */
+    public let font: UIFont
+
+    public override func isEqual(to other: ExpandableContentLayout) -> Bool {
+        guard let other = other as? LabelContentLayout else { return false }
+        return self.text == other.text &&
+            self.font == other.font
+    }
+
+    public override func hash(into hasher: inout Hasher) {
+        self.text.hash(into: &hasher)
+        self.font.hash(into: &hasher)
     }
 
 }
@@ -85,13 +126,14 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
         - labelStyle: Styling to be applied on the UILabel. Default value is an empty style.
         - imageSize: The size for the UIImageView.
         - imageAlignment: Alignment. The default value is Aligment.aspectFit.
-        - imageStyle: Styling to be applied on the UIImageView. The UIImage should be set here. Default value is an empty style.
+        - imageStyle: Styling to be applied on the UIImageView. Do not set the image here. It will be done for you. Default value is an empty style.
         - spacing: The spacing between the UILabel and UIImageView.
     */
     public init(
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
         labelStyle: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in },
+        image: UIImage,
         imageSize: CGSize,
         imageAlignment: Alignment = Alignment.aspectFit,
         imageStyle: AlacrityStyle<UIImageView> = AlacrityStyle<UIImageView> { _ in },
@@ -113,7 +155,7 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
             alignment: imageAlignment,
             flexibility: Flexibility.inflexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)ContentImage",
-            config: imageStyle.style
+            config: imageStyle.modifying(with: { $0.image = image }).style
         )
 
         let stackLayout: StackLayout<UIView> = StackLayout<UIView>(
@@ -125,6 +167,12 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
             sublayouts: [imageLayout, labelLayout]
         )
 
+        self.text = text
+        self.font = font
+        self.image = image
+        self.imageSize = imageSize
+        self.spacing = spacing
+
         super.init(
             insets: UIEdgeInsets.zero,
             alignment: Alignment.center,
@@ -133,6 +181,48 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
             sublayout: stackLayout,
             config: nil
         )
+    }
+
+    /**
+     Text of the UILabel
+    */
+    public let text: Text
+
+    /**
+     UIFont of the UILabel
+    */
+    public let font: UIFont
+
+    /**
+     UIImage of the UIImageView
+    */
+    public let image: UIImage
+
+    /**
+     CGSize of the UIImageView
+    */
+    public let imageSize: CGSize
+
+    /**
+     Spacing between the UILabel and UIImageView
+    */
+    public let spacing: CGFloat
+
+    public override func isEqual(to other: ExpandableContentLayout) -> Bool {
+        guard let other = other as? ImageLabelContentLayout else { return false }
+        return self.text == other.text &&
+            self.font == other.font &&
+            self.image.isEqual(other.image) &&
+            self.imageSize == other.imageSize &&
+            self.spacing == other.spacing
+    }
+
+    public override func hash(into hasher: inout Hasher) {
+        self.text.hash(into: &hasher)
+        self.font.hash(into: &hasher)
+        self.image.hash(into: &hasher)
+        self.imageSize.hash(into: &hasher)
+        self.spacing.hash(into: &hasher)
     }
 
 }

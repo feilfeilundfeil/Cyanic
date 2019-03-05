@@ -21,7 +21,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.collectionView.backgroundColor = UIColor.purple
+        self.collectionView.backgroundColor = UIColor.white
 
         let button: UIBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: UIBarButtonItem.SystemItem.done,
@@ -63,6 +63,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             contentLayout: ImageLabelContentLayout(
                 text: Text.unattributed("First Expandable"),
                 labelStyle: AlacrityStyle<UILabel> { $0.textColor = .green },
+                image: UIImage(),
                 imageSize: CGSize(width: 30.0, height: 30.0),
                 imageStyle: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green },
                 spacing: 16.0
