@@ -24,6 +24,9 @@
 - ViewModel contains the business logic necessary to render your screen. ViewModels own state and its state can be observed
     
 ### BaseComponentVC
-- BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource
+- BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource and UICollectionViewDelegateFlowLayout
+
+### Component
+- A data model representing content in one UICollectionViewCell displayed on the BaseComponentVC. It contains UI properties and closures/functions related to user interaction
 
 
