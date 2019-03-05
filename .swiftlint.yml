@@ -1,0 +1,51 @@
+opt_in_rules:
+  - attributes
+  - duplicate_imports
+  - discouraged_optional_boolean
+  - discouraged_optional_collection
+  - empty_count
+  - empty_enum_arguments
+  - explicit_acl
+  - explicit_init
+  - explicit_self
+  - explicit_top_level_acl
+# - explicit_type_interface
+# - file_name
+  - first_where
+  - force_unwrapping
+  - identical_operands
+  - identifier_name
+  - implicitly_unwrapped_optional
+  - last_where
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - multiline_arguments
+  - multiline_arguments_brackets
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - multiple_closures_with_trailing_closure
+  - pattern_matching_keywords
+  - unused_import
+  - unused_private_declaration
+  - vertical_parameter_alignment
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+
+disabled_rules:
+  - identifier_name
+  - switch_case_alignment
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+  - Carthage
+  - Tests
+  - Example
+
+line_length:
+  ignores_function_declarations: true
+  ignores_comments: true
+  warning: 130
+
+file_length:
+  warning: 390
+  error: 400

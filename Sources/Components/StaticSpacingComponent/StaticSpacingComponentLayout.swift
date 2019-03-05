@@ -24,7 +24,8 @@ public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLa
         super.init(
             minWidth: Constants.screenWidth,
             maxWidth: Constants.screenWidth,
-            minHeight: height, maxHeight: height,
+            minHeight: height,
+            maxHeight: height,
             alignment: Alignment.center,
             flexibility: Flexibility.inflexible,
             viewReuseId: StaticSpacingComponentLayout.identifier,

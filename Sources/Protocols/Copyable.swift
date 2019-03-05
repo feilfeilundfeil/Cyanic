@@ -1,5 +1,5 @@
 //
-//  Changeable.swift
+//  Copyable.swift
 //  FFUFComponents
 //
 //  Created by Julio Miguel Alorro on 3/1/19.
@@ -7,12 +7,12 @@
 //
 
 /**
- Changeable is a fork of https://gist.github.com/nicklockwood/9b4aac87e7f88c80e932ba3c843252df.
+ Copyable is a fork of https://gist.github.com/nicklockwood/9b4aac87e7f88c80e932ba3c843252df.
  Used to mutate Components and State in place with a copy (due to the value-type nature of structs)
 */
-public protocol Changeable {}
+public protocol Copyable {}
 
-public extension Changeable {
+public extension Copyable {
     /**
      Creates a copy of Self and mutates that mutable copy with the closure.
      - parameters:
@@ -20,9 +20,9 @@ public extension Changeable {
         - mutableSelf: The mutable copy of Self passed to the closure.
      - Returns: Mutated copy of Self.
     */
-    func changing(block: (_ mutableSelf: inout Self) -> Void) -> Self {
+    func copy(with changes: (_ mutableSelf: inout Self) -> Void) -> Self {
         var mutableSelf: Self = self
-        block(&mutableSelf)
+        changes(&mutableSelf)
         return mutableSelf
     }
 }

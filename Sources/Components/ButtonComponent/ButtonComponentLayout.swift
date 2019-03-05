@@ -65,7 +65,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         serialDisposable.disposed(by: disposeBag)
         self.disposeBag = disposeBag
 
-        let buttonLayout = ButtonLayout<UIButton>(
+        let buttonLayout: ButtonLayout<UIButton> = ButtonLayout<UIButton>(
             type: type,
             title: title,
             image: ButtonLayoutImage.size(size),
@@ -87,8 +87,10 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         )
 
         super.init(
-            minWidth: size.width, maxWidth: size.width,
-            minHeight: size.height, maxHeight: size.height,
+            minWidth: size.width,
+            maxWidth: size.width,
+            minHeight: size.height,
+            maxHeight: size.height,
             alignment: alignment,
             flexibility: flexibility,
             viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",

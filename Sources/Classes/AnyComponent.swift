@@ -30,7 +30,7 @@ public final class AnyComponent: IdentifiableType {
      The layout from the Component.
     */
     public var layout: ComponentLayout {
-        return (self.identity.base as! UserInterfaceModel).layout
+        return (self.identity.base as! UserInterfaceModel).layout // swiftlint:disable:this force_cast
     }
 
     /**

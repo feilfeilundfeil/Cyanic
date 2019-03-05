@@ -15,9 +15,6 @@ import RxSwift
 
 class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
-    let bag: DisposeBag = DisposeBag()
-    let expandableMonitor: PublishRelay<(String, Bool)> = PublishRelay<(String, Bool)>()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -29,12 +26,6 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             action: #selector(buttonTapped)
         )
         self.navigationItem.leftBarButtonItem = button
-
-        self.expandableMonitor
-            .bind(onNext: { (id: String, isExpanded: Bool) -> Void in
-                self.viewModel.setState(block: { $0.expandableDict[id] = isExpanded })
-            })
-            .disposed(by: self.bag)
     }
 
     @objc
@@ -44,7 +35,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
     override func buildModels(state: ExampleState, components: inout ComponentsArray) {
         components.add(
-            StaticTextComponent(id: "First").changing {
+            StaticTextComponent(id: "First").copy {
                 $0.text = Text.unattributed("Bacon")
                 $0.font = UIFont.systemFont(ofSize: 17.0)
                 $0.backgroundColor = UIColor.gray
@@ -68,9 +59,9 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 spacing: 16.0
             ),
             isExpanded: state.expandableDict[firstId] ?? false,
-            relay: self.expandableMonitor
+            relay: self.viewModel.setExpandableState
         )
-            .changing {
+            .copy {
                 $0.backgroundColor = UIColor.white
                 $0.height = 55.0
                 $0.insets = expandableContentInsets
@@ -87,7 +78,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             state.strings.enumerated()
                 .map { (offset: Int, element: String) -> StaticTextComponent in
                     return StaticTextComponent(id: "Text \(offset.description)")
-                        .changing {
+                        .copy {
                             $0.text = Text.unattributed(element)
                             $0.font = UIFont.systemFont(ofSize: 17.0)
                             $0.backgroundColor = randomColor()
@@ -100,7 +91,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         }
 
         components.add(
-            StaticSpacingComponent(id: "Second").changing {
+            StaticSpacingComponent(id: "Second").copy {
                 $0.height = 50.0
                 $0.backgroundColor = UIColor.black
             }
@@ -114,9 +105,9 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 text: Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")")
             ),
             isExpanded: state.expandableDict[secondId] ?? false,
-            relay: self.expandableMonitor
+            relay: self.viewModel.setExpandableState
         )
-            .changing {
+            .copy {
                 $0.insets = expandableContentInsets
                 $0.backgroundColor = UIColor.lightGray
             }
@@ -127,7 +118,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             state.otherStrings.enumerated()
                 .map { (offset: Int, value: String) -> StaticTextComponent in
                     return StaticTextComponent(id: "Other \(offset.description)")
-                        .changing {
+                        .copy {
                             $0.text = Text.unattributed(value)
                             $0.font = UIFont.systemFont(ofSize: 17.0)
                             $0.backgroundColor = randomColor()
@@ -146,7 +137,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             $0.layer.backgroundColor = $0.backgroundColor?.cgColor
         }
 
-        let first = ButtonComponent(id: "First").changing { (button: inout ButtonComponent) -> Void in
+        let first = ButtonComponent(id: "First").copy { (button: inout ButtonComponent) -> Void in
             let id = button.id
             button.height = 200.0
             button.title = id
@@ -155,7 +146,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             button.onTap = { print("Hello World, \(id)") }
         }
 
-        let second = ButtonComponent(id: "Second").changing { (button: inout ButtonComponent) -> Void in
+        let second = ButtonComponent(id: "Second").copy { (button: inout ButtonComponent) -> Void in
             let id = button.id
             button.height = 200.0
             button.title = button.id
@@ -169,7 +160,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         }
 
         components.add(
-            StaticSpacingComponent(id: "Second").changing {
+            StaticSpacingComponent(id: "Second").copy {
                 $0.height = 100.0
                 $0.backgroundColor = UIColor.brown
             }
@@ -187,35 +178,35 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
         components.add([
             second,
-            ButtonComponent(id: "Third").changing {
+            ButtonComponent(id: "Third").copy {
                 block(.yellow, &$0)
             },
-            ButtonComponent(id: "Fourth").changing {
+            ButtonComponent(id: "Fourth").copy {
                 block(.green, &$0)
             },
-            ButtonComponent(id: "Fifth").changing {
+            ButtonComponent(id: "Fifth").copy {
                 block(.blue, &$0)
             },
-            ButtonComponent(id: "Sixth").changing {
+            ButtonComponent(id: "Sixth").copy {
                 block(.purple, &$0)
             },
-            ButtonComponent(id: "Seventh").changing {
+            ButtonComponent(id: "Seventh").copy {
                block(.brown, &$0)
             },
-            ButtonComponent(id: "Eighth").changing {
+            ButtonComponent(id: "Eighth").copy {
                 block(.white, &$0)
             },
-            ButtonComponent(id: "Ninth").changing {
+            ButtonComponent(id: "Ninth").copy {
                 block(.cyan, &$0)
             },
-            ButtonComponent(id: "Tenth").changing {
+            ButtonComponent(id: "Tenth").copy {
                 block(.gray, &$0)
             },
         ])
     }
 }
 
-class ExampleViewModel: BaseViewModel<ExampleState> {
+class ExampleViewModel: BaseExpandableViewModel<ExampleState> {
 
     func buttonWasTapped() {
         self.setState { $0.isTrue = !$0.isTrue }
@@ -223,7 +214,7 @@ class ExampleViewModel: BaseViewModel<ExampleState> {
 
 }
 
-struct ExampleState: State {
+struct ExampleState: ExpandableState {
     static var `default`: ExampleState {
         return ExampleState(
             isTrue: true,

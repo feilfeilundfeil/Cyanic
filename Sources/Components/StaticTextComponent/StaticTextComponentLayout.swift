@@ -68,8 +68,10 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
         let size: CGSize = CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)
 
         super.init(
-            minWidth: size.width, maxWidth: size.width,
-            minHeight: 0.0, maxHeight: size.height,
+            minWidth: size.width,
+            maxWidth: size.width,
+            minHeight: 0.0,
+            maxHeight: size.height,
             viewReuseId: "\(StaticTextComponentLayout.identifier)Size",
             sublayout: textLayout,
             config: {

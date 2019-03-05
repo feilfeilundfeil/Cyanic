@@ -1,4 +1,4 @@
-// swiftlint:disable file_length
+// swiftlint:disable private_over_fileprivate
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
     switch (lhs, rhs) {
         case let (lValue?, rValue?):
@@ -23,7 +23,6 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
     {% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}{% if not variable.annotations.skipEquality %}guard {% if not variable.isOptional %}{% if not variable.annotations.arrayEquality %}lhs.{{ variable.name }} == rhs.{{ variable.name }}{% else %}compareArrays(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %}{% else %}compareOptionals(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %} else { return false }{% endif %}
     {% endfor %}
 {% endmacro %}
-
 // MARK: - AutoEquatable for classes, protocols, structs
 {% for type in types.types|!enum where type.implements.AutoEquatable or type|annotated:"AutoEquatable" %}
 // MARK: - {{ type.name }} AutoEquatable

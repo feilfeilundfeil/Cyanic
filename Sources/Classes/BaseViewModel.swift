@@ -44,8 +44,8 @@ open class BaseViewModel<S: State>: ViewModelType {
         - block: The closure that contains mutating logic on the State object.
     */
     public final func setState(block: (inout S) -> Void) {
-        let firstState: S = self.currentState.changing(block: block)
-        let secondState: S = self.currentState.changing(block: block)
+        let firstState: S = self.currentState.copy(with: block)
+        let secondState: S = self.currentState.copy(with: block)
 
         guard firstState == secondState else {
             fatalError("Executing your block twice produced different states. This must not happen!")
@@ -53,6 +53,16 @@ open class BaseViewModel<S: State>: ViewModelType {
 
         self.state.accept(firstState)
 
+    }
+
+}
+
+open class BaseExpandableViewModel<S: ExpandableState>: BaseViewModel<S> {
+
+    public final func setExpandableState(id: String, isExpanded: Bool) {
+        self.setState { (state: inout S) -> Void in
+            state.expandableDict[id] = isExpanded
+        }
     }
 
 }

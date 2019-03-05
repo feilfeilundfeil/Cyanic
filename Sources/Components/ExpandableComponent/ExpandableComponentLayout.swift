@@ -43,7 +43,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         - disposeBag: The disposeBag of the ExpandableComponent used to dispose of Rx related subscriptions.
         - isExpanded: The state of the ExpandableComponent used to determine the next Bool value to be emitted by the PublishRelay.
     */
-    public init(
+    public init( // swiftlint:disable:this function_body_length
         id: String,
         contentLayout: ExpandableContentLayout,
         backgroundColor: UIColor,
@@ -51,7 +51,6 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         insets: UIEdgeInsets,
         chevronSize: CGSize,
         chevronStyle: AlacrityStyle<ChevronView>,
-        relay: PublishRelay<(String, Bool)>,
         isExpanded: Bool
     ) {
         let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
@@ -73,13 +72,13 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             alignment: Alignment.center,
             flexibility: Flexibility.inflexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)Chevron",
-            config:  chevronStyle
-                .modifying(with: { (view: ChevronView) -> Void in
+            config: chevronStyle
+                .modifying { (view: ChevronView) -> Void in
                     switch isExpanded {
                         case true: view.direction = .up
                         case false: view.direction = .down
                     }
-                })
+                }
                 .style
         )
 
@@ -101,8 +100,10 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         )
 
         super.init(
-            minWidth: size.width, maxWidth: size.width,
-            minHeight: size.height, maxHeight: size.height,
+            minWidth: size.width,
+            maxWidth: size.width,
+            minHeight: size.height,
+            maxHeight: size.height,
             viewReuseId: ExpandableComponentLayout.identifier,
             sublayout: stackLayout,
             config: { (view: UIView) -> Void in

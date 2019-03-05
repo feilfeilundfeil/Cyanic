@@ -46,6 +46,7 @@ internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDisp
  BaseComponentVC is the delegate of the UICollectionView it manages and serves as the data source as well.
 */
 open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
+    // swiftlint:disable:previous line_length
 
     // MARK: Initializers
     public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], viewModel: ConcreteViewModel) {
@@ -59,7 +60,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK:  UIViewController Lifecycle Methods
+    // MARK: UIViewController Lifecycle Methods
     override open func loadView() {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -77,6 +78,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         self.collectionView.delegate = self
 
         // Delegate the UICollectionViewDataSource management to RxDataSources
+        // swiftlint:disable:next line_length
         let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ComponentCell
@@ -88,7 +90,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
             }
         )
 
-        let s = self
+        let s: BaseComponentVC = self
 
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
@@ -135,7 +137,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
     */
     private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ComponentCell>>
-    private let disposeBag: DisposeBag = DisposeBag()    
+    private let disposeBag: DisposeBag = DisposeBag()
 
     /**
      A Set containing the different kinds of ComponentCell subclasses registered for this UICollectionView.
@@ -146,7 +148,7 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
     /**
      The UICollectionView instance managed by this BaseComponentVC subclass.
     */
-    open var collectionView: UICollectionView { return self.view as! UICollectionView }
+    open var collectionView: UICollectionView { return self.view as! UICollectionView } // swiftlint:disable:this force_cast
 
     // MARK: Functions
     /**
@@ -184,8 +186,11 @@ open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseView
         }
 
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
-        let size: CGSize = layout.measurement(within: CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)).size
-        return size
+
+        let size: CGSize = CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)
+
+        let cellSize: CGSize = layout.measurement(within: size).size
+        return cellSize
     }
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

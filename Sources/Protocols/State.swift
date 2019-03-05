@@ -9,8 +9,14 @@
 /**
  State is the data structure representing the state of your screen.
 */
-public protocol State: Equatable, Changeable {
+public protocol State: Equatable, Copyable {
 
     static var `default`: Self { get }
+
+}
+
+public protocol ExpandableState: State {
+
+    var expandableDict: [String: Bool] { get set }
 
 }

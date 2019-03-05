@@ -1,7 +1,7 @@
-// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery // swiftlint:disable:this file_name
 // DO NOT EDIT
 
-// swiftlint:disable file_length
+// swiftlint:disable private_over_fileprivate
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
     switch (lhs, rhs) {
         case let (lValue?, rValue?):
@@ -21,7 +21,6 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 
     return true
 }
-
 
 // MARK: - AutoEquatable for classes, protocols, structs
 // MARK: - ButtonComponent AutoEquatable

@@ -6,6 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-protocol AutoHashable {}
-protocol AutoEquatable {}
-protocol AutoButtonComponentType {}
+public protocol AutoHashable {}
+public protocol AutoEquatable {}
+public protocol AutoButtonComponentType {}

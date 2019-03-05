@@ -57,5 +57,5 @@ public protocol ExpandableComponentType: Component {
     // sourcery: skipHashing,skipEquality
     /// The PublishRelay that keeps track of the isExpanded state of the ExpandableComponentType. This PublishRelay should come from
     /// the ViewModel or BaseComponentVC.
-    var relay: PublishRelay<(String, Bool)> { get }
+    var relay: (String, Bool) -> Void { get }
 }

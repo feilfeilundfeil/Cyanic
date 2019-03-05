@@ -60,5 +60,3 @@ public protocol ButtonComponentType: Component {
     var onTap: () -> Void { get set }
 
 }
-
-
