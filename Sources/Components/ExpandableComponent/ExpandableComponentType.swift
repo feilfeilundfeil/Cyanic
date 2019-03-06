@@ -55,7 +55,6 @@ public protocol ExpandableComponentType: Component {
     var isExpanded: Bool { get set }
 
     // sourcery: skipHashing,skipEquality
-    /// The PublishRelay that keeps track of the isExpanded state of the ExpandableComponentType. This PublishRelay should come from
-    /// the ViewModel or BaseComponentVC.
-    var relay: (String, Bool) -> Void { get }
+    /// A reference to the function will set a new state when the ExpandableComponentType is tapped.
+    var setExpandableState: (String, Bool) -> Void { get }
 }

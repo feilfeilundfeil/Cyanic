@@ -56,13 +56,12 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var isExpanded: Bool
 
     // sourcery: skipHashing, skipEquality 
-    public let relay: (String, Bool) -> Void
+    public let setExpandableState: (String, Bool) -> Void
 
     public var identity: ExpandableComponent { return self }
 
     public func onSelect() {
-        let newState: (id: String, isExpanded: Bool) = (self.id, !self.isExpanded)
-        self.relay(newState.id, newState.isExpanded)
+        self.setExpandableState(self.id, !self.isExpanded)
     }
 }
 
@@ -76,11 +75,11 @@ public extension ExpandableComponent {
         - isExpanded: Whether the ExpandableComponent is expanded or contracted.
         - relay: PublishRelay that tracks the isExpanded state of this ExpandableComponent.
     */
-    init(id: String, contentLayout: ExpandableContentLayout, isExpanded: Bool, relay: @escaping (String, Bool) -> Void) {
+    init(id: String, contentLayout: ExpandableContentLayout, isExpanded: Bool, setExpandableState: @escaping (String, Bool) -> Void) {
         self.id = id
         self.contentLayout = contentLayout
         self.isExpanded = isExpanded
-        self.relay = relay
+        self.setExpandableState = setExpandableState
     }
 
 }

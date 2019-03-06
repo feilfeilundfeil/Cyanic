@@ -28,8 +28,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         self.navigationItem.leftBarButtonItem = button
     }
 
-    @objc
-    public func buttonTapped() {
+    @objc public func buttonTapped() {
         self.viewModel.buttonWasTapped()
     }
 
@@ -59,7 +58,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 spacing: 16.0
             ),
             isExpanded: state.expandableDict[firstId] ?? false,
-            relay: self.viewModel.setExpandableState
+            setExpandableState: self.viewModel.setExpandableState
         )
             .copy {
                 $0.backgroundColor = UIColor.white
@@ -105,7 +104,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 text: Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")")
             ),
             isExpanded: state.expandableDict[secondId] ?? false,
-            relay: self.viewModel.setExpandableState
+            setExpandableState: self.viewModel.setExpandableState
         )
             .copy {
                 $0.insets = expandableContentInsets
@@ -206,7 +205,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
     }
 }
 
-class ExampleViewModel: BaseExpandableViewModel<ExampleState> {
+class ExampleViewModel: BaseViewModel<ExampleState> {
 
     func buttonWasTapped() {
         self.setState { $0.isTrue = !$0.isTrue }
