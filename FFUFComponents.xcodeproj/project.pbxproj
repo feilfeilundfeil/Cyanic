@@ -38,6 +38,10 @@
 		14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */; };
 		14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB02A222E7C1C002D2768 /* Selectable.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
+		14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */; };
+		14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */; };
+		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
+		14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */; };
 		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */; };
@@ -126,6 +130,10 @@
 		14CBB02D222E8E26002D2768 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		14CBB02F222EA929002D2768 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentType.swift; sourceTree = "<group>"; };
+		14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponent.swift; sourceTree = "<group>"; };
+		14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentLayout.swift; sourceTree = "<group>"; };
+		14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildComponentVC.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -304,6 +312,7 @@
 				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				1437BDC922157C4F00A35FFE /* BaseViewModel.swift */,
+				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -325,6 +334,7 @@
 				1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */,
 				1437BDD42215B57800A35FFE /* StaticTextComponent */,
 				1437BDDA2216C14100A35FFE /* ExpandableComponent */,
+				14D5112822313D8400EEAC0F /* ChildVCComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -361,6 +371,16 @@
 				14CBAFEA222D1351002D2768 /* ViewModelType.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		14D5112822313D8400EEAC0F /* ChildVCComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */,
+				14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */,
+				14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */,
+			);
+			path = ChildVCComponent;
 			sourceTree = "<group>";
 		};
 		6353A5DA7DC56B603F3D74B9 /* Frameworks */ = {
@@ -653,7 +673,9 @@
 				1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
+				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
+				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
@@ -662,8 +684,10 @@
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
+				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
+				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,

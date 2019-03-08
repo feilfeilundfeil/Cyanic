@@ -26,6 +26,12 @@ public final class AnyComponent: IdentifiableType {
         self.identity = AnyHashable(component.identity)
     }
 
+    deinit {
+        print("\(self) was deallocated")
+//        guard let component = self.identity.base as? ChildVCComponent else { return }
+//        component.removeVC()
+    }
+
     /**
      The layout from the Component.
     */

@@ -14,7 +14,7 @@ public protocol Copyable {}
 
 public extension Copyable {
     /**
-     Creates a copy of Self and mutates that mutable copy with the closure.
+     Creates a mutable copy of Self and mutates that copy with the closure.
      - parameters:
         - block: The closure that mutates the mutable copy of Self
         - mutableSelf: The mutable copy of Self passed to the closure.

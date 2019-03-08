@@ -44,6 +44,12 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
                 }
             }
         )
+        if state.isTrue {
+            components.add(
+                ChildVCComponent(id: "Child", vc: ChildVC(), parentVC: self).copy { $0.height = 200.0 }
+            )
+        }
+
         let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         let firstId: String = ExampleState.Expandable.first.rawValue
@@ -169,7 +175,6 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             let id = button.id
             button.title = id
             button.height = 200.0
-//            button.backgroundColor = UIColor.white
             button.style = style.modifying(with: { $0.backgroundColor = color })
             button.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
             button.onTap = { print("Hello World, \(id)") }
@@ -265,6 +270,28 @@ extension ExampleState {
         case first = "First Expandable"
         case second = "Second Expandable"
     }
+}
+
+class ChildVC: ChildComponentVC {
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print("ChildVC Initiated")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = UIColor.blue
+    }
+
+    deinit {
+        print("ChildVC deallocated")
+    }
+
 }
 
 

@@ -15,6 +15,14 @@ extension ButtonComponent: Hashable {
         self.id.hash(into: &hasher)
     }
 }
+// MARK: - ChildVCComponent AutoHashable
+extension ChildVCComponent: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.height.hash(into: &hasher)
+        self.name.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+    }
+}
 // MARK: - ExpandableComponent AutoHashable
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {

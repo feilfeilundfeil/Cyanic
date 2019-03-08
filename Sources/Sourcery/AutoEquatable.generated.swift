@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery // swiftlint:disable:this file_name
+// Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable private_over_fileprivate
@@ -30,6 +30,14 @@ public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
     guard lhs.title == rhs.title else { return false }
     guard lhs.height == rhs.height else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
+    guard lhs.id == rhs.id else { return false }
+    return true
+}
+// MARK: - ChildVCComponent AutoEquatable
+extension ChildVCComponent: Equatable {}
+public func == (lhs: ChildVCComponent, rhs: ChildVCComponent) -> Bool {
+    guard lhs.height == rhs.height else { return false }
+    guard lhs.name == rhs.name else { return false }
     guard lhs.id == rhs.id else { return false }
     return true
 }
