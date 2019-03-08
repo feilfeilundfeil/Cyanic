@@ -46,7 +46,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         )
         if state.isTrue {
             components.add(
-                ChildVCComponent(id: "Child", vc: ChildVC(), parentVC: self).copy { $0.height = 200.0 }
+                ChildVCComponent(id: "Child", childVC: ChildVC(), parentVC: self).copy { $0.height = 200.0 }
             )
         }
 

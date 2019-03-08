@@ -13,7 +13,7 @@ import struct CoreGraphics.CGFloat
 public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
     // sourcery: skipHashing, skipEquality 
-    public let vc: ChildComponentVC
+    public let childVC: ChildComponentVC
 
     // sourcery: skipHashing, skipEquality 
     public unowned let parentVC: UIViewController
@@ -24,7 +24,7 @@ public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout {
-        return ChildVCComponentLayout(vc: self.vc, parentVC: self.parentVC, height: height)
+        return ChildVCComponentLayout(childVC: self.childVC, parentVC: self.parentVC, height: height)
     }
 
     // sourcery: skipHashing, skipEquality 
@@ -40,9 +40,9 @@ public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
 public extension ChildVCComponent {
 
-    init(id: String, vc: ChildComponentVC, parentVC: UIViewController) {
+    init(id: String, childVC: ChildComponentVC, parentVC: UIViewController) {
         self.id = id
-        self.vc = vc
+        self.childVC = childVC
         self.parentVC = parentVC
     }
 

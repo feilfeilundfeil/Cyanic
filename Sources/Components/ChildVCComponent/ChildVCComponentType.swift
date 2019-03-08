@@ -14,7 +14,7 @@ import struct CoreGraphics.CGFloat
 public protocol ChildVCComponentType: Component {
 
     // sourcery: skipHashing, skipEquality
-    var vc: ChildComponentVC { get }
+    var childVC: ChildComponentVC { get }
 
     // sourcery: skipHashing, skipEquality
     var parentVC: UIViewController { get }
@@ -27,7 +27,7 @@ public protocol ChildVCComponentType: Component {
 public extension ChildVCComponentType {
 
     var name: String {
-        return String(describing: Mirror(reflecting: self.vc).subjectType)
+        return String(describing: Mirror(reflecting: self.childVC).subjectType)
     }
 
 }
