@@ -14,8 +14,7 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
 /**
- The StaticTextComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
- associated with StaticTextComponent.
+ The ChildVCComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to size the view property of the childVC
  */
 public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
@@ -27,7 +26,7 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
      - height: The height of the content in the view of the vc.
      */
     public init(
-        vc: ChildComponentVC,
+        childVC: ChildComponentVC,
         parentVC: UIViewController,
         height: CGFloat
     ) {
@@ -39,12 +38,12 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
             minHeight: size.height,
             maxHeight: size.height,
             viewReuseId: "\(ChildVCComponentLayout.identifier)Size",
-            config: { [weak vc, weak parentVC] (view: UIView) -> Void in
-                guard let vc = vc, let parentVC = parentVC else { return }
-                parentVC.addChild(vc)
-                vc.didMove(toParent: parentVC)
-                view.addSubview(vc.view)
-                vc.view.frame = view.bounds
+            config: { [weak childVC, weak parentVC] (view: UIView) -> Void in
+                guard let childVC = childVC, let parentVC = parentVC, childVC.parent !== parentVC else { return }
+                parentVC.addChild(childVC)
+                childVC.didMove(toParent: parentVC)
+                view.addSubview(childVC.view)
+                childVC.view.frame = view.bounds
             }
         )
     }
