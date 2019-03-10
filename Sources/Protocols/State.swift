@@ -21,29 +21,28 @@ public protocol ExpandableState: State {
 
 }
 
-public struct CompositeTwoState<FirstState: State, SecondState: State>: State {
+public protocol CompositeTwoStateType: State {
 
-    public static var `default`: CompositeTwoState {
-        return CompositeTwoState(firstState: FirstState.default, secondState: SecondState.default)
-    }
+    associatedtype FirstState: State
+    associatedtype SecondState: State
 
-    public var firstState: FirstState
-    public var secondState: SecondState
+    init(firstState: FirstState, secondState: SecondState)
+
+    var firstState: FirstState { get set }
+    var secondState: SecondState { get set }
 
 }
 
-public struct CompositeThreeState<FirstState: State, SecondState: State, ThirdState: State>: State {
+public protocol CompositeThreeStateType: State {
 
-    public static var `default`: CompositeThreeState {
-        return CompositeThreeState(
-            firstState: FirstState.default,
-            secondState: SecondState.default,
-            thirdState: ThirdState.default
-        )
-    }
+    associatedtype FirstState: State
+    associatedtype SecondState: State
+    associatedtype ThirdState: State
 
-    public var firstState: FirstState
-    public var secondState: SecondState
-    public var thirdState: ThirdState
+    init(firstState: FirstState, secondState: SecondState, thirdState: ThirdState)
+
+    var firstState: FirstState { get }
+    var secondState: SecondState { get }
+    var thirdState: ThirdState { get }
 
 }

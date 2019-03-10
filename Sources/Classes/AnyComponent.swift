@@ -60,7 +60,11 @@ public extension AnyComponent {
          - cellType: The UICollectionViewCell subclass type with the identifier
          - indexPath: The indexPath in the UICollectionView for the UICollectionViewCell.
     */
-    func dequeueReusableCell(in collectionView: UICollectionView, as cellType: ComponentCell.Type, for indexPath: IndexPath) -> UICollectionViewCell? {
+    func dequeueReusableCell(
+        in collectionView: UICollectionView,
+        as cellType: ComponentCell.Type,
+        for indexPath: IndexPath
+    ) -> UICollectionViewCell? {
         return collectionView.dequeueReusableCell(withReuseIdentifier: cellType.identifier, for: indexPath)
     }
 

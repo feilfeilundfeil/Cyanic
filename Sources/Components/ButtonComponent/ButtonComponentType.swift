@@ -15,6 +15,9 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
+/**
+ ButtonComponentType is a protocol for Components that represents a UIButton.
+*/
 public protocol ButtonComponentType: Component {
 
     // sourcery: defaultValue = ButtonLayoutType.system
