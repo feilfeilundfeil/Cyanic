@@ -6,13 +6,14 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Dispatch
+import class Dispatch.DispatchQueue
 import class UIKit.UICollectionViewCell
 import class UIKit.UIColor
 import protocol LayoutKit.Layout
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
+import struct Dispatch.DispatchQoS
 import struct Foundation.IndexPath
 import struct LayoutKit.LayoutMeasurement
 import struct LayoutKit.LayoutArrangement

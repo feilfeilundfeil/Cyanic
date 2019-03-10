@@ -9,7 +9,6 @@
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
 import class RxSwift.Observable
-import RxSwift
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
@@ -32,21 +31,6 @@ open class BaseViewModel<S: State>: ViewModelType {
 
     public let disposeBag: DisposeBag = DisposeBag()
 
-}
-
-public extension BaseViewModel where S: ExpandableState {
-
-    /**
-     Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key
-     - parameters:
-        - id: The unique identifier of the ExpandableComponent.
-        - isExpanded: The new state of the ExpandableComponent.
-    */
-    final func setExpandableState(id: String, isExpanded: Bool) {
-        self.setState { (state: inout S) -> Void in
-            state.expandableDict[id] = isExpanded
-        }
-    }
 }
 
 open class BaseCompositeTwoViewModelType<

@@ -6,8 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import RxCocoa
-import RxSwift
+import class RxCocoa.BehaviorRelay
+import class RxSwift.DisposeBag
 
 /**
  ViewModelType is a protocol adopted by the BaseViewModel classes. It provides the essential functionality for ViewModel and State interaction.
@@ -57,4 +57,19 @@ public extension ViewModelType {
 
     }
 
+}
+
+public extension ViewModelType where StateType: ExpandableState {
+
+    /**
+     Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key
+     - parameters:
+     - id: The unique identifier of the ExpandableComponent.
+     - isExpanded: The new state of the ExpandableComponent.
+     */
+    func setExpandableState(id: String, isExpanded: Bool) {
+        self.setState { (state: inout StateType) -> Void in
+            state.expandableDict[id] = isExpanded
+        }
+    }
 }

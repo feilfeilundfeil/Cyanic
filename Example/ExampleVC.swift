@@ -26,10 +26,35 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             action: #selector(buttonTapped)
         )
         self.navigationItem.leftBarButtonItem = button
+
+        let nextButton: UIBarButtonItem = UIBarButtonItem(
+            title: "Next",
+            style: .plain,
+            target: self,
+            action: #selector(nextButtonTapped)
+        )
+
+        self.navigationItem.rightBarButtonItem = nextButton
+    
     }
 
     @objc public func buttonTapped() {
         self.viewModel.buttonWasTapped()
+    }
+
+    @objc func nextButtonTapped() {
+        let viewModelA = ViewModelA(initialState: StateA.default)
+        let viewModelB = ViewModelB(initialState: StateB.default)
+
+        let viewModel = CompositeViewModel(
+            first: viewModelA,
+            second: viewModelB,
+            initialState: CompositeState(firstState: viewModelA.currentState, secondState: viewModelB.currentState, isTrue: false)
+        )
+
+        let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.debounce(0.5), viewModel: viewModel)
+
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override func buildModels(state: ExampleState, components: inout ComponentsArray) {

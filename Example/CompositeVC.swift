@@ -77,22 +77,27 @@ class CompositeViewModel: BaseCompositeTwoViewModelType<
 
 class CompositeVC: BaseComponentVC<CompositeState, CompositeViewModel> {
 
+    deinit {
+        print("CompositeVC Deallocated")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
 
         self.kio.setUpNavigationItem {
-            $0.leftBarButtonItem = UIBarButtonItem(
-                title: "Add", style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(CompositeVC.addButtonTapped)
-            )
-
-            $0.rightBarButtonItem = UIBarButtonItem(
-                title: "Other", style: UIBarButtonItem.Style.plain,
-                target: self,
-                action: #selector(CompositeVC.otherButtonTapped)
-            )
+            $0.rightBarButtonItems = [
+                UIBarButtonItem(
+                    title: "Add", style: UIBarButtonItem.Style.plain,
+                    target: self,
+                    action: #selector(CompositeVC.addButtonTapped)
+                ),
+                UIBarButtonItem(
+                    title: "Other", style: UIBarButtonItem.Style.plain,
+                    target: self,
+                    action: #selector(CompositeVC.otherButtonTapped)
+                )
+            ]
         }
     }
 

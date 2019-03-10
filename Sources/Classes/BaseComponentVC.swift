@@ -51,7 +51,7 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
     // swiftlint:disable:previous line_length
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.throttle, viewModel: ConcreteViewModel) {
+    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.throttle(0.5), viewModel: ConcreteViewModel) {
         self.layout = layout
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
         self.throttleType = throttleType
@@ -73,9 +73,10 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
         // Register the required ConfigurationCell subclasses
-        self._cellTypes.forEach { self.collectionView.register($0.base.self, forCellWithReuseIdentifier: $0.base.identifier) }
+        for cellType in self._cellTypes {
+            self.collectionView.register(cellType.base.self, forCellWithReuseIdentifier: cellType.base.identifier)
+        }
 
         // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout, UICollectionViewDelegate and UIScrollViewDelegate
         self.collectionView.delegate = self
@@ -93,19 +94,16 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
             }
         )
 
-        let s: BaseComponentVC = self
-
         let observable: Observable<ConcreteState>
-        let timeInterval: RxTimeInterval = 0.5
 
         switch self.throttleType {
-            case .debounce:
+            case .debounce(let timeInterval):
                 observable = self.viewModel.state.asObservable()
                     .debounce(timeInterval, scheduler: BaseComponentVCScheduler)
 
-            case .throttle:
+            case .throttle(let timeInterval):
                 observable = self.viewModel.state.asObservable()
-                    .throttle(timeInterval, scheduler: BaseComponentVCScheduler)
+                    .throttle(timeInterval, latest: true, scheduler: BaseComponentVCScheduler)
         }
 
         // Call buildModels method when a new element in ViewModel's state is emitted
@@ -115,21 +113,22 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
         // in executing operations when it is throttled anyway.
         observable
             .observeOn(BaseComponentVCScheduler)
-            .map { (state: ConcreteState) -> [AnyComponent] in
+            .map { [weak self] (state: ConcreteState) -> [AnyComponent] in
+                guard let s = self else { return [] }
                 var array: ComponentsArray = ComponentsArray()
                 s.buildModels(state: state, components: &array)
                 return array.components
             }
             .subscribeOn(BaseComponentVCScheduler)
-            .bind(to: s._components)
-            .disposed(by: s.disposeBag)
+            .bind(to: self._components)
+            .disposed(by: self.disposeBag)
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .debug("Components", trimOutput: false)
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
-            .drive(s.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: s.disposeBag)
+            .drive(self.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: self.disposeBag)
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
