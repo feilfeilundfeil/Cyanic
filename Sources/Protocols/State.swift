@@ -26,8 +26,6 @@ public protocol CompositeTwoStateType: State {
     associatedtype FirstState: State
     associatedtype SecondState: State
 
-    init(firstState: FirstState, secondState: SecondState)
-
     var firstState: FirstState { get set }
     var secondState: SecondState { get set }
 
@@ -39,10 +37,8 @@ public protocol CompositeThreeStateType: State {
     associatedtype SecondState: State
     associatedtype ThirdState: State
 
-    init(firstState: FirstState, secondState: SecondState, thirdState: ThirdState)
-
-    var firstState: FirstState { get }
-    var secondState: SecondState { get }
-    var thirdState: ThirdState { get }
+    var firstState: FirstState { get set }
+    var secondState: SecondState { get set }
+    var thirdState: ThirdState { get set }
 
 }

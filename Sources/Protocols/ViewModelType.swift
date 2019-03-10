@@ -12,7 +12,15 @@ import RxSwift
 /**
  ViewModelType is a protocol adopted by the BaseViewModel classes. It provides the essential functionality for ViewModel and State interaction.
 */
-public protocol ViewModelType: StateManager {
+public protocol ViewModelType {
+
+    associatedtype StateType: State
+
+    /**
+     The BehaviorRelay that emits values of StateType. It is not meant to be accessed directly, please use
+     setState(block:) to mutate StateType.
+    */
+    var state: BehaviorRelay<StateType> { get }
 
     /**
      The DisposeBag used to clean up any Rx related subscriptions related to the ViewModel instance.
@@ -33,7 +41,7 @@ public extension ViewModelType {
     /**
      Used to mutate the current State object of the ViewModelType.
      Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
-     When run successfully, it emits a notification to BaseComponentsVC that tells it to rebuild its ComponentsArray.
+     When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsArray.
      - parameters:
      - block: The closure that contains mutating logic on the State object.
      */
@@ -48,13 +56,5 @@ public extension ViewModelType {
         self.state.accept(firstState)
 
     }
-
-}
-
-public protocol StateManager {
-
-    associatedtype StateType: State
-
-    var state: BehaviorRelay<StateType> { get }
 
 }

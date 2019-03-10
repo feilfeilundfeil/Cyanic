@@ -11,6 +11,7 @@ import class RxCocoa.BehaviorRelay
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
+import class RxSwift.Observable
 import class RxSwift.SerialDispatchQueueScheduler
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
@@ -29,6 +30,7 @@ import struct CoreGraphics.CGFloat
 import struct Kio.MetaType
 import struct RxDataSources.AnimatableSectionModel
 import struct RxDataSources.AnimationConfiguration
+import struct RxSwift.RxTimeInterval
 
 /**
  The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
@@ -49,9 +51,10 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
     // swiftlint:disable:previous line_length
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], viewModel: ConcreteViewModel) {
+    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.throttle, viewModel: ConcreteViewModel) {
         self.layout = layout
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
+        self.throttleType = throttleType
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,13 +95,25 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
 
         let s: BaseComponentVC = self
 
+        let observable: Observable<ConcreteState>
+        let timeInterval: RxTimeInterval = 0.5
+
+        switch self.throttleType {
+            case .debounce:
+                observable = self.viewModel.state.asObservable()
+                    .debounce(timeInterval, scheduler: BaseComponentVCScheduler)
+
+            case .throttle:
+                observable = self.viewModel.state.asObservable()
+                    .throttle(timeInterval, scheduler: BaseComponentVCScheduler)
+        }
+
         // Call buildModels method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
         // UICollectionView has problems with fast updates. No point in
         // in executing operations when it is throttled anyway.
-        self.viewModel.state.asObservable()
-            .throttle(0.5, scheduler: BaseComponentVCScheduler)
+        observable
             .observeOn(BaseComponentVCScheduler)
             .map { (state: ConcreteState) -> [AnyComponent] in
                 var array: ComponentsArray = ComponentsArray()
@@ -138,6 +153,7 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
     */
     private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     private var _cellTypes: Set<MetaType<ComponentCell>>
+    private let throttleType: ThrottleType
     private let disposeBag: DisposeBag = DisposeBag()
 
     /**

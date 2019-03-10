@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
+		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
 		1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* BaseViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
@@ -90,6 +92,8 @@
 		01258669A160C84944C44BBE /* Pods-MvRx-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MvRx-iOS.debug.xcconfig"; path = "Target Support Files/Pods-MvRx-iOS/Pods-MvRx-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		02E5CD7DD6093F46BD1865C1 /* Pods_MvRx_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MvRx_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		054D316CC07E8E310B0D8998 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
+		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
 		1437BDC922157C4F00A35FFE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -185,6 +189,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		142C44FE2235A0EA002360F5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				142C44FF2235A105002360F5 /* ThrottleType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				F000D2A7221C1D6F00D10D0D /* Sourcery */,
+				142C44FE2235A0EA002360F5 /* Enums */,
 				1437BDD72215BA4400A35FFE /* Extensions */,
 				14C96F062211C2EF00731265 /* Utilities */,
 				14C1E3DC2210491E0053E318 /* Components */,
@@ -298,6 +311,7 @@
 			children = (
 				1478E994220C59B9006AF8B3 /* AppDelegate.swift */,
 				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
+				141315B42235924500513FD9 /* CompositeVC.swift */,
 				1478E99B220C59BC006AF8B3 /* Assets.xcassets */,
 				1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */,
 				1478E9A0220C59BC006AF8B3 /* Info.plist */,
@@ -684,6 +698,7 @@
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
+				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
@@ -718,6 +733,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */,
+				141315B52235924600513FD9 /* CompositeVC.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

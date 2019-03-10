@@ -21,9 +21,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
 
-        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default)
+//        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default)
+//
+//        let vc = ExampleVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.throttle, viewModel: viewModel)
 
-        let vc = ExampleVC(layout: layout, cellTypes: [ComponentCell.self], viewModel: viewModel)
+        let viewModelA = ViewModelA(initialState: StateA.default)
+        let viewModelB = ViewModelB(initialState: StateB.default)
+
+        let viewModel = CompositeViewModel(
+            first: viewModelA,
+            second: viewModelB,
+            initialState: CompositeState(firstState: viewModelA.currentState, secondState: viewModelB.currentState, isTrue: false)
+        )
+
+        let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.debounce, viewModel: viewModel)
+
         self.window?.rootViewController = UINavigationController(rootViewController: vc)
         self.window?.makeKeyAndVisible()
 
