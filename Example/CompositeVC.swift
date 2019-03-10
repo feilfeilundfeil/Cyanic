@@ -61,14 +61,14 @@ class CompositeViewModel: BaseCompositeTwoViewModelType<
 
     func addButtonTapped() {
         self.first.setState(block: { $0.isTrue = true } )
-        self.second.setState(block: { $0.isTrue = true })
+        self.second.setState(block: { $0.isTrue = false })
 
         self.setState(block: { $0.isTrue = self.first.currentState.isTrue && self.second.currentState.isTrue })
     }
 
     func otherButtonTapped() {
         self.first.setState(block: { $0.isTrue = false } )
-        self.second.setState(block: { $0.isTrue = false })
+        self.second.setState(block: { $0.isTrue = true })
 
         self.setState(block: { $0.isTrue = self.first.currentState.isTrue && self.second.currentState.isTrue })
     }

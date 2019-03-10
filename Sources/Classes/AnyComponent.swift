@@ -28,8 +28,6 @@ public final class AnyComponent: IdentifiableType {
 
     deinit {
         print("\(self) was deallocated")
-//        guard let component = self.identity.base as? ChildVCComponent else { return }
-//        component.removeVC()
     }
 
     /**

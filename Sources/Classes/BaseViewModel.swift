@@ -9,6 +9,7 @@
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
 import class RxSwift.Observable
+import RxSwift
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
@@ -53,6 +54,7 @@ open class BaseCompositeTwoViewModelType<
                     mutableState.secondState = secondState
                 }
             }
+//            .debug(String(describing: type(of: self)), trimOutput: false)
             .bind(to: self.state)
             .disposed(by: self.disposeBag)
     }
