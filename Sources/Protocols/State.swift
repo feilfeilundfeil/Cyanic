@@ -32,13 +32,18 @@ public struct CompositeTwoState<FirstState: State, SecondState: State>: State {
 
 }
 
-public struct CompositeState<FirstState: State, SecondState: State, ThirdState: State>: State {
+public struct CompositeThreeState<FirstState: State, SecondState: State, ThirdState: State>: State {
 
-    public static var `default`: CompositeState {
-        return CompositeState(firstState: FirstState.default, secondState: SecondState.default)
+    public static var `default`: CompositeThreeState {
+        return CompositeThreeState(
+            firstState: FirstState.default,
+            secondState: SecondState.default,
+            thirdState: ThirdState.default
+        )
     }
 
     public var firstState: FirstState
     public var secondState: SecondState
+    public var thirdState: ThirdState
 
 }

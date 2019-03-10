@@ -49,11 +49,11 @@ public extension BaseViewModel where S: ExpandableState {
     }
 }
 
-public class BaseCompositeViewModel<
-    FirstState: State, First: BaseViewModel<FirstState>,
-    SecondState: State, Second: BaseViewModel<SecondState>>: ViewModelType {
+public class BaseCompositeTwoViewModel<
+    FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
+    SecondState: State, SecondViewModel: BaseViewModel<SecondState>>: ViewModelType {
 
-    public init(first: First, second: Second) {
+    public init(first: FirstViewModel, second: SecondViewModel) {
         self.first = first
         self.second = second
         self.state = BehaviorRelay<CompositeTwoState<FirstState, SecondState>>(
@@ -66,8 +66,38 @@ public class BaseCompositeViewModel<
             .disposed(by: self.disposeBag)
     }
 
-    public let first: First
-    public let second: Second
+    public let first: FirstViewModel
+    public let second: SecondViewModel
     public let state: BehaviorRelay<CompositeTwoState<FirstState, SecondState>>
+    public let disposeBag: DisposeBag = DisposeBag()
+}
+
+public class BaseThreeCompositeViewModel<
+    FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
+    SecondState: State, SecondViewModel: BaseViewModel<SecondState>,
+    ThirdState: State, ThirdViewModel: BaseViewModel<ThirdState>>: ViewModelType {
+
+    public init(first: FirstViewModel, second: SecondViewModel, third: ThirdViewModel) {
+        self.first = first
+        self.second = second
+        self.third = third
+        self.state = BehaviorRelay<CompositeThreeState<FirstState, SecondState, ThirdState>>(
+            value: CompositeThreeState(
+                firstState: first.currentState,
+                secondState: second.currentState,
+                thirdState: third.currentState
+            )
+        )
+
+        Observable.combineLatest(first.state, second.state, third.state)
+            .map { CompositeThreeState<FirstState, SecondState, ThirdState>(firstState: $0, secondState: $1, thirdState: $2) }
+            .bind(to: self.state)
+            .disposed(by: self.disposeBag)
+    }
+
+    public let first: FirstViewModel
+    public let second: SecondViewModel
+    public let third: ThirdViewModel
+    public let state: BehaviorRelay<CompositeThreeState<FirstState, SecondState, ThirdState>>
     public let disposeBag: DisposeBag = DisposeBag()
 }
