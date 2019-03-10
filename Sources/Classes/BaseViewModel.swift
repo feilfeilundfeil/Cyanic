@@ -49,7 +49,7 @@ public extension BaseViewModel where S: ExpandableState {
     }
 }
 
-public class BaseCompositeTwoViewModel<
+public class BaseCompositeTwoViewModelType<
     FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
     SecondState: State, SecondViewModel: BaseViewModel<SecondState>>: ViewModelType {
 
@@ -72,7 +72,7 @@ public class BaseCompositeTwoViewModel<
     public let disposeBag: DisposeBag = DisposeBag()
 }
 
-public class BaseThreeCompositeViewModel<
+public class BaseThreeCompositeViewModelType<
     FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
     SecondState: State, SecondViewModel: BaseViewModel<SecondState>,
     ThirdState: State, ThirdViewModel: BaseViewModel<ThirdState>>: ViewModelType {

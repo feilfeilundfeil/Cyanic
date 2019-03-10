@@ -13,7 +13,7 @@ open class ChildComponentVC: UIViewController {
     deinit {
         self.willMove(toParent: nil)
         self.removeFromParent()
-        self.view.removeFromSuperview()
+        self.view?.removeFromSuperview()
     }
 
 }

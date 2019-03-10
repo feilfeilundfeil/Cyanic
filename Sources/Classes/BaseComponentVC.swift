@@ -105,15 +105,16 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
                 s.buildModels(state: state, components: &array)
                 return array.components
             }
-            .bind(to: self._components)
-            .disposed(by: self.disposeBag)
+            .subscribeOn(BaseComponentVCScheduler)
+            .bind(to: s._components)
+            .disposed(by: s.disposeBag)
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .debug("Components", trimOutput: false)
             .map { [AnimatableSectionModel(model: "Test", items: $0)] }
-            .drive(self.collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: self.disposeBag)
+            .drive(s.collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: s.disposeBag)
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

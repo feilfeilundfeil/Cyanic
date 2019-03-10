@@ -10,8 +10,7 @@ import RxCocoa
 import RxSwift
 
 /**
- ViewModelType is a protocol adopted by the BaseViewModel class. It is mainly used as a fallback type so ViewModels
- can be grouped in collections with a specific type instead of Any.
+ ViewModelType is a protocol adopted by the BaseViewModel classes. It provides the essential functionality for ViewModel and State interaction.
 */
 public protocol ViewModelType: StateManager {
 
@@ -24,12 +23,15 @@ public protocol ViewModelType: StateManager {
 
 public extension ViewModelType {
 
+    /**
+     Accessor for the current State of the ViewModelType.
+    */
     var currentState: StateType {
         return self.state.value
     }
 
     /**
-     Used to mutate the current State object of the ViewModel.
+     Used to mutate the current State object of the ViewModelType.
      Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
      When run successfully, it emits a notification to BaseComponentsVC that tells it to rebuild its ComponentsArray.
      - parameters:
