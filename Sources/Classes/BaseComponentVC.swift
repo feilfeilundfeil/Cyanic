@@ -45,7 +45,7 @@ internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDisp
 
  BaseComponentVC is the delegate of the UICollectionView it manages and serves as the data source as well.
 */
-open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: BaseViewModel<ConcreteState>>: UIViewController, UICollectionViewDelegateFlowLayout {
+open class BaseComponentVC<ConcreteState: Equatable, ConcreteViewModel: ViewModelType>: UIViewController, UICollectionViewDelegateFlowLayout where ConcreteViewModel.StateType == ConcreteState {
     // swiftlint:disable:previous line_length
 
     // MARK: Initializers
