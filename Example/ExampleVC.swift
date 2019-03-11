@@ -52,7 +52,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
             initialState: CompositeState(firstState: viewModelA.currentState, secondState: viewModelB.currentState, isTrue: false)
         )
 
-        let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.debounce(0.5), viewModel: viewModel)
+        let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.none, viewModel: viewModel)
 
         self.navigationController?.pushViewController(vc, animated: true)
     }

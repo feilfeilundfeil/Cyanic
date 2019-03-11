@@ -14,13 +14,18 @@ import struct RxSwift.RxTimeInterval
 public enum ThrottleType {
 
     /**
-     Changes in the State of the BaseComponentVC are ignored until a specified time interval has passed, the time interval is reset
+     Changes in State are ignored until a specified time interval has passed, the time interval is reset
      for changes that happen within the time interval.
     */
     case debounce(RxTimeInterval)
 
     /**
-     Changes in the State of the BaseComponentVC are ignored until a specified time interval has passed.
+     Changes in State are ignored until a specified time interval has passed.
     */
     case throttle(RxTimeInterval)
+
+    /**
+     Changes in State are immediately emitted.
+    */
+    case none
 }

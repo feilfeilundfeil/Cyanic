@@ -9,7 +9,6 @@
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
 import class RxSwift.Observable
-import RxSwift
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
@@ -34,6 +33,10 @@ open class BaseViewModel<S: State>: ViewModelType {
 
 }
 
+/**
+ The base class for custom Composite ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State and
+ it emits a new State value whenever the state of one of its ViewModels changes. It is important to not directly 
+*/
 open class BaseCompositeTwoViewModelType<
     FirstState, FirstViewModel: BaseViewModel<FirstState>,
     SecondState, SecondViewModel: BaseViewModel<SecondState>,
@@ -66,37 +69,37 @@ open class BaseCompositeTwoViewModelType<
 
 }
 
-open class BaseThreeCompositeViewModelType<
-    FirstState, FirstViewModel: BaseViewModel<FirstState>,
-    SecondState, SecondViewModel: BaseViewModel<SecondState>,
-    ThirdState, ThirdViewModel: BaseViewModel<ThirdState>,
-    CompositeState: CompositeThreeStateType
->: ViewModelType where
-    CompositeState.FirstState == FirstState,
-    CompositeState.SecondState == SecondState,
-    CompositeState.ThirdState == ThirdState {
-
-    public init(first: FirstViewModel, second: SecondViewModel, third: ThirdViewModel, initialState: CompositeState) {
-        self.first = first
-        self.second = second
-        self.third = third
-        self.state = BehaviorRelay<CompositeState>(value: initialState)
-
-        Observable.combineLatest(first.state, second.state, third.state)
-            .map { (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> CompositeState in
-                return self.currentState.copy { (mutableState: inout CompositeState) -> Void in
-                    mutableState.firstState = firstState
-                    mutableState.secondState = secondState
-                    mutableState.thirdState = thirdState
-                }
-            }
-            .bind(to: self.state)
-            .disposed(by: self.disposeBag)
-    }
-
-    public let first: FirstViewModel
-    public let second: SecondViewModel
-    public let third: ThirdViewModel
-    public let state: BehaviorRelay<CompositeState>
-    public let disposeBag: DisposeBag = DisposeBag()
-}
+//open class BaseThreeCompositeViewModelType<
+//    FirstState, FirstViewModel: BaseViewModel<FirstState>,
+//    SecondState, SecondViewModel: BaseViewModel<SecondState>,
+//    ThirdState, ThirdViewModel: BaseViewModel<ThirdState>,
+//    CompositeState: CompositeThreeStateType
+//>: ViewModelType where
+//    CompositeState.FirstState == FirstState,
+//    CompositeState.SecondState == SecondState,
+//    CompositeState.ThirdState == ThirdState {
+//
+//    public init(first: FirstViewModel, second: SecondViewModel, third: ThirdViewModel, initialState: CompositeState) {
+//        self.first = first
+//        self.second = second
+//        self.third = third
+//        self.state = BehaviorRelay<CompositeState>(value: initialState)
+//
+//        Observable.combineLatest(first.state, second.state, third.state)
+//            .map { (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> CompositeState in
+//                return self.currentState.copy { (mutableState: inout CompositeState) -> Void in
+//                    mutableState.firstState = firstState
+//                    mutableState.secondState = secondState
+//                    mutableState.thirdState = thirdState
+//                }
+//            }
+//            .bind(to: self.state)
+//            .disposed(by: self.disposeBag)
+//    }
+//
+//    public let first: FirstViewModel
+//    public let second: SecondViewModel
+//    public let third: ThirdViewModel
+//    public let state: BehaviorRelay<CompositeState>
+//    public let disposeBag: DisposeBag = DisposeBag()
+//}

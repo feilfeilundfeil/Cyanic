@@ -51,7 +51,7 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
     // swiftlint:disable:previous line_length
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.throttle(0.5), viewModel: ConcreteViewModel) {
+    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.none, viewModel: ConcreteViewModel) {
         self.layout = layout
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
         self.throttleType = throttleType
@@ -104,6 +104,9 @@ open class BaseComponentVC<ConcreteState, ConcreteViewModel: ViewModelType>: UIV
             case .throttle(let timeInterval):
                 observable = self.viewModel.state.asObservable()
                     .throttle(timeInterval, latest: true, scheduler: BaseComponentVCScheduler)
+
+            case .none:
+                observable = self.viewModel.state.asObservable()
         }
 
         // Call buildModels method when a new element in ViewModel's state is emitted
