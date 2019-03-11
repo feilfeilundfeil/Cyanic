@@ -13,6 +13,7 @@
 		142C450422366F38002360F5 /* CompositeStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450322366F38002360F5 /* CompositeStates.swift */; };
 		142C45082236877F002360F5 /* OneViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45072236877F002360F5 /* OneViewModelComponentVC.swift */; };
 		142C450A22368CB2002360F5 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
+		142C450C2236A224002360F5 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
 		1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* BaseViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
@@ -102,6 +103,7 @@
 		142C450322366F38002360F5 /* CompositeStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeStates.swift; sourceTree = "<group>"; };
 		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
+		142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewModelComponentVC.swift; sourceTree = "<group>"; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
 		1437BDC922157C4F00A35FFE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */,
 				142C45072236877F002360F5 /* OneViewModelComponentVC.swift */,
 				142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */,
+				142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */,
 				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				1437BDC922157C4F00A35FFE /* BaseViewModel.swift */,
@@ -707,6 +710,7 @@
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
+				142C450C2236A224002360F5 /* ThreeViewModelComponentVC.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,

@@ -10,6 +10,9 @@ import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
 
+/**
+ 
+*/
 open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: BaseViewModel<ConcreteState>>: BaseComponentVC {
 
     public init(
