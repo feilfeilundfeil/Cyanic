@@ -48,8 +48,7 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
 
         let viewModel = CompositeViewModel(
             first: viewModelA,
-            second: viewModelB,
-            initialState: CompositeState(firstState: viewModelA.currentState, secondState: viewModelB.currentState, isTrue: false)
+            second: viewModelB
         )
 
         let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.none, viewModel: viewModel)

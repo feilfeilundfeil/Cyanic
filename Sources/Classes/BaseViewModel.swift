@@ -9,54 +9,78 @@
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
 import class RxSwift.Observable
+import class RxSwift.SerialDispatchQueueScheduler
+import struct Dispatch.DispatchQoS
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
  the business logic necessary to render the screen it is responsible for. ViewModels own state and its state can be observed.
 */
-open class BaseViewModel<S: State>: ViewModelType {
+open class BaseViewModel<StateType: State>: ViewModelType<StateType> {
 
     /**
-     Initializer for the ViewModel.
-     When instantiating the ViewModel, it is important to pass an initial State object which should represent the initial State of the current
-     view / screen of the app.
+     Used to mutate the current State object of the ViewModelType.
+     Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
+     When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsArray.
      - parameters:
-        - initialState: The starting State of the ViewModel.
-    */
-    public init(initialState: S) {
-        self.state = BehaviorRelay<S>(value: initialState)
+     - block: The closure that contains mutating logic on the State object.
+     */
+    public func setState(block: (inout StateType) -> Void) {
+        let firstState: StateType = self.currentState.copy(with: block)
+        let secondState: StateType = self.currentState.copy(with: block)
+
+        guard firstState == secondState else {
+            fatalError("Executing your block twice produced different states. This must not happen!")
+        }
+
+        self.state.accept(firstState)
+
     }
-
-    public let state: BehaviorRelay<S>
-
-    public let disposeBag: DisposeBag = DisposeBag()
 
 }
 
+public extension BaseViewModel where StateType: ExpandableState {
+
+    /**
+     Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key
+     - parameters:
+     - id: The unique identifier of the ExpandableComponent.
+     - isExpanded: The new state of the ExpandableComponent.
+    */
+    func setExpandableState(id: String, isExpanded: Bool) {
+        self.setState { (state: inout StateType) -> Void in
+            state.expandableDict[id] = isExpanded
+        }
+    }
+}
+
 /**
- The base class for custom Composite ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State and
- it emits a new State value whenever the state of one of its ViewModels changes. It is important to not directly 
+ The base class for custom Composite ViewModels to subclass. CompositeViewModels function like containers for the underlying ViewModels.
+ This class should not mutate its child ViewModels
 */
 open class BaseCompositeTwoViewModelType<
-    FirstState, FirstViewModel: BaseViewModel<FirstState>,
-    SecondState, SecondViewModel: BaseViewModel<SecondState>,
-    CompositeState: CompositeTwoStateType
->: ViewModelType where
-    CompositeState.FirstState == FirstState,
-    CompositeState.SecondState == SecondState {
+    FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
+    SecondState: State, SecondViewModel: BaseViewModel<SecondState>
+>: ViewModelType<CompositeTwoStateType<FirstState, SecondState>> {
 
-    public init(first: FirstViewModel, second: SecondViewModel, initialState: CompositeState) {
+    public typealias CompositeState = CompositeTwoStateType<FirstState, SecondState>
+
+    public init(first: FirstViewModel, second: SecondViewModel) {
         self.first = first
         self.second = second
-        self.state = BehaviorRelay<CompositeState>(value: initialState)
+        super.init(initialState: CompositeState(firstState: first.currentState, secondState: second.currentState))
 
         Observable.combineLatest(first.state, second.state)
-            .map { (firstState: FirstState, secondState: SecondState) -> CompositeState in
-                return self.currentState.copy { (mutableState: inout CompositeState) -> Void in
+            .debounce(0.15, scheduler: self.scheduler)
+            .map { [weak self] (firstState: FirstState, secondState: SecondState) -> CompositeState? in
+                guard let s = self else { return nil }
+                return s.currentState.copy { (mutableState: inout CompositeState) -> Void in
                     mutableState.firstState = firstState
                     mutableState.secondState = secondState
                 }
             }
+            .filter { $0 != nil }
+            .map { $0! } // Filter out nil values swiftlint:disable:this force_unwrapping
 //            .debug(String(describing: type(of: self)), trimOutput: false)
             .bind(to: self.state)
             .disposed(by: self.disposeBag)
@@ -64,42 +88,48 @@ open class BaseCompositeTwoViewModelType<
 
     public let first: FirstViewModel
     public let second: SecondViewModel
-    public let state: BehaviorRelay<CompositeState>
-    public let disposeBag: DisposeBag = DisposeBag()
+    private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(qos: DispatchQoS.userInitiated)
 
 }
 
-//open class BaseThreeCompositeViewModelType<
-//    FirstState, FirstViewModel: BaseViewModel<FirstState>,
-//    SecondState, SecondViewModel: BaseViewModel<SecondState>,
-//    ThirdState, ThirdViewModel: BaseViewModel<ThirdState>,
-//    CompositeState: CompositeThreeStateType
-//>: ViewModelType where
-//    CompositeState.FirstState == FirstState,
-//    CompositeState.SecondState == SecondState,
-//    CompositeState.ThirdState == ThirdState {
-//
-//    public init(first: FirstViewModel, second: SecondViewModel, third: ThirdViewModel, initialState: CompositeState) {
-//        self.first = first
-//        self.second = second
-//        self.third = third
-//        self.state = BehaviorRelay<CompositeState>(value: initialState)
-//
-//        Observable.combineLatest(first.state, second.state, third.state)
-//            .map { (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> CompositeState in
-//                return self.currentState.copy { (mutableState: inout CompositeState) -> Void in
-//                    mutableState.firstState = firstState
-//                    mutableState.secondState = secondState
-//                    mutableState.thirdState = thirdState
-//                }
-//            }
-//            .bind(to: self.state)
-//            .disposed(by: self.disposeBag)
-//    }
-//
-//    public let first: FirstViewModel
-//    public let second: SecondViewModel
-//    public let third: ThirdViewModel
-//    public let state: BehaviorRelay<CompositeState>
-//    public let disposeBag: DisposeBag = DisposeBag()
-//}
+open class BaseThreeCompositeViewModelType<
+    FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
+    SecondState: State, SecondViewModel: BaseViewModel<SecondState>,
+    ThirdState: State, ThirdViewModel: BaseViewModel<ThirdState>
+>: ViewModelType<CompositeThreeStateType<FirstState, SecondState, ThirdState>> {
+
+    public typealias CompositeState = CompositeThreeStateType<FirstState, SecondState, ThirdState>
+
+    public init(first: FirstViewModel, second: SecondViewModel, third: ThirdViewModel) {
+        self.first = first
+        self.second = second
+        self.third = third
+        super.init(
+            initialState: CompositeState(
+                firstState: first.currentState,
+                secondState: second.currentState,
+                thirdState: third.currentState
+            )
+        )
+
+        Observable.combineLatest(first.state, second.state, third.state)
+            .debounce(0.15, scheduler: self.scheduler)
+            .map { [weak self] (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> CompositeState? in
+                guard let s = self else { return nil }
+                return s.currentState.copy { (mutableState: inout CompositeState) -> Void in
+                    mutableState.firstState = firstState
+                    mutableState.secondState = secondState
+                    mutableState.thirdState = thirdState
+                }
+            }
+            .filter { $0 != nil }
+            .map { $0! } // Filter out nil values swiftlint:disable:this force_unwrapping
+            .bind(to: self.state)
+            .disposed(by: self.disposeBag)
+    }
+
+    public let first: FirstViewModel
+    public let second: SecondViewModel
+    public let third: ThirdViewModel
+    private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(qos: DispatchQoS.userInitiated)
+}

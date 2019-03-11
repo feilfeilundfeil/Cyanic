@@ -32,21 +32,6 @@ struct StateB: State {
 
 }
 
-struct CompositeState: CompositeTwoStateType {
-
-    typealias FirstState = StateA
-    typealias SecondState = StateB
-
-    static var `default`: CompositeState {
-        return CompositeState(firstState: StateA.default, secondState: StateB.default, isTrue: false)
-    }
-
-    var firstState: StateA
-    var secondState: StateB
-    var isTrue: Bool
-
-}
-
 class ViewModelA: BaseViewModel<StateA> {
 
 }
@@ -56,26 +41,22 @@ class ViewModelB: BaseViewModel<StateB> {
 
 class CompositeViewModel: BaseCompositeTwoViewModelType<
     StateA, ViewModelA,
-    StateB, ViewModelB,
-    CompositeState> {
+    StateB, ViewModelB
+> {
 
     func addButtonTapped() {
         self.first.setState(block: { $0.isTrue = true } )
         self.second.setState(block: { $0.isTrue = false })
-
-        self.setState(block: { $0.isTrue = self.first.currentState.isTrue && self.second.currentState.isTrue })
     }
 
     func otherButtonTapped() {
         self.first.setState(block: { $0.isTrue = false } )
         self.second.setState(block: { $0.isTrue = true })
-
-        self.setState(block: { $0.isTrue = self.first.currentState.isTrue && self.second.currentState.isTrue })
     }
     
 }
 
-class CompositeVC: BaseComponentVC<CompositeState, CompositeViewModel> {
+class CompositeVC: BaseComponentVC<CompositeViewModel.CompositeState, CompositeViewModel> {
 
     deinit {
         print("CompositeVC Deallocated")
@@ -109,12 +90,14 @@ class CompositeVC: BaseComponentVC<CompositeState, CompositeViewModel> {
         self.viewModel.otherButtonTapped()
     }
 
-    override func buildModels(state: CompositeState, components: inout ComponentsArray) {
+    override func buildModels(state: CompositeViewModel.CompositeState, components: inout ComponentsArray) {
+
+        let isTrue: Bool = state.firstState.isTrue && state.secondState.isTrue
 
         components.add(
             StaticTextComponent(id: "First")
                 .copy {
-                    $0.text = Text.unattributed(state.isTrue ? "This should say true when both are true" : "False")
+                    $0.text = Text.unattributed(isTrue ? "This should say true when both are true" : "False")
                     $0.backgroundColor = UIColor.red
                     $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
                     $0.font = UIFont.systemFont(ofSize: 17.0)

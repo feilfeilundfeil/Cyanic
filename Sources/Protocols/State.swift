@@ -31,65 +31,103 @@ public protocol ExpandableState: State {
 }
 
 /**
- Represents a State data structure that keeps track of two other State data structures.
+ Represents a State data structure that keeps track of two other State data structures. CompositeTwoStateType itself is stateless. It functions
+ as a container for other states.
 */
-public protocol CompositeTwoStateType: State {
+public final class CompositeTwoStateType<FirstState: State, SecondState: State>: State {
+
+    public static var `default`: CompositeTwoStateType<FirstState, SecondState> {
+        return CompositeTwoStateType(firstState: FirstState.default, secondState: SecondState.default)
+    }
 
     /**
-     The concrete type of the first State data structure being tracked.
+     Initializer.
+     - parameters:
+        - firstState: The FirstState instance.
+        - secondState: The SecondState instance.
     */
-    associatedtype FirstState: State
-
-    /**
-     The concrete type of the second State data structure being tracked.
-    */
-    associatedtype SecondState: State
+    public init(firstState: FirstState, secondState: SecondState) {
+        self.firstState = firstState
+        self.secondState = secondState
+    }
 
     /**
      The instance of the first State data structure.
     */
-    var firstState: FirstState { get set }
+    public internal(set) var firstState: FirstState
 
     /**
-     The instance of the first State data structure.
+     The instance of the second State data structure.
     */
-    var secondState: SecondState { get set }
+    public internal(set) var secondState: SecondState
+
+    public static func == (lhs: CompositeTwoStateType<FirstState, SecondState>, rhs: CompositeTwoStateType<FirstState, SecondState>) -> Bool {
+        return lhs.firstState == rhs.firstState &&
+            lhs.secondState == rhs.secondState
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        self.firstState.hash(into: &hasher)
+        self.secondState.hash(into: &hasher)
+    }
 
 }
 
 /**
- Represents a State data structure that keeps track of two other State data structures.
+ Represents a State data structure that keeps track of three other State data structures. CompositeThreeStateType itself is stateless. It functions
+ as a container for other states.
 */
-public protocol CompositeThreeStateType: State {
+public final class CompositeThreeStateType<FirstState: State, SecondState: State, ThirdState: State>: State {
+
+    public static var `default`: CompositeThreeStateType<FirstState, SecondState, ThirdState> {
+        return CompositeThreeStateType(
+            firstState: FirstState.default,
+            secondState: SecondState.default,
+            thirdState: ThirdState.default
+        )
+    }
 
     /**
-     The concrete type of the first State data structure being tracked.
-    */
-    associatedtype FirstState: State
-
-    /**
-     The concrete type of the second State data structure being tracked.
-    */
-    associatedtype SecondState: State
-
-    /**
-     The concrete type of the third State data structure being tracked.
-    */
-    associatedtype ThirdState: State
-
-    /**
-     The instance of the first State data structure.
-    */
-    var firstState: FirstState { get set }
-
-    /**
-     The instance of the first State data structure.
-    */
-    var secondState: SecondState { get set }
+     Initializer.
+     - parameters:
+     - firstState: The FirstState instance.
+     - secondState: The SecondState instance.
+     - thirdState: The ThirdState instance.
+     */
+    public init(firstState: FirstState, secondState: SecondState, thirdState: ThirdState) {
+        self.firstState = firstState
+        self.secondState = secondState
+        self.thirdState = thirdState
+    }
 
     /**
      The instance of the first State data structure.
     */
-    var thirdState: ThirdState { get set }
+    public internal(set) var firstState: FirstState
+
+    /**
+     The instance of the second State data structure.
+    */
+    public internal(set) var secondState: SecondState
+
+    /**
+     The instance of the third State data structure.
+    */
+    public internal(set) var thirdState: ThirdState
+
+    public static func == (
+        lhs: CompositeThreeStateType<FirstState, SecondState, ThirdState>,
+        rhs: CompositeThreeStateType<FirstState, SecondState, ThirdState>
+    ) -> Bool {
+        return lhs.firstState == rhs.firstState &&
+            lhs.secondState == rhs.secondState &&
+            lhs.thirdState == rhs.thirdState
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        self.firstState.hash(into: &hasher)
+        self.secondState.hash(into: &hasher)
+        self.thirdState.hash(into: &hasher)
+    }
 
 }
