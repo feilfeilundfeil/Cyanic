@@ -33,29 +33,18 @@ import struct RxDataSources.AnimationConfiguration
 import struct RxSwift.RxTimeInterval
 
 /**
- The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
-*/
-internal let BaseComponentVCScheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
-    qos: DispatchQoS.userInitiated,
-    internalSerialQueueName: "Scheduler",
-    leeway: DispatchTimeInterval.milliseconds(100)
-)
-
-/**
  BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
  have a reactive UICollectionView. It respondes to new elements emitted by its ViewModel's state.
 
  BaseComponentVC is the delegate of the UICollectionView it manages and serves as the data source as well.
 */
-open class BaseComponentVC<ConcreteState: State, ConcreteViewModel: ViewModelType<ConcreteState>>:
-    UIViewController, UICollectionViewDelegateFlowLayout {
+open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.none, viewModel: ConcreteViewModel) {
+    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.none) {
         self.layout = layout
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
         self.throttleType = throttleType
-        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -94,38 +83,6 @@ open class BaseComponentVC<ConcreteState: State, ConcreteViewModel: ViewModelTyp
             }
         )
 
-        let observable: Observable<ConcreteState>
-
-        switch self.throttleType {
-            case .debounce(let timeInterval):
-                observable = self.viewModel.state.asObservable()
-                    .debounce(timeInterval, scheduler: BaseComponentVCScheduler)
-
-            case .throttle(let timeInterval):
-                observable = self.viewModel.state.asObservable()
-                    .throttle(timeInterval, latest: true, scheduler: BaseComponentVCScheduler)
-
-            case .none:
-                observable = self.viewModel.state.asObservable()
-        }
-
-        // Call buildModels method when a new element in ViewModel's state is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay
-        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. No point in
-        // in executing operations when it is throttled anyway.
-        observable
-            .observeOn(BaseComponentVCScheduler)
-            .map { [weak self] (state: ConcreteState) -> [AnyComponent] in
-                guard let s = self else { return [] }
-                var array: ComponentsArray = ComponentsArray()
-                s.buildModels(state: state, components: &array)
-                return array.components
-            }
-            .subscribeOn(BaseComponentVCScheduler)
-            .bind(to: self._components)
-            .disposed(by: self.disposeBag)
-
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .debug("Components", trimOutput: false)
@@ -146,17 +103,21 @@ open class BaseComponentVC<ConcreteState: State, ConcreteViewModel: ViewModelTyp
     public let layout: UICollectionViewLayout
 
     /**
-     The ViewModel instance that manages the business logic of this instance of BaseComponentVC
-    */
-    public let viewModel: ConcreteViewModel
-
-    /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
     */
-    private let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
-    private var _cellTypes: Set<MetaType<ComponentCell>>
-    private let throttleType: ThrottleType
-    private let disposeBag: DisposeBag = DisposeBag()
+    internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
+    internal var _cellTypes: Set<MetaType<ComponentCell>>
+    internal let throttleType: ThrottleType
+    internal let disposeBag: DisposeBag = DisposeBag()
+
+    /**
+     The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
+     */
+    internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+        qos: DispatchQoS.userInitiated,
+        internalSerialQueueName: "Scheduler",
+        leeway: DispatchTimeInterval.milliseconds(100)
+    )
 
     /**
      A Set containing the different kinds of ComponentCell subclasses registered for this UICollectionView.
@@ -184,18 +145,27 @@ open class BaseComponentVC<ConcreteState: State, ConcreteViewModel: ViewModelTyp
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
 
-    /**
-     This method is responsible for creating the [AnyComponent] array.
-     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time the State
-     of the ViewModel changes.
+//    /**
+//     This method is responsible for creating the [AnyComponent] array.
+//     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time the State
+//     of the ViewModel changes.
+//
+//     - parameters:
+//        - state: The latest snapshot of the State object of the ViewModel
+//        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
+//    */
+//    open func buildModels(state: ConcreteState, components: inout ComponentsArray) {
+//        fatalError("You must override this")
+//    }
 
-     - parameters:
-        - state: The latest snapshot of the State object of the ViewModel
-        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
-    */
-    open func buildModels(state: ConcreteState, components: inout ComponentsArray) {
-        fatalError("You must override this")
-    }
+//    open func components<ConcreteState1: State, ConcreteState2: State, ConcreteState3: State>(
+//        _ components: inout ComponentsArray,
+//        state1: ConcreteState1,
+//        state2: ConcreteState2,
+//        state3: ConcreteState3
+//    ) {
+//
+//    }
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

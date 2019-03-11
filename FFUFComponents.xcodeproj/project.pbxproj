@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
+		142C450222366E99002360F5 /* CompositeViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450122366E99002360F5 /* CompositeViewModels.swift */; };
+		142C450422366F38002360F5 /* CompositeStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450322366F38002360F5 /* CompositeStates.swift */; };
+		142C45082236877F002360F5 /* OneViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45072236877F002360F5 /* OneViewModelComponentVC.swift */; };
+		142C450A22368CB2002360F5 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
 		1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* BaseViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
@@ -34,7 +38,7 @@
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
-		14CBAFEB222D1351002D2768 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* ViewModelType.swift */; };
+		14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */; };
 		14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */; };
 		14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */; };
 		14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */; };
@@ -94,6 +98,10 @@
 		054D316CC07E8E310B0D8998 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
+		142C450122366E99002360F5 /* CompositeViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeViewModels.swift; sourceTree = "<group>"; };
+		142C450322366F38002360F5 /* CompositeStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeStates.swift; sourceTree = "<group>"; };
+		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
+		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
 		1437BDC922157C4F00A35FFE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -125,7 +133,7 @@
 		14B01E41222723E200EE0A9A /* AutoEquatable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatable.stencil; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		14CBAFEA222D1351002D2768 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContentLayout.swift; sourceTree = "<group>"; };
 		14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceModel.swift; sourceTree = "<group>"; };
 		14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+FFUFComponents.swift"; sourceTree = "<group>"; };
@@ -323,10 +331,15 @@
 			isa = PBXGroup;
 			children = (
 				1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */,
+				142C45072236877F002360F5 /* OneViewModelComponentVC.swift */,
+				142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */,
 				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				1437BDC922157C4F00A35FFE /* BaseViewModel.swift */,
+				142C450122366E99002360F5 /* CompositeViewModels.swift */,
+				14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */,
 				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
+				142C450322366F38002360F5 /* CompositeStates.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -382,7 +395,6 @@
 				F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */,
 				1437BDCB22157FC300A35FFE /* State.swift */,
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
-				14CBAFEA222D1351002D2768 /* ViewModelType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -681,8 +693,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142C450A22368CB2002360F5 /* TwoViewModelComponentVC.swift in Sources */,
 				149D5B8F221B33A100482F28 /* ComponentsArray.swift in Sources */,
 				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
+				142C45082236877F002360F5 /* OneViewModelComponentVC.swift in Sources */,
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
@@ -707,12 +721,14 @@
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
-				14CBAFEB222D1351002D2768 /* ViewModelType.swift in Sources */,
+				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
+				142C450222366E99002360F5 /* CompositeViewModels.swift in Sources */,
 				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
+				142C450422366F38002360F5 /* CompositeStates.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 				14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */,

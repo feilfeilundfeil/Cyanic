@@ -34,29 +34,27 @@ struct StateB: State {
 
 class ViewModelA: BaseViewModel<StateA> {
 
-}
-class ViewModelB: BaseViewModel<StateB> {
-
-}
-
-class CompositeViewModel: BaseCompositeTwoViewModelType<
-    StateA, ViewModelA,
-    StateB, ViewModelB
-> {
-
     func addButtonTapped() {
-        self.first.setState(block: { $0.isTrue = true } )
-        self.second.setState(block: { $0.isTrue = false })
+        self.setState(block: { $0.isTrue = true } )
     }
 
     func otherButtonTapped() {
-        self.first.setState(block: { $0.isTrue = false } )
-        self.second.setState(block: { $0.isTrue = true })
+        self.setState(block: { $0.isTrue = false } )
     }
-    
+
+}
+class ViewModelB: BaseViewModel<StateB> {
+    func addButtonTapped() {
+        self.setState(block: { $0.isTrue = false })
+    }
+
+    func otherButtonTapped() {
+        self.setState(block: { $0.isTrue = true })
+    }
 }
 
-class CompositeVC: BaseComponentVC<CompositeViewModel.CompositeState, CompositeViewModel> {
+
+class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModelB> {
 
     deinit {
         print("CompositeVC Deallocated")
@@ -69,30 +67,31 @@ class CompositeVC: BaseComponentVC<CompositeViewModel.CompositeState, CompositeV
         self.kio.setUpNavigationItem {
             $0.rightBarButtonItems = [
                 UIBarButtonItem(
-                    title: "Add", style: UIBarButtonItem.Style.plain,
+                    title: "Second", style: UIBarButtonItem.Style.plain,
                     target: self,
                     action: #selector(CompositeVC.addButtonTapped)
                 ),
                 UIBarButtonItem(
-                    title: "Other", style: UIBarButtonItem.Style.plain,
+                    title: "Third", style: UIBarButtonItem.Style.plain,
                     target: self,
                     action: #selector(CompositeVC.otherButtonTapped)
                 )
-            ]
+            ].reversed()
         }
     }
 
     @objc func addButtonTapped() {
-        self.viewModel.addButtonTapped()
+        self.viewModelOne.addButtonTapped()
+        self.viewModelTwo.addButtonTapped()
     }
 
     @objc func otherButtonTapped() {
-        self.viewModel.otherButtonTapped()
+        self.viewModelOne.otherButtonTapped()
+        self.viewModelTwo.otherButtonTapped()
     }
 
-    override func buildModels(state: CompositeViewModel.CompositeState, components: inout ComponentsArray) {
-
-        let isTrue: Bool = state.firstState.isTrue && state.secondState.isTrue
+    override func components(_ components: inout ComponentsArray, state1: StateA, state2: StateB) {
+        let isTrue: Bool = state1.isTrue && state2.isTrue
 
         components.add(
             StaticTextComponent(id: "First")
@@ -108,7 +107,7 @@ class CompositeVC: BaseComponentVC<CompositeViewModel.CompositeState, CompositeV
         components.add(
             StaticTextComponent(id: "Second")
                 .copy {
-                    $0.text = Text.unattributed(state.firstState.isTrue ? "First state is true" : "False")
+                    $0.text = Text.unattributed(state1.isTrue ? "First state is true" : "False")
                     $0.backgroundColor = UIColor.gray
                     $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
                     $0.font = UIFont.systemFont(ofSize: 17.0)
@@ -119,7 +118,7 @@ class CompositeVC: BaseComponentVC<CompositeViewModel.CompositeState, CompositeV
         components.add(
             StaticTextComponent(id: "Third")
                 .copy {
-                    $0.text = Text.unattributed(state.secondState.isTrue ? "Second state is true" : "False")
+                    $0.text = Text.unattributed(state2.isTrue ? "Second state is true" : "False")
                     $0.backgroundColor = UIColor.green
                     $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
                     $0.font = UIFont.systemFont(ofSize: 17.0)

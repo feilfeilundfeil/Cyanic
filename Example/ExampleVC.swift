@@ -13,7 +13,7 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
+class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,17 +46,18 @@ class ExampleVC: BaseComponentVC<ExampleState, ExampleViewModel> {
         let viewModelA = ViewModelA(initialState: StateA.default)
         let viewModelB = ViewModelB(initialState: StateB.default)
 
-        let viewModel = CompositeViewModel(
-            first: viewModelA,
-            second: viewModelB
+        let vc = CompositeVC(
+            layout: layout,
+            cellTypes: [ComponentCell.self],
+            throttleType: ThrottleType.none,
+            viewModelOne: viewModelA,
+            viewModelTwo: viewModelB
         )
-
-        let vc = CompositeVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.none, viewModel: viewModel)
 
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func buildModels(state: ExampleState, components: inout ComponentsArray) {
+    override func components(_ components: inout ComponentsArray, state: ExampleState) {
         components.add(
             StaticTextComponent(id: "First").copy {
                 $0.text = Text.unattributed("Bacon")

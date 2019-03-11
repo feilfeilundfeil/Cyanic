@@ -12,7 +12,7 @@ import class RxSwift.DisposeBag
 /**
  ViewModelType is a protocol adopted by the BaseViewModel classes. It provides the essential functionality for ViewModel and State interaction.
 */
-open class ViewModelType<StateType: State> {
+open class AbstractViewModel<StateType: State>: ViewModelType {
 
     /**
      Initializer for the ViewModel.
@@ -23,6 +23,10 @@ open class ViewModelType<StateType: State> {
     */
     public init(initialState: StateType) {
         self.state = BehaviorRelay<StateType>(value: initialState)
+    }
+
+    deinit {
+        print("\(self) was deallocated")
     }
 
     /**
@@ -38,13 +42,15 @@ open class ViewModelType<StateType: State> {
 
 }
 
-public extension ViewModelType {
+public extension AbstractViewModel {
 
     /**
-     Accessor for the current State of the ViewModelType.
+     Accessor for the current State of the AbstractViewModel.
     */
     var currentState: StateType {
         return self.state.value
     }
 
 }
+
+internal protocol ViewModelType {}
