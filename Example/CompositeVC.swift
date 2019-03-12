@@ -55,7 +55,7 @@ class ViewModelB: BaseViewModel<StateB> {
 
 
 class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModelB> {
-
+    
     deinit {
         print("CompositeVC Deallocated")
     }
@@ -79,6 +79,8 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
             ].reversed()
         }
     }
+
+    override var throttleType: ThrottleType { return ThrottleType.debounce(0.01) }
 
     @objc func addButtonTapped() {
         self.viewModelOne.addButtonTapped()

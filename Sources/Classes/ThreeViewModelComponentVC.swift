@@ -16,18 +16,11 @@ open class ThreeViewModelComponentVC<
     ThirdState: State, ThirdViewModel: BaseViewModel<ThirdState>
 >: BaseComponentVC {
 
-    public init(
-        layout: UICollectionViewLayout,
-        cellTypes: [ComponentCell.Type],
-        throttleType: ThrottleType,
-        viewModelOne: FirstViewModel,
-        viewModelTwo: SecondViewModel,
-        viewModelThree: ThirdViewModel
-    ) {
+    public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel, viewModelThree: ThirdViewModel) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
         self.viewModelThree = viewModelThree
-        super.init(layout: layout, cellTypes: cellTypes, throttleType: throttleType)
+        super.init()
     }
 
     public required init?(coder aDecoder: NSCoder) {

@@ -15,14 +15,9 @@ import class UIKit.UICollectionViewLayout
 */
 open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: BaseViewModel<ConcreteState>>: BaseComponentVC {
 
-    public init(
-        layout: UICollectionViewLayout,
-        cellTypes: [ComponentCell.Type],
-        throttleType: ThrottleType,
-        viewModel: ConcreteViewModel
-    ) {
+    public init(viewModel: ConcreteViewModel) {
         self.viewModel = viewModel
-        super.init(layout: layout, cellTypes: cellTypes, throttleType: throttleType)
+        super.init()
     }
 
     public required init?(coder aDecoder: NSCoder) {

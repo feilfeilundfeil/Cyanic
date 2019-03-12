@@ -16,13 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: 10.0)
-        layout.minimumLineSpacing = 0.0
-        layout.minimumInteritemSpacing = 0.0
-
         let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default)
-        let vc = ExampleVC(layout: layout, cellTypes: [ComponentCell.self], throttleType: ThrottleType.throttle(0.1), viewModel: viewModel)
+        let vc = ExampleVC(viewModel: viewModel)
 
         let nvc: UINavigationController = UINavigationController(rootViewController: vc)
 

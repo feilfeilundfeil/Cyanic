@@ -41,10 +41,13 @@ import struct RxSwift.RxTimeInterval
 open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: Initializers
-    public init(layout: UICollectionViewLayout, cellTypes: [ComponentCell.Type], throttleType: ThrottleType = ThrottleType.none) {
-        self.layout = layout
+    /**
+     Initializer.
+     - parameters:
+        - cellTypes: The different types of ComponentCell to be used in the UICollectionView. Default argument is [ComponentCell.self].
+    */
+    public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
-        self.throttleType = throttleType
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -98,16 +101,10 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
     // MARK: Stored Properties
     /**
-     The layout of the UICollectionView
-    */
-    public let layout: UICollectionViewLayout
-
-    /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
     */
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
     internal var _cellTypes: Set<MetaType<ComponentCell>>
-    internal let throttleType: ThrottleType
     internal let disposeBag: DisposeBag = DisposeBag()
 
     /**
@@ -119,10 +116,27 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
         leeway: DispatchTimeInterval.milliseconds(100)
     )
 
+    // MARK: Computed Properties
+    /**
+     The layout of the UICollectionView. This is not the exact instance as the one used in the UICollectionView but a copy.
+     The instance used by the UICollectionView was injected via initializer in the loadView method.
+    */
+    open var layout: UICollectionViewLayout {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+        return layout
+    }
+
     /**
      A Set containing the different kinds of ComponentCell subclasses registered for this UICollectionView.
     */
     public var cellTypes: Set<MetaType<ComponentCell>> { return self._cellTypes }
+
+    /**
+     Limits the frequency of updates to the UICollectionView.
+    */
+    open var throttleType: ThrottleType { return ThrottleType.none }
 
     // MARK: Views
     /**
@@ -144,28 +158,6 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
         self.collectionView.register(cellType, forCellWithReuseIdentifier: cellType.identifier)
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
-
-//    /**
-//     This method is responsible for creating the [AnyComponent] array.
-//     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time the State
-//     of the ViewModel changes.
-//
-//     - parameters:
-//        - state: The latest snapshot of the State object of the ViewModel
-//        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
-//    */
-//    open func buildModels(state: ConcreteState, components: inout ComponentsArray) {
-//        fatalError("You must override this")
-//    }
-
-//    open func components<ConcreteState1: State, ConcreteState2: State, ConcreteState3: State>(
-//        _ components: inout ComponentsArray,
-//        state1: ConcreteState1,
-//        state2: ConcreteState2,
-//        state3: ConcreteState3
-//    ) {
-//
-//    }
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

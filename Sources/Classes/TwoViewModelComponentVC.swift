@@ -15,16 +15,10 @@ open class TwoViewModelComponentVC<
     SecondState: State, SecondViewModel: BaseViewModel<SecondState>
 >: BaseComponentVC {
 
-    public init(
-        layout: UICollectionViewLayout,
-        cellTypes: [ComponentCell.Type],
-        throttleType: ThrottleType,
-        viewModelOne: FirstViewModel,
-        viewModelTwo: SecondViewModel
-    ) {
+    public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
-        super.init(layout: layout, cellTypes: cellTypes, throttleType: throttleType)
+        super.init()
     }
 
     public required init?(coder aDecoder: NSCoder) {

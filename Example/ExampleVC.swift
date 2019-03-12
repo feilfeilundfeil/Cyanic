@@ -38,6 +38,8 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     
     }
 
+    override var throttleType: ThrottleType { return ThrottleType.throttle(0.1) }
+
     @objc public func buttonTapped() {
         self.viewModel.buttonWasTapped()
     }
@@ -47,9 +49,6 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         let viewModelB = ViewModelB(initialState: StateB.default)
 
         let vc = CompositeVC(
-            layout: layout,
-            cellTypes: [ComponentCell.self],
-            throttleType: ThrottleType.none,
             viewModelOne: viewModelA,
             viewModelTwo: viewModelB
         )
