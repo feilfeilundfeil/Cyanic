@@ -95,16 +95,14 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
     override func components(_ components: inout ComponentsArray, state1: StateA, state2: StateB) {
         let isTrue: Bool = state1.isTrue && state2.isTrue
 
-        components.add(
-            StaticTextComponent(id: "First")
-                .copy {
-                    $0.text = Text.unattributed(isTrue ? "This should say true when both are true" : "False")
-                    $0.backgroundColor = UIColor.red
-                    $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
-                    $0.font = UIFont.systemFont(ofSize: 17.0)
-                    $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-                }
-        )
+        components.staticTextComponent {
+            $0.id = "First"
+            $0.text = Text.unattributed(isTrue ? "This should say true when both are true" : "False")
+            $0.backgroundColor = UIColor.red
+            $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
+            $0.font = UIFont.systemFont(ofSize: 17.0)
+            $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+        }
 
         components.add(
             StaticTextComponent(id: "Second")

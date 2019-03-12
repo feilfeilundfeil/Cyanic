@@ -16,7 +16,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
 /// ButtonComponent is a Component that represents a UIButton.
 public struct ButtonComponent: ButtonComponentType {
 

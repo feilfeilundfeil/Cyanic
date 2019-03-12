@@ -9,7 +9,7 @@
 import class UIKit.UIColor
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
 /// StaticSpacingComponent is a Component that represents static spacing between content / other Components.
 public struct StaticSpacingComponent: StaticSpacingComponentType {
 

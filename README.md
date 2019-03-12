@@ -2,7 +2,7 @@
 * * *
 
 ## TODO
-- Create a Composite ViewModel that is able to manage other ViewModels (who have their own state) [✅ 10.03.2019]
+- Create a BaseComponentVC subclasses that handle one, two, three ViewModels [✅ 11.03.2019]
 - Update the documentation of each file [✅  05.03.2019]
 - Refactor Components into structs [✅ 01.03.2019]
 - Create Stencil templates for said structs to generate default values for properties [✅ 01.03.2019 but could still be refined]

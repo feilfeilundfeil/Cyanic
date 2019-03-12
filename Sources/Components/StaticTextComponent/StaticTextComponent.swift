@@ -17,7 +17,7 @@ import struct UIKit.UIEdgeInsets
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
 /// StaticTextComponent is a Component that represents static text to be displayed in a UICollectionViewCell.
 public struct StaticTextComponent: StaticTextComponentType {
 

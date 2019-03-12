@@ -19,7 +19,6 @@ extension ButtonComponent: Hashable {
 extension ChildVCComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.height.hash(into: &hasher)
-        self.name.hash(into: &hasher)
         self.id.hash(into: &hasher)
     }
 }

@@ -37,7 +37,6 @@ public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
 extension ChildVCComponent: Equatable {}
 public func == (lhs: ChildVCComponent, rhs: ChildVCComponent) -> Bool {
     guard lhs.height == rhs.height else { return false }
-    guard lhs.name == rhs.name else { return false }
     guard lhs.id == rhs.id else { return false }
     return true
 }

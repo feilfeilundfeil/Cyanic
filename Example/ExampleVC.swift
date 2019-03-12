@@ -57,17 +57,17 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     }
 
     override func components(_ components: inout ComponentsArray, state: ExampleState) {
-        components.add(
-            StaticTextComponent(id: "First").copy {
-                $0.text = Text.unattributed("Bacon")
-                $0.font = UIFont.systemFont(ofSize: 17.0)
+        components.staticTextComponent {
+            $0.id = "First"
+            $0.text = Text.unattributed("Bacon")
+            $0.font = UIFont.systemFont(ofSize: 17.0)
+            $0.backgroundColor = UIColor.gray
+            $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+            $0.style = AlacrityStyle<UITextView> {
                 $0.backgroundColor = UIColor.gray
-                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
-                $0.style = AlacrityStyle<UITextView> {
-                    $0.backgroundColor = UIColor.gray
-                }
             }
-        )
+        }
+
         if state.isTrue {
             components.add(
                 ChildVCComponent(id: "Child", childVC: ChildVC(), parentVC: self).copy { $0.height = 200.0 }

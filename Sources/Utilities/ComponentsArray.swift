@@ -43,4 +43,15 @@ public struct ComponentsArray {
         self.components.append(contentsOf: components.map { $0.asAnyComponent()})
     }
 
+    /**
+     Checks if the Component instance has a valid identifier.
+     - parameters:
+        - component: The Component instance to be checked.
+     - Returns:
+        Bool indicating whether or not the id is valid.
+    */
+    internal func hasValidIdentifier<ConcreteComponent: Component>(_ component: ConcreteComponent) -> Bool {
+        return component.id != Constants.invalidID
+    }
+
 }
