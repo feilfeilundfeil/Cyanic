@@ -31,7 +31,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
 
     /**
      Initializer
-     - parameters:
+     - Parameters:
         - id: The unique identifier used by the ExpandableComponent as a means to map the isExpanded state to the PublishRelay.
         - contentLayout: The Layout that creates, sizes, and arranges the content-specific UI. Excludes the ChevronView.
         - backgroundColor: The backgroundColor of the entire content.

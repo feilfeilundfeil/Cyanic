@@ -70,7 +70,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
       This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time the State
       of the ViewModel changes.
 
-      - parameters:
+      - Parameters:
          - state: The latest snapshot of the State object of the ViewModel
          - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
     */

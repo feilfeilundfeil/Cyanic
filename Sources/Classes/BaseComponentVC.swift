@@ -43,7 +43,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
     // MARK: Initializers
     /**
      Initializer.
-     - parameters:
+     - Parameters:
         - cellTypes: The different types of ComponentCell to be used in the UICollectionView. Default argument is [ComponentCell.self].
     */
     public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
@@ -148,7 +148,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
     /**
      Adds a new ComponentCell subclass to the cellTypes Set and registers it to the UICollectionView if it doesn't have it.
      Otherwise, does nothing.
-     - parameters:
+     - Parameters:
         - cellType: The ComponentCell.Type
     */
     public final func add(cellType: ComponentCell.Type) {

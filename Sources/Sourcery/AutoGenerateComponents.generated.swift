@@ -4,8 +4,8 @@
 public extension ComponentsArray {
 
     /**
-      Generates a ButtonComponent instance and configures its properties with the given closure. You must provide a unique id in the configuration
-      block, otherwise it will force a fatalError.
+      Generates a ButtonComponent instance and configures its properties with the given closure. You must provide a
+      unique id in the configuration block, otherwise it will force a fatalError.
       - Parameters:
         - configuration: The closure that mutates the mutable ButtonComponent.
         - mutableComponent: The ButtonComponent instance to be mutated/configured.
@@ -23,8 +23,8 @@ public extension ComponentsArray {
     }
 
     /**
-      Generates a StaticSpacingComponent instance and configures its properties with the given closure. You must provide a unique id in the configuration
-      block, otherwise it will force a fatalError.
+      Generates a StaticSpacingComponent instance and configures its properties with the given closure. You must provide a
+      unique id in the configuration block, otherwise it will force a fatalError.
       - Parameters:
         - configuration: The closure that mutates the mutable StaticSpacingComponent.
         - mutableComponent: The StaticSpacingComponent instance to be mutated/configured.
@@ -42,8 +42,8 @@ public extension ComponentsArray {
     }
 
     /**
-      Generates a StaticTextComponent instance and configures its properties with the given closure. You must provide a unique id in the configuration
-      block, otherwise it will force a fatalError.
+      Generates a StaticTextComponent instance and configures its properties with the given closure. You must provide a
+      unique id in the configuration block, otherwise it will force a fatalError.
       - Parameters:
         - configuration: The closure that mutates the mutable StaticTextComponent.
         - mutableComponent: The StaticTextComponent instance to be mutated/configured.

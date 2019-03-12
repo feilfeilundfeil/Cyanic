@@ -29,7 +29,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
 
     /**
      Initializer.
-     - parameters:
+     - Parameters:
         - text: The text to be displayed on the UITextView.
         - font: UIFont of the UITextView.
         - backgroundColor: The backgroundColor for the entire content.

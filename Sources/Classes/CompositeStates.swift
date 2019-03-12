@@ -18,7 +18,7 @@
 //
 //    /**
 //     Initializer.
-//     - parameters:
+//     - Parameters:
 //     - firstState: The FirstState instance.
 //     - secondState: The SecondState instance.
 //     */
@@ -65,7 +65,7 @@
 //
 //    /**
 //     Initializer.
-//     - parameters:
+//     - Parameters:
 //     - firstState: The FirstState instance.
 //     - secondState: The SecondState instance.
 //     - thirdState: The ThirdState instance.

@@ -16,7 +16,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
      Used to mutate the current State object of the ViewModelType.
      Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
      When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsArray.
-     - parameters:
+     - Parameters:
      - block: The closure that contains mutating logic on the State object.
      */
     public func setState(block: (inout StateType) -> Void) {
@@ -37,7 +37,7 @@ public extension BaseViewModel where StateType: ExpandableState {
 
     /**
      Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key
-     - parameters:
+     - Parameters:
      - id: The unique identifier of the ExpandableComponent.
      - isExpanded: The new state of the ExpandableComponent.
     */

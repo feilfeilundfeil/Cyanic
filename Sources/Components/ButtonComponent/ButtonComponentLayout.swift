@@ -34,7 +34,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     /**
      Initializer
-     - parameters:
+     - Parameters:
         - type: The ButtonLayoutType of the ButtonLayout.
         - title: The title to be displayed on UIButton's titleLabel.
         - backgroundColor: The backgroundColor for the entire content.

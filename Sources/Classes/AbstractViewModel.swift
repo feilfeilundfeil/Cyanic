@@ -18,7 +18,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
      Initializer for the ViewModel.
      When instantiating the ViewModel, it is important to pass an initial State object which should represent the initial State of the current
      view / screen of the app.
-     - parameters:
+     - Parameters:
      - initialState: The starting State of the ViewModel.
     */
     public init(initialState: StateType) {

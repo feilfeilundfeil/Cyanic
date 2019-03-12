@@ -87,7 +87,7 @@ open class ThreeViewModelComponentVC<
      This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time FirstViewModel's,
      SecondViewModel's, and/or ThirdViewModel's State changes.
 
-     - parameters:
+     - Parameters:
          - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
          - state1: The latest snapshot of the FirstState object of FirstViewModel.
          - state2: The latest snapshot of the SecondState object of SecondViewModel.

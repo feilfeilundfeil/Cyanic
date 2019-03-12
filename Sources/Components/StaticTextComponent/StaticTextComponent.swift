@@ -68,7 +68,7 @@ public extension StaticTextComponent {
 
     /**
      Work around Initializer because memberwise initializers are all or nothing
-     - parameters:
+     - Parameters:
         - id: The unique identifier of the StaticTextComponent.
     */
     init(id: String) {

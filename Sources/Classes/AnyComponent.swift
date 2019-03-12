@@ -53,7 +53,7 @@ public extension AnyComponent {
 
     /**
      Dequeues the correct cellType for the given Component on the BaseComponentsVC's UICollectionView.
-     - parameters:
+     - Parameters:
          - collectionView: The UICollectionView dequeuing the UICollectionViewCell
          - cellType: The UICollectionViewCell subclass type with the identifier
          - indexPath: The indexPath in the UICollectionView for the UICollectionViewCell.

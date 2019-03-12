@@ -2,8 +2,8 @@ public extension ComponentsArray {
 {% for type in types.all where type.implements.AutoGenerateComponent or type|annotated:"AutoGenerateComponent" %}
 
     /**
-      Generates a {{ type.name }} instance and configures its properties with the given closure. You must provide a unique id in the configuration
-      block, otherwise it will force a fatalError.
+      Generates a {{ type.name }} instance and configures its properties with the given closure. You must provide a
+      unique id in the configuration block, otherwise it will force a fatalError.
       - Parameters:
         - configuration: The closure that mutates the mutable {{ type.name }}.
         - mutableComponent: The {{ type.name }} instance to be mutated/configured.

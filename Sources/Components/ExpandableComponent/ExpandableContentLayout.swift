@@ -34,7 +34,7 @@ open class ExpandableContentLayout: InsetLayout<UIView>, Hashable {
 
     /**
      Method used for equality checks.
-     - parameters:
+     - Parameters:
         - other: ExpandableContentLayout instance to be compared with.
      - Returns: Bool
     */
@@ -55,7 +55,7 @@ public final class LabelContentLayout: ExpandableContentLayout {
 
     /**
      Initializer
-     - parameters:
+     - Parameters:
         - text: String / NSAttributedString to be displayed on the UILabel.
         - font: UIFont used for the String. Default value is UIFont.systemFont(ofSize: 17.0)
         - alignment: Alignment. Default value is Alignment.center
@@ -120,7 +120,7 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
 
     /**
      Initializer
-     - parameters:
+     - Parameters:
         - text: String / NSAttributedString to be displayed on the UILabel.
         - font: UIFont used for the String. Default value is UIFont.systemFont(ofSize: 17.0)
         - labelStyle: Styling to be applied on the UILabel. Default value is an empty style.

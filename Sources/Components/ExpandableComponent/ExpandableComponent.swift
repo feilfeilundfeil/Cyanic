@@ -69,7 +69,7 @@ public extension ExpandableComponent {
 
     /**
      Work around Initializer because memberwise initializers are all or nothing.
-     - parameters:
+     - Parameters:
         - id: The unique identifier of the ExpandableComponent
         - contentLayout: The custom content for the ExpandableComponent
         - isExpanded: Whether the ExpandableComponent is expanded or contracted.

@@ -18,7 +18,7 @@ public struct ComponentsArray {
 
     /**
      Adds a Component to the array as an AnyComponent instance.
-     - parameters:
+     - Parameters:
         - component: The Component instance to be added to the components array.
     */
     public mutating func add<C: Component>(_ component: C) {
@@ -27,7 +27,7 @@ public struct ComponentsArray {
 
     /**
      Adds Components of the same type to the array.
-     - parameters:
+     - Parameters:
         - components: The Component instances to be added to the components array.
     */
     public mutating func add<Components: Sequence>(_ components: Components) where Components.Element == Component {
@@ -36,7 +36,7 @@ public struct ComponentsArray {
 
     /**
      Adds Components of the same type to the array. Variadic version of the method.
-     - parameters:
+     - Parameters:
         - components: The Component instances to be added to the components array.
      */
     public mutating func add<Components: Component>(_ components: Components...) {
@@ -45,7 +45,7 @@ public struct ComponentsArray {
 
     /**
      Checks if the Component instance has a valid identifier.
-     - parameters:
+     - Parameters:
         - component: The Component instance to be checked.
      - Returns:
         Bool indicating whether or not the id is valid.
