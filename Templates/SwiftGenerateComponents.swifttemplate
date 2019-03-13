@@ -1,0 +1,53 @@
+<%
+func lowerCamelCaseName(for type: Type) -> String {
+    let name: String = type.name
+    return name.prefix(1).lowercased() + name.dropFirst()
+}
+-%>
+import class UIKit.UIViewController
+// swiftlint:disable line_length
+public extension ComponentsArray {
+<%_ for type in types.all where type.annotations["AutoGenerateComponent"] != nil {-%>
+    /**
+        Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable <%= type.name %>.
+            - mutableComponent: The <%= type.name %> instance to be mutated/configured.
+        - Returns:
+            <%= type.name %>
+    */
+<%_ let filteredVariables = type.storedVariables.filter { $0.annotations["isRequired"] != nil } -%>
+<%
+let parameters = filteredVariables.map { (variable: Variable) -> String in
+    if variable.annotations["isEscaping"] != nil {
+        return "\(variable.name): @escaping \(variable.typeName)"
+    } else {
+        return "\(variable.name): \(variable.typeName)"
+    }
+}
+-%>
+<%
+let args = filteredVariables.map { (variable: Variable) -> String in
+    return "\(variable.name): \(variable.name)"
+}
+-%>
+    @discardableResult
+<%_ let functionName = lowerCamelCaseName(for: type) -%>
+<%_ if parameters.isEmpty { -%>
+    mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
+<%_ } else { -%>
+    mutating func <%= functionName %>(<%= parameters.joined(separator: ", ") %>, configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID, <%= args.joined(separator: ", ") %>)
+<%_ } -%>
+        configuration(&mutableComponent)
+        guard self.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+        self.add(mutableComponent)
+        return mutableComponent
+    }
+
+<%_ } -%>
+}
+// swiftlint:enable line_length

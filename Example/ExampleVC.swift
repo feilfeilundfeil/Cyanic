@@ -69,16 +69,16 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         }
 
         if state.isTrue {
-            components.add(
-                ChildVCComponent(id: "Child", childVC: ChildVC(), parentVC: self).copy { $0.height = 200.0 }
-            )
+            components.childVCComponent(childVC: ChildVC(), parentVC: self) {
+                $0.id = "Child"
+                $0.height = 200.0
+            }
         }
 
         let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-        let firstId: String = ExampleState.Expandable.first.rawValue
-        let firstExpandable = ExpandableComponent(
-            id: firstId,
+        let firstID: String = ExampleState.Expandable.first.rawValue
+        let firstExpandable: ExpandableComponent = components.expandableComponent(
             contentLayout: ImageLabelContentLayout(
                 text: Text.unattributed("First Expandable"),
                 labelStyle: AlacrityStyle<UILabel> { $0.textColor = .green },
@@ -87,76 +87,62 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                 imageStyle: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green },
                 spacing: 16.0
             ),
-            isExpanded: state.expandableDict[firstId] ?? false,
+            isExpanded: state.expandableDict[firstID] ?? false,
             setExpandableState: self.viewModel.setExpandableState
-        )
-            .copy {
-                $0.backgroundColor = UIColor.white
-                $0.height = 55.0
-                $0.insets = expandableContentInsets
-            }
-
-        components.add(firstExpandable)
+        ) {
+            $0.id = firstID
+            $0.backgroundColor = UIColor.white
+            $0.height = 55.0
+            $0.insets = expandableContentInsets
+        }
 
         let randomColor: () -> UIColor = {
             return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
         }
 
         if firstExpandable.isExpanded {
-
-            state.strings.enumerated()
-                .map { (offset: Int, element: String) -> StaticTextComponent in
-                    return StaticTextComponent(id: "Text \(offset.description)")
-                        .copy {
-                            $0.text = Text.unattributed(element)
-                            $0.font = UIFont.systemFont(ofSize: 17.0)
-                            $0.backgroundColor = randomColor()
-                            $0.insets = insets
-                        }
+            state.strings.enumerated().forEach { (offset: Int, element: String) -> Void in
+                components.staticTextComponent {
+                    $0.id = "Text \(offset.description)"
+                    $0.text = Text.unattributed(element)
+                    $0.font = UIFont.systemFont(ofSize: 17.0)
+                    $0.backgroundColor = randomColor()
+                    $0.insets = insets
                 }
-                .forEach {
-                    components.add($0)
-                }
-        }
-
-        components.add(
-            StaticSpacingComponent(id: "Second").copy {
-                $0.height = 50.0
-                $0.backgroundColor = UIColor.black
             }
-        )
+        }
+        components.staticSpacingComponent {
+            $0.id = "Second"
+            $0.height = 50.0
+            $0.backgroundColor = UIColor.black
+        }
 
         let secondId: String = ExampleState.Expandable.second.rawValue
 
-        let secondExpandable = ExpandableComponent(
-            id: secondId,
+        let secondExpandable = components.expandableComponent(
             contentLayout: LabelContentLayout(
-                text: Text.unattributed("This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")")
+                text: Text.unattributed(
+                    "This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"
+                )
             ),
             isExpanded: state.expandableDict[secondId] ?? false,
             setExpandableState: self.viewModel.setExpandableState
-        )
-            .copy {
-                $0.insets = expandableContentInsets
-                $0.backgroundColor = UIColor.lightGray
-            }
-
-        components.add(secondExpandable)
+        ) {
+            $0.id = secondId
+            $0.insets = expandableContentInsets
+            $0.backgroundColor = UIColor.lightGray
+        }
 
         if secondExpandable.isExpanded {
-            state.otherStrings.enumerated()
-                .map { (offset: Int, value: String) -> StaticTextComponent in
-                    return StaticTextComponent(id: "Other \(offset.description)")
-                        .copy {
-                            $0.text = Text.unattributed(value)
-                            $0.font = UIFont.systemFont(ofSize: 17.0)
-                            $0.backgroundColor = randomColor()
-                            $0.insets = insets
-                        }
+            state.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
+                components.staticTextComponent {
+                    $0.id = "Other \(offset.description)"
+                    $0.text = Text.unattributed(value)
+                    $0.font = UIFont.systemFont(ofSize: 17.0)
+                    $0.backgroundColor = randomColor()
+                    $0.insets = insets
                 }
-                .forEach {
-                    components.add($0)
-                }
+            }
         }
 
         let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
@@ -166,37 +152,8 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.layer.backgroundColor = $0.backgroundColor?.cgColor
         }
 
-        let first = ButtonComponent(id: "First").copy { (button: inout ButtonComponent) -> Void in
-            let id = button.id
-            button.height = 200.0
-            button.title = id
-            button.backgroundColor = UIColor.red
-            button.style = style
-            button.onTap = { print("Hello World, \(id)") }
-        }
-
-        let second = ButtonComponent(id: "Second").copy { (button: inout ButtonComponent) -> Void in
-            let id = button.id
-            button.height = 200.0
-            button.title = button.id
-            button.backgroundColor = UIColor.orange
-            button.style = style
-            button.onTap = { print("Hello World, \(id)") }
-        }
-
-        if state.isTrue {
-            components.add(first)
-        }
-
-        components.add(
-            StaticSpacingComponent(id: "Second").copy {
-                $0.height = 100.0
-                $0.backgroundColor = UIColor.brown
-            }
-        )
-
-        let block: (UIColor, inout ButtonComponent) -> Void = { (color: UIColor, button: inout ButtonComponent) -> Void in
-            let id = button.id
+        let newBlock: (String, UIColor, inout ButtonComponent) -> Void = { id, color, button in
+            button.id = id
             button.title = id
             button.height = 200.0
             button.style = style.modifying(with: { $0.backgroundColor = color })
@@ -204,33 +161,48 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             button.onTap = { print("Hello World, \(id)") }
         }
 
-        components.add([
-            second,
-            ButtonComponent(id: "Third").copy {
-                block(.yellow, &$0)
-            },
-            ButtonComponent(id: "Fourth").copy {
-                block(.green, &$0)
-            },
-            ButtonComponent(id: "Fifth").copy {
-                block(.blue, &$0)
-            },
-            ButtonComponent(id: "Sixth").copy {
-                block(.purple, &$0)
-            },
-            ButtonComponent(id: "Seventh").copy {
-               block(.brown, &$0)
-            },
-            ButtonComponent(id: "Eighth").copy {
-                block(.white, &$0)
-            },
-            ButtonComponent(id: "Ninth").copy {
-                block(.cyan, &$0)
-            },
-            ButtonComponent(id: "Tenth").copy {
-                block(.gray, &$0)
-            },
-        ])
+        if state.isTrue {
+            components.buttonComponent {
+                newBlock("First", UIColor.red, &$0)
+            }
+        }
+
+        components.staticSpacingComponent {
+            $0.id = "Second"
+            $0.height = 100.0
+            $0.backgroundColor = UIColor.brown
+        }
+
+        components.buttonComponent {
+            newBlock("Second", UIColor.orange, &$0)
+        }
+
+        components.buttonComponent {
+            newBlock("Third", .yellow, &$0)
+        }
+
+        components.buttonComponent {
+            newBlock("Fourth",.green, &$0)
+        }
+
+        components.buttonComponent {
+            newBlock("Fifth", .blue, &$0)
+        }
+        components.buttonComponent {
+            newBlock("Sixth",.purple, &$0)
+        }
+        components.buttonComponent {
+           newBlock("Seventh",.brown, &$0)
+        }
+        components.buttonComponent {
+            newBlock("Eighth",.white, &$0)
+        }
+        components.buttonComponent {
+            newBlock("Ninth",.cyan, &$0)
+        }
+        components.buttonComponent {
+            newBlock("Tenth", .gray, &$0)
+        }
     }
 }
 

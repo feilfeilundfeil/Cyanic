@@ -16,7 +16,7 @@ import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
 /// An ExpandableComponent is a Component that represents an expandable UI element that shows / hides other UI elements grouped with it.
 public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
@@ -39,6 +39,7 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality 
     public let cellType: ComponentCell.Type = ComponentCell.self
 
+    // sourcery: isRequired
     public var contentLayout: ExpandableContentLayout
 
     public var backgroundColor: UIColor = UIColor.clear
@@ -53,9 +54,10 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality
     public var chevronStyle: AlacrityStyle<ChevronView> = AlacrityStyle<ChevronView> { _ in }
 
+    // sourcery: isRequired
     public var isExpanded: Bool
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality, isRequired, isEscaping
     public let setExpandableState: (String, Bool) -> Void
 
     public var identity: ExpandableComponent { return self }
@@ -69,7 +71,7 @@ public extension ExpandableComponent {
 
     /**
      Work around Initializer because memberwise initializers are all or nothing.
-     - Parameters:
+     - parameters:
         - id: The unique identifier of the ExpandableComponent
         - contentLayout: The custom content for the ExpandableComponent
         - isExpanded: Whether the ExpandableComponent is expanded or contracted.

@@ -9,6 +9,7 @@ def pods
   pod 'Kio'
   pod 'Alacrity'
   pod 'FFUFWidgets', :git => 'git@bitbucket.org:FFUF/ffuf-ios-widgets.git'
+  pod 'Sourcery'
 
 end
 

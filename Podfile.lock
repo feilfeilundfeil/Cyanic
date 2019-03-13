@@ -13,6 +13,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.1):
     - RxAtomic (~> 4.4)
+  - Sourcery (0.15.0)
 
 DEPENDENCIES:
   - Alacrity
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - LayoutKit
   - RxDataSources
   - RxSwift
+  - Sourcery
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -32,6 +34,7 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - Sourcery
 
 EXTERNAL SOURCES:
   FFUFWidgets:
@@ -52,7 +55,8 @@ SPEC CHECKSUMS:
   RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
+  Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
 
-PODFILE CHECKSUM: 5ca04987fc03cca3f1307a13c44ccd1c89834fed
+PODFILE CHECKSUM: 39c0ee6266f154aa90eb9609c992a2587935fc38
 
 COCOAPODS: 1.6.0

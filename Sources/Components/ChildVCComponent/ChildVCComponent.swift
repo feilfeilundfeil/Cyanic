@@ -9,13 +9,13 @@
 import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoEquatable, AutoHashable
+// sourcery: AutoEquatable, AutoHashable,AutoGenerateComponent
 public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality, isRequired
     public let childVC: ChildComponentVC
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality, isRequired
     public unowned let parentVC: UIViewController
 
     public var height: CGFloat = 250.0
