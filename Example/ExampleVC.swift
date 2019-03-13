@@ -35,6 +35,12 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         )
 
         self.navigationItem.rightBarButtonItem = nextButton
+
+        self.viewModel.selectSubscribe(
+            keyPath1: \ExampleState.isTrue,
+            keyPath2: \ExampleState.expandableDict,
+            onNewValue: { print("from a different subscription: \($0)") }
+        )
     
     }
 
@@ -212,7 +218,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 class ExampleViewModel: BaseViewModel<ExampleState> {
 
     func buttonWasTapped() {
-        self.setState { $0.isTrue = !$0.isTrue }
+        self.setState { $0.isTrue = $0.isTrue }
     }
 
 }

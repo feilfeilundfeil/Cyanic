@@ -33,10 +33,18 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
     }
 
+    /**
+     Subscribes to changes in an Async property of StateType. The closures are executed on the main thread asynchronously.
+     - Parameters:
+        - onSuccess: Executed when the Async property is changed to Async.success.
+        - newValue: The underlying value of the property when it is changed to Async.success.
+        - onFailure: Executed when the Async property is changed to Async.failure.
+        - error: The underlying error value of the property when it is changed to Async.failure.
+    */
     public final func asyncSubscribe<T>(
         keyPath: KeyPath<StateType, Async<T>>,
-        onSuccess: @escaping (T) -> Void = { _ in },
-        onFail: @escaping (Error) -> Void = { _ in }
+        onSuccess: @escaping (_ newValue: T) -> Void = { _ in },
+        onFail: @escaping (_ error: Error) -> Void = { _ in }
     ) {
         self.state
             .map { $0[keyPath: keyPath] }
@@ -57,7 +65,14 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
             .disposed(by: self.disposeBag)
     }
 
-    public final func selectSubscribe<T: Equatable>(keyPath: KeyPath<StateType, T>, onNewValue: @escaping (T) -> Void) {
+    /**
+     Subscribes to changes in a property of the StateType. The closures are executed on the main thread asynchronously.
+     - Parameters:
+        - keyPath: The KeyPath of the property being observed.
+        - onNewValue: Executed when the property changes to a new value (different from the old value).
+        - newValue: The new value of the property.
+    */
+    public final func selectSubscribe<T: Equatable>(keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
         self.state
             .map { $0[keyPath: keyPath] }
             .distinctUntilChanged()
@@ -70,10 +85,18 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
             .disposed(by: self.disposeBag)
     }
 
+    /**
+     Subscribes to changes in two properties of the StateType. The closures are executed on the main thread asynchronously.
+     - Parameters:
+        - keyPath1: The KeyPath of the first property being observed.
+        - keyPath2: The KeyPath of the second property being observed.
+        - onNewValue: Executed when at least one of the properties change to a new value (different from the old value).
+        - newValue: The value of the properties when onNewValue is executed.
+    */
     public final func selectSubscribe<T: Equatable, U: Equatable>(
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
-        onNewValue: @escaping ((T, U)) -> Void) {
+        onNewValue: @escaping (_ newValue: (T, U)) -> Void) {
         self.state
             .map { SubscribeSelect2<T, U>(t: $0[keyPath: keyPath1], u: $0[keyPath: keyPath2]) }
             .distinctUntilChanged()
@@ -86,11 +109,20 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
             .disposed(by: self.disposeBag)
     }
 
+    /**
+     Subscribes to changes in three properties of the StateType. The closures are executed on the main thread asynchronously.
+     - Parameters:
+         - keyPath1: The KeyPath of the first property being observed.
+         - keyPath2: The KeyPath of the second property being observed.
+         - keyPath3: The KeyPath of the second property being observed.
+         - onNewValue: Executed when at least one of the properties change to a new value (different from the old value).
+         - newValue: The value of the properties when onNewValue is executed.
+    */
     public final func selectSubscribe<T: Equatable, U: Equatable, V: Equatable>(
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
         keyPath3: KeyPath<StateType, V>,
-        onNewValue: @escaping ((T, U, V)) -> Void) { // swiftlint:disable:this large_tuple
+        onNewValue: @escaping (_ newValue: (T, U, V)) -> Void) { // swiftlint:disable:this large_tuple
         self.state
             .map { SubscribeSelect3<T, U, V>(t: $0[keyPath: keyPath1], u: $0[keyPath: keyPath2], v: $0[keyPath: keyPath3]) }
             .distinctUntilChanged()
