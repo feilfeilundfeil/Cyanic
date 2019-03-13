@@ -16,7 +16,7 @@ import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
+// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent,RequiredVariables
 /// An ExpandableComponent is a Component that represents an expandable UI element that shows / hides other UI elements grouped with it.
 public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
@@ -39,8 +39,7 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality 
     public let cellType: ComponentCell.Type = ComponentCell.self
 
-    // sourcery: isRequired
-    public var contentLayout: ExpandableContentLayout
+    public var contentLayout: ExpandableContentLayout = EmptyContentLayout()
 
     public var backgroundColor: UIColor = UIColor.clear
 
@@ -55,10 +54,12 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var chevronStyle: AlacrityStyle<ChevronView> = AlacrityStyle<ChevronView> { _ in }
 
     // sourcery: isRequired
-    public var isExpanded: Bool
+    public var isExpanded: Bool = false
 
-    // sourcery: skipHashing, skipEquality, isRequired, isEscaping
-    public let setExpandableState: (String, Bool) -> Void
+    // sourcery: skipHashing, skipEquality
+    public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in
+        fatalError("This default closure must be replaced!")
+    }
 
     public var identity: ExpandableComponent { return self }
 
@@ -73,15 +74,9 @@ public extension ExpandableComponent {
      Work around Initializer because memberwise initializers are all or nothing.
      - parameters:
         - id: The unique identifier of the ExpandableComponent
-        - contentLayout: The custom content for the ExpandableComponent
-        - isExpanded: Whether the ExpandableComponent is expanded or contracted.
-        - relay: PublishRelay that tracks the isExpanded state of this ExpandableComponent.
     */
-    init(id: String, contentLayout: ExpandableContentLayout, isExpanded: Bool, setExpandableState: @escaping (String, Bool) -> Void) {
+    init(id: String) {
         self.id = id
-        self.contentLayout = contentLayout
-        self.isExpanded = isExpanded
-        self.setExpandableState = setExpandableState
     }
 
 }

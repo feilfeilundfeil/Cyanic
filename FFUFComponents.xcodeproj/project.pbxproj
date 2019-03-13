@@ -16,6 +16,7 @@
 		142C450C2236A224002360F5 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
 		142C451422390C52002360F5 /* SwiftGenerateComponents.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45132238FA27002360F5 /* SwiftGenerateComponents.generated.swift */; };
 		142C451622390D26002360F5 /* String+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451522390D26002360F5 /* String+FFUFComponents.swift */; };
+		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
 		1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* BaseViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
@@ -109,6 +110,8 @@
 		142C45122238F7AB002360F5 /* SwiftGenerateComponents.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftGenerateComponents.swifttemplate; sourceTree = "<group>"; };
 		142C45132238FA27002360F5 /* SwiftGenerateComponents.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenerateComponents.generated.swift; sourceTree = "<group>"; };
 		142C451522390D26002360F5 /* String+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FFUFComponents.swift"; sourceTree = "<group>"; };
+		142C451722392A95002360F5 /* DeprecatedSwiftGenerateComponents.oldswifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeprecatedSwiftGenerateComponents.oldswifttemplate; sourceTree = "<group>"; };
+		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
 		1437BDC922157C4F00A35FFE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -358,6 +361,7 @@
 			children = (
 				14496DB92228714200C5C278 /* AutoComponentType.stencil */,
 				14B01E41222723E200EE0A9A /* AutoEquatable.stencil */,
+				142C451722392A95002360F5 /* DeprecatedSwiftGenerateComponents.oldswifttemplate */,
 				142C45122238F7AB002360F5 /* SwiftGenerateComponents.swifttemplate */,
 				14B01E40222723E200EE0A9A /* AutoHashable.stencil */,
 			);
@@ -381,6 +385,7 @@
 			children = (
 				14C96F072211C30F00731265 /* Constants.swift */,
 				149D5B8E221B33A100482F28 /* ComponentsArray.swift */,
+				142C451822392C09002360F5 /* ComponentStateValidator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -710,6 +715,7 @@
 				142C45082236877F002360F5 /* OneViewModelComponentVC.swift in Sources */,
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */,
+				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,

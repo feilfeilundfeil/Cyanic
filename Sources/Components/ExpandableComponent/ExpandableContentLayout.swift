@@ -226,3 +226,28 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
     }
 
 }
+
+internal final class EmptyContentLayout: ExpandableContentLayout {
+
+    internal init() {
+        let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
+            text: Text.unattributed("This must be replaced!"),
+            font: UIFont.systemFont(ofSize: 17.0),
+            numberOfLines: 0,
+            alignment: Alignment.centerLeading,
+            flexibility: LabelLayoutDefaults.defaultFlexibility,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)EmptyLabel",
+            config: AlacrityStyle<UILabel> { _ in }.style
+        )
+
+        super.init(
+            insets: UIEdgeInsets.zero,
+            alignment: labelLayout.alignment,
+            flexibility: labelLayout.flexibility,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)ContentInset",
+            sublayout: labelLayout,
+            config: nil
+        )
+    }
+
+}

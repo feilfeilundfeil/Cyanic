@@ -27,7 +27,7 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
      */
     public init(
         childVC: ChildComponentVC,
-        parentVC: UIViewController,
+        parentVC: UIViewController?,
         height: CGFloat
     ) {
 

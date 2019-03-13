@@ -14,10 +14,10 @@ import struct CoreGraphics.CGFloat
 public protocol ChildVCComponentType: Component {
 
     // sourcery: skipHashing, skipEquality
-    var childVC: ChildComponentVC { get }
+    var childVC: ChildComponentVC { get set }
 
     // sourcery: skipHashing, skipEquality
-    var parentVC: UIViewController { get }
+    var parentVC: UIViewController? { get set }
 
     // sourcery: defaultValue = "250.0"
     var height: CGFloat { get set }

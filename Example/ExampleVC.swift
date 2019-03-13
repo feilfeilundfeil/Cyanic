@@ -69,8 +69,11 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         }
 
         if state.isTrue {
-            components.childVCComponent(childVC: ChildVC(), parentVC: self) {
+            components.childVCComponent { [weak self] in
+                guard let s = self else { return }
                 $0.id = "Child"
+                $0.childVC = ChildVC()
+                $0.parentVC = s
                 $0.height = 200.0
             }
         }
@@ -78,19 +81,19 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
         let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
         let firstID: String = ExampleState.Expandable.first.rawValue
-        let firstExpandable: ExpandableComponent = components.expandableComponent(
-            contentLayout: ImageLabelContentLayout(
+        let firstExpandable: ExpandableComponent = components.expandableComponent { [weak self] in
+            guard let s = self else { return }
+            $0.id = firstID
+            $0.contentLayout = ImageLabelContentLayout(
                 text: Text.unattributed("First Expandable"),
                 labelStyle: AlacrityStyle<UILabel> { $0.textColor = .green },
                 image: UIImage(),
                 imageSize: CGSize(width: 30.0, height: 30.0),
                 imageStyle: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green },
                 spacing: 16.0
-            ),
-            isExpanded: state.expandableDict[firstID] ?? false,
-            setExpandableState: self.viewModel.setExpandableState
-        ) {
-            $0.id = firstID
+            )
+            $0.isExpanded = state.expandableDict[firstID] ?? false
+            $0.setExpandableState = s.viewModel.setExpandableState
             $0.backgroundColor = UIColor.white
             $0.height = 55.0
             $0.insets = expandableContentInsets
@@ -119,16 +122,16 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
         let secondId: String = ExampleState.Expandable.second.rawValue
 
-        let secondExpandable = components.expandableComponent(
-            contentLayout: LabelContentLayout(
+        let secondExpandable = components.expandableComponent { [weak self] in
+            guard let s = self else { return }
+            $0.id = secondId
+            $0.contentLayout = LabelContentLayout(
                 text: Text.unattributed(
                     "This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"
                 )
-            ),
-            isExpanded: state.expandableDict[secondId] ?? false,
-            setExpandableState: self.viewModel.setExpandableState
-        ) {
-            $0.id = secondId
+            )
+            $0.isExpanded = state.expandableDict[secondId] ?? false
+            $0.setExpandableState = s.viewModel.setExpandableState
             $0.insets = expandableContentInsets
             $0.backgroundColor = UIColor.lightGray
         }

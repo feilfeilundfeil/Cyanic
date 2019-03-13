@@ -17,3 +17,12 @@ open class ChildComponentVC: UIViewController {
     }
 
 }
+
+internal final class InvalidChildComponentVC: ChildComponentVC {
+
+    override internal func viewDidLoad() {
+        super.viewDidLoad()
+        fatalError("This cannot be used as a childVC in ChildVCComponent")
+    }
+
+}

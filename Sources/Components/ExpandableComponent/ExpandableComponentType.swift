@@ -56,5 +56,5 @@ public protocol ExpandableComponentType: Component {
 
     // sourcery: skipHashing,skipEquality
     /// A reference to the function will set a new state when the ExpandableComponentType is tapped.
-    var setExpandableState: (String, Bool) -> Void { get }
+    var setExpandableState: (String, Bool) -> Void { get set }
 }

@@ -1,8 +1,6 @@
 // Generated using Sourcery 0.15.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
-import class UIKit.UIViewController
-// swiftlint:disable line_length
 public extension ComponentsArray {
     /**
         Generates a ButtonComponent instance and configures its properties with the given closure. You must provide a
@@ -17,7 +15,7 @@ public extension ComponentsArray {
     mutating func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
         var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        guard self.hasValidIdentifier(mutableComponent)
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
         return mutableComponent
@@ -33,11 +31,13 @@ public extension ComponentsArray {
             ChildVCComponent
     */
     @discardableResult
-    mutating func childVCComponent(childVC: ChildComponentVC, parentVC: UIViewController, configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
-        var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID, childVC: childVC, parentVC: parentVC)
+    mutating func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
+        var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        guard self.hasValidIdentifier(mutableComponent)
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
+        guard ComponentStateValidator.validateChildVCComponent(mutableComponent)
+            else { fatalError("You did not configure all required variables in this component") }
         self.add(mutableComponent)
         return mutableComponent
     }
@@ -52,11 +52,13 @@ public extension ComponentsArray {
             ExpandableComponent
     */
     @discardableResult
-    mutating func expandableComponent(contentLayout: ExpandableContentLayout, isExpanded: Bool, setExpandableState: @escaping (String, Bool) -> Void, configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
-        var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID, contentLayout: contentLayout, isExpanded: isExpanded, setExpandableState: setExpandableState)
+    mutating func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
+        var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        guard self.hasValidIdentifier(mutableComponent)
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
+        guard ComponentStateValidator.validateExpandableComponent(mutableComponent)
+            else { fatalError("You did not configure all required variables in this component") }
         self.add(mutableComponent)
         return mutableComponent
     }
@@ -74,7 +76,7 @@ public extension ComponentsArray {
     mutating func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
         var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        guard self.hasValidIdentifier(mutableComponent)
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
         return mutableComponent
@@ -93,11 +95,10 @@ public extension ComponentsArray {
     mutating func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
         var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        guard self.hasValidIdentifier(mutableComponent)
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
         return mutableComponent
     }
 
 }
-// swiftlint:enable line_length

@@ -9,14 +9,14 @@
 import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoEquatable, AutoHashable,AutoGenerateComponent
+// sourcery: AutoEquatable, AutoHashable,AutoGenerateComponent,RequiredVariables
 public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
-    // sourcery: skipHashing, skipEquality, isRequired
-    public let childVC: ChildComponentVC
+    // sourcery: skipHashing, skipEquality
+    public var childVC: ChildComponentVC = InvalidChildComponentVC()
 
-    // sourcery: skipHashing, skipEquality, isRequired
-    public unowned let parentVC: UIViewController
+    // sourcery: skipHashing, skipEquality
+    public weak var parentVC: UIViewController?
 
     public var height: CGFloat = 250.0
 
@@ -40,10 +40,8 @@ public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
 public extension ChildVCComponent {
 
-    init(id: String, childVC: ChildComponentVC, parentVC: UIViewController) {
+    init(id: String) {
         self.id = id
-        self.childVC = childVC
-        self.parentVC = parentVC
     }
 
 }
