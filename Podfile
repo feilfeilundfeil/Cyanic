@@ -5,7 +5,7 @@ def pods
 
   pod 'RxSwift'
   pod 'RxDataSources'
-  pod 'LayoutKit', :git => 'https://github.com/linkedin/LayoutKit.git', :branch => 'swift-4.2'
+  pod 'LayoutKit', :git => 'git@github.com:hooliooo/LayoutKit.git'
   pod 'Kio'
   pod 'Alacrity'
   pod 'FFUFWidgets', :git => 'git@bitbucket.org:FFUF/ffuf-ios-widgets.git'
