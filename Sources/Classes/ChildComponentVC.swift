@@ -15,8 +15,8 @@ import class UIKit.UIViewController
 open class ChildComponentVC: UIViewController {
 
     deinit {
-        self.willMove(toParentViewController: nil)
-        self.removeFromParentViewController()
+        self.willMove(toParent: nil)
+        self.removeFromParent()
         self.view?.removeFromSuperview()
     }
 
