@@ -40,8 +40,8 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
             viewReuseId: "\(ChildVCComponentLayout.identifier)Size",
             config: { [weak childVC, weak parentVC] (view: UIView) -> Void in
                 guard let childVC = childVC, let parentVC = parentVC, childVC.parent !== parentVC else { return }
-                parentVC.addChild(childVC)
-                childVC.didMove(toParent: parentVC)
+                parentVC.addChildViewController(childVC)
+                childVC.didMove(toParentViewController: parentVC)
                 view.addSubview(childVC.view)
                 childVC.view.frame = view.bounds
             }

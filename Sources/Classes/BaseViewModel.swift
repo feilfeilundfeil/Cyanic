@@ -6,7 +6,9 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import RxSwift
+import class RxSwift.MainScheduler
+import protocol RxSwift.ObservableType
+import protocol RxSwift.Disposable
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
@@ -47,7 +49,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         onFail: @escaping (_ error: Error) -> Void = { _ in }
     ) {
         self.state
-            .map { $0[keyPath: keyPath] }
+            .map { (state: StateType) -> Async<T> in
+                return state[keyPath: keyPath]
+            }
             .distinctUntilChanged()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
@@ -74,7 +78,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
     */
     public final func selectSubscribe<T: Equatable>(keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
         self.state
-            .map { $0[keyPath: keyPath] }
+            .map { (state: StateType) -> T in
+                return state[keyPath: keyPath]
+            }
             .distinctUntilChanged()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
@@ -98,7 +104,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath2: KeyPath<StateType, U>,
         onNewValue: @escaping (_ newValue: (T, U)) -> Void) {
         self.state
-            .map { SubscribeSelect2<T, U>(t: $0[keyPath: keyPath1], u: $0[keyPath: keyPath2]) }
+            .map { (state: StateType) -> SubscribeSelect2<T, U> in
+                return SubscribeSelect2<T, U>(t: state[keyPath: keyPath1], u: state[keyPath: keyPath2])
+            }
             .distinctUntilChanged()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
@@ -124,7 +132,13 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath3: KeyPath<StateType, V>,
         onNewValue: @escaping (_ newValue: (T, U, V)) -> Void) { // swiftlint:disable:this large_tuple
         self.state
-            .map { SubscribeSelect3<T, U, V>(t: $0[keyPath: keyPath1], u: $0[keyPath: keyPath2], v: $0[keyPath: keyPath3]) }
+            .map { (state: StateType) -> SubscribeSelect3<T, U, V> in
+                return SubscribeSelect3<T, U, V>(
+                    t: state[keyPath: keyPath1],
+                    u: state[keyPath: keyPath2],
+                    v: state[keyPath: keyPath3]
+                )
+            }
             .distinctUntilChanged()
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(

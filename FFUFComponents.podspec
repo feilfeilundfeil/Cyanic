@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FFUFComponents"
-  spec.version      = "0.0.1"
+  spec.version      = "0.1.0"
   spec.summary      = "FFUFComponents is a MvRx-inspired framework that aims to build complex UI in a UICollectionView / UITableView."
 
   spec.homepage     = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
@@ -125,5 +125,6 @@ Pod::Spec.new do |spec|
   spec.dependency "Kio"
   spec.dependency "Alacrity"
   spec.dependency "FFUFWidgets"
+  spec.dependency "Sourcery"
 
 end

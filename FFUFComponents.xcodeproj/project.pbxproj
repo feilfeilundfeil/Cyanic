@@ -15,7 +15,6 @@
 		142C450A22368CB2002360F5 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
 		142C450C2236A224002360F5 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
 		142C451422390C52002360F5 /* SwiftGenerateComponents.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45132238FA27002360F5 /* SwiftGenerateComponents.generated.swift */; };
-		142C451622390D26002360F5 /* String+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451522390D26002360F5 /* String+FFUFComponents.swift */; };
 		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		142C451C223939DB002360F5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451B223939DB002360F5 /* Async.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
@@ -110,7 +109,6 @@
 		142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C45122238F7AB002360F5 /* SwiftGenerateComponents.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftGenerateComponents.swifttemplate; sourceTree = "<group>"; };
 		142C45132238FA27002360F5 /* SwiftGenerateComponents.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenerateComponents.generated.swift; sourceTree = "<group>"; };
-		142C451522390D26002360F5 /* String+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FFUFComponents.swift"; sourceTree = "<group>"; };
 		142C451722392A95002360F5 /* DeprecatedSwiftGenerateComponents.oldswifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeprecatedSwiftGenerateComponents.oldswifttemplate; sourceTree = "<group>"; };
 		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
 		142C451B223939DB002360F5 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -243,7 +241,6 @@
 			children = (
 				1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */,
 				14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */,
-				142C451522390D26002360F5 /* String+FFUFComponents.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -744,7 +741,6 @@
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
-				142C451622390D26002360F5 /* String+FFUFComponents.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				142C450222366E99002360F5 /* CompositeViewModels.swift in Sources */,
 				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
@@ -864,6 +860,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -921,6 +918,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = "";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -950,7 +948,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -977,7 +975,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.de.FFUFComponents;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

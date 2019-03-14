@@ -9,6 +9,9 @@
 import Foundation
 import Kio
 
+/**
+ Represents some data/model that is must be retrieved some time after the screen in rendered.
+*/
 public enum Async<T: Hashable>: Hashable {
 
     public static func == (lhs: Async<T>, rhs: Async<T>) -> Bool {
@@ -25,13 +28,30 @@ public enum Async<T: Hashable>: Hashable {
 
             case (.uninitialized, .uninitialized):
                 return true
-            default: return false
+
+            default:
+                return false
         }
     }
 
+    /**
+     The data/model was successfully fetched.
+    */
     case success(T)
+
+    /**
+     An error was encountered while trying to fetched the data/model.
+    */
     case failure(Error)
+
+    /**
+     The data/model is being fetched.
+    */
     case loading
+
+    /**
+     The data/model has not been fetched and the process to get it has not started
+    */
     case uninitialized
 
     public func hash(into hasher: inout Hasher) {
