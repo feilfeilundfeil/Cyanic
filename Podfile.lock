@@ -3,7 +3,7 @@ PODS:
   - Differentiator (3.1.0)
   - FFUFWidgets (0.0.2)
   - Kio (2.1.3)
-  - LayoutKit (10.1.0)
+  - LayoutKit (10.1.1)
   - RxAtomic (4.4.2)
   - RxCocoa (4.4.2):
     - RxSwift (>= 4.4.2, ~> 4.4)
@@ -46,7 +46,7 @@ CHECKOUT OPTIONS:
     :commit: e8462e1a833cf8819eecb3ed1515389104f327c3
     :git: "git@bitbucket.org:FFUF/ffuf-ios-widgets.git"
   LayoutKit:
-    :commit: c0a7133ac8814fb4b9eb79542fbe94fb10f866e6
+    :commit: b3162eff56a0d9c1809549fa19f739031c158480
     :git: "git@github.com:hooliooo/LayoutKit.git"
 
 SPEC CHECKSUMS:
@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   FFUFWidgets: aa263457c39c96059a56edf1c330acf106d428a1
   Kio: 8f638653e9905962d734bb085b6fa92f0f253922
-  LayoutKit: 66478bb3af5ce4519a056d9465bc4c7585d2350b
+  LayoutKit: 8cde3feb61e20e5aa80eefde876397076d8f0021
   RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
@@ -63,4 +63,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e7dee8814fe8c8342065c29e8931e0f6029732dd
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
