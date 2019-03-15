@@ -17,22 +17,38 @@ import protocol RxSwift.Disposable
 open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
     /**
+     Gets the current State after all pending setState methods are resolved.
+     - parameters:
+        - block: The closure executed when fetching the current State.
+    */
+    public final func withState(block: @escaping (StateType) -> Void) {
+        self.stateStore.getState(block: block)
+    }
+
+    /**
      Used to mutate the current State object of the ViewModelType.
      Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
      When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsArray.
      - Parameters:
      - block: The closure that contains mutating logic on the State object.
      */
-    public final func setState(block: (inout StateType) -> Void) {
-        let firstState: StateType = self.currentState.copy(with: block)
-        let secondState: StateType = self.currentState.copy(with: block)
+    public final func setState(block: @escaping (inout StateType) -> Void) {
+        switch self.isDebugMode {
+            case true:
+                self.stateStore.setState { (mutableState: inout StateType) -> Void in
+                    let firstState: StateType = mutableState.copy(with: block)
+                    let secondState: StateType = mutableState.copy(with: block)
 
-        guard firstState == secondState else {
-            fatalError("Executing your block twice produced different states. This must not happen!")
+                    guard firstState == secondState else {
+                        fatalError("Executing your block twice produced different states. This must not happen!")
+                    }
+
+                    block(&mutableState)
+
+                }
+            case false:
+                self.stateStore.setState(reducer: block)
         }
-
-        self.state.accept(firstState)
-
     }
 
     /**
@@ -48,7 +64,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         onSuccess: @escaping (_ newValue: T) -> Void = { _ in },
         onFail: @escaping (_ error: Error) -> Void = { _ in }
     ) {
-        self.state
+        self.stateStore.state
             .map { (state: StateType) -> Async<T> in
                 return state[keyPath: keyPath]
             }
@@ -77,7 +93,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         - newValue: The new value of the property.
     */
     public final func selectSubscribe<T: Equatable>(keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
-        self.state
+        self.stateStore.state
             .map { (state: StateType) -> T in
                 return state[keyPath: keyPath]
             }
@@ -103,7 +119,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
         onNewValue: @escaping (_ newValue: (T, U)) -> Void) {
-        self.state
+        self.stateStore.state
             .map { (state: StateType) -> SubscribeSelect2<T, U> in
                 return SubscribeSelect2<T, U>(t: state[keyPath: keyPath1], u: state[keyPath: keyPath2])
             }
@@ -131,7 +147,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath2: KeyPath<StateType, U>,
         keyPath3: KeyPath<StateType, V>,
         onNewValue: @escaping (_ newValue: (T, U, V)) -> Void) { // swiftlint:disable:this large_tuple
-        self.state
+        self.stateStore.state
             .map { (state: StateType) -> SubscribeSelect3<T, U, V> in
                 return SubscribeSelect3<T, U, V>(
                     t: state[keyPath: keyPath1],

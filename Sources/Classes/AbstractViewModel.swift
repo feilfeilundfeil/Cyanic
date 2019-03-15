@@ -8,6 +8,7 @@
 
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
+import class RxSwift.Observable
 
 /**
  ViewModelType is a protocol adopted by the BaseViewModel classes. It provides the essential functionality for ViewModel and State interaction.
@@ -21,8 +22,9 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
      - Parameters:
      - initialState: The starting State of the ViewModel.
     */
-    public init(initialState: StateType) {
-        self.state = BehaviorRelay<StateType>(value: initialState)
+    public init(initialState: StateType, isDebugMode: Bool = false) {
+        self.stateStore = InternalStateStore<StateType>(initialState: initialState)
+        self.isDebugMode = isDebugMode
     }
 
     deinit {
@@ -30,10 +32,14 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     }
 
     /**
-     The BehaviorRelay that emits values of StateType. It is not meant to be accessed directly, please use
-     setState(block:) to mutate StateType.
+     The InternalStateStore that manages the State of the ViewModel
     */
-    internal var state: BehaviorRelay<StateType>
+    internal let stateStore: InternalStateStore<StateType>
+
+    /**
+     Indicates whether debugging functionality will be used.
+    */
+    internal let isDebugMode: Bool
 
     /**
      The DisposeBag used to clean up any Rx related subscriptions related to the ViewModel instance.
@@ -42,13 +48,17 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
 
 }
 
-public extension AbstractViewModel {
+internal extension AbstractViewModel {
+
+    internal var state: Observable<StateType> {
+        return self.stateStore.state
+    }
 
     /**
      Accessor for the current State of the AbstractViewModel.
     */
-    var currentState: StateType {
-        return self.state.value
+    internal var currentState: StateType {
+        return self.stateStore.currentState
     }
 
 }

@@ -89,7 +89,9 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .debug("Components", trimOutput: false)
-            .map { [AnimatableSectionModel(model: "Test", items: $0)] }
+            .map { (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
+                return [AnimatableSectionModel(model: "Test", items: components)]
+            }
             .drive(self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
     }

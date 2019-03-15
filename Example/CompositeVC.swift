@@ -80,7 +80,7 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
         }
     }
 
-    override var throttleType: ThrottleType { return ThrottleType.debounce(0.01) }
+    override var throttleType: ThrottleType { return ThrottleType.none }
 
     @objc func addButtonTapped() {
         self.viewModelOne.addButtonTapped()

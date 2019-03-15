@@ -218,7 +218,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 class ExampleViewModel: BaseViewModel<ExampleState> {
 
     func buttonWasTapped() {
-        self.setState { $0.isTrue = $0.isTrue }
+        self.setState { $0.isTrue = !$0.isTrue }
     }
 
 }

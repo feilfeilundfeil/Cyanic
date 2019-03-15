@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default)
+        let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default, isDebugMode: true)
         let vc = ExampleVC(viewModel: viewModel)
 
         let nvc: UINavigationController = UINavigationController(rootViewController: vc)

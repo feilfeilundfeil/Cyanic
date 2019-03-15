@@ -31,15 +31,15 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
 
         switch self.throttleType {
             case .debounce(let timeInterval):
-                observable = self.viewModel.state.asObservable()
+                observable = self.viewModel.state
                     .debounce(timeInterval, scheduler: self.scheduler)
 
             case .throttle(let timeInterval):
-                observable = self.viewModel.state.asObservable()
+                observable = self.viewModel.state
                     .throttle(timeInterval, latest: true, scheduler: self.scheduler)
 
             case .none:
-                observable = self.viewModel.state.asObservable()
+                observable = self.viewModel.state
         }
 
         // Call buildModels method when a new element in ViewModel's state is emitted

@@ -30,9 +30,11 @@ open class TwoViewModelComponentVC<
 
         let observable: Observable<(FirstState, SecondState)>
 
-        let combinedObservable: Observable<(FirstState, SecondState)> = Observable.combineLatest(
-            self.viewModelOne.state, self.viewModelTwo.state
-        )
+        let combinedObservable: Observable<(FirstState, SecondState)> = Observable
+            .combineLatest(
+                self.viewModelOne.state, self.viewModelTwo.state
+            )
+            .observeOn(self.scheduler)
 
         switch self.throttleType {
             case .debounce(let timeInterval):
@@ -53,7 +55,6 @@ open class TwoViewModelComponentVC<
         // UICollectionView has problems with fast updates. No point in
         // in executing operations when it is throttled anyway.
         observable
-            .observeOn(self.scheduler)
             .map { [weak self] (firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 var array: ComponentsArray = ComponentsArray()
