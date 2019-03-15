@@ -93,12 +93,15 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         - newValue: The new value of the property.
     */
     public final func selectSubscribe<T: Equatable>(to keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
+
         self.stateStore.state
             .map { (state: StateType) -> T in
                 return state[keyPath: keyPath]
             }
             .distinctUntilChanged()
-            .observeOn(MainScheduler.asyncInstance)
+            .skip(1)
+            .debug("Select Subscribe state change", trimOutput: false)
+            .observeOn(MainScheduler.instance)
             .subscribe(
                 onNext: { (value: T) -> Void in
                     onNewValue(value)

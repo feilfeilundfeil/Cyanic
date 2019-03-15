@@ -25,6 +25,7 @@ internal class StateStore<ConcreteState: State> {
         self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
         self.executionRelay
             .observeOn(self.scheduler)
+            .debug("Execution Relay", trimOutput: false)
             .bind(
                 onNext: { [weak self] () -> Void in
                     self?.resolveClosureQueue()
@@ -46,7 +47,7 @@ internal class StateStore<ConcreteState: State> {
     /**
      The BehaviorRelay that is responsible for resolving the get and set closures on State.
     */
-    private let executionRelay: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
+    private let executionRelay: PublishRelay<Void> = PublishRelay<Void>()
 
     /**
      The ClosureQueue instance that manages the setState and withState queues.
@@ -73,12 +74,15 @@ internal class StateStore<ConcreteState: State> {
     */
     private func resolveSetQueue() {
         let reducers: [(inout ConcreteState) -> Void] = self.closureQueue.dequeueAllSetStateClosures()
-        guard !reducers.isEmpty else { return }
+        guard !reducers.isEmpty
+            else { return }
         let newState: ConcreteState = reducers
             .reduce(into: self.currentState) { (state: inout ConcreteState, block: (inout ConcreteState) -> Void) -> Void in
                 block(&state)
             }
-        guard newState != self.currentState else { return }
+
+        guard newState != self.currentState
+            else { return }
         self.stateRelay.accept(newState)
     }
 
