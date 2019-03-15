@@ -123,7 +123,7 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
     /**
      The pending getState callbacks.
     */
-    var witStateQueue: [(T) -> Void] = []
+    var withStateQueue: [(T) -> Void] = []
 
     /**
      The pending setState callbacks.
@@ -131,13 +131,13 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
     var setStateQueue: [(inout T) -> Void] = []
 
     /**
-     Adds a withState closure to the witStateQueue.
+     Adds a withState closure to the withStateQueue.
      - Parameters:
         - block: The callback to be added
         - state: The current value of the StateType.
     */
     mutating func add(block: @escaping (_ state: T) -> Void) {
-        self.witStateQueue.append(block)
+        self.withStateQueue.append(block)
     }
 
     /**
@@ -155,8 +155,8 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
         an optional withState closure
     */
     mutating func dequeueFirstWithStateCallback() -> ((T) -> Void)? {
-        guard !self.witStateQueue.isEmpty else { return nil }
-        return self.witStateQueue.removeFirst()
+        guard !self.withStateQueue.isEmpty else { return nil }
+        return self.withStateQueue.removeFirst()
     }
 
     /**

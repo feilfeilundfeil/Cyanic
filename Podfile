@@ -17,6 +17,12 @@ target 'FFUFComponents' do
   pods
 end
 
+target 'Tests' do
+  pods
+  pod 'Quick'
+  pod 'Nimble'
+end
+
 target 'Example' do
   pods
 end

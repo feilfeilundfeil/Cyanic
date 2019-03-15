@@ -60,7 +60,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         - error: The underlying error value of the property when it is changed to Async.failure.
     */
     public final func asyncSubscribe<T>(
-        keyPath: KeyPath<StateType, Async<T>>,
+        to keyPath: KeyPath<StateType, Async<T>>,
         onSuccess: @escaping (_ newValue: T) -> Void = { _ in },
         onFail: @escaping (_ error: Error) -> Void = { _ in }
     ) {
