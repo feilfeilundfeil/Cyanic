@@ -10,7 +10,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-internal class InternalStateStore<ConcreteState: State> {
+/**
+ StateStore manages the State of the ViewModel instance. It ensures that all setState calls are resolved before withState calls are
+ executed.
+*/
+internal class StateStore<ConcreteState: State> {
 
     /**
      Initializer.
@@ -18,8 +22,8 @@ internal class InternalStateStore<ConcreteState: State> {
         - initialState: The initial value of StateType.
     */
     internal init(initialState: ConcreteState) {
-        self.relay = BehaviorRelay<ConcreteState>(value: initialState)
-        self.executionQueue
+        self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
+        self.executionRelay
             .observeOn(self.scheduler)
             .bind(
                 onNext: { [weak self] () -> Void in
@@ -37,15 +41,15 @@ internal class InternalStateStore<ConcreteState: State> {
     /**
      The BehaviorRelay that encapsulates State.
     */
-    internal let relay: BehaviorRelay<ConcreteState>
+    internal let stateRelay: BehaviorRelay<ConcreteState>
 
     /**
      The BehaviorRelay that is responsible for resolving the get and set closures on State.
     */
-    private let executionQueue: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
+    private let executionRelay: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
 
     /**
-     The get and set closures on State.
+     The ClosureQueue instance that manages the setState and withState queues.
     */
     private var closureQueue: ClosureQueue<ConcreteState> = ClosureQueue<ConcreteState>()
 
@@ -55,112 +59,115 @@ internal class InternalStateStore<ConcreteState: State> {
     private let disposeBag: DisposeBag = DisposeBag()
 
     /**
-     Resolves all pending set calls then resolves all pending get calls.
+     Resolves all pending setState closures then resolves all pending withState closures.
     */
     private func resolveClosureQueue() {
         self.resolveSetQueue()
-        guard let getBlock = self.closureQueue.fetchGetCallback() else { return }
-        getBlock(self.currentState  )
+        guard let getBlock = self.closureQueue.dequeueFirstWithStateCallback() else { return }
+        getBlock(self.currentState)
         self.resolveClosureQueue()
     }
 
     /**
-     Resolves all set callbacks and emits a new State value.
+     Resolves all setState closures and emits a new State value.
     */
     private func resolveSetQueue() {
-        let reducers: [(inout ConcreteState) -> Void] = self.closureQueue.dequeueAllSetCallBacks()
+        let reducers: [(inout ConcreteState) -> Void] = self.closureQueue.dequeueAllSetStateClosures()
         guard !reducers.isEmpty else { return }
         let newState: ConcreteState = reducers
             .reduce(into: self.currentState) { (state: inout ConcreteState, block: (inout ConcreteState) -> Void) -> Void in
                 block(&state)
             }
         guard newState != self.currentState else { return }
-        self.relay.accept(newState)
+        self.stateRelay.accept(newState)
     }
 
-    // MARK: StateStore Protocol
     /**
      The current value of the State.
     */
-    internal var currentState: ConcreteState { return self.relay.value }
+    internal var currentState: ConcreteState { return self.stateRelay.value }
 
     /**
      The Observable encapsulating the StateType.
     */
-    internal var state: Observable<ConcreteState> { return self.relay.asObservable() }
+    internal var state: Observable<ConcreteState> { return self.stateRelay.asObservable() }
 
     /**
-     Adds the block to the queue then resolves all pending StateType related closures.
+     Adds the block to the getQueue and makes the executionRelay emit a new value.
      - parameters:
      - block: The closure to get the latest value of the StateType.
     */
     internal func getState(with block: @escaping (ConcreteState) -> Void) {
-        self.closureQueue.add(get: block)
-        self.executionQueue.accept(())
+        self.closureQueue.add(block: block)
+        self.executionRelay.accept(())
     }
 
     /**
-     Adds the block to the queue then resolves all pending StateType related closures.
+     Adds the reducer to the setQueue and makes the executionRelay emit a new value.
      - parameters:
      - block: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
-        self.closureQueue.add(set: reducer)
-        self.executionQueue.accept(())
+        self.closureQueue.add(reducer: reducer)
+        self.executionRelay.accept(())
     }
 
 }
 
+/**
+ The ClosureQueue is a helper struct that manages the withState and setState calls from the viewModel by storing each callback in
+ a withState array or setState array.
+*/
 fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_fileprivate
 
     /**
      The pending getState callbacks.
     */
-    var getQueue: [(T) -> Void] = []
+    var witStateQueue: [(T) -> Void] = []
 
     /**
      The pending setState callbacks.
     */
-    var setQueue: [(inout T) -> Void] = []
+    var setStateQueue: [(inout T) -> Void] = []
 
     /**
-     Adds a get callback to the getQueue.
+     Adds a withState closure to the witStateQueue.
      - Parameters:
         - block: The callback to be added
         - state: The current value of the StateType.
     */
-    mutating func add(get block: @escaping (_ state: T) -> Void) {
-        self.getQueue.append(block)
+    mutating func add(block: @escaping (_ state: T) -> Void) {
+        self.witStateQueue.append(block)
     }
 
     /**
-     Adds a set callback to the setQueue.
+     Adds a setState closure to the setStateQueue.
      - Parameters:
         - block: The callback to be added
     */
-    mutating func add(set block: @escaping (inout T) -> Void) {
-        self.setQueue.append(block)
+    mutating func add(reducer: @escaping (inout T) -> Void) {
+        self.setStateQueue.append(reducer)
     }
 
     /**
-     Gets the first get callback if there is one and removes that callback from the getQueue.
+     Gets the first withState closure if there is one and removes that callback from the withStateQueue.
      - Returns:
-        an optional get callback
+        an optional withState closure
     */
-    mutating func fetchGetCallback() -> ((T) -> Void)? {
-        guard !self.getQueue.isEmpty else { return nil }
-        return self.getQueue.removeFirst()
+    mutating func dequeueFirstWithStateCallback() -> ((T) -> Void)? {
+        guard !self.witStateQueue.isEmpty else { return nil }
+        return self.witStateQueue.removeFirst()
     }
 
     /**
-     Gets all the set callbacks currently in the setQueue and clears the setQueue
+     Gets all the set callbacks currently in the setQueue and clears the setStateQueue.
      - Returns:
-        all the set callbacks currently in the setQueue
+        all the setState closures currently in the setStateQueue
     */
-    mutating func dequeueAllSetCallBacks() -> [(inout T) -> Void] {
-        guard !self.setQueue.isEmpty else { return [] }
-        let callbacks: [(inout T) -> Void] = self.setQueue
-        self.setQueue = []
+    mutating func dequeueAllSetStateClosures() -> [(inout T) -> Void] {
+        guard !self.setStateQueue.isEmpty else { return [] }
+        let callbacks: [(inout T) -> Void] = self.setStateQueue
+        self.setStateQueue = []
         return callbacks
     }
 

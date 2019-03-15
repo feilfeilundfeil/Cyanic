@@ -23,7 +23,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
      - initialState: The starting State of the ViewModel.
     */
     public init(initialState: StateType, isDebugMode: Bool = false) {
-        self.stateStore = InternalStateStore<StateType>(initialState: initialState)
+        self.stateStore = StateStore<StateType>(initialState: initialState)
         self.isDebugMode = isDebugMode
     }
 
@@ -34,7 +34,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     /**
      The InternalStateStore that manages the State of the ViewModel
     */
-    internal let stateStore: InternalStateStore<StateType>
+    internal let stateStore: StateStore<StateType>
 
     /**
      Indicates whether debugging functionality will be used.
