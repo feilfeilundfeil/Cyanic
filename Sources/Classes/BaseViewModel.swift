@@ -92,7 +92,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         - onNewValue: Executed when the property changes to a new value (different from the old value).
         - newValue: The new value of the property.
     */
-    public final func selectSubscribe<T: Equatable>(keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
+    public final func selectSubscribe<T: Equatable>(to keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
         self.stateStore.state
             .map { (state: StateType) -> T in
                 return state[keyPath: keyPath]

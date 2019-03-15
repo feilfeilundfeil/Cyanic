@@ -12,12 +12,14 @@ import Nimble
 
 class BaseViewModelTests: QuickSpec {
 
+    // MARK: - Test Data Structures
     struct TestState: State {
 
         static var `default`: BaseViewModelTests.TestState {
             return BaseViewModelTests.TestState(
                 string: "Hello, World",
-                isTrue: true, double: 1337.0,
+                isTrue: false,
+                double: 1337.0,
                 asyncOnSuccess: Async<Bool>.uninitialized,
                 asyncOnFailure: Async<Bool>.uninitialized
             )
@@ -40,6 +42,7 @@ class BaseViewModelTests: QuickSpec {
         }
     }
 
+    // MARK: - Factory Method
     private func createViewModel() -> ViewModel {
         return ViewModel(initialState: TestState.default)
     }
@@ -101,10 +104,63 @@ class BaseViewModelTests: QuickSpec {
                 }
             }
         }
+
+        describe("selectSubscribe single keyPath") {
+
+            context("If the subscribed property changes to a different value") {
+                it("should execute the onNewValue closure") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    var newProperty: String = ""
+                    let expectedValue: String = "FFUFComponents"
+
+                    viewModel.selectSubscribe(
+                        to: \TestState.string,
+                        onNewValue: { (newValue: String) -> Void in
+                            newProperty = newValue
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = expectedValue
+                        })
+                    }
+
+                    expect(newProperty)
+                        .toEventually(equal(expectedValue), timeout: 2.0, pollInterval: 1.0, description: "")
+                }
+            }
+
+            context("If the subscribed property is mutated to the same value") {
+                it("should not execute the onNewValue closure") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    let currentValue: String = viewModel.currentState.string
+
+                    var isFirstPass: Bool = true
+
+                    viewModel.selectSubscribe(
+                        to: \TestState.string,
+                        onNewValue: { (value: String) -> Void in
+                            guard !isFirstPass else { return }
+                            fail()
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = currentValue
+                            isFirstPass = false
+                        })
+                    }
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3.0) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = currentValue
+                        })
+                    }
+                }
+            }
+        }
     }
-
 }
-
-
-
 
