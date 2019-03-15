@@ -17,12 +17,12 @@ import protocol RxSwift.Disposable
 open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
     /**
-     Gets the current State after all pending setState methods are resolved.
+     Accesses the current State after all pending setState methods are resolved.
      - parameters:
         - block: The closure executed when fetching the current State.
     */
     public final func withState(block: @escaping (StateType) -> Void) {
-        self.stateStore.getState(block: block)
+        self.stateStore.getState(with: block)
     }
 
     /**
@@ -32,22 +32,22 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
      - Parameters:
      - block: The closure that contains mutating logic on the State object.
      */
-    public final func setState(block: @escaping (inout StateType) -> Void) {
+    public final func setState(with reducer: @escaping (inout StateType) -> Void) {
         switch self.isDebugMode {
             case true:
                 self.stateStore.setState { (mutableState: inout StateType) -> Void in
-                    let firstState: StateType = mutableState.copy(with: block)
-                    let secondState: StateType = mutableState.copy(with: block)
+                    let firstState: StateType = mutableState.copy(with: reducer)
+                    let secondState: StateType = mutableState.copy(with: reducer)
 
                     guard firstState == secondState else {
                         fatalError("Executing your block twice produced different states. This must not happen!")
                     }
 
-                    block(&mutableState)
+                    reducer(&mutableState)
 
                 }
             case false:
-                self.stateStore.setState(reducer: block)
+                self.stateStore.setState(with: reducer)
         }
     }
 

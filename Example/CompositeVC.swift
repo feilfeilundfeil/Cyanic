@@ -35,21 +35,21 @@ struct StateB: State {
 class ViewModelA: BaseViewModel<StateA> {
 
     func addButtonTapped() {
-        self.setState(block: { $0.isTrue = true } )
+        self.setState(with: { $0.isTrue = true } )
     }
 
     func otherButtonTapped() {
-        self.setState(block: { $0.isTrue = false } )
+        self.setState(with: { $0.isTrue = false } )
     }
 
 }
 class ViewModelB: BaseViewModel<StateB> {
     func addButtonTapped() {
-        self.setState(block: { $0.isTrue = false })
+        self.setState(with: { $0.isTrue = false })
     }
 
     func otherButtonTapped() {
-        self.setState(block: { $0.isTrue = true })
+        self.setState(with: { $0.isTrue = true })
     }
 }
 

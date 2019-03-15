@@ -94,7 +94,7 @@ internal class InternalStateStore<ConcreteState: State> {
      - parameters:
      - block: The closure to get the latest value of the StateType.
     */
-    internal func getState(block: @escaping (ConcreteState) -> Void) {
+    internal func getState(with block: @escaping (ConcreteState) -> Void) {
         self.closureQueue.add(get: block)
         self.executionQueue.accept(())
     }
@@ -104,7 +104,7 @@ internal class InternalStateStore<ConcreteState: State> {
      - parameters:
      - block: The closure to set/mutate the StateType.
     */
-    internal func setState(reducer: @escaping (inout ConcreteState) -> Void) {
+    internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
         self.closureQueue.add(set: reducer)
         self.executionQueue.accept(())
     }
