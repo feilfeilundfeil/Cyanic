@@ -104,7 +104,10 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         - onNewValue: Executed when the property changes to a new value (different from the old value).
         - newValue:   The new value of the property.
     */
-    public final func selectSubscribe<T: Equatable>(to keyPath: KeyPath<StateType, T>, onNewValue: @escaping (_ newValue: T) -> Void) {
+    public final func selectSubscribe<T: Equatable>(
+        to keyPath: KeyPath<StateType, T>,
+        onNewValue: @escaping (_ newValue: T) -> Void
+    ) {
 
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
@@ -136,7 +139,8 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
     public final func selectSubscribe<T: Equatable, U: Equatable>(
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
-        onNewValue: @escaping (_ newValue: (T, U)) -> Void) {
+        onNewValue: @escaping (_ newValue: (T, U)) -> Void
+    ) {
 
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
@@ -169,7 +173,8 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
         keyPath3: KeyPath<StateType, V>,
-        onNewValue: @escaping (_ newValue: (T, U, V)) -> Void) { // swiftlint:disable:this large_tuple
+        onNewValue: @escaping (_ newValue: (T, U, V)) -> Void // swiftlint:disable:this large_tuple
+    ) {
 
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator

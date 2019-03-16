@@ -63,7 +63,7 @@ internal class StateStore<ConcreteState: State> {
      Resolves all pending setState closures then resolves all pending withState closures.
     */
     private func resolveClosureQueue() {
-        self.resolveSetQueue()
+        self.resolveSetStateQueue()
         guard let getBlock = self.closureQueue.dequeueFirstWithStateCallback() else { return }
         getBlock(self.currentState)
         self.resolveClosureQueue()
@@ -72,7 +72,7 @@ internal class StateStore<ConcreteState: State> {
     /**
      Resolves all setState closures and emits a new State value.
     */
-    private func resolveSetQueue() {
+    private func resolveSetStateQueue() {
         let reducers: [(inout ConcreteState) -> Void] = self.closureQueue.dequeueAllSetStateClosures()
         guard !reducers.isEmpty
             else { return }
@@ -92,12 +92,12 @@ internal class StateStore<ConcreteState: State> {
     internal var currentState: ConcreteState { return self.stateRelay.value }
 
     /**
-     The Observable encapsulating the StateType.
+     The Observable encapsulating the State.
     */
     internal var state: Observable<ConcreteState> { return self.stateRelay.asObservable() }
 
     /**
-     Adds the block to the getQueue and makes the executionRelay emit a new value.
+     Adds the block to the withStateQueue and makes the executionRelay emit a new value.
      - Parameters:
      - block: The closure to get the latest value of the StateType.
     */
@@ -107,7 +107,7 @@ internal class StateStore<ConcreteState: State> {
     }
 
     /**
-     Adds the reducer to the setQueue and makes the executionRelay emit a new value.
+     Adds the reducer to the setStateQueue and makes the executionRelay emit a new value.
      - Parameters:
         - block: The closure to set/mutate the StateType.
     */
