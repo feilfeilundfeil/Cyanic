@@ -50,7 +50,6 @@ class BaseViewModelTests: QuickSpec {
 
     override func spec() {
         describe("asyncSubscribe method") {
-
             context("If the Async property is mutated to .success") {
                 it("should execute the onSuccess closure") {
 
@@ -145,7 +144,6 @@ class BaseViewModelTests: QuickSpec {
         }
 
         describe("selectSubscribe single keyPath") {
-
             context("If the subscribed property changes to a different value") {
                 it("should execute the onNewValue closure") {
                     let viewModel: ViewModel = self.createViewModel()
@@ -173,26 +171,26 @@ class BaseViewModelTests: QuickSpec {
             context("If the subscribed property is mutated to the same value") {
                 it("should not execute the onNewValue closure") {
                     let viewModel: ViewModel = self.createViewModel()
-                    let currentValue: String = viewModel.currentState.string
+                    let initialString: String = viewModel.currentState.string
 
                     viewModel.selectSubscribe(
                         to: \TestState.string,
                         onNewValue: { (value: String) -> Void in
-                            guard value != currentValue
-                                else { fail("\(value) is equal to \(currentValue)"); return }
+                            guard value != initialString
+                                else { fail("\(value) is equal to \(initialString)"); return }
                         }
                     )
 
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
                         viewModel.setState(with: { (state: inout TestState) -> Void in
-                            state.string = currentValue
+                            state.string = initialString
                             state.double = 1339
                         })
                     }
 
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
                         viewModel.setState(with: { (state: inout TestState) -> Void in
-                            state.string = currentValue
+                            state.string = initialString
                             state.double = 1340
                         })
                     }
@@ -206,6 +204,133 @@ class BaseViewModelTests: QuickSpec {
 
                     expect(viewModel.currentState.string)
                         .toEventually(equal("Hello"), timeout: 5.0, pollInterval: 5.0, description: "")
+                }
+            }
+        }
+
+        describe("selectSubscribe multiple keyPaths") {
+            context("If either ofthe subscribed properties change value") {
+                it("should execute the onNewValue closure for two properties") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    let currentString: String = viewModel.currentState.string
+                    let currentDouble: Double = viewModel.currentState.double
+                    var counter: Int = 0
+                    viewModel.selectSubscribe(
+                        keyPath1: \TestState.double,
+                        keyPath2: \TestState.string,
+                        onNewValue: { (double: Double, string: String) -> Void in
+                            counter += 1
+                        }
+                    )
+
+                    // Should not increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = currentString // Hello, World
+                            state.double = currentDouble // 1337.0
+                            state.isTrue = true
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = currentString // Hello, World
+                            state.double = 1339.0        // 1339.0
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = "Hello"       // Hello
+                            state.double = 1339.0        // 1339.0
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = "Hello" // Hello
+                            state.double = 1341.0    // 1341.0
+                        })
+                    }
+
+                    expect(counter)
+                        .toEventually(equal(3), timeout: 3.0, pollInterval: 3.0, description: "")
+                }
+
+                it("should execute the onNewValue closure for two properties") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    let initialString: String = viewModel.currentState.string // Hello, World
+                    let initialDouble: Double = viewModel.currentState.double // 1337.0
+                    let initialIsTrue: Bool = viewModel.currentState.isTrue   // false
+                    var counter: Int = 0
+                    viewModel.selectSubscribe(
+                        keyPath1: \TestState.double,
+                        keyPath2: \TestState.string,
+                        keyPath3: \TestState.isTrue,
+                        onNewValue: { (double: Double, string: String, isTrue: Bool) -> Void in
+                            counter += 1
+                        }
+                    )
+
+                    // Should not increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = initialString // Hello, World
+                            state.double = initialDouble // 1337.0
+                            state.isTrue = initialIsTrue // false
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = initialString // Hello, World
+                            state.double = 1339.0        // 1339.0
+                            state.isTrue = initialIsTrue // false
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = initialString // Hello, World
+                            state.double = initialDouble // 1337.0
+                            state.isTrue = initialIsTrue // false
+                        })
+                    }
+
+                    // Should not increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = initialString // Hello, World
+                            state.double = initialDouble // 1337.0
+                            state.isTrue = initialIsTrue // false
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.25) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = "Hi" // Hi
+                            state.double = 1340 // 1340
+                            // state.isTrue     // false
+                        })
+                    }
+
+                    // Should increment
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = "Hi" // Hi
+                            // state.double     // 1340
+                            state.isTrue = true // true
+                        })
+                    }
+
+                    expect(counter)
+                        .toEventually(equal(4), timeout: 4.0, pollInterval: 4.0, description: "")
                 }
             }
         }
