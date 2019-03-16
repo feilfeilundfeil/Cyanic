@@ -49,94 +49,132 @@ class BaseViewModelTests: QuickSpec {
     }
 
     override func spec() {
-//        describe("asyncSubscribe method") {
-//
-//            context("If the Async property is mutated to .success") {
-//                it("should execute the onSuccess closure") {
-//
-//                    let viewModel: ViewModel = self.createViewModel()
-//                    var wasSuccess: Bool = false
-//
-//                    viewModel.asyncSubscribe(
-//                        to: \TestState.asyncOnSuccess,
-//                        onSuccess: { (value: Bool) -> Void in
-//                            wasSuccess = value
-//                        },
-//                        onFail: { (error: Error) -> Void in
-//                            fail()
-//                        }
-//                    )
-//
-//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-//                        viewModel.setState(with: { (state: inout TestState) -> Void in
-//                            state.asyncOnSuccess = .success(true)
-//                        })
-//                    })
-//
-//                    expect(wasSuccess).toEventually(equal(true), timeout: 2.0, pollInterval: 1.0, description: "")
-//                }
-//            }
-//
-//            context("If the Async property is mutated to .failure") {
-//                it("should execute the onFailure closure") {
-//                    let viewModel: ViewModel = self.createViewModel()
-//                    var wasFailure: Bool = false
-//
-//                    viewModel.asyncSubscribe(
-//                        to: \TestState.asyncOnFailure,
-//                        onSuccess: { (value: Bool) -> Void in
-//                            fail()
-//                        },
-//                        onFail: { (error: Error) -> Void in
-//                            wasFailure = true
-//                        }
-//                    )
-//
-//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-//                        viewModel.setState(with: { (state: inout TestState) -> Void in
-//                            state.asyncOnFailure = .failure(AsyncError.failed)
-//                        })
-//                    })
-//
-//                    expect(wasFailure)
-//                        .toEventually(equal(true), timeout: 2.0, pollInterval: 1.0, description: "")
-//                    expect(viewModel.currentState.asyncOnFailure)
-//                        .toEventually(equal(Async.failure(AsyncError.failed)), timeout: 2.0, pollInterval: 1.0, description: "")
-//                }
-//            }
-//        }
+        describe("asyncSubscribe method") {
+
+            context("If the Async property is mutated to .success") {
+                it("should execute the onSuccess closure") {
+
+                    let viewModel: ViewModel = self.createViewModel()
+                    var wasSuccess: Bool = false
+
+                    viewModel.asyncSubscribe(
+                        to: \TestState.asyncOnSuccess,
+                        onSuccess: { (value: Bool) -> Void in
+                            wasSuccess = value
+                        },
+                        onFailure: { (error: Error) -> Void in
+                            fail()
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.asyncOnSuccess = .success(true)
+                        })
+                    })
+
+                    expect(wasSuccess).toEventually(equal(true), timeout: 2.0, pollInterval: 1.0, description: "")
+                }
+            }
+
+            context("If the Async property is mutated to .failure") {
+                it("should execute the onFailure closure") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    var wasFailure: Bool = false
+
+                    viewModel.asyncSubscribe(
+                        to: \TestState.asyncOnFailure,
+                        onSuccess: { (value: Bool) -> Void in
+                            fail()
+                        },
+                        onFailure: { (error: Error) -> Void in
+                            wasFailure = true
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.asyncOnFailure = .failure(AsyncError.failed)
+                        })
+                    })
+
+                    expect(wasFailure)
+                        .toEventually(equal(true), timeout: 2.0, pollInterval: 1.0, description: "")
+                    expect(viewModel.currentState.asyncOnFailure)
+                        .toEventually(equal(Async.failure(AsyncError.failed)), timeout: 2.0, pollInterval: 1.0, description: "")
+                }
+            }
+
+            context("If the Async property is already .success/failure") {
+                it("should not execute the onSuccess/Failure closure after subscribing") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    let state: TestState = viewModel.currentState
+
+                    // Set the asyncOnSuccess property to success synchronously
+                    viewModel.stateStore.stateRelay
+                        .accept(state.copy(with: {$0.asyncOnSuccess = .success(true) }))
+
+                    viewModel.asyncSubscribe(
+                        to: \TestState.asyncOnSuccess,
+                        onSuccess: { (value: Bool) -> Void in
+                            fail()
+                        },
+                        onFailure: { (error: Error) -> Void in
+                            fail()
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: {
+                            $0.asyncOnSuccess = .success(true)
+                            $0.string = "This"
+                        })
+                    }
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.75) {
+                        viewModel.setState(with: {
+                            $0.asyncOnSuccess = .success(true)
+                            $0.string = "That"
+                        })
+                    }
+
+                    expect(viewModel.currentState.string)
+                        .toEventually(equal("That"), timeout: 3.0, pollInterval: 3.0, description: "")
+                }
+            }
+        }
 
         describe("selectSubscribe single keyPath") {
 
-//            context("If the subscribed property changes to a different value") {
-//                it("should execute the onNewValue closure") {
-//                    let viewModel: ViewModel = self.createViewModel()
-//                    var newProperty: String = ""
-//                    let expectedValue: String = "FFUFComponents"
-//
-//                    viewModel.selectSubscribe(
-//                        to: \TestState.string,
-//                        onNewValue: { (newValue: String) -> Void in
-//                            newProperty = newValue
-//                        }
-//                    )
-//
-//                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-//                        viewModel.setState(with: { (state: inout TestState) -> Void in
-//                            state.string = expectedValue
-//                        })
-//                    }
-//
-//                    expect(newProperty)
-//                        .toEventually(equal(expectedValue), timeout: 2.0, pollInterval: 1.0, description: "")
-//                }
-//            }
+            context("If the subscribed property changes to a different value") {
+                it("should execute the onNewValue closure") {
+                    let viewModel: ViewModel = self.createViewModel()
+                    var newProperty: String = ""
+                    let expectedValue: String = "FFUFComponents"
+
+                    viewModel.selectSubscribe(
+                        to: \TestState.string,
+                        onNewValue: { (newValue: String) -> Void in
+                            newProperty = newValue
+                        }
+                    )
+
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                        viewModel.setState(with: { (state: inout TestState) -> Void in
+                            state.string = expectedValue
+                        })
+                    }
+
+                    expect(newProperty)
+                        .toEventually(equal(expectedValue), timeout: 2.0, pollInterval: 1.0, description: "")
+                }
+            }
 
             context("If the subscribed property is mutated to the same value") {
                 it("should not execute the onNewValue closure") {
                     let viewModel: ViewModel = self.createViewModel()
                     let currentValue: String = viewModel.currentState.string
-                    viewModel.currentState == viewModel.currentState
+
                     viewModel.selectSubscribe(
                         to: \TestState.string,
                         onNewValue: { (value: String) -> Void in
@@ -144,13 +182,6 @@ class BaseViewModelTests: QuickSpec {
                                 else { fail("\(value) is equal to \(currentValue)"); return }
                         }
                     )
-
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                        viewModel.setState(with: { (state: inout TestState) -> Void in
-                            state.string = currentValue
-                            state.double = 1338
-                        })
-                    }
 
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
                         viewModel.setState(with: { (state: inout TestState) -> Void in
