@@ -49,6 +49,32 @@ class BaseViewModelTests: QuickSpec {
     }
 
     override func spec() {
+        describe("withState and setState methods") {
+            it("setState closure should be executed before withState closures even if withState is called first.") {
+                let viewModel: ViewModel = self.createViewModel()
+                var currentState: TestState = viewModel.currentState
+                var isCurrentState: Bool = false
+
+                viewModel.withState(block: { (state: TestState) -> Void in
+                    currentState = state
+                })
+                var isZero: Bool = false
+
+                viewModel.setState(with: { $0.double = 0.0 })
+
+                viewModel.withState(block: { (state: TestState) -> Void in
+                    isZero = state.double == 0.0
+                })
+
+                viewModel.withState(block: { (state: TestState) -> Void in
+                    isCurrentState = currentState == state
+                })
+
+                expect(isCurrentState).toEventually(equal(true), timeout: 1.0, pollInterval: 1.0, description: "isSameState")
+                expect(isZero).toEventually(equal(true), timeout: 3.0, pollInterval: 3.0, description: "isStillSame")
+            }
+        }
+
         describe("asyncSubscribe method") {
             context("If the Async property is mutated to .success") {
                 it("should execute the onSuccess closure") {
