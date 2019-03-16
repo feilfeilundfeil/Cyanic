@@ -161,7 +161,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.layer.backgroundColor = $0.backgroundColor?.cgColor
         }
 
-        let newBlock: (String, UIColor, inout ButtonComponent) -> Void = { id, color, button in
+        let buttonConfiguration: (String, UIColor, inout ButtonComponent) -> Void = { id, color, button in
             button.id = id
             button.title = id
             button.height = 200.0
@@ -172,7 +172,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
         if state.isTrue {
             components.buttonComponent {
-                newBlock("First", UIColor.red, &$0)
+                buttonConfiguration("First", UIColor.red, &$0)
             }
         }
 
@@ -183,34 +183,34 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         }
 
         components.buttonComponent {
-            newBlock("Second", UIColor.orange, &$0)
+            buttonConfiguration("Second", UIColor.orange, &$0)
         }
 
         components.buttonComponent {
-            newBlock("Third", .yellow, &$0)
+            buttonConfiguration("Third", .yellow, &$0)
         }
 
         components.buttonComponent {
-            newBlock("Fourth",.green, &$0)
+            buttonConfiguration("Fourth",.green, &$0)
         }
 
         components.buttonComponent {
-            newBlock("Fifth", .blue, &$0)
+            buttonConfiguration("Fifth", .blue, &$0)
         }
         components.buttonComponent {
-            newBlock("Sixth",.purple, &$0)
+            buttonConfiguration("Sixth",.purple, &$0)
         }
         components.buttonComponent {
-           newBlock("Seventh",.brown, &$0)
+           buttonConfiguration("Seventh",.brown, &$0)
         }
         components.buttonComponent {
-            newBlock("Eighth",.white, &$0)
+            buttonConfiguration("Eighth",.white, &$0)
         }
         components.buttonComponent {
-            newBlock("Ninth",.cyan, &$0)
+            buttonConfiguration("Ninth",.cyan, &$0)
         }
         components.buttonComponent {
-            newBlock("Tenth", .gray, &$0)
+            buttonConfiguration("Tenth", .gray, &$0)
         }
     }
 }
@@ -298,5 +298,3 @@ class ChildVC: ChildComponentVC {
     }
 
 }
-
-

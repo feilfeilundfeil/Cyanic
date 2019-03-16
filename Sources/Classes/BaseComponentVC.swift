@@ -33,10 +33,9 @@ import struct RxDataSources.AnimationConfiguration
 import struct RxSwift.RxTimeInterval
 
 /**
- BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the boilerplate needed to
- have a reactive UICollectionView. It respondes to new elements emitted by its ViewModel's state.
-
- BaseComponentVC is the delegate of the UICollectionView it manages and serves as the data source as well.
+ BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
+ boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
+ BaseComponentVC is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
 */
 open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout {
 
@@ -44,7 +43,8 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
     /**
      Initializer.
      - Parameters:
-        - cellTypes: The different types of ComponentCell to be used in the UICollectionView. Default argument is [ComponentCell.self].
+        - cellTypes: The different types of ComponentCell to be used in the UICollectionView.
+                     Default argument is [ComponentCell.self].
     */
     public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
@@ -70,7 +70,8 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
             self.collectionView.register(cellType.base.self, forCellWithReuseIdentifier: cellType.base.identifier)
         }
 
-        // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout, UICollectionViewDelegate and UIScrollViewDelegate
+        // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout,
+        // UICollectionViewDelegate, and UIScrollViewDelegate
         self.collectionView.delegate = self
 
         // Delegate the UICollectionViewDataSource management to RxDataSources
@@ -115,7 +116,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
     internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
         qos: DispatchQoS.userInitiated,
         internalSerialQueueName: "Scheduler",
-        leeway: DispatchTimeInterval.milliseconds(100)
+        leeway: DispatchTimeInterval.never
     )
 
     // MARK: Computed Properties

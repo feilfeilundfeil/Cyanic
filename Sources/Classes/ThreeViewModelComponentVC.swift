@@ -10,12 +10,23 @@ import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
 
+/**
+ A BaseComponentVC subclass that is managed by three BaseViewModels. State changes from any of the three BaseViewModels
+ triggers a rebuild of the AnyComponents array.
+*/
 open class ThreeViewModelComponentVC<
     FirstState: State, FirstViewModel: BaseViewModel<FirstState>,
     SecondState: State, SecondViewModel: BaseViewModel<SecondState>,
     ThirdState: State, ThirdViewModel: BaseViewModel<ThirdState>
 >: BaseComponentVC {
 
+    /**
+     Initializer.
+     - Parameters:
+        - viewModelOne: The first BaseViewModel that manages this BaseComponentVC
+        - viewModelTwo: The second BaseViewModel that manages this BaseComponentVC
+        - viewModelThree: The third BaseViewModel that manages this BaseComponentVC
+    */
     public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel, viewModelThree: ThirdViewModel) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
@@ -51,11 +62,12 @@ open class ThreeViewModelComponentVC<
                 observable = combinedObservable
         }
 
-        // Call buildModels method when a new element from combinedObservable is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay
+        // Call components method when a new element from combinedObservable is emitted
+        // Bind the new AnyComponents array to the _components BehaviorRelay.
+        // NOTE:
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. No point in
-        // in executing operations when it is throttled anyway.
+        // UICollectionView has problems with fast updates. So, there is no point in
+        // in executing operations in quick succession when it is throttled anyway.
         observable
             .map { [weak self] (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> [AnyComponent] in
                 guard let s = self else { return [] }

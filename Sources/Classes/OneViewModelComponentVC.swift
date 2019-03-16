@@ -42,11 +42,12 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
                 observable = self.viewModel.state
         }
 
-        // Call buildModels method when a new element in ViewModel's state is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay
+        // Call components method when a new element in ViewModel's state is emitted
+        // Bind the new AnyComponents array to the _components BehaviorRelay.
+        // NOTE:
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. No point in
-        // in executing operations when it is throttled anyway.
+        // UICollectionView has problems with fast updates. So, there is no point in
+        // in executing operations in quick succession when it is throttled anyway.
         observable
             .observeOn(self.scheduler)
             .map { [weak self] (state: ConcreteState) -> [AnyComponent] in

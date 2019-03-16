@@ -11,14 +11,14 @@ import RxCocoa
 import RxSwift
 
 /**
- StateStore manages the State of the ViewModel instance. It ensures that all setState calls are resolved before withState calls are
- executed.
+ StateStore manages the State of the ViewModel instance. It ensures that all setState calls are
+ resolved before withState calls are executed.
 */
 internal class StateStore<ConcreteState: State> {
 
     /**
      Initializer.
-     - parameters:
+     - Parameters:
         - initialState: The initial value of StateType.
     */
     internal init(initialState: ConcreteState) {
@@ -98,7 +98,7 @@ internal class StateStore<ConcreteState: State> {
 
     /**
      Adds the block to the getQueue and makes the executionRelay emit a new value.
-     - parameters:
+     - Parameters:
      - block: The closure to get the latest value of the StateType.
     */
     internal func getState(with block: @escaping (ConcreteState) -> Void) {
@@ -108,8 +108,8 @@ internal class StateStore<ConcreteState: State> {
 
     /**
      Adds the reducer to the setQueue and makes the executionRelay emit a new value.
-     - parameters:
-     - block: The closure to set/mutate the StateType.
+     - Parameters:
+        - block: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
         self.closureQueue.add(reducer: reducer)
@@ -119,13 +119,13 @@ internal class StateStore<ConcreteState: State> {
 }
 
 /**
- The ClosureQueue is a helper struct that manages the withState and setState calls from the viewModel by storing each callback in
- a withState array or setState array.
+ The ClosureQueue is a helper struct that manages the withState and setState calls from the viewModel
+ by storing each callback in a withState array or setState array.
 */
 fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_fileprivate
 
     /**
-     The pending getState callbacks.
+     The pending withState callbacks.
     */
     var withStateQueue: [(T) -> Void] = []
 
