@@ -20,7 +20,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
      When instantiating the ViewModel, it is important to pass an initial State object which should represent the initial State of the current
      view / screen of the app.
      - Parameters:
-     - initialState: The starting State of the ViewModel.
+        - initialState: The starting State of the ViewModel.
     */
     public init(initialState: StateType, isDebugMode: Bool = false) {
         self.stateStore = StateStore<StateType>(initialState: initialState)

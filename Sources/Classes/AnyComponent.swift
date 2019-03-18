@@ -19,7 +19,9 @@ public final class AnyComponent: IdentifiableType {
 
     /**
      Initializer.
-     Keeps the underlying Component in memory and creates a reference to its layout and cellType. 
+     Keeps the underlying Component in memory and creates a reference to its layout and cellType.
+     - Parameters:
+        - component: The Component instance.
     */
     public init<C: Component>(_ component: C) {
         self.cellType = component.cellType

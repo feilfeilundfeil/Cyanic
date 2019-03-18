@@ -7,8 +7,8 @@
 //
 
 /**
- Selectable is a protocol adopted by Components that want to utilize the collectionView(collectionView:didSelectItemAt:) method in
- BaseComponentVC.
+ Selectable is a protocol adopted by Components that want to utilize the collectionView(collectionView:didSelectItemAt:)
+ method in BaseComponentVC.
 */
 public protocol Selectable {
 

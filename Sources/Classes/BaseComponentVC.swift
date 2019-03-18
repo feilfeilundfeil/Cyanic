@@ -44,7 +44,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
      Initializer.
      - Parameters:
         - cellTypes: The different types of ComponentCell to be used in the UICollectionView.
-                     Default argument is [ComponentCell.self].
+                    Default argument is [ComponentCell.self].
     */
     public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
@@ -112,7 +112,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
-     */
+    */
     internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
         qos: DispatchQoS.userInitiated,
         internalSerialQueueName: "Scheduler",

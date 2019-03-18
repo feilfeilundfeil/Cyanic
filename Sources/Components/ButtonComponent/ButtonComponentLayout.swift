@@ -27,8 +27,8 @@ import struct UIKit.UIEdgeInsets
 import struct UIKit.UIControlEvents
 
 /**
- The ButtonComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
- associated with ButtonComponent.
+ The ButtonComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.
+ Used to create, size, and arrange the subviews associated with ButtonComponent.
 */
 open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 

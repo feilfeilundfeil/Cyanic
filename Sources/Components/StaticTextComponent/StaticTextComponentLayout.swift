@@ -22,8 +22,8 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
 /**
- The StaticTextComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to create, size, and arrange the subviews
- associated with StaticTextComponent.
+ The StaticTextComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.
+ Used to create, size, and arrange the subviews associated with StaticTextComponent.
 */
 public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayout {
 

@@ -92,7 +92,7 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
         self.viewModelTwo.otherButtonTapped()
     }
 
-    override func components(_ components: inout ComponentsArray, state1: StateA, state2: StateB) {
+    override func buildComponents(_ components: inout ComponentsArray, state1: StateA, state2: StateB) {
         let isTrue: Bool = state1.isTrue && state2.isTrue
 
         components.staticTextComponent {

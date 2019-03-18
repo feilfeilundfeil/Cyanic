@@ -20,8 +20,8 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
     /**
      Accesses the current State after all pending setState methods are resolved.
-     - parameters:
-        - block: The closure executed when fetching the current State.
+     - Parameters:
+        - block:        The closure executed when fetching the current State.
         - currentState: The current value of the State instance when this is called.
     */
     public final func withState(block: @escaping (_ currentState: StateType) -> Void) {

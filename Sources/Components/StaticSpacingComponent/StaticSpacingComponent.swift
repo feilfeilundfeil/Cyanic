@@ -35,7 +35,7 @@ public extension StaticSpacingComponent {
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
-     - id: The unique identifier of the StaticSpacingComponent.
+        - id: The unique identifier of the StaticSpacingComponent.
     */
     init(id: String) {
         self.id = id

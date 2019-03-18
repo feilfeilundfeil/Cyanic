@@ -25,7 +25,7 @@ open class ComponentCell: UICollectionViewCell {
 
     /**
      The String identifier used by the ComponentCell to register to a UICollectionView instance
-     */
+    */
     open class var identifier: String {
         return String(describing: Mirror(reflecting: self).subjectType)
     }

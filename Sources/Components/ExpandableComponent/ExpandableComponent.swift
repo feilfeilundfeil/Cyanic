@@ -17,7 +17,8 @@ import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent,RequiredVariables
-/// An ExpandableComponent is a Component that represents an expandable UI element that shows / hides other UI elements grouped with it.
+/// An ExpandableComponent is a Component that represents an expandable UI element that shows/hides other UI elements
+/// grouped with it.
 public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var id: String
@@ -72,7 +73,7 @@ public extension ExpandableComponent {
 
     /**
      Work around Initializer because memberwise initializers are all or nothing.
-     - parameters:
+     - Parameters:
         - id: The unique identifier of the ExpandableComponent
     */
     init(id: String) {

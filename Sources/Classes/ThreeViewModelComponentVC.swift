@@ -62,7 +62,7 @@ open class ThreeViewModelComponentVC<
                 observable = combinedObservable
         }
 
-        // Call components method when a new element from combinedObservable is emitted
+        // Call buildComponents method when a new element from combinedObservable is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay.
         // NOTE:
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
@@ -72,7 +72,7 @@ open class ThreeViewModelComponentVC<
             .map { [weak self] (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 var array: ComponentsArray = ComponentsArray()
-                s.components(&array, state1: firstState, state2: secondState, state3: thirdState)
+                s.buildComponents(&array, state1: firstState, state2: secondState, state3: thirdState)
                 return array.components
             }
             .subscribeOn(self.scheduler)
@@ -97,8 +97,8 @@ open class ThreeViewModelComponentVC<
 
     /**
      This method is responsible for creating the [AnyComponent] array.
-     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time FirstViewModel's,
-     SecondViewModel's, and/or ThirdViewModel's State changes.
+     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called
+     every time FirstViewModel's, SecondViewModel's, and/or ThirdViewModel's State changes.
 
      - Parameters:
          - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
@@ -106,7 +106,12 @@ open class ThreeViewModelComponentVC<
          - state2: The latest snapshot of the SecondState object of SecondViewModel.
          - state3: The latest snapshot of the ThirdState object of ThirdViewModel.
      */
-    open func components(_ components: inout ComponentsArray, state1: FirstState, state2: SecondState, state3: ThirdState) {
+    open func buildComponents(
+        _ components: inout ComponentsArray,
+        state1: FirstState,
+        state2: SecondState,
+        state3: ThirdState
+    ) {
         fatalError("Override this.")
     }
 

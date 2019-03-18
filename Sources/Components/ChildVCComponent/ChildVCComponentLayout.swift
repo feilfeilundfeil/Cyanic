@@ -14,16 +14,17 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
 /**
- The ChildVCComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>. Used to size the view property of the childVC
+ The ChildVCComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.
+ Used to size the view property of the childVC
  */
 public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     /**
      Initializer.
      - Parameters:
-     - vc: The ChildComponentVC to be displayed.
-     - parentVC: The main UIViewController where the ChildComponentVC will be added as a child.
-     - height: The height of the content in the view of the vc.
+         - vc: The ChildComponentVC to be displayed.
+         - parentVC: The main UIViewController where the ChildComponentVC will be added as a child.
+         - height: The height of the content in the view of the vc.
      */
     public init(
         childVC: ChildComponentVC,

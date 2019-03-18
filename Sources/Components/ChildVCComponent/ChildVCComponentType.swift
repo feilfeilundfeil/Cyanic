@@ -10,22 +10,28 @@ import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
 /**
+ ChildVCComponentType is a protocol for Component data structures that want to show other UIViewControllers as a
+ child UIViewController to the BaseComponentVC.
 */
 public protocol ChildVCComponentType: Component {
 
     // sourcery: skipHashing, skipEquality
+    /// The child UIViewController instance to be shown on the UICollectionView.
     var childVC: ChildComponentVC { get set }
 
     // sourcery: skipHashing, skipEquality
+    /// The parent UIViewController instance of the child VC. It is usually the BaseComponentVC.
     var parentVC: UIViewController? { get set }
 
     // sourcery: defaultValue = "250.0"
+    /// The height of the ComponentCell that represents this Component.
     var height: CGFloat { get set }
 
 }
 
 public extension ChildVCComponentType {
 
+    /// The class name of the childVC.
     var name: String {
         return String(describing: Mirror(reflecting: self.childVC).subjectType)
     }

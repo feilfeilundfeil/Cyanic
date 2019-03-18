@@ -7,8 +7,8 @@
 //
 
 /**
- The UserInterfaceModel protcol is a workaround protocol to be able to access a Component's layout and cellType without casting it to
- Component (which causes a generic constraint error).
+ The UserInterfaceModel protcol is a workaround protocol to be able to access a Component's layout and cellType
+ without casting it to Component (which causes a generic constraint error).
 */
 public protocol UserInterfaceModel {
 

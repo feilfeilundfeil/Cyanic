@@ -20,8 +20,8 @@ import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
 /**
- ExpandableComponentType is a protocol for Component data structures that want to function like section headers with content that
- can be hidden / shown on tap.
+ ExpandableComponentType is a protocol for Component data structures that want to function like section headers
+ with content that can be hidden / shown on tap.
 */
 public protocol ExpandableComponentType: Component {
 

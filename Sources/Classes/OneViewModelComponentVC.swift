@@ -11,10 +11,16 @@ import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
 
 /**
- 
+ A BaseComponentVC subclass that is managed by one BaseViewModel. State changes from its BaseViewModel triggers
+ a rebuild of the AnyComponents array.
 */
 open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: BaseViewModel<ConcreteState>>: BaseComponentVC {
 
+    /**
+     Initializer.
+     - Parameters:
+        - viewModel: The BaseViewModel that manages this BaseComponentVC
+    */
     public init(viewModel: ConcreteViewModel) {
         self.viewModel = viewModel
         super.init()
@@ -42,7 +48,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
                 observable = self.viewModel.state
         }
 
-        // Call components method when a new element in ViewModel's state is emitted
+        // Call buildComponents method when a new element in ViewModel's state is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay.
         // NOTE:
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
@@ -53,7 +59,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
             .map { [weak self] (state: ConcreteState) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 var array: ComponentsArray = ComponentsArray()
-                s.components(&array, state: state)
+                s.buildComponents(&array, state: state)
                 return array.components
             }
             .subscribeOn(self.scheduler)
@@ -75,7 +81,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
          - state: The latest snapshot of the State object of the ViewModel
          - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
     */
-    open func components(_ components: inout ComponentsArray, state: ConcreteState) {
+    open func buildComponents(_ components: inout ComponentsArray, state: ConcreteState) {
         fatalError("Override this.")
     }
 

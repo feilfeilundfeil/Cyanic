@@ -10,6 +10,7 @@ import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
 // sourcery: AutoEquatable, AutoHashable,AutoGenerateComponent,RequiredVariables
+/// A ChildVCComponent is a Component that represents a child UIViewController presented on a UICollectionViewCell.
 public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
     // sourcery: skipHashing, skipEquality
@@ -40,6 +41,11 @@ public struct ChildVCComponent: ChildVCComponentType, CustomStringConvertible {
 
 public extension ChildVCComponent {
 
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - Parameters:
+        - id: The unique identifier of the ButtonComponent.
+    */
     init(id: String) {
         self.id = id
     }

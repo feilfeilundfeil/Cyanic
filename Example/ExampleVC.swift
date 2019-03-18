@@ -62,7 +62,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func components(_ components: inout ComponentsArray, state: ExampleState) {
+    override func buildComponents(_ components: inout ComponentsArray, state: ExampleState) {
         components.staticTextComponent {
             $0.id = "First"
             $0.text = Text.unattributed("Bacon")

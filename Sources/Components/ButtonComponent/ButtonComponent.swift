@@ -72,7 +72,7 @@ public extension ButtonComponent {
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
-     - id: The unique identifier of the ButtonComponent.
+        - id: The unique identifier of the ButtonComponent.
     */
     init(id: String) {
         self.id = id

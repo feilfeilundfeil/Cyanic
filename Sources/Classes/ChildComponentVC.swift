@@ -23,8 +23,8 @@ open class ChildComponentVC: UIViewController {
 }
 
 /**
- The default ChildComponentVC in a ChildVCComponent. This MUST be replaced by another custom ChildComponentVC. Otherwise, it forces a
- fatalError.
+ The default ChildComponentVC in a ChildVCComponent. This MUST be replaced by another custom ChildComponentVC.
+ Otherwise, it forces a fatalError.
 */
 internal final class InvalidChildComponentVC: ChildComponentVC {
 

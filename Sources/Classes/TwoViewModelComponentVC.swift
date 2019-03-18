@@ -59,7 +59,7 @@ open class TwoViewModelComponentVC<
                 observable = combinedObservable
         }
 
-        // Call components method when a new element from combinedObservable is emitted
+        // Call buildComponents method when a new element from combinedObservable is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay.
         // NOTE:
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
@@ -69,7 +69,7 @@ open class TwoViewModelComponentVC<
             .map { [weak self] (firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 var array: ComponentsArray = ComponentsArray()
-                s.components(&array, state1: firstState, state2: secondState)
+                s.buildComponents(&array, state1: firstState, state2: secondState)
                 return array.components
             }
             .subscribeOn(self.scheduler)
@@ -89,15 +89,15 @@ open class TwoViewModelComponentVC<
 
     /**
      This method is responsible for creating the [AnyComponent] array.
-     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called every time FirstViewModel's
-     and/or SecondViewModel's State changes.
+     This is where you create for logic to add Components to the ComponentsArray data structure. This method is called
+     every time FirstViewModel's and/or SecondViewModel's State changes.
 
      - Parameters:
         - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
         - state1: The latest snapshot of the FirstState object of FirstViewModel.
         - state2: The latest snapshot of the SecondState object of SecondViewModel.
-     */
-    open func components(_ components: inout ComponentsArray, state1: FirstState, state2: SecondState) {
+    */
+    open func buildComponents(_ components: inout ComponentsArray, state1: FirstState, state2: SecondState) {
         fatalError("Override this.")
     }
 
