@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
-		142C450222366E99002360F5 /* CompositeViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450122366E99002360F5 /* CompositeViewModels.swift */; };
-		142C450422366F38002360F5 /* CompositeStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450322366F38002360F5 /* CompositeStates.swift */; };
 		142C45082236877F002360F5 /* OneViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45072236877F002360F5 /* OneViewModelComponentVC.swift */; };
 		142C450A22368CB2002360F5 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
 		142C450C2236A224002360F5 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
@@ -103,8 +101,6 @@
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
 		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
-		142C450122366E99002360F5 /* CompositeViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeViewModels.swift; sourceTree = "<group>"; };
-		142C450322366F38002360F5 /* CompositeStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeStates.swift; sourceTree = "<group>"; };
 		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewModelComponentVC.swift; sourceTree = "<group>"; };
@@ -367,8 +363,6 @@
 				142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */,
 				142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
-				142C450322366F38002360F5 /* CompositeStates.swift */,
-				142C450122366E99002360F5 /* CompositeViewModels.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -833,13 +827,11 @@
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
-				142C450222366E99002360F5 /* CompositeViewModels.swift in Sources */,
 				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
-				142C450422366F38002360F5 /* CompositeStates.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
