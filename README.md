@@ -9,6 +9,11 @@
 - Create the "Copyable" protocol and have these structs conform to it [✅ 01.03.2019]
     - Copyable protocol allows structs to be mutated (copied) in place
 - Create the Sourcery template containing the logic to generate extensions for ComponentsArray [✅ 13.03.2019]
+- Create unit tests for BaseViewModel [✅ 17.03.2019]
+- Create unit tests for StateStore
+- Create unit tests for BaseComponentVC and its subclasses
+- Change ComponentLayout subclasses to use the Component struct as the argument in initializer
+- Refactor Sourcery template to autogenerate the layout property of Components
 - Create a UITableView subclass with identical functionality as the BaseComponentsVC
 - Create a Run Script Phase in the FFUFComponents target  that refereshes the AutoEquatable and AutoHashables of the basic Components  that come with this framework
 - Refine the README.md to fully explain what the architecture is and the best practices.
