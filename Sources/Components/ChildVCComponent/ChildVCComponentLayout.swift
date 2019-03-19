@@ -22,17 +22,14 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
     /**
      Initializer.
      - Parameters:
-         - vc: The ChildComponentVC to be displayed.
-         - parentVC: The main UIViewController where the ChildComponentVC will be added as a child.
-         - height: The height of the content in the view of the vc.
+         - component: The ChildVCComponent instance.
      */
-    public init(
-        childVC: ChildComponentVC,
-        parentVC: UIViewController?,
-        height: CGFloat
-    ) {
+    public init(component: ChildVCComponent) {
 
-        let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
+        let size: CGSize = CGSize(width: Constants.screenWidth, height: component.height)
+        let childVC: ChildComponentVC = component.childVC
+        let parentVC: UIViewController? = component.parentVC
+
         super.init(
             minWidth: size.width,
             maxWidth: size.width,

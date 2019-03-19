@@ -12,9 +12,8 @@
 */
 public protocol UserInterfaceModel {
 
-    // sourcery: defaultValue = fatalError()
-    // sourcery: isComputed = true
-    // sourcery: skipHashing,skipEquality
+    // sourcery: isLayout = true
+    // sourcery: skipHashing,skipEquality,
     /// The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     var layout: ComponentLayout { get }
 

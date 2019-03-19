@@ -1,18 +1,25 @@
 {% for type in types.all %}
 {% if type|annotated:"AutoComponentType" %}
 // sourcery:inline:auto:{{ type.name }}.AutoComponentType
-{% for var in type.allVariables %}
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - Parameters:
+         - id: The unique identifier of the {{ type.name }}.
+    */
+    {{ type.accessLevel }} init(id: String) {
+        self.id = id
+    }
+
+{% for var in type.allVariables|!annotated:"isInExtension" %}
 {% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
 {% if var.annotations.defaultValue %}
-{% if var.annotations.isComputed %}
-    {{ type.accessLevel }} var {{ var.name }}: {{ var.typeName }} { {{ var.annotations.defaultValue }} }
+    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
+
+{% elif var.annotations.isLayout %}
+    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.Component }}(component: self) }
 
 {% else %}
-    {{ type.accessLevel }} {% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
-
-{% endif %}
-{% else %}
-    {{ type.accessLevel }} {% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
+    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
 
 {% endif %}
 {% endfor %}

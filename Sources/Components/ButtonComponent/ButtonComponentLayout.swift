@@ -35,30 +35,10 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
     /**
      Initializer
      - Parameters:
-        - type: The ButtonLayoutType of the ButtonLayout.
-        - title: The title to be displayed on UIButton's titleLabel.
-        - backgroundColor: The backgroundColor for the entire content.
-        - height: The height of the entire content.
-        - contentEdgeInsets: The insets on the UIButton relative to its root UIView.
-        - alignment: The alignment of the ButtonLayout and SizeLayout.
-        - flexibility: The flexibility of the ButtonLayout and SizeLayout.
-        - viewReuseId: The unique id of the ButtonComponent used for debugging.
-        - style: The styling to be applied on the UIButton.
-        - onTap: The code executed when the UIButton is tapped.
+        - component: ButtonComponent instance.
     */
-    public init(
-        type: ButtonLayoutType,
-        title: String,
-        backgroundColor: UIColor,
-        height: CGFloat,
-        contentEdgeInsets: UIEdgeInsets,
-        alignment: Alignment,
-        flexibility: Flexibility,
-        viewReuseId: String,
-        style: AlacrityStyle<UIButton>,
-        onTap: @escaping () -> Void
-    ) {
-        let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
+    public init(component: ButtonComponent) {
+        let size: CGSize = CGSize(width: Constants.screenWidth, height: component.height)
 
         let serialDisposable: SerialDisposable = SerialDisposable()
         let disposeBag: DisposeBag = DisposeBag()
@@ -66,22 +46,22 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         self.disposeBag = disposeBag
 
         let buttonLayout: ButtonLayout<UIButton> = ButtonLayout<UIButton>(
-            type: type,
-            title: title,
+            type: component.type,
+            title: component.title,
             image: ButtonLayoutImage.size(size),
-            alignment: alignment,
-            flexibility: flexibility,
-            config: style
+            alignment: component.alignment,
+            flexibility: component.flexibility,
+            config: component.style
                 .modifying { (view: UIButton) -> Void in
                     serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
-                        .debug(viewReuseId, trimOutput: false)
-                        .bind(onNext: onTap)
+                        .debug(component.id, trimOutput: false)
+                        .bind(onNext: component.onTap)
                 }
                 .style
         )
 
         let insetLayout: InsetLayout = InsetLayout(
-            insets: contentEdgeInsets,
+            insets: component.insets,
             viewReuseId: "\(ButtonComponentLayout.identifier)InsetLayout",
             sublayout: buttonLayout
         )
@@ -91,12 +71,12 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             maxWidth: size.width,
             minHeight: size.height,
             maxHeight: size.height,
-            alignment: alignment,
-            flexibility: flexibility,
+            alignment: component.alignment,
+            flexibility: component.flexibility,
             viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",
             sublayout: insetLayout,
             config: { (view: UIView) -> Void in
-                view.backgroundColor = backgroundColor
+                view.backgroundColor = component.backgroundColor
             }
         )
     }

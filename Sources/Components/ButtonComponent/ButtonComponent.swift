@@ -17,8 +17,18 @@ import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
+// sourcery: Component = "ButtonComponentLayout"
 /// ButtonComponent is a Component that represents a UIButton.
 public struct ButtonComponent: ButtonComponentType {
+
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - Parameters:
+         - id: The unique identifier of the ButtonComponent.
+    */
+    public init(id: String) {
+        self.id = id
+    }
 
     public var type: ButtonLayoutType = ButtonLayoutType.system
 
@@ -43,38 +53,14 @@ public struct ButtonComponent: ButtonComponentType {
     // sourcery: skipHashing, skipEquality 
     public var onTap: () -> Void = { print("Hello World \(#file)") }
 
-    public var identity: ButtonComponent { return self }
-
     public var id: String
 
     // sourcery: skipHashing, skipEquality 
-    public var layout: ComponentLayout {
-        return ButtonComponentLayout(
-            type: self.type,
-            title: self.title,
-            backgroundColor: self.backgroundColor,
-            height: self.height,
-            contentEdgeInsets: self.insets,
-            alignment: self.alignment,
-            flexibility: self.flexibility,
-            viewReuseId: self.id,
-            style: self.style,
-            onTap: self.onTap
-        )
-    }
+    public var layout: ComponentLayout { return ButtonComponentLayout(component: self) }
 
     // sourcery: skipHashing, skipEquality 
     public let cellType: ComponentCell.Type = ComponentCell.self
-}
 
-public extension ButtonComponent {
+    public var identity: ButtonComponent { return self }
 
-    /**
-     Work around Initializer because memberwise initializers are all or nothing
-     - Parameters:
-        - id: The unique identifier of the ButtonComponent.
-    */
-    init(id: String) {
-        self.id = id
-    }
 }

@@ -15,9 +15,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-/**
- ButtonComponentType is a protocol for Components that represents a UIButton.
-*/
+/// ButtonComponentType is a protocol for Components that represents a UIButton.
 public protocol ButtonComponentType: Component {
 
     // sourcery: defaultValue = ButtonLayoutType.system
@@ -34,8 +32,8 @@ public protocol ButtonComponentType: Component {
 
     // sourcery: defaultValue = UIEdgeInsets.zero
     // sourcery: skipHashing, skipEquality
-    /// The insets on the UIButton relative to its root UIView. This is NOT the insets on the content inside the UIButton. The default value is
-    /// UIEdgeInsets.zero
+    /// The insets on the UIButton relative to its root UIView. This is NOT the insets on the content inside the
+    /// UIButton. The default value is UIEdgeInsets.zero.
     var insets: UIEdgeInsets { get set }
 
     // sourcery: defaultValue = UIColor.clear
@@ -44,12 +42,14 @@ public protocol ButtonComponentType: Component {
 
     // sourcery: defaultValue = ButtonLayoutDefaults.defaultAlignment
     // sourcery: skipHashing, skipEquality
-    /// The alignment of the underlying ButtonLayout and SizeLayout. The default value is ButtonLayoutDefaults.defaultAlignment.
+    /// The alignment of the underlying ButtonLayout and SizeLayout. The default value is
+    /// ButtonLayoutDefaults.defaultAlignment.
     var alignment: Alignment { get set }
 
     // sourcery: defaultValue = ButtonLayoutDefaults.defaultFlexibility
     // sourcery: skipHashing, skipEquality
-    /// The flexibility of the underlying ButotnLayout and SizeLayout. The default value is ButtonLayoutDefaults.defaultFlexibility.
+    /// The flexibility of the underlying ButotnLayout and SizeLayout. The default value is
+    /// ButtonLayoutDefaults.defaultFlexibility.
     var flexibility: Flexibility { get set }
 
     // sourcery: defaultValue = AlacrityStyle<UIButton> { _ in }
