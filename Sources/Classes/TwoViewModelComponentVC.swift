@@ -9,6 +9,7 @@
 import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
+import struct CoreGraphics.CGFloat
 
 /**
  A BaseComponentVC subclass that is managed by two BaseViewModels. State changes from any of the two BaseViewModels triggers
@@ -38,11 +39,11 @@ open class TwoViewModelComponentVC<
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        let observable: Observable<(FirstState, SecondState)>
+        let observable: Observable<(CGFloat?, FirstState, SecondState)>
 
-        let combinedObservable: Observable<(FirstState, SecondState)> = Observable
+        let combinedObservable: Observable<(CGFloat?, FirstState, SecondState)> = Observable
             .combineLatest(
-                self.viewModelOne.state, self.viewModelTwo.state
+                self._width, self.viewModelOne.state, self.viewModelTwo.state
             )
             .observeOn(self.scheduler)
 
@@ -66,8 +67,9 @@ open class TwoViewModelComponentVC<
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         observable
-            .map { [weak self] (firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
-                guard let s = self else { return [] }
+            .map { [weak self] (width: CGFloat?, firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
+                guard let s = self, let width = width else { return [] }
+                s.width = width
                 var array: ComponentsArray = ComponentsArray()
                 s.buildComponents(&array, state1: firstState, state2: secondState)
                 return array.components

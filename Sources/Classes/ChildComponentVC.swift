@@ -6,6 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
+import class Foundation.Bundle
+import class Foundation.NSCoder
 import class UIKit.UIViewController
 
 /**
@@ -15,9 +17,9 @@ import class UIKit.UIViewController
 open class ChildComponentVC: UIViewController {
 
     deinit {
+        self.view?.removeFromSuperview()
         self.willMove(toParent: nil)
         self.removeFromParent()
-        self.view?.removeFromSuperview()
     }
 
 }
@@ -26,11 +28,4 @@ open class ChildComponentVC: UIViewController {
  The default ChildComponentVC in a ChildVCComponent. This MUST be replaced by another custom ChildComponentVC.
  Otherwise, it forces a fatalError.
 */
-internal final class InvalidChildComponentVC: ChildComponentVC {
-
-    override internal func viewDidLoad() {
-        super.viewDidLoad()
-        fatalError("This cannot be used as a childVC in ChildVCComponent")
-    }
-
-}
+internal final class InvalidChildComponentVC: ChildComponentVC {}

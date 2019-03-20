@@ -5,50 +5,52 @@
 
 
 // MARK: - AutoHashable for classes, protocols, structs
-// MARK: - ButtonComponent AutoHashable
+// MARK: - ButtonComponentType AutoHashable
 extension ButtonComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.type.hash(into: &hasher)
         self.title.hash(into: &hasher)
-        self.height.hash(into: &hasher)
+        self.size.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
     }
 }
-// MARK: - ChildVCComponent AutoHashable
+// MARK: - ChildVCComponentType AutoHashable
 extension ChildVCComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
-        self.height.hash(into: &hasher)
+        self.size.hash(into: &hasher)
+        self.name.hash(into: &hasher)
+        self.description.hash(into: &hasher)
         self.id.hash(into: &hasher)
     }
 }
-// MARK: - ExpandableComponent AutoHashable
+// MARK: - ExpandableComponentType AutoHashable
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
-        self.id.hash(into: &hasher)
-        self.contentLayout.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
-        self.height.hash(into: &hasher)
+        self.size.hash(into: &hasher)
         self.chevronSize.hash(into: &hasher)
         self.isExpanded.hash(into: &hasher)
+        self.id.hash(into: &hasher)
     }
 }
-// MARK: - StaticSpacingComponent AutoHashable
+// MARK: - StaticSpacingComponentType AutoHashable
 extension StaticSpacingComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
-        self.id.hash(into: &hasher)
-        self.height.hash(into: &hasher)
+        self.size.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
+        self.id.hash(into: &hasher)
     }
 }
-// MARK: - StaticTextComponent AutoHashable
+// MARK: - StaticTextComponentType AutoHashable
 extension StaticTextComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
-        self.id.hash(into: &hasher)
         self.text.hash(into: &hasher)
         self.font.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.lineFragmentPadding.hash(into: &hasher)
+        self.width.hash(into: &hasher)
+        self.id.hash(into: &hasher)
     }
 }
 

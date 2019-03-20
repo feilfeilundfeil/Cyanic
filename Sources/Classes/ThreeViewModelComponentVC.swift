@@ -9,6 +9,7 @@
 import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
+import struct CoreGraphics.CGFloat
 
 /**
  A BaseComponentVC subclass that is managed by three BaseViewModels. State changes from any of the three BaseViewModels
@@ -41,11 +42,11 @@ open class ThreeViewModelComponentVC<
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        let observable: Observable<(FirstState, SecondState, ThirdState)>
+        let observable: Observable<(CGFloat?, FirstState, SecondState, ThirdState)>
 
-        let combinedObservable: Observable<(FirstState, SecondState, ThirdState)> = Observable
+        let combinedObservable: Observable<(CGFloat?, FirstState, SecondState, ThirdState)> = Observable
             .combineLatest(
-                self.viewModelOne.state, self.viewModelTwo.state, self.viewModelThree.state
+                self._width, self.viewModelOne.state, self.viewModelTwo.state, self.viewModelThree.state
             )
             .observeOn(self.scheduler)
 
@@ -68,9 +69,10 @@ open class ThreeViewModelComponentVC<
         // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
-        observable
-            .map { [weak self] (firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> [AnyComponent] in
-                guard let s = self else { return [] }
+        observable // swiftlint:disable:next line_length
+            .map { [weak self] (width: CGFloat?, firstState: FirstState, secondState: SecondState, thirdState: ThirdState) -> [AnyComponent] in
+                guard let s = self, let width = width else { return [] }
+                s.width = width
                 var array: ComponentsArray = ComponentsArray()
                 s.buildComponents(&array, state1: firstState, state2: secondState, state3: thirdState)
                 return array.components

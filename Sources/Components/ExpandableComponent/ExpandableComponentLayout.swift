@@ -43,38 +43,29 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         - disposeBag: The disposeBag of the ExpandableComponent used to dispose of Rx related subscriptions.
         - isExpanded: The state of the ExpandableComponent used to determine the next Bool value to be emitted by the PublishRelay.
     */
-    public init( // swiftlint:disable:this function_body_length
-        id: String,
-        contentLayout: ExpandableContentLayout,
-        backgroundColor: UIColor,
-        height: CGFloat,
-        insets: UIEdgeInsets,
-        chevronSize: CGSize,
-        chevronStyle: AlacrityStyle<ChevronView>,
-        isExpanded: Bool
-    ) {
-        let size: CGSize = CGSize(width: Constants.screenWidth, height: height)
-
+    public init(component: ExpandableComponent) {  // swiftlint:disable:this function_body_length
+        let size: CGSize = component.size
+        let insets: UIEdgeInsets = component.insets
         let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
             insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),
-            sublayout: contentLayout
+            sublayout: component.contentLayout
         )
 
         let flexibleLayout: SizeLayout<UIView> = SizeLayout<UIView>(
-            size: CGSize(width: CGFloat.greatestFiniteMagnitude, height: height),
+            size: CGSize(width: size.width, height: size.height),
             alignment: Alignment.center,
             flexibility: Flexibility.flexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)flexibleSpace"
         )
 
         let chevronLayout: SizeLayout<ChevronView> = SizeLayout<ChevronView>(
-            size: chevronSize,
+            size: component.chevronSize,
             alignment: Alignment.center,
             flexibility: Flexibility.inflexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)Chevron",
-            config: chevronStyle
+            config: component.chevronStyle
                 .modifying { (view: ChevronView) -> Void in
-                    switch isExpanded {
+                    switch component.isExpanded {
                         case true: view.direction = .up
                         case false: view.direction = .down
                     }
@@ -106,9 +97,11 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             maxHeight: size.height,
             viewReuseId: ExpandableComponentLayout.identifier,
             sublayout: stackLayout,
-            config: { (view: UIView) -> Void in
-                view.backgroundColor = backgroundColor
-            }
+            config: component.style
+                .modifying { (view: UIView) -> Void in
+                    view.backgroundColor = component.backgroundColor
+                }
+                .style
         )
     }
 

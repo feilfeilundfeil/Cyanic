@@ -102,6 +102,7 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
             $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
             $0.font = UIFont.systemFont(ofSize: 17.0)
             $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+            $0.width = self.width
         }
 
         components.add(
@@ -112,6 +113,7 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
                     $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
                     $0.font = UIFont.systemFont(ofSize: 17.0)
                     $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+                    $0.width = self.width
                 }
         )
 
@@ -123,8 +125,15 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
                     $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
                     $0.font = UIFont.systemFont(ofSize: 17.0)
                     $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+                    $0.width = self.width
                 }
         )
+
+        components.staticSpacingComponent {
+            $0.id = "Blah"
+            $0.backgroundColor = UIColor.yellow
+            $0.size = CGSize(width: self.width, height: 44.0)
+        }
 
     }
 

@@ -17,28 +17,22 @@ import struct UIKit.UIEdgeInsets
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
-// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
+// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: ComponentLayout = StaticTextComponentLayout
 /// StaticTextComponent is a Component that represents static text to be displayed in a UICollectionViewCell.
 public struct StaticTextComponent: StaticTextComponentType {
 
-    public var id: String
-
-    // sourcery: skipHashing, skipEquality 
-    public var layout: ComponentLayout {
-        return StaticTextComponentLayout(
-            text: self.text,
-            font: self.font,
-            backgroundColor: self.backgroundColor,
-            lineFragmentPadding: self.lineFragmentPadding,
-            insets: self.insets,
-            layoutAlignment: self.alignment,
-            flexibility: self.flexibility,
-            style: self.style
-        )
+// sourcery:inline:auto:StaticTextComponent.AutoComponentType
+    /**
+     Work around Initializer because memberwise initializers are all or nothing
+     - Parameters:
+         - id: The unique identifier of the StaticTextComponent.
+    */
+    public init(id: String) {
+        self.id = id
     }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
+    public var id: String
 
     public var text: Text = Text.unattributed("")
 
@@ -51,6 +45,8 @@ public struct StaticTextComponent: StaticTextComponentType {
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
+    public var width: CGFloat = Constants.screenWidth
+
     // sourcery: skipHashing, skipEquality 
     public var alignment: Alignment = Alignment.centerLeading
 
@@ -60,18 +56,12 @@ public struct StaticTextComponent: StaticTextComponentType {
     // sourcery: skipHashing, skipEquality 
     public var style: AlacrityStyle<UITextView> = AlacrityStyle<UITextView> { _ in }
 
+    // sourcery: skipHashing, skipEquality 
+    public var layout: ComponentLayout { return StaticTextComponentLayout(component: self) }
+
+    // sourcery: skipHashing, skipEquality 
+    public let cellType: ComponentCell.Type = ComponentCell.self
+
     public var identity: StaticTextComponent { return self }
-
-}
-
-public extension StaticTextComponent {
-
-    /**
-     Work around Initializer because memberwise initializers are all or nothing
-     - Parameters:
-        - id: The unique identifier of the StaticTextComponent.
-    */
-    init(id: String) {
-        self.id = id
-    }
+// sourcery:end
 }

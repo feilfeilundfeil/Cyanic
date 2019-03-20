@@ -7,16 +7,18 @@
 //
 
 import class UIKit.UIColor
-import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 
-/**
- StaticSpacingComponentType is a protocol for Components that represent space between other components / content on the screen.
-*/
+// sourcery: AutoEquatable,AutoHashable
+// sourcery: Component = StaticSpacingComponent
+/// StaticSpacingComponentType is a protocol for Components that represent space between
+/// other components / content on the screen.
 public protocol StaticSpacingComponentType: Component {
 
-    // sourcery: defaultValue = "0.0"
-    /// The height of the spacing between content.
-    var height: CGFloat { get set }
+    // sourcery: defaultValue = "CGSize(width: Constants.screenWidth, height: 44.0)"
+    /// The size of the UICollectionViewCell that this Component is currently representing.
+    /// The default value is CGSize(width: Constants.screenWidth, height: 44.0).
+    var size: CGSize { get set }
 
     // sourcery: defaultValue = UIColor.clear
     /// The backgroundColor of the spacing.

@@ -16,9 +16,9 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-/**
- StaticTextComponentType is a protocol for Component data structures that represent static text.
-*/
+// sourcery: AutoEquatable,AutoHashable
+// sourcery: Component = StaticTextComponent
+/// StaticTextComponentType is a protocol for Component data structures that represent static text.
 public protocol StaticTextComponentType: Component {
 
     // sourcery: defaultValue = "Text.unattributed("")"
@@ -41,6 +41,11 @@ public protocol StaticTextComponentType: Component {
     // sourcery: skipHashing, skipEquality
     /// The insets for the textContainerInset in the underlying TextViewLayout. Default value is 0.0.
     var insets: UIEdgeInsets { get set }
+
+    // sourcery: defaultValue = "Constants.screenWidth"
+    /// The width of the UICollectionViewCell that this Component is currently representing.
+    /// The default value is Constants.screenWidth.
+    var width: CGFloat { get set }
 
     // sourcery: defaultValue = Alignment.centerLeading
     // sourcery: skipHashing, skipEquality

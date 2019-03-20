@@ -11,16 +11,17 @@ import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
 import struct Alacrity.AlacrityStyle
-import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
-// sourcery: Component = "ButtonComponentLayout"
+// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: ComponentLayout = ButtonComponentLayout
 /// ButtonComponent is a Component that represents a UIButton.
 public struct ButtonComponent: ButtonComponentType {
 
+// sourcery:inline:auto:ButtonComponent.AutoComponentType
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
@@ -34,7 +35,7 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var title: String = ""
 
-    public var height: CGFloat = 44.0
+    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 44.0)
 
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
@@ -62,5 +63,5 @@ public struct ButtonComponent: ButtonComponentType {
     public let cellType: ComponentCell.Type = ComponentCell.self
 
     public var identity: ButtonComponent { return self }
-
+// sourcery:end
 }

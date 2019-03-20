@@ -25,10 +25,9 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 {% endmacro %}
 // MARK: - AutoEquatable for classes, protocols, structs
 {% for type in types.types|!enum where type.implements.AutoEquatable or type|annotated:"AutoEquatable" %}
-// MARK: - {{ type.name }} AutoEquatable
-{% if not type.kind == "protocol" and not type.based.NSObject %}extension {{ type.name }}: Equatable {}{% endif %}
-{% if type.supertype.based.Equatable or type.supertype.implements.AutoEquatable or type.supertype|annotated:"AutoEquatable" %}THIS WONT COMPILE, WE DONT SUPPORT INHERITANCE for AutoEquatable{% endif %}
-public func == (lhs: {{ type.name }}, rhs: {{ type.name }}) -> Bool {
+// MARK: - {{ type.annotations.Component }} AutoEquatable
+extension {{ type.annotations.Component }}: Equatable {}
+public func == (lhs: {{ type.annotations.Component }}, rhs: {{ type.annotations.Component }}) -> Bool {
     {% if not type.kind == "protocol" %}
     {% call compareVariables type.storedVariables %}
     {% else %}

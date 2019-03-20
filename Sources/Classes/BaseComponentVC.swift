@@ -28,9 +28,11 @@ import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct CoreGraphics.CGFloat
 import struct Kio.MetaType
+import struct RxCocoa.KeyValueObservingOptions
 import struct RxDataSources.AnimatableSectionModel
 import struct RxDataSources.AnimationConfiguration
 import struct RxSwift.RxTimeInterval
+import struct UIKit.UIEdgeInsets
 
 /**
  BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
@@ -89,7 +91,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
-            .debug("Components", trimOutput: false)
+//            .debug("Components", trimOutput: false)
             .map { (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
                 return [AnimatableSectionModel(model: "Test", items: components)]
             }
@@ -99,7 +101,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.collectionView.reloadData()
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     // MARK: Stored Properties
@@ -107,8 +109,23 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
     */
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
+
+    /**
+     When the view is loaded, its width and height are initially all zero. It is useful to observe these changes to
+     determine the max width of the content inside the UICollectionView.
+     The _width Observable listens to changes in the root UIVIew's bounds. It is used as the width when sizing the
+     ComponentCell.
+
+     This Observable is filtered so it doesn't repeat the duplicate values.
+    */
+    internal private(set) lazy var _width: Observable<CGFloat?> = self.view.rx
+        .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
+        .map { $0?.width }
+        .distinctUntilChanged()
+
     internal var _cellTypes: Set<MetaType<ComponentCell>>
     internal let disposeBag: DisposeBag = DisposeBag()
+    public internal(set) var width: CGFloat = 0.0
 
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
@@ -171,7 +188,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
 
-        let size: CGSize = CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude)
 
         let cellSize: CGSize = layout.measurement(within: size).size
         return cellSize

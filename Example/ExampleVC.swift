@@ -63,6 +63,9 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     }
 
     override func buildComponents(_ components: inout ComponentsArray, state: ExampleState) {
+        print("BUILD")
+        let width: CGFloat = self.width
+
         components.staticTextComponent {
             $0.id = "First"
             $0.text = Text.unattributed("Bacon")
@@ -80,7 +83,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                 $0.id = "Child"
                 $0.childVC = ChildVC()
                 $0.parentVC = s
-                $0.height = 200.0
+                $0.size = CGSize(width: width, height: 200.0)
             }
         }
 
@@ -101,8 +104,15 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.isExpanded = state.expandableDict[firstID] ?? false
             $0.setExpandableState = s.viewModel.setExpandableState
             $0.backgroundColor = UIColor.white
-            $0.height = 55.0
+            $0.size = CGSize(width: width, height: 55.0)
             $0.insets = expandableContentInsets
+            $0.style = AlacrityStyle<UIView> { (view: UIView) -> Void in
+                view.subviews.forEach { $0.removeFromSuperview() }
+                let divider: UIView = UIView().avd.apply { $0.backgroundColor = UIColor.green }
+                view.addSubview(divider)
+                divider.frame = CGRect(x: 20.0, y: view.bounds.height - 5.0, width: view.bounds.width - 20.0, height: 5.0)
+                print("Subviews: \(view.subviews)")
+            }
         }
 
         let randomColor: () -> UIColor = {
@@ -117,12 +127,13 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                     $0.font = UIFont.systemFont(ofSize: 17.0)
                     $0.backgroundColor = randomColor()
                     $0.insets = insets
+                    $0.width = width
                 }
             }
         }
         components.staticSpacingComponent {
             $0.id = "Second"
-            $0.height = 50.0
+            $0.size = CGSize(width: width, height: 50.0)
             $0.backgroundColor = UIColor.black
         }
 
@@ -140,6 +151,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.setExpandableState = s.viewModel.setExpandableState
             $0.insets = expandableContentInsets
             $0.backgroundColor = UIColor.lightGray
+            $0.size = CGSize(width: width, height: 55.0)
         }
 
         if secondExpandable.isExpanded {
@@ -150,6 +162,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                     $0.font = UIFont.systemFont(ofSize: 17.0)
                     $0.backgroundColor = randomColor()
                     $0.insets = insets
+                    $0.width = width
                 }
             }
         }
@@ -164,7 +177,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         let buttonConfiguration: (String, UIColor, inout ButtonComponent) -> Void = { id, color, button in
             button.id = id
             button.title = id
-            button.height = 200.0
+            button.size = CGSize(width: width, height: 200.0)
             button.style = style.modifying(with: { $0.backgroundColor = color })
             button.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
             button.onTap = { print("Hello World, \(id)") }
@@ -178,7 +191,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
         components.staticSpacingComponent {
             $0.id = "Second"
-            $0.height = 100.0
+            $0.size = CGSize(width: width, height: 100.0)
             $0.backgroundColor = UIColor.brown
         }
 
@@ -218,6 +231,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 class ExampleViewModel: BaseViewModel<ExampleState> {
 
     func buttonWasTapped() {
+        print("IS TRUE IS SET")
         self.setState { $0.isTrue = !$0.isTrue }
     }
 

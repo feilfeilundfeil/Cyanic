@@ -7,38 +7,35 @@
 //
 
 import class UIKit.UIColor
-import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 
-// sourcery: AutoEquatable,AutoHashable,AutoGenerateComponent
+// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: ComponentLayout = StaticSpacingComponentLayout
 /// StaticSpacingComponent is a Component that represents static spacing between content / other Components.
 public struct StaticSpacingComponent: StaticSpacingComponentType {
 
-    public var identity: StaticSpacingComponent { return self }
-
-    public var id: String
-
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout {
-        return StaticSpacingComponentLayout(height: self.height, backgroundColor: self.backgroundColor)
-    }
-
-    // sourcery: skipHashing, skipEquality
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
-    public var height: CGFloat = 0.0
-
-    public var backgroundColor: UIColor = UIColor.clear
-}
-
-public extension StaticSpacingComponent {
-
+// sourcery:inline:auto:StaticSpacingComponent.AutoComponentType
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
-        - id: The unique identifier of the StaticSpacingComponent.
+         - id: The unique identifier of the StaticSpacingComponent.
     */
-    init(id: String) {
+    public init(id: String) {
         self.id = id
     }
 
+    public var id: String
+
+    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 44.0)
+
+    public var backgroundColor: UIColor = UIColor.clear
+
+    // sourcery: skipHashing, skipEquality 
+    public var layout: ComponentLayout { return StaticSpacingComponentLayout(component: self) }
+
+    // sourcery: skipHashing, skipEquality 
+    public let cellType: ComponentCell.Type = ComponentCell.self
+
+    public var identity: StaticSpacingComponent { return self }
+// sourcery:end
 }

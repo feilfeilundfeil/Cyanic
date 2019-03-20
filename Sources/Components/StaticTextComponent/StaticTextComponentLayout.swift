@@ -39,33 +39,24 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
         - flexibility: The flexibility of the TextLayout.
         - style: The styling applied to the UITextView.
     */
-    public init(
-        text: Text,
-        font: UIFont,
-        backgroundColor: UIColor,
-        lineFragmentPadding: CGFloat,
-        insets: UIEdgeInsets,
-        layoutAlignment: Alignment,
-        flexibility: Flexibility,
-        style: AlacrityStyle<UITextView>
-    ) {
+    public init(component: StaticTextComponent) {
         let textLayout: TextViewLayout<UITextView> = TextViewLayout<UITextView>(
-            text: text,
-            font: font,
-            lineFragmentPadding: lineFragmentPadding,
-            textContainerInset: insets,
-            layoutAlignment: layoutAlignment,
-            flexibility: flexibility,
+            text: component.text,
+            font: component.font,
+            lineFragmentPadding: component.lineFragmentPadding,
+            textContainerInset: component.insets,
+            layoutAlignment: component.alignment,
+            flexibility: component.flexibility,
             viewReuseId: "\(StaticTextComponentLayout.identifier)TextView",
             config: AlacrityStyle<UITextView> {
                 $0.backgroundColor = UIColor.clear
                 $0.isEditable = false
             }
-            .modifying(with: style.style)
+            .modifying(with: component.style.style)
             .style
         )
 
-        let size: CGSize = CGSize(width: Constants.screenWidth, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude)
 
         super.init(
             minWidth: size.width,
@@ -75,7 +66,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             viewReuseId: "\(StaticTextComponentLayout.identifier)Size",
             sublayout: textLayout,
             config: {
-                $0.backgroundColor = backgroundColor
+                $0.backgroundColor = component.backgroundColor
             }
         )
     }

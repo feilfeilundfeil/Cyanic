@@ -13,10 +13,10 @@
 {% for var in type.allVariables|!annotated:"isInExtension" %}
 {% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
 {% if var.annotations.defaultValue %}
-    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
+    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.annotations.isLazy %}lazy {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
 
 {% elif var.annotations.isLayout %}
-    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.Component }}(component: self) }
+    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.ComponentLayout }}(component: self) }
 
 {% else %}
     {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}

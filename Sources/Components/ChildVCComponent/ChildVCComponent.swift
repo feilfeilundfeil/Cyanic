@@ -7,13 +7,14 @@
 //
 
 import class UIKit.UIViewController
-import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 
-// sourcery: AutoEquatable, AutoHashable,AutoGenerateComponent,RequiredVariables
-// sourcery: Component = "ChildVCComponentLayout"
+// sourcery: AutoComponentType,AutoGenerateComponent,RequiredVariables
+// sourcery: ComponentLayout = "ChildVCComponentLayout"
 /// A ChildVCComponent is a Component that represents a child UIViewController presented on a UICollectionViewCell.
 public struct ChildVCComponent: ChildVCComponentType {
 
+// sourcery:inline:auto:ChildVCComponent.AutoComponentType
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
@@ -24,12 +25,12 @@ public struct ChildVCComponent: ChildVCComponentType {
     }
 
     // sourcery: skipHashing, skipEquality 
-    public var childVC: ChildComponentVC = InvalidChildComponentVC()
+    public lazy var childVC: ChildComponentVC = InvalidChildComponentVC()
 
     // sourcery: skipHashing, skipEquality 
     public weak var parentVC: UIViewController?
 
-    public var height: CGFloat = 250.0
+    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 250.0)
 
     public var id: String
 
@@ -40,5 +41,5 @@ public struct ChildVCComponent: ChildVCComponentType {
     public let cellType: ComponentCell.Type = ComponentCell.self
 
     public var identity: ChildVCComponent { return self }
-
+// sourcery:end
 }
