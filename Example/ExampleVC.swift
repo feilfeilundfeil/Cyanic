@@ -44,7 +44,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     
     }
 
-    override var throttleType: ThrottleType { return ThrottleType.throttle(0.1) }
+    override var throttleType: ThrottleType { return ThrottleType.none }
 
     @objc public func buttonTapped() {
         self.viewModel.buttonWasTapped()

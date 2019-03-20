@@ -23,6 +23,7 @@ import enum RxDataSources.UITableViewRowAnimation
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import protocol UIKit.UIViewControllerTransitionCoordinator
 import struct Foundation.IndexPath
+import struct Foundation.UUID
 import struct Foundation.DispatchQoS
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
@@ -132,8 +133,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
     */
     internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
         qos: DispatchQoS.userInitiated,
-        internalSerialQueueName: "Scheduler",
-        leeway: DispatchTimeInterval.never
+        internalSerialQueueName: "\(UUID().uuidString)"
     )
 
     // MARK: Computed Properties
