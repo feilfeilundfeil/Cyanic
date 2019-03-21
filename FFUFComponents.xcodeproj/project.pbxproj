@@ -245,7 +245,6 @@
 		1437BDD42215B57800A35FFE /* StaticTextComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14D29B132244103900F8450D /* New Group */,
 				14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */,
 				1437BDD52215B75100A35FFE /* StaticTextComponent.swift */,
 				1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */,
@@ -429,13 +428,6 @@
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		14D29B132244103900F8450D /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		14D5112822313D8400EEAC0F /* ChildVCComponent */ = {
