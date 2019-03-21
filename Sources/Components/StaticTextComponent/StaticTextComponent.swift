@@ -34,6 +34,8 @@ public struct StaticTextComponent: StaticTextComponentType {
 
     public var id: String
 
+    public var width: CGFloat = 0.0
+
     public var text: Text = Text.unattributed("")
 
     public var font: UIFont = UIFont.systemFont(ofSize: 13.0)
@@ -44,8 +46,6 @@ public struct StaticTextComponent: StaticTextComponentType {
 
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
-
-    public var width: CGFloat = Constants.screenWidth
 
     // sourcery: skipHashing, skipEquality 
     public var alignment: Alignment = Alignment.centerLeading

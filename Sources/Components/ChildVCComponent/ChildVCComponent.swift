@@ -7,7 +7,7 @@
 //
 
 import class UIKit.UIViewController
-import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 
 // sourcery: AutoComponentType,AutoGenerateComponent,RequiredVariables
 // sourcery: ComponentLayout = "ChildVCComponentLayout"
@@ -30,9 +30,11 @@ public struct ChildVCComponent: ChildVCComponentType {
     // sourcery: skipHashing, skipEquality 
     public weak var parentVC: UIViewController?
 
-    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 250.0)
-
     public var id: String
+
+    public var width: CGFloat = 0.0
+
+    public var height: CGFloat = 44.0
 
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ChildVCComponentLayout(component: self) }

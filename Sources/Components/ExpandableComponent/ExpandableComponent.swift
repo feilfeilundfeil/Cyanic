@@ -35,12 +35,12 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var id: String
 
+    public var width: CGFloat = 0.0
+
     // sourcery: skipHashing, skipEquality 
     public var contentLayout: ExpandableContentLayout = EmptyContentLayout()
 
     public var backgroundColor: UIColor = UIColor.clear
-
-    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 44.0)
 
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
@@ -59,6 +59,8 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in
         fatalError("This default closure must be replaced!")
     }
+
+    public var height: CGFloat = 44.0
 
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ExpandableComponentLayout(component: self) }

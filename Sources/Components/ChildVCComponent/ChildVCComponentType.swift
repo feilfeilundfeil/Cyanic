@@ -7,13 +7,13 @@
 //
 
 import class UIKit.UIViewController
-import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 
 // sourcery: AutoEquatable,AutoHashable
 // sourcery: Component = ChildVCComponent
 /// ChildVCComponentType is a protocol for Component data structures that want to show other UIViewControllers as a
 /// child UIViewController to the BaseComponentVC.
-public protocol ChildVCComponentType: Component, CustomStringConvertible {
+public protocol ChildVCComponentType: StaticHeightComponent, CustomStringConvertible {
 
     // sourcery: skipHashing, skipEquality
     // sourcery: defaultValue = "InvalidChildComponentVC()", isLazy
@@ -24,11 +24,6 @@ public protocol ChildVCComponentType: Component, CustomStringConvertible {
     // sourcery: isWeak
     /// The parent UIViewController instance of the child VC. It is usually the BaseComponentVC.
     var parentVC: UIViewController? { get set }
-
-    // sourcery: defaultValue = "CGSize(width: Constants.screenWidth, height: 250.0)"
-    /// The size of the UICollectionViewCell that this Component is currently representing.
-    /// The default value is CGSize(width: Constants.screenWidth, height: 250.0).
-    var size: CGSize { get set }
 
 }
 

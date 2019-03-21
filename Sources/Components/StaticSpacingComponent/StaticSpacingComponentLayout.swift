@@ -21,7 +21,7 @@ import struct LayoutKit.Flexibility
 public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     public init(component: StaticSpacingComponent) {
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: component.width, height: component.height)
         super.init(
             minWidth: size.width,
             maxWidth: size.width,

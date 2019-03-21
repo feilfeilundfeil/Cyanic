@@ -23,7 +23,7 @@ import struct UIKit.UIEdgeInsets
 // sourcery: Component = ExpandableComponent
 /// ExpandableComponentType is a protocol for Component data structures that want to function like section headers
 /// with content that can be hidden / shown on tap.
-public protocol ExpandableComponentType: Component {
+public protocol ExpandableComponentType: StaticHeightComponent {
 
     // sourcery: skipHashing, skipEquality
     // sourcery: defaultValue = "EmptyContentLayout()"
@@ -33,11 +33,6 @@ public protocol ExpandableComponentType: Component {
     // sourcery: defaultValue = UIColor.clear
     /// The backgroundColor for the entire content of the ExpandableComponentType. The default value is UIColor.clear.
     var backgroundColor: UIColor { get set }
-
-    // sourcery: defaultValue = "CGSize(width: Constants.screenWidth, height: 44.0)"
-    /// The size of the UICollectionViewCell that this Component is currently representing.
-    /// The default value is CGSize(width: Constants.screenWidth, height: 44.0).
-    var size: CGSize { get set }
 
     // sourcery: defaultValue = UIEdgeInsets.zero
     // sourcery: skipHashing, skipEquality

@@ -10,7 +10,7 @@ import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
 import struct Alacrity.AlacrityStyle
-import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
@@ -18,7 +18,7 @@ import struct UIKit.UIEdgeInsets
 // sourcery: AutoEquatable,AutoHashable
 // sourcery: Component = ButtonComponent
 /// ButtonComponentType is a protocol for Components that represents a UIButton.
-public protocol ButtonComponentType: Component {
+public protocol ButtonComponentType: StaticHeightComponent {
 
     // sourcery: defaultValue = ButtonLayoutType.system
     /// The ButtonLayoutType which maps to UIButton.ButtonType. The default value is .system.
@@ -27,11 +27,6 @@ public protocol ButtonComponentType: Component {
     // sourcery: defaultValue = """"
     /// The title displayed as text on the UIButton. The default value is an empty string: "".
     var title: String { get set }
-
-    // sourcery: defaultValue = "CGSize(width: Constants.screenWidth, height: 44.0)"
-    /// The size of the UICollectionViewCell that this Component is currently representing.
-    /// The default value is CGSize(width: Constants.screenWidth, height: 44.0).
-    var size: CGSize { get set }
 
     // sourcery: defaultValue = UIEdgeInsets.zero
     // sourcery: skipHashing, skipEquality

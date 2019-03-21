@@ -11,7 +11,7 @@ import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
 import struct Alacrity.AlacrityStyle
-import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
@@ -35,8 +35,6 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var title: String = ""
 
-    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 44.0)
-
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
@@ -55,6 +53,10 @@ public struct ButtonComponent: ButtonComponentType {
     public var onTap: () -> Void = { print("Hello World \(#file)") }
 
     public var id: String
+
+    public var width: CGFloat = 0.0
+
+    public var height: CGFloat = 44.0
 
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ButtonComponentLayout(component: self) }

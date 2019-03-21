@@ -132,7 +132,7 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
         components.staticSpacingComponent {
             $0.id = "Blah"
             $0.backgroundColor = UIColor.yellow
-            $0.size = CGSize(width: self.width, height: 44.0)
+            $0.height = 44.0
         }
 
     }

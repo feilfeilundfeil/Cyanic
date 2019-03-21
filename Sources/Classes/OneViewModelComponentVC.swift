@@ -49,7 +49,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
                 stateObservable = self.viewModel.state
         }
 
-        let observable: Observable<(CGFloat?, ConcreteState)> = Observable
+        let observable: Observable<(CGFloat, ConcreteState)> = Observable
             .combineLatest(self._width, stateObservable)
 
         // Call buildComponents method when a new element in ViewModel's state is emitted
@@ -60,10 +60,10 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
         // in executing operations in quick succession when it is throttled anyway.
         observable
             .observeOn(self.scheduler)
-            .map { [weak self] (width: CGFloat?, state: ConcreteState) -> [AnyComponent] in
-                guard let s = self, let width = width else { return [] }
+            .map { [weak self] (width: CGFloat, state: ConcreteState) -> [AnyComponent] in
+                guard let s = self else { return [] }
                 s.width = width
-                var array: ComponentsArray = ComponentsArray()
+                var array: ComponentsArray = ComponentsArray(width: width)
                 s.buildComponents(&array, state: state)
                 return array.components
             }

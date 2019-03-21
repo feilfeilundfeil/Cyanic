@@ -94,7 +94,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                 $0.id = "Child"
                 $0.childVC = ChildVC()
                 $0.parentVC = s
-                $0.size = CGSize(width: width, height: 200.0)
+                $0.height = 200.0
             }
         }
 
@@ -115,7 +115,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.isExpanded = state.expandableDict[firstID] ?? false
             $0.setExpandableState = s.viewModel.setExpandableState
             $0.backgroundColor = UIColor.white
-            $0.size = CGSize(width: width, height: 55.0)
+            $0.height = 55.0
             $0.insets = expandableContentInsets
             $0.style = AlacrityStyle<UIView> { (view: UIView) -> Void in
                 view.subviews.forEach { $0.removeFromSuperview() }
@@ -144,7 +144,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         }
         components.staticSpacingComponent {
             $0.id = "Second"
-            $0.size = CGSize(width: width, height: 50.0)
+            $0.height = 50.0
             $0.backgroundColor = UIColor.black
         }
 
@@ -162,7 +162,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.setExpandableState = s.viewModel.setExpandableState
             $0.insets = expandableContentInsets
             $0.backgroundColor = UIColor.lightGray
-            $0.size = CGSize(width: width, height: 55.0)
+            $0.height = 55.0
         }
 
         if secondExpandable.isExpanded {
@@ -188,7 +188,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         let buttonConfiguration: (String, UIColor, inout ButtonComponent) -> Void = { id, color, button in
             button.id = id
             button.title = id
-            button.size = CGSize(width: width, height: 200.0)
+            button.height = 200.0
             button.style = style.modifying(with: { $0.backgroundColor = color })
             button.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
             button.onTap = { print("Hello World, \(id)") }
@@ -202,7 +202,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
         components.staticSpacingComponent {
             $0.id = "Second"
-            $0.size = CGSize(width: width, height: 100.0)
+            $0.height = 100.0
             $0.backgroundColor = UIColor.brown
         }
 

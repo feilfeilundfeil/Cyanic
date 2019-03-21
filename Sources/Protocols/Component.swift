@@ -8,6 +8,7 @@
 
 import class RxSwift.DisposeBag
 import protocol Differentiator.IdentifiableType
+import struct CoreGraphics.CGFloat
 
 /**
  Component is the data model representation of the UICollectionViewCell rendered on the BaseComponentVC.
@@ -23,6 +24,11 @@ public protocol Component: IdentifiableType, Copyable, UserInterfaceModel where 
     /// via Copyable protocol
     var id: String { get set }
 
+    // sourcery: defaultValue = "0.0"
+    /// The width of the UICollectionViewCell that hosts the content created by the Component.
+    /// This should not be modified because it will be set by the framework. Mutating this won't do anything.
+    var width: CGFloat { get set }
+
 }
 
 public extension Component {
@@ -35,5 +41,14 @@ public extension Component {
     func asAnyComponent() -> AnyComponent {
         return AnyComponent(self)
     }
+
+}
+
+public protocol StaticHeightComponent: Component {
+
+    // sourcery: defaultValue = "44.0"
+    /// The width of the UICollectionViewCell that hosts the content created by the Component.
+    /// The default value is 44.0
+    var height: CGFloat { get set }
 
 }

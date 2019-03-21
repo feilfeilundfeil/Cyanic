@@ -15,6 +15,9 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.2):
     - RxAtomic (>= 4.4.2, ~> 4.4)
+  - RxTest (4.4.2):
+    - RxAtomic (>= 4.4.2, ~> 4.4)
+    - RxSwift (>= 4.4.2, ~> 4.4)
   - SideMenu (5.0.3)
   - Sourcery (0.16.0)
 
@@ -27,6 +30,7 @@ DEPENDENCIES:
   - Quick
   - RxDataSources
   - RxSwift
+  - RxTest
   - SideMenu
   - Sourcery
 
@@ -41,6 +45,7 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - RxTest
     - SideMenu
     - Sourcery
 
@@ -70,9 +75,10 @@ SPEC CHECKSUMS:
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
+  RxTest: 6433d5b6229f5de424fa534bc22b5e6c38b0b671
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
 
-PODFILE CHECKSUM: 1847599b128ddb0d812fbd0e209b4fc2d226ab58
+PODFILE CHECKSUM: 756dcec9d65c9d6ed985b52bdf9e3c560e4c8578
 
 COCOAPODS: 1.6.1

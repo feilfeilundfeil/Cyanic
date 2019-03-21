@@ -26,7 +26,7 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
      */
     public init(component: ChildVCComponent) {
         var component: ChildVCComponent = component
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: component.width, height: component.height)
         let childVC: ChildComponentVC = component.childVC
         let parentVC: UIViewController? = component.parentVC
 

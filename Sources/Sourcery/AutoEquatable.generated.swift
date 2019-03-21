@@ -28,36 +28,40 @@ extension ButtonComponent: Equatable {}
 public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
     guard lhs.type == rhs.type else { return false }
     guard lhs.title == rhs.title else { return false }
-    guard lhs.size == rhs.size else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
     return true
 }
 // MARK: - ChildVCComponent AutoEquatable
 extension ChildVCComponent: Equatable {}
 public func == (lhs: ChildVCComponent, rhs: ChildVCComponent) -> Bool {
-    guard lhs.size == rhs.size else { return false }
     guard lhs.name == rhs.name else { return false }
     guard lhs.description == rhs.description else { return false }
     guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
     return true
 }
 // MARK: - ExpandableComponent AutoEquatable
 extension ExpandableComponent: Equatable {}
 public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
-    guard lhs.size == rhs.size else { return false }
     guard lhs.chevronSize == rhs.chevronSize else { return false }
     guard lhs.isExpanded == rhs.isExpanded else { return false }
     guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
     return true
 }
 // MARK: - StaticSpacingComponent AutoEquatable
 extension StaticSpacingComponent: Equatable {}
 public func == (lhs: StaticSpacingComponent, rhs: StaticSpacingComponent) -> Bool {
-    guard lhs.size == rhs.size else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
     return true
 }
 // MARK: - StaticTextComponent AutoEquatable
@@ -67,8 +71,8 @@ public func == (lhs: StaticTextComponent, rhs: StaticTextComponent) -> Bool {
     guard lhs.font == rhs.font else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.lineFragmentPadding == rhs.lineFragmentPadding else { return false }
-    guard lhs.width == rhs.width else { return false }
     guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
     return true
 }
 

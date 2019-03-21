@@ -119,9 +119,10 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
      This Observable is filtered so it doesn't repeat the duplicate values.
     */
-    internal private(set) lazy var _width: Observable<CGFloat?> = self.view.rx
+    internal private(set) lazy var _width: Observable<CGFloat> = self.view.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
-        .map { $0?.width }
+        .filter { $0?.width != nil && $0?.width != 0.0 }
+        .map { $0!.width } // swiftlint:disable:this force_unwrapping
         .distinctUntilChanged()
 
     internal var _cellTypes: Set<MetaType<ComponentCell>>

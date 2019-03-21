@@ -39,9 +39,9 @@ open class TwoViewModelComponentVC<
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        let observable: Observable<(CGFloat?, FirstState, SecondState)>
+        let observable: Observable<(CGFloat, FirstState, SecondState)>
 
-        let combinedObservable: Observable<(CGFloat?, FirstState, SecondState)> = Observable
+        let combinedObservable: Observable<(CGFloat, FirstState, SecondState)> = Observable
             .combineLatest(
                 self._width, self.viewModelOne.state, self.viewModelTwo.state
             )
@@ -67,10 +67,10 @@ open class TwoViewModelComponentVC<
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         observable
-            .map { [weak self] (width: CGFloat?, firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
-                guard let s = self, let width = width else { return [] }
+            .map { [weak self] (width: CGFloat, firstState: FirstState, secondState: SecondState) -> [AnyComponent] in
+                guard let s = self else { return [] }
                 s.width = width
-                var array: ComponentsArray = ComponentsArray()
+                var array: ComponentsArray = ComponentsArray(width: width)
                 s.buildComponents(&array, state1: firstState, state2: secondState)
                 return array.components
             }

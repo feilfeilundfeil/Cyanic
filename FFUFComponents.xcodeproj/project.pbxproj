@@ -42,6 +42,7 @@
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* BaseStateListeningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* BaseStateListeningVC.swift */; };
+		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */; };
 		14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */; };
@@ -154,6 +155,7 @@
 		14B01E41222723E200EE0A9A /* AutoEquatable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatable.stencil; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* BaseStateListeningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateListeningVC.swift; sourceTree = "<group>"; };
+		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContentLayout.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 		1437BDD42215B57800A35FFE /* StaticTextComponent */ = {
 			isa = PBXGroup;
 			children = (
+				14D29B132244103900F8450D /* New Group */,
 				14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */,
 				1437BDD52215B75100A35FFE /* StaticTextComponent.swift */,
 				1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */,
@@ -320,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */,
+				14C324DB2243827E00FA6496 /* StateStoreTests.swift */,
 				145AD75D220B1EBF004F02C2 /* Info.plist */,
 			);
 			path = Tests;
@@ -425,6 +429,13 @@
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		14D29B132244103900F8450D /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
 			sourceTree = "<group>";
 		};
 		14D5112822313D8400EEAC0F /* ChildVCComponent */ = {
@@ -729,6 +740,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+				"${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -745,6 +757,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxTest.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -851,6 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				145AD75C220B1EBF004F02C2 /* BaseViewModelTests.swift in Sources */,
+				14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

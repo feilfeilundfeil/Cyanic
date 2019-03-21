@@ -21,6 +21,7 @@ target 'Tests' do
   pods
   pod 'Quick'
   pod 'Nimble'
+  pod 'RxTest'
 end
 
 target 'Example' do

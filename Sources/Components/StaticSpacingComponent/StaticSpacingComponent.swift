@@ -7,7 +7,7 @@
 //
 
 import class UIKit.UIColor
-import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 
 // sourcery: AutoComponentType,AutoGenerateComponent
 // sourcery: ComponentLayout = StaticSpacingComponentLayout
@@ -26,7 +26,9 @@ public struct StaticSpacingComponent: StaticSpacingComponentType {
 
     public var id: String
 
-    public var size: CGSize = CGSize(width: Constants.screenWidth, height: 44.0)
+    public var width: CGFloat = 0.0
+
+    public var height: CGFloat = 44.0
 
     public var backgroundColor: UIColor = UIColor.clear
 

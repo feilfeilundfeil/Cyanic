@@ -38,7 +38,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         - component: ButtonComponent instance.
     */
     public init(component: ButtonComponent) {
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: component.width, height: component.height)
 
         let serialDisposable: SerialDisposable = SerialDisposable()
         let disposeBag: DisposeBag = DisposeBag()
@@ -82,7 +82,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
     }
 
     deinit {
-        print("ButtonButtonComponentLayout was deallocated")
+        print("ButtonComponentLayout was deallocated")
     }
 
     public let disposeBag: DisposeBag

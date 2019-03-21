@@ -42,11 +42,6 @@ public protocol StaticTextComponentType: Component {
     /// The insets for the textContainerInset in the underlying TextViewLayout. Default value is 0.0.
     var insets: UIEdgeInsets { get set }
 
-    // sourcery: defaultValue = "Constants.screenWidth"
-    /// The width of the UICollectionViewCell that this Component is currently representing.
-    /// The default value is Constants.screenWidth.
-    var width: CGFloat { get set }
-
     // sourcery: defaultValue = Alignment.centerLeading
     // sourcery: skipHashing, skipEquality
     /// The alignment for the underlying TextViewLayout. The default value is Alignment.centerLeading.

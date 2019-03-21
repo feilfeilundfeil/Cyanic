@@ -32,19 +32,11 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
     /**
      Initializer
      - Parameters:
-        - id: The unique identifier used by the ExpandableComponent as a means to map the isExpanded state to the PublishRelay.
-        - contentLayout: The Layout that creates, sizes, and arranges the content-specific UI. Excludes the ChevronView.
-        - backgroundColor: The backgroundColor of the entire content.
-        - height: The height specified for the root UIView.
-        - insets: The insets of the entire content including the ChevronView.
-        - chevronSize: The size applied to the ChevronView.
-        - chevronStyle: The style applied to the ChevronView
-        - relay: The PublishRelay that emits the id and isExpanded state of the ExpandableComponent when the UI is tapped.
-        - disposeBag: The disposeBag of the ExpandableComponent used to dispose of Rx related subscriptions.
-        - isExpanded: The state of the ExpandableComponent used to determine the next Bool value to be emitted by the PublishRelay.
+        - component: ExpandableComponent instance. Properties from this instance are used to configure the view's
+                     appearance and determine the size of the content.
     */
     public init(component: ExpandableComponent) {  // swiftlint:disable:this function_body_length
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: component.width, height: component.height)
         let insets: UIEdgeInsets = component.insets
         let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
             insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),
