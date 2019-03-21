@@ -25,4 +25,5 @@ end
 
 target 'Example' do
   pods
+  pod 'SideMenu'
 end

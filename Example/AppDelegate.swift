@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let viewModel: ExampleViewModel  = ExampleViewModel(initialState: ExampleState.default, isDebugMode: true)
         let vc = ExampleVC(viewModel: viewModel)

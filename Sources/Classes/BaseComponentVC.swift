@@ -47,7 +47,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
      Initializer.
      - Parameters:
         - cellTypes: The different types of ComponentCell to be used in the UICollectionView.
-                    Default argument is [ComponentCell.self].
+                     Default argument is [ComponentCell.self].
     */
     public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
         self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))

@@ -12,6 +12,7 @@ import Alacrity
 import LayoutKit
 import RxCocoa
 import RxSwift
+import SideMenu
 
 class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
 
@@ -41,6 +42,15 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             keyPath2: \ExampleState.expandableDict,
             onNewValue: { print("from a different subscription: \($0)") }
         )
+
+        let rightVC: UISideMenuNavigationController = UISideMenuNavigationController(
+            rootViewController: CompositeVC(viewModelOne: ViewModelA(initialState: StateA.default), viewModelTwo: ViewModelB(initialState: StateB.default)
+            )
+        )
+
+        SideMenuManager.default.menuRightNavigationController = rightVC
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
     
     }
 
@@ -51,15 +61,16 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     }
 
     @objc func nextButtonTapped() {
-        let viewModelA = ViewModelA(initialState: StateA.default)
-        let viewModelB = ViewModelB(initialState: StateB.default)
-
-        let vc = CompositeVC(
-            viewModelOne: viewModelA,
-            viewModelTwo: viewModelB
-        )
-
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
+//        let viewModelA = ViewModelA(initialState: StateA.default)
+//        let viewModelB = ViewModelB(initialState: StateB.default)
+//
+//        let vc = CompositeVC(
+//            viewModelOne: viewModelA,
+//            viewModelTwo: viewModelB
+//        )
+//
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     override func buildComponents(_ components: inout ComponentsArray, state: ExampleState) {
