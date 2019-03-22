@@ -116,6 +116,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             $0.setExpandableState = s.viewModel.setExpandableState
             $0.backgroundColor = UIColor.white
             $0.height = 55.0
+            $0.width = 999_999_999.0
             $0.insets = expandableContentInsets
             $0.style = AlacrityStyle<UIView> { (view: UIView) -> Void in
                 view.subviews.forEach { $0.removeFromSuperview() }
