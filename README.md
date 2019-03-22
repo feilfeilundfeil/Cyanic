@@ -10,7 +10,7 @@
     - Copyable protocol allows structs to be mutated (copied) in place
 - Create the Sourcery template containing the logic to generate extensions for ComponentsArray [✅ 13.03.2019]
 - Create unit tests for BaseViewModel [✅ 17.03.2019]
-- Create unit tests for StateStore
+- Create unit tests for StateStore [✅ 22.03.2019]
 - Create unit tests for BaseComponentVC and its subclasses
 - Change ComponentLayout subclasses to use the Component struct as the argument in initializer
 - Refactor Sourcery template to autogenerate the layout property of Components

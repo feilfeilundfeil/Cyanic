@@ -24,8 +24,10 @@ internal class StateStore<ConcreteState: State> {
     internal init(initialState: ConcreteState) {
         self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
         self.executionRelay
+//            .debounce(0.1, scheduler: self.scheduler)
             .observeOn(self.scheduler)
-//            .debug("Execution Relay", trimOutput: false)
+            .subscribeOn(self.scheduler)
+            .debug("Execution Relay", trimOutput: false)
             .bind(
                 onNext: { [weak self] () -> Void in
                     self?.resolveClosureQueue()
@@ -37,7 +39,10 @@ internal class StateStore<ConcreteState: State> {
     /**
      The scheduler where all pending closures related to State are resolved.
     */
-    private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(qos: DispatchQoS.userInitiated)
+    private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+        qos: DispatchQoS.default,
+        internalSerialQueueName: "\(UUID().uuidString)"
+    )
 
     /**
      The BehaviorRelay that encapsulates State.
