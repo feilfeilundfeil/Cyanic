@@ -106,7 +106,7 @@
 		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewModelComponentVC.swift; sourceTree = "<group>"; };
-		142C45122238F7AB002360F5 /* SwiftGenerateComponents.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = SwiftGenerateComponents.swifttemplate; sourceTree = "<group>"; };
+		142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponentExtensions.swifttemplate; sourceTree = "<group>"; };
 		142C45132238FA27002360F5 /* SwiftGenerateComponents.generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftGenerateComponents.generated.swift; sourceTree = "<group>"; };
 		142C451722392A95002360F5 /* DeprecatedSwiftGenerateComponents.oldswifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeprecatedSwiftGenerateComponents.oldswifttemplate; sourceTree = "<group>"; };
 		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
 		14496DB522273CE000C5C278 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
-		14496DB92228714200C5C278 /* AutoComponentType.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoComponentType.stencil; sourceTree = "<group>"; };
+		14496DB92228714200C5C278 /* AutoGenerateComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponent.stencil; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -376,10 +376,10 @@
 		14B01E3F222723E200EE0A9A /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				14496DB92228714200C5C278 /* AutoComponentType.stencil */,
+				14496DB92228714200C5C278 /* AutoGenerateComponent.stencil */,
 				14B01E41222723E200EE0A9A /* AutoEquatable.stencil */,
 				14B01E40222723E200EE0A9A /* AutoHashable.stencil */,
-				142C45122238F7AB002360F5 /* SwiftGenerateComponents.swifttemplate */,
+				142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */,
 				142C451722392A95002360F5 /* DeprecatedSwiftGenerateComponents.oldswifttemplate */,
 			);
 			path = Templates;

@@ -17,12 +17,12 @@ import struct UIKit.UIEdgeInsets
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 
-// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = StaticTextComponentLayout
 /// StaticTextComponent is a Component that represents static text to be displayed in a UICollectionViewCell.
 public struct StaticTextComponent: StaticTextComponentType {
 
-// sourcery:inline:auto:StaticTextComponent.AutoComponentType
+// sourcery:inline:auto:StaticTextComponent.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:

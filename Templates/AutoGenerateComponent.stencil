@@ -1,6 +1,6 @@
 {% for type in types.all %}
-{% if type|annotated:"AutoComponentType" %}
-// sourcery:inline:auto:{{ type.name }}.AutoComponentType
+{% if type|annotated:"AutoGenerateComponent" %}
+// sourcery:inline:auto:{{ type.name }}.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Foundation
+import struct CoreGraphics.CGSize
 
 public enum ComponentStateValidator {
 
@@ -29,8 +29,20 @@ public enum ComponentStateValidator {
         Bool indicating whether or not the component's state is valid.
     */
     public static func validateExpandableComponent(_ component: ExpandableComponent) -> Bool {
-        let isEmptyContentLayout: Bool = component.contentLayout is EmptyContentLayout
-        return !isEmptyContentLayout
+        let isValidContentLayout: Bool = !(component.contentLayout is EmptyContentLayout)
+        var validations: [Bool] = [isValidContentLayout]
+        if let contentLayout = component.contentLayout as? ImageLabelContentLayout {
+            let size: CGSize = contentLayout.imageSize
+            let isValid: Bool = !(size.width == 0.0 || size.height == 0.0)
+            let errorString = "Your imageSize cannot have zero values otherwise "
+            #if DEBUG
+            print("ExpandableError: \(errorString)")
+            #endif
+            validations.append(isValid)
+        }
+
+        return !validations.contains(false)
+
     }
 
     /**

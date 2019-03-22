@@ -5,7 +5,7 @@ func lowerCamelCaseName(for type: Type) -> String {
 }
 -%>
 public extension ComponentsArray {
-<%_ for type in types.all where type.annotations["AutoGenerateComponent"] != nil {-%>
+<%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
 <%_ let functionName = lowerCamelCaseName(for: type) -%>
     /**
         Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a

@@ -9,12 +9,12 @@
 import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoComponentType,AutoGenerateComponent,RequiredVariables
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension,RequiredVariables
 // sourcery: ComponentLayout = "ChildVCComponentLayout"
 /// A ChildVCComponent is a Component that represents a child UIViewController presented on a UICollectionViewCell.
 public struct ChildVCComponent: ChildVCComponentType {
 
-// sourcery:inline:auto:ChildVCComponent.AutoComponentType
+// sourcery:inline:auto:ChildVCComponent.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:

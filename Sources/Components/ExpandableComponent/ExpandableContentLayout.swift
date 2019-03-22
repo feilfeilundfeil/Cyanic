@@ -124,7 +124,7 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
         - text: String / NSAttributedString to be displayed on the UILabel.
         - font: UIFont used for the String. Default value is UIFont.systemFont(ofSize: 17.0)
         - labelStyle: Styling to be applied on the UILabel. Default value is an empty style.
-        - imageSize: The size for the UIImageView.
+        - imageSize: The size for the UIImageView. This cannot be zero, otherwise LayoutKit forces a crash.
         - imageAlignment: Alignment. The default value is Aligment.aspectFit.
         - imageStyle: Styling to be applied on the UIImageView. Do not set the image here. It will be done for you. Default value is an empty style.
         - spacing: The spacing between the UILabel and UIImageView.

@@ -9,12 +9,12 @@
 import class UIKit.UIColor
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = StaticSpacingComponentLayout
 /// StaticSpacingComponent is a Component that represents static spacing between content / other Components.
 public struct StaticSpacingComponent: StaticSpacingComponentType {
 
-// sourcery:inline:auto:StaticSpacingComponent.AutoComponentType
+// sourcery:inline:auto:StaticSpacingComponent.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:

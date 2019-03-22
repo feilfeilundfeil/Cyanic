@@ -17,13 +17,13 @@ import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoComponentType,AutoGenerateComponent,RequiredVariables
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension,RequiredVariables
 // sourcery: ComponentLayout = ExpandableComponentLayout
 /// An ExpandableComponent is a Component that represents an expandable UI element that shows/hides other UI elements
 /// grouped with it.
 public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
-// sourcery:inline:auto:ExpandableComponent.AutoComponentType
+// sourcery:inline:auto:ExpandableComponent.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:

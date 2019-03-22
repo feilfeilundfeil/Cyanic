@@ -16,12 +16,12 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoComponentType,AutoGenerateComponent
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = ButtonComponentLayout
 /// ButtonComponent is a Component that represents a UIButton.
 public struct ButtonComponent: ButtonComponentType {
 
-// sourcery:inline:auto:ButtonComponent.AutoComponentType
+// sourcery:inline:auto:ButtonComponent.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
      - Parameters:
