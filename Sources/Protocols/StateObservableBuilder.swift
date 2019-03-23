@@ -11,7 +11,7 @@ import protocol RxSwift.SchedulerType
 
 internal protocol StateObservableBuilder {
 
-    func setUpStateObservable<T>(_ observable: Observable<T>)
+    func setUpObservables(with viewModels: [AnyViewModel])
 
 }
 

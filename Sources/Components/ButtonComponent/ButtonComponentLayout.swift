@@ -81,9 +81,5 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         )
     }
 
-    deinit {
-        print("ButtonComponentLayout was deallocated")
-    }
-
     public let disposeBag: DisposeBag
 }

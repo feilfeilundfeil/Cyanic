@@ -58,12 +58,17 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         )
 
         SideMenuManager.default.menuRightNavigationController = rightVC
+        SideMenuManager.default.menuLeftNavigationController = nil
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
     
     }
 
     override var throttleType: ThrottleType { return ThrottleType.none }
+
+    override var viewModels: [AnyViewModel] {
+        return [AnyViewModel(self.viewModel)]
+    }
 
     @objc public func buttonTapped() {
         self.viewModel.buttonWasTapped()

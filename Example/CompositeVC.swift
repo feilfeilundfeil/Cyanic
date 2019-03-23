@@ -81,6 +81,9 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
     }
 
     override var throttleType: ThrottleType { return ThrottleType.debounce(0.1) }
+    override var viewModels: [AnyViewModel] {
+        return [AnyViewModel(self.viewModelOne), AnyViewModel(self.viewModelTwo)]
+    }
 
     @objc func addButtonTapped() {
         self.viewModelOne.addButtonTapped()

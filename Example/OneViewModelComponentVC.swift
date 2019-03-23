@@ -6,6 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
+import FFUFComponents
 import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
@@ -33,7 +34,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.setUpStateObservable(self.viewModel.state)
+//        self.setUpStateObservable(self.viewModel.state)
     }
 
     /**

@@ -26,24 +26,55 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
         internalSerialQueueName: "\(UUID().uuidString)"
     )
 
+    /**
+     The combined state of the ViewModels as a BehviorRelay for debugging purposes.
+    */
+    internal let state: BehaviorRelay<[Any]> = BehaviorRelay<[Any]>(value: [()])
+
     internal let disposeBag: DisposeBag = DisposeBag()
 
     // MARK: Computed Properties
+    /**
+     Limits the frequency of state updates.
+    */
     open var throttleType: ThrottleType { return ThrottleType.none }
 
+    /**
+     The current state of the ViewModels from the state BehaviorRelay.
+    */
+    public var currentState: Any { return self.state.value }
+
+    /**
+     The ViewModels whose state is observed by this BaseStateListeningVC.
+    */
+    open var viewModels: [AnyViewModel] { return [] }
+
     // MARK: Methods
-    internal func setUpStateObservable<T>(_ observable: Observable<T>) {
-        let stateObservable: Observable<T> = self.setUpThrottleType(
-            on: observable,
+    internal func setUpObservables(with viewModels: [AnyViewModel]) {
+        guard !viewModels.isEmpty else { return }
+        let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
+
+        var throttledStateObservable: Observable<[Any]> = self.setUpThrottleType(
+            on: combinedStatesObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
+        .share()
 
-        stateObservable
+        #if DEBUG
+        throttledStateObservable = throttledStateObservable.debug("\(type(of: self))", trimOutput: false)
+        #endif
+
+        throttledStateObservable
+            .subscribeOn(self.scheduler)
+            .bind(to: self.state)
+            .disposed(by: self.disposeBag)
+
+        throttledStateObservable
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
             .bind(
-                onNext: { [weak self] (_: T) -> Void in
+                onNext: { [weak self] (_: [Any]) -> Void in
                     self?.invalidate()
                 }
             )
@@ -55,31 +86,5 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
      should react to changes in state.
     */
     open func invalidate() {}
-
-}
-
-open class OneViewModelStateListeningVC<
-    ConcreteState: State,
-    ConcreteViewModel: BaseViewModel<ConcreteState>
->: BaseStateListeningVC {
-
-    // MARK: Initializers
-    public init(viewModel: ConcreteViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // MARK: UIViewController Lifecycle Methods
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setUpStateObservable(self.viewModel.state)
-    }
-
-    // MARK: Stored Properties
-    public let viewModel: ConcreteViewModel
 
 }

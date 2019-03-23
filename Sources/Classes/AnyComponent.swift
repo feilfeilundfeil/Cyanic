@@ -28,10 +28,6 @@ public final class AnyComponent: IdentifiableType {
         self.identity = AnyHashable(component.identity)
     }
 
-    deinit {
-        print("\(self) was deallocated")
-    }
-
     /**
      The layout from the Component.
     */
