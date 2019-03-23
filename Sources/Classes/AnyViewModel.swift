@@ -8,6 +8,9 @@
 
 import class RxSwift.Observable
 
+/**
+ Type Erased wrapper for BaseViewModels
+*/
 public final class AnyViewModel {
 
     public init<S: State, V: BaseViewModel<S>>(_ viewModel: V) {
@@ -15,7 +18,14 @@ public final class AnyViewModel {
         self.state = viewModel.state.map { $0 as Any }
     }
 
+    /**
+     The underlying BaseViewModel as an Any type
+    */
     public let viewModel: Any
+
+    /**
+     The BaseViewModel's State as an Observable<Any>
+    */
     public let state: Observable<Any>
 
 }

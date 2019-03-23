@@ -37,14 +37,6 @@ open class TwoViewModelComponentVC<
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-//        let combinedObservable = Observable
-//            .combineLatest(self.viewModelOne.state, self.viewModelTwo.state)
-//
-//        self.setUpStateObservable(combinedObservable)
-    }
-
     /**
      The FirstViewModel instance.
      */

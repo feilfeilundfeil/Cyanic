@@ -32,11 +32,6 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-//        self.setUpStateObservable(self.viewModel.state)
-    }
-
     /**
      The ViewModel instance that manages the business logic of this instance of BaseComponentVC
     */

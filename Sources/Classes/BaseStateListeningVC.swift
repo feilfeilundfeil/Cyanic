@@ -50,6 +50,15 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
     open var viewModels: [AnyViewModel] { return [] }
 
     // MARK: Methods
+    /**
+     Creates an Observables based on ThrottleType and binds it to the invalidate method.
+
+     It creates a new Observables based on the ViewModels' States and  BaseStateListeningVC ThrottleType and
+     binds it to the invalidate method so any new State change calls the invalidate method.
+
+     - Parameters:
+     - viewModels: The ViewModels whose States will be observed.
+     */
     internal func setUpObservables(with viewModels: [AnyViewModel]) {
         guard !viewModels.isEmpty else { return }
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()

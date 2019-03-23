@@ -169,9 +169,9 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
     /**
      Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
 
-     This method is a helper that is meant to be used on State Observables only. It creates a
-     new Observables based on the BaseComponenVC's ThrottleType and binds it to the AnyComponents Observable
-     so any new State change creates a new AnyComponents array which in turn updates the UICollectionView.
+     It creates a new Observables based on the ViewModels' States and  BaseComponenVC's ThrottleType and
+     binds it to the AnyComponents Observable so any new State change creates a new AnyComponents array
+     which in turn updates the UICollectionView.
 
      - Parameters:
         - viewModels: The ViewModels whose States will be observed.

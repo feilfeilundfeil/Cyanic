@@ -40,14 +40,6 @@ open class ThreeViewModelComponentVC<
         fatalError("init(coder:) has not been implemented")
     }
 
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-
-//        let combinedObservable: Observable<(FirstState, SecondState, ThirdState)> = Observable
-//            .combineLatest(self.viewModelOne.state, self.viewModelTwo.state, self.viewModelThree.state)
-//        self.setUpStateObservable(combinedObservable)
-    }
-
     /**
      The FirstViewModel instance.
      */
