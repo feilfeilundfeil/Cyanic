@@ -34,9 +34,11 @@ public enum ComponentStateValidator {
         if let contentLayout = component.contentLayout as? ImageLabelContentLayout {
             let size: CGSize = contentLayout.imageSize
             let isValid: Bool = !(size.width == 0.0 || size.height == 0.0)
-            let errorString = "Your imageSize cannot have zero values otherwise "
             #if DEBUG
-            print("ExpandableError: \(errorString)")
+            if !isValid {
+                let errorString = "Your imageSize cannot have zero values"
+                print("ExpandableError: \(errorString)")
+            }
             #endif
             validations.append(isValid)
         }

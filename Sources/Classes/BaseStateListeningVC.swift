@@ -15,7 +15,7 @@ import class UIKit.UIViewController
 import struct Foundation.DispatchQoS
 import struct Foundation.UUID
 
-open class BaseStateListeningVC: UIViewController {
+open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
 
     // MARK: Stored Properties
     /**
@@ -32,6 +32,24 @@ open class BaseStateListeningVC: UIViewController {
     open var throttleType: ThrottleType { return ThrottleType.none }
 
     // MARK: Methods
+    internal func setUpStateObservable<T>(_ observable: Observable<T>) {
+        let stateObservable: Observable<T> = self.setUpThrottleType(
+            on: observable,
+            throttleType: self.throttleType,
+            scheduler: self.scheduler
+        )
+
+        stateObservable
+            .observeOn(self.scheduler)
+            .subscribeOn(self.scheduler)
+            .bind(
+                onNext: { [weak self] (_: T) -> Void in
+                    self?.invalidate()
+                }
+            )
+            .disposed(by: self.disposeBag)
+    }
+
     /**
      When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
      should react to changes in state.
@@ -43,7 +61,7 @@ open class BaseStateListeningVC: UIViewController {
 open class OneViewModelStateListeningVC<
     ConcreteState: State,
     ConcreteViewModel: BaseViewModel<ConcreteState>
-    >: BaseStateListeningVC {
+>: BaseStateListeningVC {
 
     // MARK: Initializers
     public init(viewModel: ConcreteViewModel) {
@@ -58,30 +76,7 @@ open class OneViewModelStateListeningVC<
     // MARK: UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        var observable: Observable<ConcreteState> = self.viewModel.state.observeOn(self.scheduler)
-
-        switch self.throttleType {
-            case .debounce(let interval):
-                observable = observable
-                    .debounce(interval, scheduler: self.scheduler)
-
-            case .throttle(let interval):
-                observable = observable
-                    .throttle(interval, latest: true, scheduler: self.scheduler)
-
-            case .none:
-                break
-        }
-
-        observable
-            .subscribeOn(self.scheduler)
-            .bind(
-                onNext: { [weak self] (_: ConcreteState) -> Void in
-                    self?.invalidate()
-                }
-            )
-            .disposed(by: self.disposeBag)
+        self.setUpStateObservable(self.viewModel.state)
     }
 
     // MARK: Stored Properties

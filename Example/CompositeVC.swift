@@ -92,49 +92,54 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
         self.viewModelTwo.otherButtonTapped()
     }
 
-    override func buildComponents(_ components: inout ComponentsArray, state1: StateA, state2: StateB) {
-        let isTrue: Bool = state1.isTrue && state2.isTrue
-        let width: CGFloat = self.width
-        components.staticTextComponent {
-            $0.id = "First"
-            $0.text = Text.unattributed(isTrue ? "This should say true when both are true" : "False")
-            $0.backgroundColor = UIColor.red
-            $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
-            $0.font = UIFont.systemFont(ofSize: 17.0)
-            $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-            $0.width = width
+    override func buildComponents(_ components: inout ComponentsArray) {
+        let width: CGFloat = components.width
+
+        FFUFComponents.withState(
+            viewModel1: self.viewModelOne,
+            viewModel2: self.viewModelTwo
+        ) { (state1: StateA, state2: StateB) -> Void in
+            let isTrue: Bool = state1.isTrue && state2.isTrue
+            components.staticTextComponent {
+                $0.id = "First"
+                $0.text = Text.unattributed(isTrue ? "This should say true when both are true" : "False")
+                $0.backgroundColor = UIColor.red
+                $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
+                $0.font = UIFont.systemFont(ofSize: 17.0)
+                $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+                $0.width = width
+            }
+
+            components.add(
+                StaticTextComponent(id: "Second")
+                    .copy {
+                        $0.text = Text.unattributed(state1.isTrue ? "First state is true" : "False")
+                        $0.backgroundColor = UIColor.gray
+                        $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
+                        $0.font = UIFont.systemFont(ofSize: 17.0)
+                        $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+                        $0.width = width
+                    }
+            )
+
+            components.add(
+                StaticTextComponent(id: "Third")
+                    .copy {
+                        $0.text = Text.unattributed(state2.isTrue ? "Second state is true" : "False")
+                        $0.backgroundColor = UIColor.green
+                        $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
+                        $0.font = UIFont.systemFont(ofSize: 17.0)
+                        $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
+                        $0.width = width
+                    }
+            )
+
+            components.staticSpacingComponent {
+                $0.id = "Blah"
+                $0.backgroundColor = UIColor.yellow
+                $0.height = 44.0
+            }
         }
-
-        components.add(
-            StaticTextComponent(id: "Second")
-                .copy {
-                    $0.text = Text.unattributed(state1.isTrue ? "First state is true" : "False")
-                    $0.backgroundColor = UIColor.gray
-                    $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
-                    $0.font = UIFont.systemFont(ofSize: 17.0)
-                    $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-                    $0.width = width
-                }
-        )
-
-        components.add(
-            StaticTextComponent(id: "Third")
-                .copy {
-                    $0.text = Text.unattributed(state2.isTrue ? "Second state is true" : "False")
-                    $0.backgroundColor = UIColor.green
-                    $0.style = AlacrityStyle<UITextView> { $0.textColor = UIColor.black }
-                    $0.font = UIFont.systemFont(ofSize: 17.0)
-                    $0.insets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-                    $0.width = width
-                }
-        )
-
-        components.staticSpacingComponent {
-            $0.id = "Blah"
-            $0.backgroundColor = UIColor.yellow
-            $0.height = 44.0
-        }
-
     }
 
 }

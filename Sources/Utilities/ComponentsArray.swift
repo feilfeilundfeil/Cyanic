@@ -26,7 +26,7 @@ public struct ComponentsArray {
     /**
      The width of the UICollectionView
     */
-    internal let width: CGFloat
+    public let width: CGFloat
 
     /**
      The AnyComponent array mutated by this ComponentsArray.

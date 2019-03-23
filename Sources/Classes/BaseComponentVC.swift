@@ -40,7 +40,7 @@ import struct UIKit.UIEdgeInsets
  boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
  BaseComponentVC is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
 */
-open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout {
+open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout, StateObservableBuilder {
 
     // MARK: Initializers
     /**
@@ -127,7 +127,7 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
 
     internal var _cellTypes: Set<MetaType<ComponentCell>>
     internal let disposeBag: DisposeBag = DisposeBag()
-    public internal(set) var width: CGFloat = 0.0
+    internal var width: CGFloat = 0.0
 
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
@@ -179,6 +179,58 @@ open class BaseComponentVC: UIViewController, UICollectionViewDelegateFlowLayout
         self.collectionView.register(cellType, forCellWithReuseIdentifier: cellType.identifier)
         self._cellTypes.insert(MetaType<ComponentCell>(cellType))
     }
+
+    /**
+     Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
+
+     This method is a helper that is meant to be used on State Observables only. It creates a
+     new Observables based on the BaseComponenVC's ThrottleType and binds it to the AnyComponents Observable
+     so any new State change creates a new AnyComponents array which in turn updates the UICollectionView.
+
+     - Parameters:
+        - observable: State Observable. It may be a tuple of Observables if there are more than on States to
+                      observe.
+    */
+    internal func setUpStateObservable<T>(_ observable: Observable<T>) {
+        let stateObservable: Observable<T> = self.setUpThrottleType(
+            on: observable,
+            throttleType: self.throttleType,
+            scheduler: self.scheduler
+        )
+
+        let combinedObservable: Observable<(CGFloat, T)> = Observable.combineLatest(self._width, stateObservable)
+
+        // Call buildComponents method when a new element in combinedObservable is emitted
+        // Bind the new AnyComponents array to the _components BehaviorRelay.
+        // NOTE:
+        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
+        // UICollectionView has problems with fast updates. So, there is no point in
+        // in executing operations in quick succession when it is throttled anyway.
+        combinedObservable
+            .observeOn(self.scheduler)
+            .map { [weak self] (width: CGFloat, _: T) -> [AnyComponent] in
+                guard let s = self else { return [] }
+                s.width = width
+                var array: ComponentsArray = ComponentsArray(width: width)
+                s.buildComponents(&array)
+                return array.components
+            }
+            .subscribeOn(self.scheduler)
+            .bind(to: self._components)
+            .disposed(by: self.disposeBag)
+    }
+
+    /**
+     Builds the AnyComponents array.
+
+     This is where you create for logic to add Components to the ComponentsArray data structure. This method is
+     called every time the State of your ViewModels change. You can access the State(s) via the FFUFComponent enum's
+     static functions.
+
+     - Parameters:
+        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
+    */
+    open func buildComponents(_ components: inout ComponentsArray) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
