@@ -1,7 +1,8 @@
 // Generated using Sourcery 0.16.0 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
-public extension ComponentsArray {
+public extension ComponentsController {
+
     /**
         Generates a ButtonComponent instance and configures its properties with the given closure. You must provide a
         unique id in the configuration block, otherwise it will force a fatalError.
@@ -105,5 +106,4 @@ public extension ComponentsArray {
         self.add(mutableComponent)
         return mutableComponent
     }
-
 }

@@ -61,9 +61,6 @@ public struct ButtonComponent: ButtonComponentType {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ButtonComponentLayout(component: self) }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
     public var identity: ButtonComponent { return self }
 // sourcery:end
 }

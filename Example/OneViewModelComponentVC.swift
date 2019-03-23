@@ -25,7 +25,7 @@ open class OneViewModelComponentVC<ConcreteState: State, ConcreteViewModel: Base
     */
     public init(viewModel: ConcreteViewModel) {
         self.viewModel = viewModel
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     public required init?(coder aDecoder: NSCoder) {

@@ -39,9 +39,6 @@ public struct ChildVCComponent: ChildVCComponentType {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ChildVCComponentLayout(component: self) }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
     public var identity: ChildVCComponent { return self }
 // sourcery:end
 }

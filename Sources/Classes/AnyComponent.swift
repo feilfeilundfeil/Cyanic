@@ -24,7 +24,6 @@ public final class AnyComponent: IdentifiableType {
         - component: The Component instance.
     */
     public init<C: Component>(_ component: C) {
-        self.cellType = component.cellType
         self.identity = AnyHashable(component.identity)
     }
 
@@ -36,33 +35,9 @@ public final class AnyComponent: IdentifiableType {
     }
 
     /**
-     The cellType from the Component.
-    */
-    public let cellType: ComponentCell.Type
-
-    /**
      The underlying Component instance wrapped in an AnyHashable type erased container.
     */
     public let identity: AnyHashable
-
-}
-
-public extension AnyComponent {
-
-    /**
-     Dequeues the correct cellType for the given Component on the BaseComponentsVC's UICollectionView.
-     - Parameters:
-         - collectionView: The UICollectionView dequeuing the UICollectionViewCell
-         - cellType: The UICollectionViewCell subclass type with the identifier
-         - indexPath: The indexPath in the UICollectionView for the UICollectionViewCell.
-    */
-    func dequeueReusableCell(
-        in collectionView: UICollectionView,
-        as cellType: ComponentCell.Type,
-        for indexPath: IndexPath
-    ) -> UICollectionViewCell? {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: cellType.identifier, for: indexPath)
-    }
 
 }
 

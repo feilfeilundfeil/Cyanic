@@ -57,6 +57,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
             )
         )
 
+        SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuRightNavigationController = rightVC
         SideMenuManager.default.menuLeftNavigationController = nil
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
@@ -90,11 +91,11 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    override func buildComponents(_ components: inout ComponentsArray) {
+    override func buildComponents(_ components: inout ComponentsController) {
         print("BUILD")
         let width: CGFloat = components.width
 
-        FFUFComponents.withState(of: self.viewModel) { (state: ExampleState) -> Void in
+        withState(of: self.viewModel) { (state: ExampleState) -> Void in
 
             components.staticTextComponent {
                 $0.id = "First"

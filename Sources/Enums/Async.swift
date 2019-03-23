@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import Foundation
-import Kio
+import struct Kio.MetaType
 
 /**
  Represents some data/model that is must be retrieved some time after the screen in rendered.

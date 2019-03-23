@@ -65,9 +65,6 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return ExpandableComponentLayout(component: self) }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
     public var identity: ExpandableComponent { return self }
 // sourcery:end
 

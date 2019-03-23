@@ -4,9 +4,11 @@ func lowerCamelCaseName(for type: Type) -> String {
     return name.prefix(1).lowercased() + name.dropFirst()
 }
 -%>
-public extension ComponentsArray {
+// sourcery:file:ComponentsController+FFUFComponents.swift
+public extension ComponentsController {
 <%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
 <%_ let functionName = lowerCamelCaseName(for: type) -%>
+
     /**
         Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a
         unique id in the configuration block, otherwise it will force a fatalError.
@@ -30,6 +32,6 @@ public extension ComponentsArray {
         self.add(mutableComponent)
         return mutableComponent
     }
-
 <%_ } -%>
 }
+// sourcery:end

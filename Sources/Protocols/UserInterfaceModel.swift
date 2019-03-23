@@ -17,9 +17,4 @@ public protocol UserInterfaceModel {
     /// The LayoutKit related class that will calculate size, location and configuration of the subviews in the ComponentCell
     var layout: ComponentLayout { get }
 
-    // sourcery: defaultValue = ComponentCell.self
-    // sourcery: skipHashing,skipEquality
-    /// The ComponentCell subclass used as the root view for the subviews.
-    var cellType: ComponentCell.Type { get }
-
 }

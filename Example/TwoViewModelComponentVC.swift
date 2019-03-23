@@ -30,7 +30,7 @@ open class TwoViewModelComponentVC<
     public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     public required init?(coder aDecoder: NSCoder) {

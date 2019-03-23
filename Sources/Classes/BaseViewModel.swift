@@ -31,7 +31,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
     /**
      Used to mutate the current State object of the ViewModelType.
      Runs the block given twice to make sure the same State is produced. Otherwise throws a fatalError.
-     When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsArray.
+     When run successfully, it emits a value to BaseComponentsVC that tells it to rebuild its ComponentsController.
      - Parameters:
         - block:        The closure that contains mutating logic on the State object.
         - mutableState: The State to be mutated by the reducer.

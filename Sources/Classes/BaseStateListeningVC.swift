@@ -17,6 +17,11 @@ import struct Foundation.UUID
 
 open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
 
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setUpObservables(with: self.viewModels)
+    }
+
     // MARK: Stored Properties
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
@@ -69,30 +74,30 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
             scheduler: self.scheduler
         )
         .share()
+        .observeOn(self.scheduler)
+        .subscribeOn(self.scheduler)
 
         #if DEBUG
         throttledStateObservable = throttledStateObservable.debug("\(type(of: self))", trimOutput: false)
         #endif
 
         throttledStateObservable
-            .subscribeOn(self.scheduler)
+            .debug("\(type(of: self))", trimOutput: false)
             .bind(to: self.state)
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
-            .observeOn(self.scheduler)
-            .subscribeOn(self.scheduler)
-            .bind(
-                onNext: { [weak self] (_: [Any]) -> Void in
-                    self?.invalidate()
-                }
-            )
+            .bind { [weak self] (_: [Any]) -> Void in
+                self?.invalidate()
+            }
             .disposed(by: self.disposeBag)
     }
 
     /**
      When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
      should react to changes in state.
+
+     When overriding, no need to call super because it does nothing.
     */
     open func invalidate() {}
 

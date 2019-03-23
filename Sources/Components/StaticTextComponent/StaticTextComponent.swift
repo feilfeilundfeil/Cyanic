@@ -59,9 +59,6 @@ public struct StaticTextComponent: StaticTextComponentType {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return StaticTextComponentLayout(component: self) }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
     public var identity: StaticTextComponent { return self }
 // sourcery:end
 }

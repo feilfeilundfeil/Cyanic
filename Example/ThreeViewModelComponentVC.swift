@@ -33,7 +33,7 @@ open class ThreeViewModelComponentVC<
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
         self.viewModelThree = viewModelThree
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     public required init?(coder aDecoder: NSCoder) {

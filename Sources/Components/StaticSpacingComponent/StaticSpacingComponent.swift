@@ -35,9 +35,6 @@ public struct StaticSpacingComponent: StaticSpacingComponentType {
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return StaticSpacingComponentLayout(component: self) }
 
-    // sourcery: skipHashing, skipEquality 
-    public let cellType: ComponentCell.Type = ComponentCell.self
-
     public var identity: StaticSpacingComponent { return self }
 // sourcery:end
 }

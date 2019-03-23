@@ -28,7 +28,6 @@ import struct Foundation.DispatchQoS
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct CoreGraphics.CGFloat
-import struct Kio.MetaType
 import struct RxCocoa.KeyValueObservingOptions
 import struct RxDataSources.AnimatableSectionModel
 import struct RxDataSources.AnimationConfiguration
@@ -42,22 +41,6 @@ import struct UIKit.UIEdgeInsets
 */
 open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLayout {
 
-    // MARK: Initializers
-    /**
-     Initializer.
-     - Parameters:
-        - cellTypes: The different types of ComponentCell to be used in the UICollectionView.
-                     Default argument is [ComponentCell.self].
-    */
-    public init(cellTypes: [ComponentCell.Type] = [ComponentCell.self]) {
-        self._cellTypes = Set<MetaType<ComponentCell>>(cellTypes.map(MetaType<ComponentCell>.init))
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // MARK: UIViewController Lifecycle Methods
     override open func loadView() {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
@@ -68,10 +51,8 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        // Register the required ConfigurationCell subclasses
-        for cellType in self._cellTypes {
-            self.collectionView.register(cellType.base.self, forCellWithReuseIdentifier: cellType.base.identifier)
-        }
+
+        self.collectionView.register(ComponentCell.self, forCellWithReuseIdentifier: ComponentCell.identifier)
 
         // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout,
         // UICollectionViewDelegate, and UIScrollViewDelegate
@@ -81,15 +62,16 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
         // swiftlint:disable:next line_length
         let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-                guard let cell = component.dequeueReusableCell(in: cv, as: component.cellType, for: indexPath) as? ComponentCell
+                guard let cell = cv.dequeueReusableCell(
+                    withReuseIdentifier: ComponentCell.identifier,
+                    for: indexPath
+                ) as? ComponentCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
                 return cell
             }
         )
-
-        self.setUpObservables(with: self.viewModels)
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
@@ -125,7 +107,6 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
         .map { $0!.width } // swiftlint:disable:this force_unwrapping
         .distinctUntilChanged()
 
-    internal var _cellTypes: Set<MetaType<ComponentCell>>
     internal var width: CGFloat = 0.0
 
     // MARK: Computed Properties
@@ -140,11 +121,6 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
         return layout
     }
 
-    /**
-     A Set containing the different kinds of ComponentCell subclasses registered for this UICollectionView.
-    */
-    public var cellTypes: Set<MetaType<ComponentCell>> { return self._cellTypes }
-
     // MARK: Views
     /**
      The UICollectionView instance managed by this BaseComponentVC subclass.
@@ -152,20 +128,6 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
     open var collectionView: UICollectionView { return self.view as! UICollectionView } // swiftlint:disable:this force_cast
 
     // MARK: Functions
-    /**
-     Adds a new ComponentCell subclass to the cellTypes Set and registers it to the UICollectionView if it doesn't have it.
-     Otherwise, does nothing.
-     - Parameters:
-        - cellType: The ComponentCell.Type
-    */
-    public final func add(cellType: ComponentCell.Type) {
-        let newMetaType: MetaType<ComponentCell> = MetaType<ComponentCell>(cellType)
-        guard !self._cellTypes.contains(newMetaType) else { return }
-
-        self.collectionView.register(cellType, forCellWithReuseIdentifier: cellType.identifier)
-        self._cellTypes.insert(MetaType<ComponentCell>(cellType))
-    }
-
     /**
      Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
 
@@ -189,16 +151,8 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
             scheduler: self.scheduler
         )
         .share()
-
-        throttledStateObservable
-            .subscribeOn(self.scheduler)
-            .debug("\(type(of: self))", trimOutput: false)
-            .map { (width: CGFloat, states: [Any]) -> [Any] in
-                let width: Any = width as Any
-                return [width] + states
-            }
-            .bind(to: self.state)
-            .disposed(by: self.disposeBag)
+        .observeOn(self.scheduler)
+        .subscribeOn(self.scheduler)
 
         // Call buildComponents method when a new element in combinedObservable is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay.
@@ -207,16 +161,29 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
-            .observeOn(self.scheduler)
             .map { [weak self] (width: CGFloat, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s.width = width
-                var array: ComponentsArray = ComponentsArray(width: width)
-                s.buildComponents(&array)
-                return array.components
+                var controller: ComponentsController = ComponentsController(width: width)
+                s.buildComponents(&controller)
+                return controller.components
             }
-            .subscribeOn(self.scheduler)
             .bind(to: self._components)
+            .disposed(by: self.disposeBag)
+
+        throttledStateObservable
+            .debug("\(type(of: self))", trimOutput: false)
+            .map { (width: CGFloat, states: [Any]) -> [Any] in
+                let width: Any = width as Any
+                return [width] + states
+            }
+            .bind(to: self.state)
+            .disposed(by: self.disposeBag)
+
+        throttledStateObservable
+            .bind { [weak self] (_: CGFloat, _: [Any]) -> Void in
+                self?.invalidate()
+            }
             .disposed(by: self.disposeBag)
 
     }
@@ -224,14 +191,15 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
     /**
      Builds the AnyComponents array.
 
-     This is where you create for logic to add Components to the ComponentsArray data structure. This method is
+     This is where you create for logic to add Components to the ComponentsController data structure. This method is
      called every time the State of your ViewModels change. You can access the State(s) via the FFUFComponent enum's
      static functions.
 
      - Parameters:
-        - components: The ComponentsArray that is mutated by this method. It is always starts as an empty ComponentsArray.
+        - components: The ComponentsController that is mutated by this method. It is always
+                      starts as an empty ComponentsController.
     */
-    open func buildComponents(_ components: inout ComponentsArray) {}
+    open func buildComponents(_ componentsController: inout ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -1,5 +1,5 @@
 //
-//  ComponentsArray.swift
+//  ComponentsController.swift
 //  FFUFComponents
 //
 //  Created by Julio Miguel Alorro on 2/18/19.
@@ -9,15 +9,17 @@
 import struct CoreGraphics.CGFloat
 
 /**
- ComponentsArray is a helper struct that transforms Component instances into AnyComponent instances and adds it to an array.
+ ComponentsController is a helper struct that transforms Component instances into AnyComponent instances and
+ adds it to an array.
 */
-public struct ComponentsArray {
+public struct ComponentsController {
 
     /**
      Initializer.
      - Parameters:
-        - width: The width of the UICollectionView. Since ComponentsArray adds components to itself, it will also determine
-                 the width of the Component by mutating its width property to the width of the UICollectionView.
+        - width: The width of the UICollectionView. Since ComponentsController adds components to itself, it
+                 will also determine the width of the Component by mutating its width property to the width
+                 of the UICollectionView.
     */
     internal init(width: CGFloat) {
         self.width = width
@@ -29,7 +31,7 @@ public struct ComponentsArray {
     public let width: CGFloat
 
     /**
-     The AnyComponent array mutated by this ComponentsArray.
+     The AnyComponent array mutated by this ComponentsController.
     */
     public private(set) var components: [AnyComponent] = []
 
