@@ -69,7 +69,6 @@
 		3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F77D4A7854D2322155566 /* Pods_Tests.framework */; };
 		9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */; };
 		D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */; };
-		F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */; };
 		F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */; };
 		F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */; };
 /* End PBXBuildFile section */
@@ -197,7 +196,6 @@
 		AAE01790233F583D5FA3BB4C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F000D2A6221C1B6800D10D0D /* .sourcery.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .sourcery.yml; sourceTree = "<group>"; };
-		F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceryProtocols.swift; sourceTree = "<group>"; };
 		F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.generated.swift; sourceTree = "<group>"; };
 		F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -438,7 +436,6 @@
 				14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */,
 				14F6BD7F2229738A008B0692 /* Copyable.swift */,
 				14CBB02A222E7C1C002D2768 /* Selectable.swift */,
-				F000D2A8221C1D8100D10D0D /* SourceryProtocols.swift */,
 				1437BDCB22157FC300A35FFE /* State.swift */,
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
 				14A4576322464434006E75C6 /* StateObservableBuilder.swift */,
@@ -852,7 +849,6 @@
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
-				F000D2A9221C1D8100D10D0D /* SourceryProtocols.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
