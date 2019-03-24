@@ -28,7 +28,9 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     }
 
     deinit {
-        print("\(self) was deallocated")
+        if self.isDebugMode {
+            print("\(self) was deallocated")
+        }
     }
 
     /**
@@ -50,6 +52,9 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
 
 internal extension AbstractViewModel {
 
+    /**
+     Accessor for the State Observable of the AbstractViewModel.
+    */
     internal var state: Observable<StateType> {
         return self.stateStore.state
     }

@@ -9,7 +9,7 @@
 import class RxSwift.Observable
 
 /**
- Type Erased wrapper for BaseViewModels
+ Type Erased wrapper for a BaseViewModel instance.
 */
 public final class AnyViewModel {
 

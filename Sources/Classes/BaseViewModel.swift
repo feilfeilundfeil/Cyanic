@@ -11,10 +11,9 @@ import protocol RxSwift.ObservableType
 import protocol RxSwift.Disposable
 
 /**
- The base class for custom ViewModels to subclass.
- It contains the basic functionality necessary for reading / mutating State. A ViewModel handles
- the business logic necessary to render the screen it is responsible for. ViewModels own state and
- its state can be observed.
+ The base class for custom ViewModels to subclass. It contains the basic functionality necessary for
+ reading / mutating State. A ViewModel handles the business logic necessary to render the screen it
+ is responsible for. ViewModels own state and its state can be observed.
 */
 open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
@@ -94,7 +93,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
                         case .failure(let error):
                             onFailure(error)
                         default:
-                            print("Not a success/failure yet")
+                            if self.isDebugMode {
+                                print("Not a success/failure yet")
+                            }
                     }
                 }
             )
@@ -209,8 +210,8 @@ public extension BaseViewModel where StateType: ExpandableState {
     /**
      Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key
      - Parameters:
-     - id:         The unique identifier of the ExpandableComponent.
-     - isExpanded: The new state of the ExpandableComponent.
+         - id:         The unique identifier of the ExpandableComponent.
+         - isExpanded: The new state of the ExpandableComponent.
     */
     func setExpandableState(id: String, isExpanded: Bool) {
         self.setState(with: { (state: inout StateType) -> Void in

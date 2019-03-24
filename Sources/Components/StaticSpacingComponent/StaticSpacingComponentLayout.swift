@@ -20,6 +20,11 @@ import struct LayoutKit.Flexibility
 */
 public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
+    /**
+     Initializer.
+     - Parameters:
+        - component: The StaticSpacingComponent whose properties define the UI characters of the subviews to be created.
+    */
     public init(component: StaticSpacingComponent) {
         let size: CGSize = component.size
         super.init(

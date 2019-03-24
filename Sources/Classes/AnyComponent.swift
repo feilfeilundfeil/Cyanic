@@ -21,7 +21,7 @@ public final class AnyComponent: IdentifiableType {
      Initializer.
      Keeps the underlying Component in memory and creates a reference to its layout and cellType.
      - Parameters:
-        - component: The Component instance.
+        - component: The Component instance to be type erased.
     */
     public init<C: Component>(_ component: C) {
         self.identity = AnyHashable(component.identity)

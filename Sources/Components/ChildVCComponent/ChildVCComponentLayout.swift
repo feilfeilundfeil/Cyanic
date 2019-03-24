@@ -22,8 +22,8 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
     /**
      Initializer.
      - Parameters:
-         - component: The ChildVCComponent instance.
-     */
+        - component: The ChildVCComponent whose properties define the UI characters of the subviews to be created.
+    */
     public init(component: ChildVCComponent) {
         var component: ChildVCComponent = component
         let size: CGSize = component.size

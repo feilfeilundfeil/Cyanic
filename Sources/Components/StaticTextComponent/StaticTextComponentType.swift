@@ -22,7 +22,8 @@ import struct UIKit.UIEdgeInsets
 public protocol StaticTextComponentType: Component {
 
     // sourcery: defaultValue = "Text.unattributed("")"
-    /// The text to be displayed on the Component as either a String or NSAttributedString. The default value is Text.unattributed("").
+    /// The text to be displayed on the Component as either a String or NSAttributedString. The default
+    /// value is Text.unattributed("").
     var text: Text { get set }
 
     // sourcery: defaultValue = "UIFont.systemFont(ofSize: 13.0)"

@@ -49,7 +49,7 @@ internal class StateStore<ConcreteState: State> {
     internal let stateRelay: BehaviorRelay<ConcreteState>
 
     /**
-     The BehaviorRelay that is responsible for resolving the get and set closures on State.
+     The PublishRelay that is responsible for resolving the withState and setState closures on State.
     */
     private let executionRelay: PublishRelay<Void> = PublishRelay<Void>()
 
@@ -103,9 +103,11 @@ internal class StateStore<ConcreteState: State> {
     /**
      Adds the block to the withStateQueue and makes the executionRelay emit a new value.
      - Parameters:
-     - block: The closure to get the latest value of the StateType.
+        - block: The closure executed on the latest value of the StateType.
+        - currentState: The current value of the State.
+
     */
-    internal func getState(with block: @escaping (ConcreteState) -> Void) {
+    internal func getState(with block: @escaping (_ currentState: ConcreteState) -> Void) {
         self.closureQueue.add(block: block)
         self.executionRelay.accept(())
     }
@@ -113,7 +115,7 @@ internal class StateStore<ConcreteState: State> {
     /**
      Adds the reducer to the setStateQueue and makes the executionRelay emit a new value.
      - Parameters:
-        - block: The closure to set/mutate the StateType.
+        - reducer: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
         self.closureQueue.add(reducer: reducer)
@@ -129,20 +131,20 @@ internal class StateStore<ConcreteState: State> {
 fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
 
     /**
-     The pending withState callbacks.
+     The pending withState closures.
     */
     var withStateQueue: [(State) -> Void] = []
 
     /**
-     The pending setState callbacks.
+     The pending setState closures.
     */
     var setStateQueue: [(inout State) -> Void] = []
 
     /**
      Adds a withState closure to the withStateQueue.
      - Parameters:
-        - block: The callback to be added
-        - state: The current value of the StateType.
+        - block: The withState closure to be added.
+        - state: The current value of the State.
     */
     mutating func add(block: @escaping (_ state: State) -> Void) {
         self.withStateQueue.append(block)
@@ -151,9 +153,10 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
     /**
      Adds a setState closure to the setStateQueue.
      - Parameters:
-        - block: The callback to be added
+        - reducer: The setState closure to be added.
+        - mutableState: The State to be mutated.
     */
-    mutating func add(reducer: @escaping (inout State) -> Void) {
+    mutating func add(reducer: @escaping (_ mutableState: inout State) -> Void) {
         self.setStateQueue.append(reducer)
     }
 
@@ -170,7 +173,7 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
     /**
      Gets all the set callbacks currently in the setQueue and clears the setStateQueue.
      - Returns:
-        all the setState closures currently in the setStateQueue
+        all the setState closures currently in the setStateQueue.
     */
     mutating func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
         guard !self.setStateQueue.isEmpty else { return [] }

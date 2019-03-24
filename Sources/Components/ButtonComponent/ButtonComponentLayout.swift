@@ -33,10 +33,10 @@ import struct UIKit.UIControlEvents
 open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
     /**
-     Initializer
+     Initializer.
      - Parameters:
-        - component: ButtonComponent instance.
-    */
+        - component: The ButtonComponent whose properties define the UI characters of the subviews to be created.
+     */
     public init(component: ButtonComponent) {
         let size: CGSize = component.size
 

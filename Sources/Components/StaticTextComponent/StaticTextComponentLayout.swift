@@ -30,14 +30,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
     /**
      Initializer.
      - Parameters:
-        - text: The text to be displayed on the UITextView.
-        - font: UIFont of the UITextView.
-        - backgroundColor: The backgroundColor for the entire content.
-        - lineFragmentPadding: The lineFragmentPadding of the TextLayout.
-        - insets: The insets for textContainerInset of the TextLayout.
-        - layoutAlignment: The Alignment of the TextLayout
-        - flexibility: The flexibility of the TextLayout.
-        - style: The styling applied to the UITextView.
+        - component: The StaticTextComponent whose properties define the UI characters of the subviews to be created.
     */
     public init(component: StaticTextComponent) {
         let textLayout: TextViewLayout<UITextView> = TextViewLayout<UITextView>(
