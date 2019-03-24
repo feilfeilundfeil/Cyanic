@@ -26,6 +26,7 @@
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
 		1443607B2247B70F0090FCF9 /* BaseStateListeningVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */; };
 		1443607D2247BC0E0090FCF9 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607C2247BC0E0090FCF9 /* TestVC.swift */; };
+		1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */; };
 		14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent.swift */; };
 		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
 		145AD75C220B1EBF004F02C2 /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */; };
@@ -129,6 +130,7 @@
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
 		1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateListeningVCTests.swift; sourceTree = "<group>"; };
 		1443607C2247BC0E0090FCF9 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
+		1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentVCTests.swift; sourceTree = "<group>"; };
 		14496DB522273CE000C5C278 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		14496DB92228714200C5C278 /* AutoGenerateComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponent.stencil; sourceTree = "<group>"; };
 		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +335,7 @@
 				145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */,
 				14C324DB2243827E00FA6496 /* StateStoreTests.swift */,
 				1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */,
+				1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */,
 				145AD75D220B1EBF004F02C2 /* Info.plist */,
 			);
 			path = Tests;
@@ -871,6 +874,7 @@
 				145AD75C220B1EBF004F02C2 /* BaseViewModelTests.swift in Sources */,
 				14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */,
 				1443607B2247B70F0090FCF9 /* BaseStateListeningVCTests.swift in Sources */,
+				1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

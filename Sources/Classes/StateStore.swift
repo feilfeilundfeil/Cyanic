@@ -24,7 +24,6 @@ internal class StateStore<ConcreteState: State> {
     internal init(initialState: ConcreteState) {
         self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
         self.executionRelay
-//            .debounce(0.1, scheduler: self.scheduler)
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
             .debug("Execution Relay", trimOutput: false)
@@ -127,17 +126,17 @@ internal class StateStore<ConcreteState: State> {
  The ClosureQueue is a helper struct that manages the withState and setState calls from the viewModel
  by storing each callback in a withState array or setState array.
 */
-fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_fileprivate
+fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
 
     /**
      The pending withState callbacks.
     */
-    var withStateQueue: [(T) -> Void] = []
+    var withStateQueue: [(State) -> Void] = []
 
     /**
      The pending setState callbacks.
     */
-    var setStateQueue: [(inout T) -> Void] = []
+    var setStateQueue: [(inout State) -> Void] = []
 
     /**
      Adds a withState closure to the withStateQueue.
@@ -145,7 +144,7 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
         - block: The callback to be added
         - state: The current value of the StateType.
     */
-    mutating func add(block: @escaping (_ state: T) -> Void) {
+    mutating func add(block: @escaping (_ state: State) -> Void) {
         self.withStateQueue.append(block)
     }
 
@@ -154,7 +153,7 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
      - Parameters:
         - block: The callback to be added
     */
-    mutating func add(reducer: @escaping (inout T) -> Void) {
+    mutating func add(reducer: @escaping (inout State) -> Void) {
         self.setStateQueue.append(reducer)
     }
 
@@ -163,7 +162,7 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
      - Returns:
         an optional withState closure
     */
-    mutating func dequeueFirstWithStateCallback() -> ((T) -> Void)? {
+    mutating func dequeueFirstWithStateCallback() -> ((State) -> Void)? {
         guard !self.withStateQueue.isEmpty else { return nil }
         return self.withStateQueue.removeFirst()
     }
@@ -173,9 +172,9 @@ fileprivate struct ClosureQueue<T> { // swiftlint:disable:this private_over_file
      - Returns:
         all the setState closures currently in the setStateQueue
     */
-    mutating func dequeueAllSetStateClosures() -> [(inout T) -> Void] {
+    mutating func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
         guard !self.setStateQueue.isEmpty else { return [] }
-        let callbacks: [(inout T) -> Void] = self.setStateQueue
+        let callbacks: [(inout State) -> Void] = self.setStateQueue
         self.setStateQueue = []
         return callbacks
     }

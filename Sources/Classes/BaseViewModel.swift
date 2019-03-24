@@ -43,7 +43,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
     public final func setState(with reducer: @escaping (_ mutableState: inout StateType) -> Void) {
         switch self.isDebugMode {
             case true:
-                self.stateStore.setState { (mutableState: inout StateType) -> Void in
+                self.stateStore.setState(with: { (mutableState: inout StateType) -> Void in
                     let firstState: StateType = mutableState.copy(with: reducer)
                     let secondState: StateType = mutableState.copy(with: reducer)
 
@@ -53,7 +53,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
                     reducer(&mutableState)
 
-                }
+                })
             case false:
                 self.stateStore.setState(with: reducer)
         }
@@ -80,9 +80,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
         self.stateStore.state
-            .map { (state: StateType) -> Async<T> in
+            .map({ (state: StateType) -> Async<T> in
                 return state[keyPath: keyPath]
-            }
+            })
             .distinctUntilChanged()
             .skip(1)
             .observeOn(MainScheduler.asyncInstance)
@@ -117,9 +117,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
         self.stateStore.state
-            .map { (state: StateType) -> T in
+            .map({ (state: StateType) -> T in
                 return state[keyPath: keyPath]
-            }
+            })
             .distinctUntilChanged()
             .skip(1)
             .debug("Select Subscribe state change", trimOutput: false)
@@ -150,9 +150,9 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
         self.stateStore.state
-            .map { (state: StateType) -> SubscribeSelect2<T, U> in
+            .map({ (state: StateType) -> SubscribeSelect2<T, U> in
                 return SubscribeSelect2<T, U>(t: state[keyPath: keyPath1], u: state[keyPath: keyPath2])
-            }
+            })
             .distinctUntilChanged()
             .skip(1)
             .observeOn(MainScheduler.asyncInstance)
@@ -184,13 +184,13 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
         self.stateStore.state
-            .map { (state: StateType) -> SubscribeSelect3<T, U, V> in
+            .map({ (state: StateType) -> SubscribeSelect3<T, U, V> in
                 return SubscribeSelect3<T, U, V>(
                     t: state[keyPath: keyPath1],
                     u: state[keyPath: keyPath2],
                     v: state[keyPath: keyPath3]
                 )
-            }
+            })
             .distinctUntilChanged()
             .skip(1)
             .observeOn(MainScheduler.asyncInstance)
@@ -213,23 +213,23 @@ public extension BaseViewModel where StateType: ExpandableState {
      - isExpanded: The new state of the ExpandableComponent.
     */
     func setExpandableState(id: String, isExpanded: Bool) {
-        self.setState { (state: inout StateType) -> Void in
+        self.setState(with: { (state: inout StateType) -> Void in
             state.expandableDict[id] = isExpanded
-        }
+        })
     }
 }
 
-internal struct SubscribeSelect2<T: Equatable, U: Equatable>: Equatable {
+internal struct SubscribeSelect2<FirstProperty: Equatable, SecondProperty: Equatable>: Equatable {
 
-    internal let t: T
-    internal let u: U
+    internal let t: FirstProperty
+    internal let u: SecondProperty
 
 }
 
-internal struct SubscribeSelect3<T: Equatable, U: Equatable, V: Equatable>: Equatable {
+internal struct SubscribeSelect3<FirstProperty: Equatable, SecondProperty: Equatable, ThirdProperty: Equatable>: Equatable {
 
-    internal let t: T
-    internal let u: U
-    internal let v: V
+    internal let t: FirstProperty
+    internal let u: SecondProperty
+    internal let v: ThirdProperty
 
 }

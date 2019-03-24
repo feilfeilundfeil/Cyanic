@@ -38,7 +38,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         - component: ButtonComponent instance.
     */
     public init(component: ButtonComponent) {
-        let size: CGSize = CGSize(width: component.width, height: component.height)
+        let size: CGSize = component.size
 
         let serialDisposable: SerialDisposable = SerialDisposable()
         let disposeBag: DisposeBag = DisposeBag()

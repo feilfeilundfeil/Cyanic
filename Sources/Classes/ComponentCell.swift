@@ -46,7 +46,7 @@ open class ComponentCell: UICollectionViewCell {
         // Get the rect of the contentView in the main thread.
         let bounds: CGRect = self.contentView.bounds
 
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { () -> Void in
             guard let layout = self.layout else { return }
 
             // Do the size calculation in a background thread
@@ -58,10 +58,10 @@ open class ComponentCell: UICollectionViewCell {
                 .arrangement(within: bounds)
 
             // Size and place the subviews on the main thread
-            DispatchQueue.main.async {
+            DispatchQueue.main.async(execute: { () -> Void in
                 arrangement.makeViews(in: self.contentView)
-            }
-        }
+            })
+        })
     }
 
     override public final func sizeThatFits(_ size: CGSize) -> CGSize {

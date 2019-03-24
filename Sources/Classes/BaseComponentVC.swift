@@ -75,9 +75,9 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
-            .map { (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
+            .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
                 return [AnimatableSectionModel(model: "Test", items: components)]
-            }
+            })
             .drive(self.collectionView.rx.items(dataSource: dataSource))
             .disposed(by: self.disposeBag)
     }
@@ -103,11 +103,11 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
     */
     internal private(set) lazy var _width: Observable<CGFloat> = self.view.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
-        .filter { $0?.width != nil && $0?.width != 0.0 }
-        .map { $0!.width } // swiftlint:disable:this force_unwrapping
+        .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
+        .map({ (rect: CGRect?) -> CGFloat in rect!.width })
         .distinctUntilChanged()
 
-    internal var width: CGFloat = 0.0
+    internal private(set) var width: CGFloat = 0.0
 
     // MARK: Computed Properties
     /**
@@ -162,29 +162,31 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
-            .map { [weak self] (width: CGFloat, _: [Any]) -> [AnyComponent] in
+            .map({ [weak self] (width: CGFloat, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s.width = width
                 var controller: ComponentsController = ComponentsController(width: width)
                 s.buildComponents(&controller)
                 return controller.components
-            }
+            })
             .bind(to: self._components)
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
-            .map { (width: CGFloat, states: [Any]) -> [Any] in
+            .map({ (width: CGFloat, states: [Any]) -> [Any] in
                 let width: Any = width as Any
                 return [width] + states
-            }
+            })
             .bind(to: self.state)
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
             .observeOn(MainScheduler.asyncInstance)
-            .bind { [weak self] (_: CGFloat, _: [Any]) -> Void in
-                self?.invalidate()
-            }
+            .bind(
+                onNext: { [weak self] (_: CGFloat, _: [Any]) -> Void in
+                    self?.invalidate()
+                }
+            )
             .disposed(by: self.disposeBag)
 
     }

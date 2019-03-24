@@ -51,7 +51,7 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
     public var currentState: Any { return self.state.value }
 
     /**
-     The ViewModels whose state is observed by this BaseStateListeningVC.
+     The ViewModels whose State is observed by this BaseStateListeningVC.
     */
     open var viewModels: [AnyViewModel] { return [] }
 
@@ -82,9 +82,11 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
 
         throttledStateObservable
             .observeOn(MainScheduler.instance)
-            .bind { [weak self] (_: [Any]) -> Void in
-                self?.invalidate()
-            }
+            .bind(
+                onNext: { [weak self] (_: [Any]) -> Void in
+                    self?.invalidate()
+                }
+            )
             .disposed(by: self.disposeBag)
 
         throttledStateObservable

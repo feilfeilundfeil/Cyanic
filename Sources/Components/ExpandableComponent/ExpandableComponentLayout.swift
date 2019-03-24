@@ -36,7 +36,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
                      appearance and determine the size of the content.
     */
     public init(component: ExpandableComponent) {  // swiftlint:disable:this function_body_length
-        let size: CGSize = CGSize(width: component.width, height: component.height)
+        let size: CGSize = component.size
         let insets: UIEdgeInsets = component.insets
         let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
             insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),

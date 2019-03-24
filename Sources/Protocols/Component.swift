@@ -9,6 +9,7 @@
 import class RxSwift.DisposeBag
 import protocol Differentiator.IdentifiableType
 import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 
 /**
  Component is the data model representation of the UICollectionViewCell rendered on the BaseComponentVC.
@@ -49,5 +50,15 @@ public protocol StaticHeightComponent: Component {
     /// The width of the UICollectionViewCell that hosts the content created by the Component.
     /// The default value is 44.0
     var height: CGFloat { get set }
+
+}
+
+public extension StaticHeightComponent {
+
+    // sourcery: isInExtension
+    /// The size of the StaticHeightComponent.
+    var size: CGSize {
+        return CGSize(width: self.width, height: self.height)
+    }
 
 }

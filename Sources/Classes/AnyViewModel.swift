@@ -13,9 +13,15 @@ import class RxSwift.Observable
 */
 public final class AnyViewModel {
 
-    public init<S: State, V: BaseViewModel<S>>(_ viewModel: V) {
+    /**
+     Initializer.
+     Keeps the underlying viewModel instance in memory as an Any type.
+     - Parameters:
+        - viewModel: The BaseViewModel instance to be type erased.
+    */
+    public init<ConcreteState: State, ConcreteViewModel: BaseViewModel<ConcreteState>>(_ viewModel: ConcreteViewModel) {
         self.viewModel = viewModel
-        self.state = viewModel.state.map { $0 as Any }
+        self.state = viewModel.state.map({ (state: ConcreteState) -> Any in state as Any })
     }
 
     /**

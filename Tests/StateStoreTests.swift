@@ -55,7 +55,8 @@ class StateStoreTests: QuickSpec {
                 _ = store.state
                     .bind(onNext: { _ in count += 1})
 
-                expect(count).to(equal(1)) // Incremented due to the fact that BehaviorRelay replays it's current value on subscribe
+                expect(count).to(equal(1)) // Incremented due to the fact that BehaviorRelay
+                                           // replays it's current value on subscribe
                 store.setState(with: { $0 = $0})
                 expect(count).to(equal(1))
                 store.setState(with: { $0.count = 1 })
@@ -63,6 +64,4 @@ class StateStoreTests: QuickSpec {
             }
         }
     }
-
 }
-

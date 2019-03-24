@@ -34,48 +34,44 @@ class BaseStateListeningVCTests: QuickSpec {
         }
     }
 
-}
+    class TestVC: BaseStateListeningVC {
 
-class TestVC: BaseStateListeningVC {
+        var count: Int = 0
+        let viewModelOne: TestViewModel1 = TestViewModel1(initialState: TestVC.TestState1.default)
+        let viewModelTwo: TestViewModel2 = TestViewModel2(initialState: TestVC.TestState2.default)
 
-    var count: Int = 0
-    let viewModelOne: TestViewModel1 = TestViewModel1(initialState: TestVC.TestState1.default)
-    let viewModelTwo: TestViewModel2 = TestViewModel2(initialState: TestVC.TestState2.default)
-
-    override var viewModels: [AnyViewModel] {
-        return [
-            self.viewModelOne.asAnyViewModel,
-            self.viewModelTwo.asAnyViewModel
-        ]
-    }
-
-    override func invalidate() {
-        self.count += 1
-    }
-
-    class TestViewModel1: BaseViewModel<TestVC.TestState1> {}
-
-    struct TestState1: State {
-
-        static var `default`: TestState1 {
-            return TestState1(changeCount: 0)
+        override var viewModels: [AnyViewModel] {
+            return [
+                self.viewModelOne.asAnyViewModel,
+                self.viewModelTwo.asAnyViewModel
+            ]
         }
 
-        var changeCount: Int
-
-    }
-
-    class TestViewModel2: BaseViewModel<TestVC.TestState2> {}
-
-    struct TestState2: State {
-
-        static var `default`: TestState2 {
-            return TestState2(changeCount: 0)
+        override func invalidate() {
+            self.count += 1
         }
 
-        var changeCount: Int
+        class TestViewModel1: BaseViewModel<TestVC.TestState1> {}
 
+        struct TestState1: State {
+
+            static var `default`: TestState1 {
+                return TestState1(changeCount: 0)
+            }
+
+            var changeCount: Int
+        }
+
+        class TestViewModel2: BaseViewModel<TestVC.TestState2> {}
+
+        struct TestState2: State {
+
+            static var `default`: TestState2 {
+                return TestState2(changeCount: 0)
+            }
+
+            var changeCount: Int
+        }
     }
-
 
 }
