@@ -6,8 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class Foundation.Bundle
-import class Foundation.NSCoder
 import class UIKit.UIViewController
 
 /**

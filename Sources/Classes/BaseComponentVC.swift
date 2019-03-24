@@ -22,12 +22,12 @@ import enum Foundation.DispatchTimeInterval
 import enum RxDataSources.UITableViewRowAnimation
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import protocol UIKit.UIViewControllerTransitionCoordinator
-import struct Foundation.IndexPath
-import struct Foundation.UUID
-import struct Foundation.DispatchQoS
+import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
-import struct CoreGraphics.CGFloat
+import struct Foundation.DispatchQoS
+import struct Foundation.IndexPath
+import struct Foundation.UUID
 import struct RxCocoa.KeyValueObservingOptions
 import struct RxDataSources.AnimatableSectionModel
 import struct RxDataSources.AnimationConfiguration
