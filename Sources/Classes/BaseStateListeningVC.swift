@@ -16,6 +16,10 @@ import class UIKit.UIViewController
 import struct Foundation.DispatchQoS
 import struct Foundation.UUID
 
+/**
+ BaseStateListeningVC is a UIViewController subclass that can listen to State changes to its ViewModels. Whenever the
+ State of at least one of its ViewModels changes, its invalidate method is called.
+*/
 open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
 
     open override func viewDidLoad() {
@@ -37,6 +41,9 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
     */
     internal let state: BehaviorRelay<[Any]> = BehaviorRelay<[Any]>(value: [()])
 
+    /**
+     DisposeBag for Rx-related subscriptions.
+    */
     internal let disposeBag: DisposeBag = DisposeBag()
 
     // MARK: Computed Properties
@@ -63,7 +70,7 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
      binds it to the invalidate method so any new State change calls the invalidate method.
 
      - Parameters:
-     - viewModels: The ViewModels whose States will be observed.
+        - viewModels: The ViewModels whose States will be observed.
      */
     internal func setUpObservables(with viewModels: [AnyViewModel]) {
         guard !viewModels.isEmpty else { return }
