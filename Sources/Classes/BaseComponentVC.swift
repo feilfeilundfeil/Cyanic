@@ -101,7 +101,7 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
 
      This Observable is filtered so it doesn't repeat the duplicate values.
     */
-    internal private(set) lazy var _width: Observable<CGFloat> = self.view.rx
+    internal lazy var _width: Observable<CGFloat> = self.view.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
         .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
         .map({ (rect: CGRect?) -> CGFloat in rect!.width })

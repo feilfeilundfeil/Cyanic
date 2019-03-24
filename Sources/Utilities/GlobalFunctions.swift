@@ -1,5 +1,5 @@
 //
-//  FFUFComponents.swift
+//  GlobalFunctions.swift
 //  FFUFComponents
 //
 //  Created by Julio Miguel Alorro on 3/15/19.
