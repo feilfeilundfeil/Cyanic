@@ -15,7 +15,6 @@
 - Change ComponentLayout subclasses to use the Component struct as the argument in initializer [✅ 22.03.2019]
 - Refactor Sourcery template to autogenerate the layout property of Components [✅ 01.03.2019]
 - Create a UITableView subclass with identical functionality as the BaseComponentsVC
-- Create a Run Script Phase in the FFUFComponents target  that refereshes the AutoEquatable and AutoHashables of the basic Components  that come with this framework
 - Refine the README.md to fully explain what the architecture is and the best practices.
 
 ## Architecture
