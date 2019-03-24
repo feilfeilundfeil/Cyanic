@@ -34,10 +34,10 @@ public protocol Component: IdentifiableType, Copyable, UserInterfaceModel where 
 
 public extension Component {
 
-    /**
-     Since Component has a generic constraint. AnyComponent is used as a type erased wrapper around it
-     so Components can be grouped in Collections.
-    */
+    // sourcery: isInExtension
+    // sourcery: skipHashing, skipEquality
+    /// Since Component has a generic constraint. AnyComponent is used as a type erased wrapper around it
+    /// so Components can be grouped in Collections.
     var asAnyComponent: AnyComponent {
         return AnyComponent(self)
     }
@@ -56,6 +56,7 @@ public protocol StaticHeightComponent: Component {
 public extension StaticHeightComponent {
 
     // sourcery: isInExtension
+    // sourcery: skipHashing, skipEquality
     /// The size of the StaticHeightComponent.
     var size: CGSize {
         return CGSize(width: self.width, height: self.height)
