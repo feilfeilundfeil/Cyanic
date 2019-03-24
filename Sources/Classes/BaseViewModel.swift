@@ -18,6 +18,10 @@ import protocol RxSwift.Disposable
 */
 open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
+    public var asAnyViewModel: AnyViewModel {
+        return AnyViewModel(self)
+    }
+
     /**
      Accesses the current State after all pending setState methods are resolved.
      - Parameters:

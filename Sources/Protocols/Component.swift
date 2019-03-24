@@ -36,9 +36,8 @@ public extension Component {
     /**
      Since Component has a generic constraint. AnyComponent is used as a type erased wrapper around it
      so Components can be grouped in Collections.
-     - Returns: This instance as an AnyComponent.
     */
-    func asAnyComponent() -> AnyComponent {
+    var asAnyComponent: AnyComponent {
         return AnyComponent(self)
     }
 

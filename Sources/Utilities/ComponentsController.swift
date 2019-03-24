@@ -41,7 +41,7 @@ public struct ComponentsController {
         - component: The Component instance to be added to the components array.
     */
     public mutating func add<C: Component>(_ component: C) {
-        self.components.append(component.asAnyComponent())
+        self.components.append(component.asAnyComponent)
     }
 
     /**
@@ -50,7 +50,7 @@ public struct ComponentsController {
         - components: The Component instances to be added to the components array.
     */
     public mutating func add<Components: Sequence>(_ components: Components) where Components.Element == Component {
-        self.components.append(contentsOf: components.map { $0.asAnyComponent()})
+        self.components.append(contentsOf: components.map { $0.asAnyComponent})
     }
 
     /**
@@ -59,7 +59,7 @@ public struct ComponentsController {
         - components: The Component instances to be added to the components array.
      */
     public mutating func add<Components: Component>(_ components: Components...) {
-        self.components.append(contentsOf: components.map { $0.asAnyComponent()})
+        self.components.append(contentsOf: components.map { $0.asAnyComponent})
     }
 
 }

@@ -150,9 +150,10 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
-        .share()
         .observeOn(self.scheduler)
         .subscribeOn(self.scheduler)
+        .debug("\(type(of: self))", trimOutput: false)
+        .share()
 
         // Call buildComponents method when a new element in combinedObservable is emitted
         // Bind the new AnyComponents array to the _components BehaviorRelay.
@@ -172,7 +173,6 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
-            .debug("\(type(of: self))", trimOutput: false)
             .map { (width: CGFloat, states: [Any]) -> [Any] in
                 let width: Any = width as Any
                 return [width] + states
@@ -181,6 +181,7 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
+            .observeOn(MainScheduler.asyncInstance)
             .bind { [weak self] (_: CGFloat, _: [Any]) -> Void in
                 self?.invalidate()
             }

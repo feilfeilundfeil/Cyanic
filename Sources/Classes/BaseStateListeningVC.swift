@@ -9,6 +9,7 @@
 import class Foundation.NSCoder
 import class RxCocoa.BehaviorRelay
 import class RxSwift.DisposeBag
+import class RxSwift.MainScheduler
 import class RxSwift.Observable
 import class RxSwift.SerialDispatchQueueScheduler
 import class UIKit.UIViewController
@@ -66,36 +67,34 @@ open class BaseStateListeningVC: UIViewController, StateObservableBuilder {
      */
     internal func setUpObservables(with viewModels: [AnyViewModel]) {
         guard !viewModels.isEmpty else { return }
-        let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
+        let combinedStatesObservables: Observable<[Any]> = viewModels
+            .combineStateObservables()
 
-        var throttledStateObservable: Observable<[Any]> = self.setUpThrottleType(
+        let throttledStateObservable: Observable<[Any]> = self.setUpThrottleType(
             on: combinedStatesObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
-        .share()
+        .debug("\(type(of: self)) \(#line)", trimOutput: false)
         .observeOn(self.scheduler)
         .subscribeOn(self.scheduler)
-
-        #if DEBUG
-        throttledStateObservable = throttledStateObservable.debug("\(type(of: self))", trimOutput: false)
-        #endif
+        .share()
 
         throttledStateObservable
-            .debug("\(type(of: self))", trimOutput: false)
-            .bind(to: self.state)
-            .disposed(by: self.disposeBag)
-
-        throttledStateObservable
+            .observeOn(MainScheduler.instance)
             .bind { [weak self] (_: [Any]) -> Void in
                 self?.invalidate()
             }
+            .disposed(by: self.disposeBag)
+
+        throttledStateObservable
+            .bind(to: self.state)
             .disposed(by: self.disposeBag)
     }
 
     /**
      When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
-     should react to changes in state.
+     should react to changes in state. This method is run on the main thread asynchronously.
 
      When overriding, no need to call super because it does nothing.
     */
