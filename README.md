@@ -188,7 +188,7 @@ class YourVC: BaseStateListeningVC {
 
 ```
 
-**NOTE**: invalidate is called once when the BaseStateListeningVC's viewDidLoad is called then after that, on very State change.
+**NOTE**: `invalidate` is called once when the BaseStateListeningVC's `viewDidLoad` is called then after that, on very State change.
 
 ## FFUFComponents on UICollectionView
 * * *
