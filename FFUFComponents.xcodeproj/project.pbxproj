@@ -46,6 +46,8 @@
 		14A4576922468D9E006E75C6 /* Array+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+FFUFComponents.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
+		14B022B122490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */; };
+		14B022B222490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* BaseStateListeningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* BaseStateListeningVC.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
@@ -69,8 +71,6 @@
 		3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F77D4A7854D2322155566 /* Pods_Tests.framework */; };
 		9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */; };
 		D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */; };
-		F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */; };
-		F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,8 +161,10 @@
 		14A4576822468D9E006E75C6 /* Array+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+FFUFComponents.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
-		14B01E40222723E200EE0A9A /* AutoHashable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashable.stencil; sourceTree = "<group>"; };
-		14B01E41222723E200EE0A9A /* AutoEquatable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatable.stencil; sourceTree = "<group>"; };
+		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
+		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
+		14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+FFUFComponents.swift"; sourceTree = "<group>"; };
+		14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+FFUFComponents.swift"; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* BaseStateListeningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateListeningVC.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
@@ -196,8 +198,6 @@
 		AAE01790233F583D5FA3BB4C /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F000D2A6221C1B6800D10D0D /* .sourcery.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .sourcery.yml; sourceTree = "<group>"; };
-		F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.generated.swift; sourceTree = "<group>"; };
-		F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoHashable.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,8 +390,8 @@
 			isa = PBXGroup;
 			children = (
 				14496DB92228714200C5C278 /* AutoGenerateComponent.stencil */,
-				14B01E41222723E200EE0A9A /* AutoEquatable.stencil */,
-				14B01E40222723E200EE0A9A /* AutoHashable.stencil */,
+				14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */,
+				14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */,
 				142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */,
 			);
 			path = Templates;
@@ -490,8 +490,8 @@
 		F000D2A7221C1D6F00D10D0D /* Sourcery */ = {
 			isa = PBXGroup;
 			children = (
-				F000D2AA221C26FC00D10D0D /* AutoEquatable.generated.swift */,
-				F000D2AB221C26FC00D10D0D /* AutoHashable.generated.swift */,
+				14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */,
+				14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */,
 				141FA6442246DC5F005C802F /* ComponentsController+FFUFComponents.swift */,
 			);
 			path = Sourcery;
@@ -823,6 +823,7 @@
 				1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
+				14B022B222490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
@@ -837,6 +838,7 @@
 				14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */,
 				14C324DA2243728600FA6496 /* BaseStateListeningVC.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
+				14B022B122490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift in Sources */,
 				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
@@ -844,7 +846,6 @@
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
-				F000D2AC221C26FC00D10D0D /* AutoEquatable.generated.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
@@ -859,7 +860,6 @@
 				14A4576922468D9E006E75C6 /* Array+FFUFComponents.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 				14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */,
-				F000D2AD221C26FC00D10D0D /* AutoHashable.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

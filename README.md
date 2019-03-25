@@ -216,9 +216,9 @@ those subviews based on the Component's properties.
 * * *
 A Component is the UI specific data model that defines the characteristics of the content to be displayed on the ComponentCell. Components
 are created in the `buildComponents` method of BaseComponentVC.
-    Some requirements when creating custom Components:
-        * Must have a unique `id`
-        * Must be `Hashable` (for the diffing aspect of the framework). The Component protocol already conforms to Hashable.
+Some requirements when creating custom Components:
+* Must have a unique `id`
+* Must be `Hashable` (for the diffing aspect of the framework). The Component protocol already conforms to Hashable.
 
 ### BaseComponentVC
 * * *
@@ -226,6 +226,8 @@ BaseComponentVC is a subclass of BaseStateListeningVC that has additional set up
 a UICollectionView. In addition to calling `invalidate` when its viewModels' States change, it will also call another method called
 `buildComponents` which recreates the UICollectionView's data source and is diffed by [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) diffing algorithm. Components are created inside the `buildComponents` method where State(s) from the ViewModel(s) can
 be read.
+
+A super simple example.
 
 ```
 class YourComponentVC: BaseComponentVC {
@@ -266,4 +268,250 @@ class YourComponentVC: BaseComponentVC {
 }
 
 ```
+
+### Using Sourcery to automatically generate your Components
+* * *
+Here at FFUF, we use Sourcery to generate our Components and ComponentsController extensions! So we can automate a lot of the
+boring Component creation process including the Equatable/Hashable implementations. We achieve this by making use of annotations.
+
+These are the templates we use:
+
+AutoEquatableComponent.stencil:
+```
+// swiftlint:disable private_over_fileprivate
+fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
+    switch (lhs, rhs) {
+        case let (lValue?, rValue?):
+            return compare(lValue, rValue)
+        case (nil, nil):
+            return true
+        default:
+            return false
+    }
+}
+
+fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
+    guard lhs.count == rhs.count else { return false }
+        for (idx, lhsItem) in lhs.enumerated() {
+            guard compare(lhsItem, rhs[idx]) else { return false }
+        }
+
+    return true
+}
+
+{% macro compareVariables variables %}
+    {% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}{% if not variable.annotations.skipEquality %}guard {% if not variable.isOptional %}{% if not variable.annotations.arrayEquality %}lhs.{{ variable.name }} == rhs.{{ variable.name }}{% else %}compareArrays(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %}{% else %}compareOptionals(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %} else { return false }{% endif %}
+    {% endfor %}
+{% endmacro %}
+// MARK: - AutoEquatableComponent
+{% for type in types.types|!enum where type|annotated:"AutoEquatableComponent" %}
+// MARK: - {{ type.annotations.Component }} AutoEquatableComponent
+extension {{ type.annotations.Component }}: Equatable {}
+{{ type.accessLevel }} func == (lhs: {{ type.annotations.Component }}, rhs: {{ type.annotations.Component }}) -> Bool {
+    {% if not type.kind == "protocol" %}
+    {% call compareVariables type.storedVariables %}
+    {% else %}
+    {% call compareVariables type.allVariables %}
+    {% endif %}
+    return true
+}
+{% endfor %}
+```
+
+AutoHashableComponent.stencil:
+```
+// swiftlint:disable all
+
+{% macro combineVariableHashes variables %}
+{% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}
+{% if not variable.annotations.skipHashing %}
+        {% if variable.isStatic %}type(of: self).{% else %}self.{% endif %}{{ variable.name }}.hash(into: &hasher)
+{% endif %}
+{% endfor %}
+{% endmacro %}
+
+// MARK: - AutoHashableComponent
+{% for type in types.types|!enum where type|annotated:"AutoHashableComponent" %}
+// MARK: - {{ type.name }} AutoHashableComponent
+extension {{ type.annotations.Component }}: Hashable {
+    {{ type.accessLevel }}{% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %} override{% endif %} func hash(into hasher: inout Hasher) {
+        {% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %}
+        super.hash(into: hasher)
+        {% endif %}
+        {% if not type.kind == "protocol" %}
+        {% call combineVariableHashes type.storedVariables %}
+        {% else %}
+        {% call combineVariableHashes type.allVariables %}
+        {% endif %}
+    }
+}
+{% endfor %}
+```
+
+AutoGenerateComponent.stencil
+```
+{% for type in types.all %}
+{% if type|annotated:"AutoGenerateComponent" %}
+// sourcery:inline:auto:{{ type.name }}.AutoGenerateComponent
+    /**
+    Work around Initializer because memberwise initializers are all or nothing
+    - Parameters:
+    - id: The unique identifier of the {{ type.name }}.
+    */
+    {{ type.accessLevel }} init(id: String) {
+        self.id = id
+    }
+
+{% for var in type.allVariables|!annotated:"isExcluded" %}
+{% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
+{% if var.annotations.defaultValue %}
+    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.annotations.isLazy %}lazy {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
+
+{% elif var.annotations.isLayout %}
+    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.ComponentLayout }}(component: self) }
+
+{% else %}
+    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
+
+{% endif %}
+{% endfor %}
+    {{ type.accessLevel }} var identity: {{ type.name }} { return self }
+
+// sourcery:end
+{% endif %}
+{% endfor %}
+```
+
+We generally use the following process:
+
+1. Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
+    conforms to Component and has an additional property called height.) 
+    Annotate it with AutoEquatable, AutoHashable, and Component.  (These will be read by Sourcery)
+
+In this example, we are creating defaultValue for `foo`, we're opting out of Equatable and Hashable for `nonHashableProperty`, and we exclude
+`description` from code generation.
+```
+// sourcery: AutoEquatable,AutoHashable
+// sourcery: Component = YourComponent
+protocol YourComponentType: StaticHeightComponent, CustomStringConvertible {
+    
+    // sourcery: defaultValue = UIColor.clear
+    var backgroundColor: UIColor { get set }
+    
+    // sourcery: defaultValue = ""Hello World!""
+    var foo: String { get set }
+    
+    // sourcery: skipHashing, skipEquality
+    // sourcery: defaultValue = ""This" as Any"
+    var nonHashableProperty: Any { get set }
+    
+}
+
+extension YourComponentType { // You can also define other protocols
+    
+    // sourcery: isExcluded
+    var description: String {
+        return "Hello World"
+    }
+
+}
+
+```
+
+2. Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
+    ComponentLayout.
+
+```
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
+// sourcery: ComponentLayout = YourComponentLayout
+struct YourComponent: YourComponentType {
+}
+```
+
+3. Create the custom ComponentLayout and implement your view logic inside the initializer
+
+```
+class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
+
+    init(component: YourComponent) {
+        ... implement your sizing, arrangement and view binding logic in the intializer ...
+        ... You can look at how the ButtonComponentLayout was implemented for an example ...
+    }
+
+}
+```
+
+4. In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`.
+Sourcery will generate the following:
+
+In `YourComponent.swift`
+```
+// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
+// sourcery: ComponentLayout = YourComponentLayout
+struct YourComponent: YourComponentType {
+
+// sourcery:inline:auto:YourComponent.AutoGenerateComponent
+    /**
+    Work around Initializer because memberwise initializers are all or nothing
+    - Parameters:
+    - id: The unique identifier of the YourComponent.
+    */
+    internal init(id: String) {
+    self.id = id
+    }
+
+    internal var id: String
+
+    internal var width: CGFloat = 0.0
+
+    internal var height: CGFloat = 44.0
+
+    // sourcery: skipHashing, skipEquality 
+    internal var layout: ComponentLayout { return YourComponentLayout(component: self) }
+
+    internal var backgroundColor: UIColor = UIColor.clear
+
+    internal var foo: String = "Hello World!"
+
+    // sourcery: skipHashing, skipEquality 
+    internal var nonHashableProperty: Any = "This" as Any
+
+    internal var identity: YourComponent { return self }
+// sourcery:end
+}
+```
+
+In your `AutoEquatable.generated.swift` file
+```
+... other stuff ...
+// MARK: - YourComponent AutoEquatable
+extension YourComponent: Equatable {}
+public func == (lhs: YourComponent, rhs: YourComponent) -> Bool {
+    guard lhs.backgroundColor == rhs.backgroundColor else { return false }
+    guard lhs.foo == rhs.foo else { return false }
+    guard lhs.description == rhs.description else { return false }
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
+    return true
+}
+```
+In your `AutoHashable.generated.swift` file:
+```
+... other stuff ...
+
+// MARK: - YourComponentType AutoHashable
+extension YourComponent: Hashable {
+    internal func hash(into hasher: inout Hasher) {
+        self.backgroundColor.hash(into: &hasher)
+        self.foo.hash(into: &hasher)
+        self.description.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+        self.width.hash(into: &hasher)
+        self.height.hash(into: &hasher)
+    }
+}
+```
+
+
 

@@ -16,7 +16,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = StaticTextComponent
 /// StaticTextComponentType is a protocol for Component data structures that represent static text.
 public protocol StaticTextComponentType: Component {

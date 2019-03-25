@@ -19,7 +19,7 @@ import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = ExpandableComponent
 /// ExpandableComponentType is a protocol for Component data structures that want to function like section headers
 /// with content that can be hidden / shown on tap.

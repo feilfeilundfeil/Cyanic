@@ -9,7 +9,7 @@
 import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = ChildVCComponent
 /// ChildVCComponentType is a protocol for Component data structures that want to show other UIViewControllers as a
 /// child UIViewController to the BaseComponentVC.
@@ -30,7 +30,7 @@ public protocol ChildVCComponentType: StaticHeightComponent, CustomStringConvert
 public extension ChildVCComponentType {
 
     /// The class name of the childVC.
-    // sourcery: isInExtension
+    // sourcery: isExcluded
     var name: String {
         var mutableSelf: Self = self
         return String(describing: Mirror(reflecting: mutableSelf.childVC).subjectType)
@@ -40,7 +40,7 @@ public extension ChildVCComponentType {
 
 public extension ChildVCComponentType {
 
-    // sourcery: isInExtension
+    // sourcery: isExcluded
     var description: String {
         return self.name
     }

@@ -22,8 +22,8 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
     return true
 }
 
-// MARK: - AutoEquatable for classes, protocols, structs
-// MARK: - ButtonComponent AutoEquatable
+// MARK: - AutoEquatableComponent
+// MARK: - ButtonComponent AutoEquatableComponent
 extension ButtonComponent: Equatable {}
 public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
     guard lhs.type == rhs.type else { return false }
@@ -34,7 +34,7 @@ public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
     guard lhs.height == rhs.height else { return false }
     return true
 }
-// MARK: - ChildVCComponent AutoEquatable
+// MARK: - ChildVCComponent AutoEquatableComponent
 extension ChildVCComponent: Equatable {}
 public func == (lhs: ChildVCComponent, rhs: ChildVCComponent) -> Bool {
     guard lhs.name == rhs.name else { return false }
@@ -44,7 +44,7 @@ public func == (lhs: ChildVCComponent, rhs: ChildVCComponent) -> Bool {
     guard lhs.height == rhs.height else { return false }
     return true
 }
-// MARK: - ExpandableComponent AutoEquatable
+// MARK: - ExpandableComponent AutoEquatableComponent
 extension ExpandableComponent: Equatable {}
 public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
@@ -55,7 +55,7 @@ public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.height == rhs.height else { return false }
     return true
 }
-// MARK: - StaticSpacingComponent AutoEquatable
+// MARK: - StaticSpacingComponent AutoEquatableComponent
 extension StaticSpacingComponent: Equatable {}
 public func == (lhs: StaticSpacingComponent, rhs: StaticSpacingComponent) -> Bool {
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
@@ -64,7 +64,7 @@ public func == (lhs: StaticSpacingComponent, rhs: StaticSpacingComponent) -> Boo
     guard lhs.height == rhs.height else { return false }
     return true
 }
-// MARK: - StaticTextComponent AutoEquatable
+// MARK: - StaticTextComponent AutoEquatableComponent
 extension StaticTextComponent: Equatable {}
 public func == (lhs: StaticTextComponent, rhs: StaticTextComponent) -> Bool {
     guard lhs.text == rhs.text else { return false }
@@ -75,5 +75,3 @@ public func == (lhs: StaticTextComponent, rhs: StaticTextComponent) -> Bool {
     guard lhs.width == rhs.width else { return false }
     return true
 }
-
-// MARK: - AutoEquatable for Enums

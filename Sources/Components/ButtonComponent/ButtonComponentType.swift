@@ -15,7 +15,7 @@ import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
 
-// sourcery: AutoEquatable,AutoHashable
+// sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = ButtonComponent
 /// ButtonComponentType is a protocol for Components that represents a UIButton.
 public protocol ButtonComponentType: StaticHeightComponent {
