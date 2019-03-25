@@ -384,9 +384,10 @@ AutoGenerateComponent.stencil
 
 We generally use the following process:
 
-1. Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
-    conforms to Component and has an additional property called height.) 
-    Annotate it with AutoEquatable, AutoHashable, and Component.  (These will be read by Sourcery)
+Step One:
+Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
+conforms to Component and has an additional property called height.) 
+Annotate it with AutoEquatable, AutoHashable, and Component.  (These will be read by Sourcery)
 
 In this example, we are creating defaultValue for `foo`, we're opting out of Equatable and Hashable for `nonHashableProperty`, and we exclude
 `description` from code generation.
@@ -418,8 +419,9 @@ extension YourComponentType { // You can also define other protocols
 
 ```
 
-2. Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
-    ComponentLayout.
+Step Two:
+Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
+ComponentLayout.
 
 ```
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
@@ -428,7 +430,8 @@ struct YourComponent: YourComponentType {
 }
 ```
 
-3. Create the custom ComponentLayout and implement your view logic inside the initializer
+Step Three:
+Create the custom ComponentLayout and implement your view logic inside the initializer
 
 ```
 class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
@@ -440,8 +443,8 @@ class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
 }
 ```
-
-4. In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`.
+Step Four:
+In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`.
 Sourcery will generate the following:
 
 In `YourComponent.swift`
@@ -512,6 +515,3 @@ extension YourComponent: Hashable {
     }
 }
 ```
-
-
-
