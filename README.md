@@ -199,10 +199,12 @@ BaseStateListeningVC. But we will continue to work hard on making it as simple a
 unit in implementing BaseComponentVC correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
 
 ### ComponentCell
+* * *
 ComponentCell is a UICollectionViewCell that leverages the power of [LayoutKit](https://github.com/linkedin/LayoutKit). It simply calls the 
 necessary logic to be performant on the main thread. You probably won't need to subclass this.
 
 ### ComponentLayout
+* * *
 ComponentLayout is an protocol that conforms to Layout from [LayoutKit](https://github.com/linkedin/LayoutKit). Any custom layout you define
 must conform to this to be usable by a Component. Please read up on how to use LayoutKit [here](https://layoutkit.org). It's super easy to
 pick up, more performant than AutoLayout, and calculations can be done in a background thread. 
@@ -211,8 +213,12 @@ The ComponentLayout defines what subviews are displayed on the ComponentCell. It
 those subviews based on the Component's properties.
 
 ### Component
+* * *
 A Component is the UI specific data model that defines the characteristics of the content to be displayed on the ComponentCell. Components
 are created in the `buildComponents` method of BaseComponentVC.
+    Some requirements when creating custom Components:
+        * Must have a unique `id`
+        * Must be `Hashable` (for the diffing aspect of the framework). The Component protocol already conforms to Hashable.
 
 ### BaseComponentVC
 * * *
@@ -221,4 +227,43 @@ a UICollectionView. In addition to calling `invalidate` when its viewModels' Sta
 `buildComponents` which recreates the UICollectionView's data source and is diffed by [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) diffing algorithm. Components are created inside the `buildComponents` method where State(s) from the ViewModel(s) can
 be read.
 
+```
+class YourComponentVC: BaseComponentVC {
+
+    ... other stuff ...
+    
+    override var viewModels: [AnyViewModel] {
+        return [
+            yourViewModel
+        ]
+    }
+
+    override func buildComponents(_ componentsController: inout ComponentsController) { 
+    // This is called in a background thread 
+        withState(yourViewModel) { (currentState: YourState) -> Void in
+            componentsController.staticTextComponent {
+                $0.id = "First static component"
+                $0.text = Text.unattributed("Hello, World")
+            }
+            
+            componentsController.buttonComponent {
+                let id: String = "Button"
+                $0.id = id
+                $0.title = Text.unattributed(id)
+                $0.height = 44.0
+                $0.onTap = { print("Hello World, \(id)") }
+            }
+            
+            if currentState.baz { // YourState.baz is a Bool
+                componentsController.staticTextComponent { // This will only show when state.baz == true
+                    $0.id = "Super secret text"
+                    $0.text = Text.unattributed("Hello, World. I'm only shown sometimes")
+                }
+            }
+            
+        }
+    }
+}
+
+```
 

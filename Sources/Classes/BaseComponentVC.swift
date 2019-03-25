@@ -199,8 +199,8 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
      static functions.
 
      - Parameters:
-        - components: The ComponentsController that is mutated by this method. It is always
-                      starts as an empty ComponentsController.
+        - componentsController: The ComponentsController that is mutated by this method. It is always
+                                starts as an empty ComponentsController.
     */
     open func buildComponents(_ componentsController: inout ComponentsController) {}
 
