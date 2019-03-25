@@ -563,13 +563,13 @@ public extension ComponentsController {
     ... other stuff ...
     
     /**
-    Generates a StaticTextComponent instance and configures its properties with the given closure. You must provide a
+    Generates a YourComponent instance and configures its properties with the given closure. You must provide a
     unique id in the configuration block, otherwise it will force a fatalError.
     - Parameters:
-    - configuration: The closure that mutates the mutable StaticTextComponent.
-    - mutableComponent: The StaticTextComponent instance to be mutated/configured.
+        - configuration: The closure that mutates the mutable YourComponent.
+        - mutableComponent: The YourComponent instance to be mutated/configured.
     - Returns:
-    StaticTextComponent
+        YourComponent
     */
     @discardableResult
     mutating func yourComponent(configuration: (_ mutableComponent: inout YourComponent) -> Void) -> YourComponent {
