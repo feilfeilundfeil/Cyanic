@@ -86,6 +86,7 @@ withState(yourViewModel, yourOtherViewModel, yourThirdViewModel, yourFourthViewM
 ```
 
 **Mutating State**
+
 The ViewModel is the only object capable of mutating its State by calling its `setState` method.  The following mutates the underlying
 State in a background thread:
 
@@ -99,6 +100,7 @@ yourViewModel.setState { (currentState: inout YourState) -> Void in
 will be changed.
 
 **Subscribing to State**
+
 There are three ways to subscribe to State:
 
 The `invalidate` method in `BaseStateListeningVC` and `BaseComponentVC` is called any their viewModel(s)' State changes. You
@@ -423,7 +425,9 @@ public extension ComponentsController {
 
 We generally use the following process:
 
-**Step One:** Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
+**Step One:** 
+
+Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
 conforms to Component and has an additional property called height.) 
 Annotate it with AutoEquatable, AutoHashable, and Component.  (These will be read by Sourcery)
 
@@ -457,7 +461,9 @@ extension YourComponentType { // You can also define other protocols
 
 ```
 
-**Step Two:** Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
+**Step Two:** 
+
+Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
 ComponentLayout.
 
 ```
@@ -467,7 +473,9 @@ struct YourComponent: YourComponentType {
 }
 ```
 
-**Step Three:** Create the custom ComponentLayout and implement your view logic inside the initializer
+**Step Three:** 
+
+Create the custom ComponentLayout and implement your view logic inside the initializer
 
 ```
 class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
@@ -479,7 +487,9 @@ class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
 }
 ```
-**Step Four:** In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`. Assuming no error occurred,
+**Step Four:** 
+
+In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`. Assuming no error occurred,
 Sourcery will generate the following:
 
 In `YourComponent.swift`
@@ -583,7 +593,7 @@ public extension ComponentsController {
 }
 ```
 
-[Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own!
+[Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own templates!
 
 ### FFUFComponents-specific Sourcery annotations
 * * *
