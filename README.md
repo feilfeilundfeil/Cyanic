@@ -592,11 +592,11 @@ Sourcery helps greatly with the boilerplate code when creating custom Components
 ### FFUFComponents-specific Sourcery annotations
 * * *
 * **isExcluded**: will be excluded out of the auto generation of properties from the `AutoGenerateComponent` template.
-* **defaultValue**: speciffies the defaultValue of the property for code generation via the `AutoGenerateComponent` template.
-* **isWeak**: speciffies that the property will be labeled `weak` for code generation via the `AutoGenerateComponent` template.
-* **isLazy**: speciffies that the property will be labeled `lazy` for code generation via the `AutoGenerateComponent` template.
-* **isLayout**: speciffies that the property is the `ComponentLayout` for code generation via the `AutoGenerateComponent` template.
-* **Component**: speciffies the type name of the Component whose properties will be Equatable and Hashable via the `AutoEquatableComponent` and 
+* **defaultValue**: specifies the defaultValue of the property for code generation via the `AutoGenerateComponent` template.
+* **isWeak**: specifies that the property will be labeled `weak` for code generation via the `AutoGenerateComponent` template.
+* **isLazy**: specifies that the property will be labeled `lazy` for code generation via the `AutoGenerateComponent` template.
+* **isLayout**: specifies that the property is the `ComponentLayout` for code generation via the `AutoGenerateComponent` template.
+* **Component**: specifies the type name of the Component whose properties will be Equatable and Hashable via the `AutoEquatableComponent` and 
 `AutoHashableComponent` template.
 * **RequiredVariables**: specifies that the Component has additional required variables that must be mutabled to be considered valid. Used by the `AutoGenerateComponentExtensions` swifttemplate.
 * **AutoGenerateComponent**: specifies that the custom Component will have generated properties via its custom ComponentType protocol
