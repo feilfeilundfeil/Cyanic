@@ -382,6 +382,45 @@ AutoGenerateComponent.stencil
 {% endfor %}
 ```
 
+AutoGenerateComponentExtensions.swifttemplate
+```
+<%
+func lowerCamelCaseName(for type: Type) -> String {
+let name: String = type.name
+return name.prefix(1).lowercased() + name.dropFirst()
+}
+-%>
+public extension ComponentsController {
+<%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
+<%_ let functionName = lowerCamelCaseName(for: type) -%>
+
+    /**
+        Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable <%= type.name %>.
+            - mutableComponent: The <%= type.name %> instance to be mutated/configured.
+        - Returns:
+            <%= type.name %>
+    */
+    @discardableResult
+    mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+    <%_ if type.annotations["RequiredVariables"] != nil { -%>
+        guard ComponentStateValidator.validate<%= type.name %>(mutableComponent)
+            else { fatalError("You did not configure all required variables in this component") }
+    <%_ } -%>
+        self.add(mutableComponent)
+        return mutableComponent
+    }
+<%_ } -%>
+}
+```
+
 We generally use the following process:
 
 Step One:
@@ -444,7 +483,7 @@ class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
 }
 ```
 Step Four:
-In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`.
+In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`. Assuming no error occurred,
 Sourcery will generate the following:
 
 In `YourComponent.swift`
@@ -484,7 +523,7 @@ struct YourComponent: YourComponentType {
 }
 ```
 
-In your `AutoEquatable.generated.swift` file
+In your `AutoEquatable.generated.swift` file (generated in your directory, you may have to drag it into your workspace if it doesn't exist there)
 ```
 ... other stuff ...
 // MARK: - YourComponent AutoEquatable
@@ -499,7 +538,7 @@ public func == (lhs: YourComponent, rhs: YourComponent) -> Bool {
     return true
 }
 ```
-In your `AutoHashable.generated.swift` file:
+In your `AutoHashable.generated.swift` file: (generated in your directory, you may have to drag it into your workspace if it doesn't exist there)
 ```
 ... other stuff ...
 
@@ -515,3 +554,53 @@ extension YourComponent: Hashable {
     }
 }
 ```
+
+In your `AutoGenerateComponentExtensions.generated.swift` file: (generated in your directory, you may have to drag it into your workspace if it doesn't exist there)
+
+```
+public extension ComponentsController {
+    
+    ... other stuff ...
+    
+    /**
+    Generates a StaticTextComponent instance and configures its properties with the given closure. You must provide a
+    unique id in the configuration block, otherwise it will force a fatalError.
+    - Parameters:
+    - configuration: The closure that mutates the mutable StaticTextComponent.
+    - mutableComponent: The StaticTextComponent instance to be mutated/configured.
+    - Returns:
+    StaticTextComponent
+    */
+    @discardableResult
+    mutating func yourComponent(configuration: (_ mutableComponent: inout YourComponent) -> Void) -> YourComponent {
+        var mutableComponent: YourComponent = YourComponent(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+        self.add(mutableComponent)
+        return mutableComponent
+    }  
+    
+    ... other stuff ...
+
+}
+```
+
+Sourcery helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own!
+
+### FFUFComponents-specific Sourcery annotations
+* * *
+**isExcluded**: will be excluded out of the auto generation of properties from the `AutoGenerateComponent` template.
+**defaultValue**: speciffies the defaultValue of the property for code generation via the `AutoGenerateComponent` template.
+**isWeak**: speciffies that the property will be labeled `weak` for code generation via the `AutoGenerateComponent` template.
+**isLazy**: speciffies that the property will be labeled `lazy` for code generation via the `AutoGenerateComponent` template.
+**isLayout**: speciffies that the property is the `ComponentLayout` for code generation via the `AutoGenerateComponent` template.
+**Component**: speciffies the type name of the Component whose properties will be Equatable and Hashable via the `AutoEquatableComponent` and 
+`AutoHashableComponent` template.
+**RequiredVariables**: specifies that the Component has additional required variables that must be mutabled to be considered valid. Used by the `AutoGenerateComponentExtensions` swifttemplate.
+**AutoGenerateComponent**: specifies that the custom Component will have generated properties via its custom ComponentType protocol
+**AutoEquatableComponent**: specifies that the custom Component will have a generated implementation of Equatable.
+**AutoHashableComponent**: specifies that the custom Component will have a generated implementation of Hashable.
+**AutoGenerateComponentExtensions**: specifies that the custom Component will have a generated implementation of a factory method as an extension to `ComponentsController`.
+
