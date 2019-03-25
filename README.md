@@ -1,5 +1,5 @@
 ## TODO
-- Create a BaseComponentVC subclasses that handle one, two, three ViewModels [✅ 11.03.2019]
+- Create a BaseComponentVC subclasses that handle one, two, three ViewModels [✅ 11.03.2019] (Deprecated)
 - Update the documentation of each file [✅  05.03.2019]
 - Refactor Components into structs [✅ 01.03.2019]
 - Create Stencil templates for said structs to generate default values for properties [✅ 01.03.2019]
@@ -145,7 +145,7 @@ yourViewModel.selectSubscribe(
     keyPath2: \YourState.bar,
     keyPath3: \YourState.baz,
     onNewValue: { // will be called if any of the properties change
-    ... your logic here ...
+        ... your logic here ...
     }
 )
 
@@ -181,7 +181,9 @@ class YourVC: BaseStateListeningVC {
     }
     
     override func invalidate() {
-        ... your logic here for state changes ...
+        withState(yourViewModel, yourOtherViewModel) { // Call this method if you want to read the States.
+            ... your logic here for state changes ...
+        }
     }
 
 }
@@ -192,10 +194,31 @@ class YourVC: BaseStateListeningVC {
 
 ## FFUFComponents on UICollectionView
 * * *
-### BaseComponentVC
-- BaseComponentVC is the UIViewController that functions as both a UICollectionViewDataSource and UICollectionViewDelegateFlowLayout
+Set up for implementing the reactive UICollectionView provided by FFUFComponents is a little more complex than setting up 
+BaseStateListeningVC. But we will continue to work hard on making it as simple as possible. The following literature breaks down each
+unit in implementing BaseComponentVC correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
+
+### ComponentCell
+ComponentCell is a UICollectionViewCell that leverages the power of [LayoutKit](https://github.com/linkedin/LayoutKit). It simply calls the 
+necessary logic to be performant on the main thread. You probably won't need to subclass this.
+
+### ComponentLayout
+ComponentLayout is an protocol that conforms to Layout from [LayoutKit](https://github.com/linkedin/LayoutKit). Any custom layout you define
+must conform to this to be usable by a Component. Please read up on how to use LayoutKit [here](https://layoutkit.org). It's super easy to
+pick up, more performant than AutoLayout, and calculations can be done in a background thread. 
+
+The ComponentLayout defines what subviews are displayed on the ComponentCell. It sizes and places those subviews, and it styles
+those subviews based on the Component's properties.
 
 ### Component
-- A data model representing content in one UICollectionViewCell displayed on the BaseComponentVC. It contains UI properties and closures/functions related to user interaction
+A Component is the UI specific data model that defines the characteristics of the content to be displayed on the ComponentCell. Components
+are created in the `buildComponents` method of BaseComponentVC.
+
+### BaseComponentVC
+* * *
+BaseComponentVC is a subclass of BaseStateListeningVC that has additional set up code so that it is geared towards managing
+a UICollectionView. In addition to calling `invalidate` when its viewModels' States change, it will also call another method called
+`buildComponents` which recreates the UICollectionView's data source and is diffed by [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) diffing algorithm. Components are created inside the `buildComponents` method where State(s) from the ViewModel(s) can
+be read.
 
 
