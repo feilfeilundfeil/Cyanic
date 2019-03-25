@@ -12,7 +12,7 @@
 - Change ComponentLayout subclasses to use the Component struct as the argument in initializer [✅ 22.03.2019]
 - Refactor Sourcery template to autogenerate the layout property of Components [✅ 01.03.2019]
 - Create a UITableView subclass with identical functionality as the BaseComponentsVC
-- Refine the README.md to fully explain what the architecture is and the best practices.
+- Refine the README.md to fully explain what the architecture is and the best practices. [✅ 25.03.2019]
 
 # FFUFComponents
 * * *
@@ -269,14 +269,14 @@ class YourComponentVC: BaseComponentVC {
 
 ```
 
-### Using Sourcery to automatically generate your Components
+### Using [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 to automatically generate your Components
 * * *
 Here at FFUF, we use Sourcery to generate our Components and ComponentsController extensions! So we can automate a lot of the
 boring Component creation process including the Equatable/Hashable implementations. We achieve this by making use of annotations.
 
 These are the templates we use:
 
-AutoEquatableComponent.stencil:
+**AutoEquatableComponent.stencil:**
 ```
 // swiftlint:disable private_over_fileprivate
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
@@ -318,7 +318,7 @@ extension {{ type.annotations.Component }}: Equatable {}
 {% endfor %}
 ```
 
-AutoHashableComponent.stencil:
+**AutoHashableComponent.stencil:**
 ```
 // swiftlint:disable all
 
@@ -348,7 +348,7 @@ extension {{ type.annotations.Component }}: Hashable {
 {% endfor %}
 ```
 
-AutoGenerateComponent.stencil
+**AutoGenerateComponent.stencil**
 ```
 {% for type in types.all %}
 {% if type|annotated:"AutoGenerateComponent" %}
@@ -382,7 +382,7 @@ AutoGenerateComponent.stencil
 {% endfor %}
 ```
 
-AutoGenerateComponentExtensions.swifttemplate
+**AutoGenerateComponentExtensions.swifttemplate**
 ```
 <%
 func lowerCamelCaseName(for type: Type) -> String {
@@ -423,8 +423,7 @@ public extension ComponentsController {
 
 We generally use the following process:
 
-Step One:
-Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
+**Step One:** Create a protocol that conforms to Component (in this case we use StaticHeightComponent. StaticHeightComponent is a protocol that 
 conforms to Component and has an additional property called height.) 
 Annotate it with AutoEquatable, AutoHashable, and Component.  (These will be read by Sourcery)
 
@@ -458,8 +457,7 @@ extension YourComponentType { // You can also define other protocols
 
 ```
 
-Step Two:
-Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
+**Step Two:** Create the struct that conforms to `YourComponentType`. Annotate it with AutoGenerateComponent, AutoGenerateComponentExtension, and
 ComponentLayout.
 
 ```
@@ -469,8 +467,7 @@ struct YourComponent: YourComponentType {
 }
 ```
 
-Step Three:
-Create the custom ComponentLayout and implement your view logic inside the initializer
+**Step Three:** Create the custom ComponentLayout and implement your view logic inside the initializer
 
 ```
 class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
@@ -482,8 +479,7 @@ class YourComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
 }
 ```
-Step Four:
-In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`. Assuming no error occurred,
+**Step Four:** In your terminal, navigate to the root directory of your project and run `Pods/Sourcery/bin/sourcery`. Assuming no error occurred,
 Sourcery will generate the following:
 
 In `YourComponent.swift`
@@ -587,7 +583,7 @@ public extension ComponentsController {
 }
 ```
 
-Sourcery helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own!
+[Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own!
 
 ### FFUFComponents-specific Sourcery annotations
 * * *
