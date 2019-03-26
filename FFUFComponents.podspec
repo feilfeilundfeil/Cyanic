@@ -32,7 +32,7 @@ Pod::Spec.new do |spec|
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.requires_arc = true
-  spec.swift_version = "4.2"
+  spec.swift_version = "5.0"
 
   spec.dependency "RxSwift"
   spec.dependency "RxDataSources"

@@ -1,7 +1,7 @@
 PODS:
   - Alacrity (0.5.2)
   - Differentiator (3.1.0)
-  - FFUFWidgets (0.0.2)
+  - FFUFWidgets (0.1.0)
   - Kio (2.2.0)
   - LayoutKit (10.1.2)
   - Nimble (8.0.1)
@@ -57,7 +57,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   FFUFWidgets:
-    :commit: e8462e1a833cf8819eecb3ed1515389104f327c3
+    :commit: 391c845bb6737a40ef499f1fb3e1b51d7f25fba3
     :git: "git@bitbucket.org:FFUF/ffuf-ios-widgets.git"
   LayoutKit:
     :commit: 9eab2939e92318d6c4cbb2ae7535453aee95f619
@@ -66,7 +66,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alacrity: 42b451c6f16d92fdee7b21cdb956051a421e5dcd
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  FFUFWidgets: aa263457c39c96059a56edf1c330acf106d428a1
+  FFUFWidgets: 9e4ea4da04bb7900942408c71fad3e58ec8f3b9d
   Kio: fd92d41add2216a5db33590e7f4fd273deb70224
   LayoutKit: 184627866d9da10de0a1919a21ec2fdc2ec9d9e7
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
