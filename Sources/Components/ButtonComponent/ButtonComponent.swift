@@ -1,6 +1,6 @@
 //
 //  ButtonComponent2.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/27/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.

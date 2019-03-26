@@ -10,14 +10,14 @@ import Quick
 import Nimble
 import LayoutKit
 import RxCocoa
-@testable import FFUFComponents
+@testable import Cyanic
 
-class BaseComponentVCTests: QuickSpec {
+class ComponentViewControllerTests: QuickSpec {
 
     override func spec() {
-        describe("BaseComponentVC functionality") {
-            context("When BaseComponentVC is initialized and view is loaded") {
-                let vc: BaseComponentVCTests.TestVC = BaseComponentVCTests.TestVC()
+        describe("ComponentViewController functionality") {
+            context("When CyanicComponentViewController is initialized and view is loaded") {
+                let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
                                                    // RxDataSource error
                 vc._width = BehaviorRelay<CGFloat>(value: 555.0).asObservable() // Fake having a width value
@@ -61,7 +61,7 @@ class BaseComponentVCTests: QuickSpec {
         }
     }
 
-    class TestVC: BaseComponentVC {
+    class TestVC: ComponentViewController {
 
         var invalidateCount: Int = 0
         var buildComponentsCount: Int = 0
@@ -104,7 +104,7 @@ class BaseComponentVCTests: QuickSpec {
             }
         }
 
-        class TestViewModel1: BaseViewModel<TestVC.TestState1> {}
+        class TestViewModel1: ViewModel<TestVC.TestState1> {}
 
         struct TestState1: State {
 
@@ -116,7 +116,7 @@ class BaseComponentVCTests: QuickSpec {
             var showStaticText: Bool
         }
 
-        class TestViewModel2: BaseViewModel<TestVC.TestState2> {}
+        class TestViewModel2: ViewModel<TestVC.TestState2> {}
 
         struct TestState2: State {
 

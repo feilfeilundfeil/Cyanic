@@ -1,6 +1,6 @@
 //
-//  MvRx_iOSTests.swift
-//  FFUFComponentsTests
+//  ViewModelTests.swift
+//  Tests
 //
 //  Created by Julio Miguel Alorro on 2/6/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -8,15 +8,15 @@
 
 import Quick
 import Nimble
-@testable import FFUFComponents
+@testable import Cyanic
 
-class BaseViewModelTests: QuickSpec {
+class ViewModelTests: QuickSpec {
 
     // MARK: - Test Data Structures
     struct TestState: State {
 
-        static var `default`: BaseViewModelTests.TestState {
-            return BaseViewModelTests.TestState(
+        static var `default`: ViewModelTests.TestState {
+            return ViewModelTests.TestState(
                 string: "Hello, World",
                 isTrue: false,
                 double: 1337.0,
@@ -33,7 +33,7 @@ class BaseViewModelTests: QuickSpec {
 
     }
 
-    class ViewModel: BaseViewModel<TestState> {}
+    class TestViewModel: ViewModel<TestState> {}
 
     enum AsyncError: Error {
         case failed
@@ -44,14 +44,14 @@ class BaseViewModelTests: QuickSpec {
     }
 
     // MARK: - Factory Method
-    private func createViewModel() -> ViewModel {
-        return ViewModel(initialState: TestState.default)
+    private func createViewModel() -> TestViewModel {
+        return TestViewModel(initialState: TestState.default)
     }
 
     override func spec() {
         describe("withState and setState methods") {
             it("setState closure should be executed before withState closures even if withState is called first.") {
-                let viewModel: ViewModel = self.createViewModel()
+                let viewModel: TestViewModel = self.createViewModel()
                 var currentState: TestState = viewModel.currentState
                 var isCurrentState: Bool = false
 
@@ -79,7 +79,7 @@ class BaseViewModelTests: QuickSpec {
             context("If the Async property is mutated to .success") {
                 it("should execute the onSuccess closure") {
 
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     var wasSuccess: Bool = false
 
                     viewModel.asyncSubscribe(
@@ -102,7 +102,7 @@ class BaseViewModelTests: QuickSpec {
 
             context("If the Async property is mutated to .failure") {
                 it("should execute the onFailure closure") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     var wasFailure: Bool = false
 
                     viewModel.asyncSubscribe(
@@ -126,7 +126,7 @@ class BaseViewModelTests: QuickSpec {
 
             context("If the Async property is already .success/failure") {
                 it("should not execute the onSuccess/Failure closure after subscribing") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     let state: TestState = viewModel.currentState
 
                     // Set the asyncOnSuccess property to success synchronously
@@ -161,9 +161,9 @@ class BaseViewModelTests: QuickSpec {
         describe("selectSubscribe single keyPath") {
             context("If the subscribed property changes to a different value") {
                 it("should execute the onNewValue closure") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     var newProperty: String = ""
-                    let expectedValue: String = "FFUFComponents"
+                    let expectedValue: String = "Cyanic"
 
                     viewModel.selectSubscribe(
                         to: \TestState.string,
@@ -182,7 +182,7 @@ class BaseViewModelTests: QuickSpec {
 
             context("If the subscribed property is mutated to the same value") {
                 it("should not execute the onNewValue closure") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     let initialString: String = viewModel.currentState.string
 
                     viewModel.selectSubscribe(
@@ -216,7 +216,7 @@ class BaseViewModelTests: QuickSpec {
         describe("selectSubscribe multiple keyPaths") {
             context("If either ofthe subscribed properties change value") {
                 it("should execute the onNewValue closure for two properties") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     let currentString: String = viewModel.currentState.string
                     let currentDouble: Double = viewModel.currentState.double
                     var counter: Int = 0
@@ -265,7 +265,7 @@ class BaseViewModelTests: QuickSpec {
                 }
 
                 it("should execute the onNewValue closure for two properties") {
-                    let viewModel: ViewModel = self.createViewModel()
+                    let viewModel: TestViewModel = self.createViewModel()
                     let initialString: String = viewModel.currentState.string // Hello, World
                     let initialDouble: Double = viewModel.currentState.double // 1337.0
                     let initialIsTrue: Bool = viewModel.currentState.isTrue   // false

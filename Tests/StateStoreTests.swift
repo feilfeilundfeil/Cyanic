@@ -8,7 +8,7 @@
 
 import Quick
 import Nimble
-@testable import FFUFComponents
+@testable import Cyanic
 
 class StateStoreTests: QuickSpec {
 

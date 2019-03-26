@@ -1,13 +1,13 @@
 //
 //  UserInterfaceModel.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/4/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
 /**
- The UserInterfaceModel protcol is a workaround protocol to be able to access a Component's layout and cellType
+ The UserInterfaceModel protocol is a workaround protocol to be able to access a Component's layout and cellType
  without casting it to Component (which causes a generic constraint error).
 */
 public protocol UserInterfaceModel {

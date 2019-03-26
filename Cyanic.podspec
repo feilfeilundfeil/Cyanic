@@ -2,9 +2,9 @@ Pod::Spec.new do |spec|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  spec.name         = "FFUFComponents"
-  spec.version      = "0.4.0"
-  spec.summary      = "FFUFComponents is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView / UITableView."
+  spec.name         = "Cyanic"
+  spec.version      = "0.4.1"
+  spec.summary      = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
 
   spec.homepage     = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
 
@@ -32,7 +32,7 @@ Pod::Spec.new do |spec|
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.requires_arc = true
-  spec.swift_version = "4.2"
+  spec.swift_version = "5.0"
 
   spec.dependency "RxSwift"
   spec.dependency "RxDataSources"

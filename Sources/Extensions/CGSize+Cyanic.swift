@@ -1,6 +1,6 @@
 //
-//  CGSize+FFUFComponents.swift
-//  FFUFComponents
+//  CGSize+Cyanic.swift
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/5/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  BaseComponentVC.swift
-//  FFUFComponents
+//  ComponentViewController.swift
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/7/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -35,11 +35,11 @@ import struct RxSwift.RxTimeInterval
 import struct UIKit.UIEdgeInsets
 
 /**
- BaseComponentVC is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
+ ComponentViewController is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
  boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
- BaseComponentVC is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
+ ComponentViewController is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
 */
-open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLayout {
+open class ComponentViewController: CyanicViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: UIViewController Lifecycle Methods
     override open func loadView() {
@@ -123,7 +123,7 @@ open class BaseComponentVC: BaseStateListeningVC, UICollectionViewDelegateFlowLa
 
     // MARK: Views
     /**
-     The UICollectionView instance managed by this BaseComponentVC subclass.
+     The UICollectionView instance managed by this ComponentViewController subclass.
     */
     open var collectionView: UICollectionView { return self.view as! UICollectionView } // swiftlint:disable:this force_cast
 

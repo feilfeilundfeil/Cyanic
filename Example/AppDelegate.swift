@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FFUFComponents
+import Cyanic
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

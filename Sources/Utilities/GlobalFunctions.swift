@@ -1,6 +1,6 @@
 //
 //  GlobalFunctions.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/15/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -12,7 +12,7 @@
     - viewModel: The ViewModel instance whose State will be accessed.
     - block: The logic executed with the current State of the ViewModel.
 */
-public func withState<ConcreteState: State>(of viewModel: BaseViewModel<ConcreteState>, block: (ConcreteState) -> Void) {
+public func withState<ConcreteState: State>(of viewModel: ViewModel<ConcreteState>, block: (ConcreteState) -> Void) {
     block(viewModel.currentState)
 }
 
@@ -24,8 +24,8 @@ public func withState<ConcreteState: State>(of viewModel: BaseViewModel<Concrete
     - block: The logic executed with the current States of the ViewModels.
 */
 public func withState<ConcreteState1: State, ConcreteState2: State>(
-    viewModel1: BaseViewModel<ConcreteState1>,
-    viewModel2: BaseViewModel<ConcreteState2>,
+    viewModel1: ViewModel<ConcreteState1>,
+    viewModel2: ViewModel<ConcreteState2>,
     block: (ConcreteState1, ConcreteState2) -> Void
 ) {
     block(viewModel1.currentState, viewModel2.currentState)
@@ -40,9 +40,9 @@ public func withState<ConcreteState1: State, ConcreteState2: State>(
     - block: The logic executed with the current States of the ViewModels.
 */
 public func withState<ConcreteState1: State, ConcreteState2: State, ConcreteState3: State>(
-    viewModel1: BaseViewModel<ConcreteState1>,
-    viewModel2: BaseViewModel<ConcreteState2>,
-    viewModel3: BaseViewModel<ConcreteState3>,
+    viewModel1: ViewModel<ConcreteState1>,
+    viewModel2: ViewModel<ConcreteState2>,
+    viewModel3: ViewModel<ConcreteState3>,
     block: (ConcreteState1, ConcreteState2, ConcreteState3) -> Void
 ) {
     block(viewModel1.currentState, viewModel2.currentState, viewModel3.currentState)
@@ -63,10 +63,10 @@ public func withState<
     ConcreteState3: State,
     ConcreteState4: State
 >(
-    viewModel1: BaseViewModel<ConcreteState1>,
-    viewModel2: BaseViewModel<ConcreteState2>,
-    viewModel3: BaseViewModel<ConcreteState3>,
-    viewModel4: BaseViewModel<ConcreteState4>,
+    viewModel1: ViewModel<ConcreteState1>,
+    viewModel2: ViewModel<ConcreteState2>,
+    viewModel3: ViewModel<ConcreteState3>,
+    viewModel4: ViewModel<ConcreteState4>,
     block: (ConcreteState1, ConcreteState2, ConcreteState3, ConcreteState4) -> Void
 ) {
     block(viewModel1.currentState, viewModel2.currentState, viewModel3.currentState, viewModel4.currentState)
@@ -89,11 +89,11 @@ public func withState< // swiftlint:disable:this function_parameter_count
     ConcreteState4: State,
     ConcreteState5: State
 >(
-    viewModel1: BaseViewModel<ConcreteState1>,
-    viewModel2: BaseViewModel<ConcreteState2>,
-    viewModel3: BaseViewModel<ConcreteState3>,
-    viewModel4: BaseViewModel<ConcreteState4>,
-    viewModel5: BaseViewModel<ConcreteState5>,
+    viewModel1: ViewModel<ConcreteState1>,
+    viewModel2: ViewModel<ConcreteState2>,
+    viewModel3: ViewModel<ConcreteState3>,
+    viewModel4: ViewModel<ConcreteState4>,
+    viewModel5: ViewModel<ConcreteState5>,
     block: (ConcreteState1, ConcreteState2, ConcreteState3, ConcreteState4, ConcreteState5) -> Void
 ) {
     block(

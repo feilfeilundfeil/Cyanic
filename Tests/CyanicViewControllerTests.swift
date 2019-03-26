@@ -1,5 +1,5 @@
 //
-//  BaseStateListeningVCTests.swift
+//  CyanicViewController.swift
 //  Tests
 //
 //  Created by Julio Miguel Alorro on 3/24/19.
@@ -8,9 +8,9 @@
 
 import Quick
 import Nimble
-@testable import FFUFComponents
+@testable import Cyanic
 
-class BaseStateListeningVCTests: QuickSpec {
+class CyanicViewControllerTests: QuickSpec {
 
     override func spec() {
         describe("BaseStateListeningVC functionality") {
@@ -34,7 +34,7 @@ class BaseStateListeningVCTests: QuickSpec {
         }
     }
 
-    class TestVC: BaseStateListeningVC {
+    class TestVC: CyanicViewController {
 
         var count: Int = 0
         let viewModelOne: TestViewModel1 = TestViewModel1(initialState: TestVC.TestState1.default)
@@ -51,7 +51,7 @@ class BaseStateListeningVCTests: QuickSpec {
             self.count += 1
         }
 
-        class TestViewModel1: BaseViewModel<TestVC.TestState1> {}
+        class TestViewModel1: ViewModel<TestVC.TestState1> {}
 
         struct TestState1: State {
 
@@ -62,7 +62,7 @@ class BaseStateListeningVCTests: QuickSpec {
             var changeCount: Int
         }
 
-        class TestViewModel2: BaseViewModel<TestVC.TestState2> {}
+        class TestViewModel2: ViewModel<TestVC.TestState2> {}
 
         struct TestState2: State {
 

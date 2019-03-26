@@ -1,6 +1,6 @@
 //
 //  ChildVCComponentType.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/7/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -12,7 +12,7 @@ import struct CoreGraphics.CGFloat
 // sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = ChildVCComponent
 /// ChildVCComponentType is a protocol for Component data structures that want to show other UIViewControllers as a
-/// child UIViewController to the BaseComponentVC.
+/// child UIViewController to the ComponentViewController.
 public protocol ChildVCComponentType: StaticHeightComponent, CustomStringConvertible {
 
     // sourcery: skipHashing, skipEquality

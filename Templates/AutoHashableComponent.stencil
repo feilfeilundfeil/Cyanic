@@ -1,4 +1,4 @@
-// sourcery:file:AutoHashableComponent+FFUFComponents.swift
+// sourcery:file:AutoHashableComponent+Cyanic.swift
 // swiftlint:disable all
 
 {% macro combineVariableHashes variables %}

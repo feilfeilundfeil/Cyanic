@@ -8,54 +8,54 @@
 
 /* Begin PBXBuildFile section */
 		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
-		141FA6452246DC5F005C802F /* ComponentsController+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FA6442246DC5F005C802F /* ComponentsController+FFUFComponents.swift */; };
+		141FA6452246DC5F005C802F /* ComponentsController+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
 		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		142C451C223939DB002360F5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451B223939DB002360F5 /* Async.swift */; };
 		142C451F223B0175002360F5 /* StateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451E223B0175002360F5 /* StateStore.swift */; };
 		142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C4520223BB36C002360F5 /* GlobalFunctions.swift */; };
 		1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC52215573300A35FFE /* AnyComponent.swift */; };
-		1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* BaseViewModel.swift */; };
+		1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDC922157C4F00A35FFE /* ViewModel.swift */; };
 		1437BDCC22157FC300A35FFE /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCB22157FC300A35FFE /* State.swift */; };
 		1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */; };
 		1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD02215AFF900A35FFE /* StaticSpacingComponentLayout.swift */; };
 		1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */; };
 		1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD52215B75100A35FFE /* StaticTextComponent.swift */; };
-		1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */; };
+		1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD82215BA6000A35FFE /* Text+Cyanic.swift */; };
 		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
-		1443607B2247B70F0090FCF9 /* BaseStateListeningVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */; };
+		1443607B2247B70F0090FCF9 /* CyanicViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */; };
 		1443607D2247BC0E0090FCF9 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607C2247BC0E0090FCF9 /* TestVC.swift */; };
 		1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */; };
 		14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14496DB522273CE000C5C278 /* ButtonComponent.swift */; };
-		145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
-		145AD75C220B1EBF004F02C2 /* BaseViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */; };
+		145AD757220B1EBF004F02C2 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
+		145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
 		1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */; };
-		1478E9AA220C5B6D006AF8B3 /* FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; };
-		1478E9AB220C5B6D006AF8B3 /* FFUFComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */; };
+		1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
+		1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1478E9B1220C5D1E006AF8B3 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
 		14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576322464434006E75C6 /* StateObservableBuilder.swift */; };
 		14A4576522468CF7006E75C6 /* OneViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45072236877F002360F5 /* OneViewModelComponentVC.swift */; };
 		14A4576622468CFC006E75C6 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
 		14A4576722468D02006E75C6 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
-		14A4576922468D9E006E75C6 /* Array+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+FFUFComponents.swift */; };
+		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
-		14B022B122490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */; };
-		14B022B222490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */; };
+		14B022B122490AD7003F848F /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */; };
+		14B022B222490AD7003F848F /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
-		14C324DA2243728600FA6496 /* BaseStateListeningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* BaseStateListeningVC.swift */; };
+		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */; };
 		14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */; };
 		14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */; };
-		14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */; };
+		14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB028222E7287002D2768 /* CGSize+Cyanic.swift */; };
 		14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB02A222E7C1C002D2768 /* Selectable.swift */; };
 		14CBC9CD220C57BB00597FAA /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBC9CC220C57BB00597FAA /* Component.swift */; };
 		14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */; };
@@ -70,6 +70,7 @@
 		14F6BD802229738A008B0692 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7F2229738A008B0692 /* Copyable.swift */; };
 		3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F77D4A7854D2322155566 /* Pods_Tests.framework */; };
 		9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */; };
+		A04C2BBF254770C7996B36CE /* Pods_Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685742A8C23801FBEAE7465F /* Pods_Cyanic.framework */; };
 		D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,7 +98,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1478E9AB220C5B6D006AF8B3 /* FFUFComponents.framework in Embed Frameworks */,
+				1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,7 +108,7 @@
 /* Begin PBXFileReference section */
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
 		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
-		141FA6442246DC5F005C802F /* ComponentsController+FFUFComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+FFUFComponents.swift"; sourceTree = "<group>"; };
+		141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+Cyanic.swift"; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
 		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
@@ -118,25 +119,25 @@
 		142C451E223B0175002360F5 /* StateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStore.swift; sourceTree = "<group>"; };
 		142C4520223BB36C002360F5 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		1437BDC52215573300A35FFE /* AnyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyComponent.swift; sourceTree = "<group>"; };
-		1437BDC922157C4F00A35FFE /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		1437BDC922157C4F00A35FFE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1437BDCB22157FC300A35FFE /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponent.swift; sourceTree = "<group>"; };
 		1437BDD02215AFF900A35FFE /* StaticSpacingComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponentLayout.swift; sourceTree = "<group>"; };
 		1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentLayout.swift; sourceTree = "<group>"; };
 		1437BDD52215B75100A35FFE /* StaticTextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponent.swift; sourceTree = "<group>"; };
-		1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+FFUFComponents.swift"; sourceTree = "<group>"; };
+		1437BDD82215BA6000A35FFE /* Text+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Cyanic.swift"; sourceTree = "<group>"; };
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
-		1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateListeningVCTests.swift; sourceTree = "<group>"; };
+		1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewControllerTests.swift; sourceTree = "<group>"; };
 		1443607C2247BC0E0090FCF9 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentVCTests.swift; sourceTree = "<group>"; };
 		14496DB522273CE000C5C278 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		14496DB92228714200C5C278 /* AutoGenerateComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponent.stencil; sourceTree = "<group>"; };
-		145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FFUFComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		145AD74D220B1EBE004F02C2 /* Cyanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cyanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD750220B1EBE004F02C2 /* FFUFComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFUFComponents.h; sourceTree = "<group>"; };
 		145AD751220B1EBE004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145AD756220B1EBF004F02C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModelTests.swift; sourceTree = "<group>"; };
+		145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1470FDD5223BCE0C008CDD25 /* Alacrity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alacrity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD7223BCE0C008CDD25 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,26 +156,26 @@
 		1478E99B220C59BC006AF8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentVC.swift; sourceTree = "<group>"; };
+		1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsController.swift; sourceTree = "<group>"; };
 		14A4576322464434006E75C6 /* StateObservableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateObservableBuilder.swift; sourceTree = "<group>"; };
-		14A4576822468D9E006E75C6 /* Array+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+FFUFComponents.swift"; sourceTree = "<group>"; };
+		14A4576822468D9E006E75C6 /* Array+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Cyanic.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
-		14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+FFUFComponents.swift"; sourceTree = "<group>"; };
-		14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+FFUFComponents.swift"; sourceTree = "<group>"; };
+		14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
+		14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
-		14C324D92243728600FA6496 /* BaseStateListeningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStateListeningVC.swift; sourceTree = "<group>"; };
+		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContentLayout.swift; sourceTree = "<group>"; };
 		14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInterfaceModel.swift; sourceTree = "<group>"; };
-		14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+FFUFComponents.swift"; sourceTree = "<group>"; };
+		14CBB028222E7287002D2768 /* CGSize+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Cyanic.swift"; sourceTree = "<group>"; };
 		14CBB02A222E7C1C002D2768 /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
-		14CBB02C222E8CF3002D2768 /* FFUFComponents.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = FFUFComponents.podspec; sourceTree = "<group>"; };
+		14CBB02C222E8CF3002D2768 /* Cyanic.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cyanic.podspec; sourceTree = "<group>"; };
 		14CBB02D222E8E26002D2768 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		14CBB02F222EA929002D2768 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		14CBC9CC220C57BB00597FAA /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -190,7 +191,10 @@
 		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7F2229738A008B0692 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
 		1BF31DBC741F7929C83DE40F /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		3257F016F9341966539EC776 /* Pods-Cyanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cyanic.debug.xcconfig"; path = "Target Support Files/Pods-Cyanic/Pods-Cyanic.debug.xcconfig"; sourceTree = "<group>"; };
 		479EBB0F43D74C3AD9AFAEF1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		685742A8C23801FBEAE7465F /* Pods_Cyanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cyanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72EB596E4D7D5F93AF75B284 /* Pods-Cyanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cyanic.release.xcconfig"; path = "Target Support Files/Pods-Cyanic/Pods-Cyanic.release.xcconfig"; sourceTree = "<group>"; };
 		730F77D4A7854D2322155566 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		751299F31D4B84C4DC5C0246 /* Pods-FFUFComponents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.debug.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.debug.xcconfig"; sourceTree = "<group>"; };
 		862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */,
+				A04C2BBF254770C7996B36CE /* Pods_Cyanic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145AD757220B1EBF004F02C2 /* FFUFComponents.framework in Frameworks */,
+				145AD757220B1EBF004F02C2 /* Cyanic.framework in Frameworks */,
 				3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,7 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1478E9AA220C5B6D006AF8B3 /* FFUFComponents.framework in Frameworks */,
+				1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */,
 				D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,9 +268,9 @@
 		1437BDD72215BA4400A35FFE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				14CBB028222E7287002D2768 /* CGSize+FFUFComponents.swift */,
-				1437BDD82215BA6000A35FFE /* Text+FFUFComponents.swift */,
-				14A4576822468D9E006E75C6 /* Array+FFUFComponents.swift */,
+				14CBB028222E7287002D2768 /* CGSize+Cyanic.swift */,
+				1437BDD82215BA6000A35FFE /* Text+Cyanic.swift */,
+				14A4576822468D9E006E75C6 /* Array+Cyanic.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,7 +289,7 @@
 		14496DB822286A0A00C5C278 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				14CBB02C222E8CF3002D2768 /* FFUFComponents.podspec */,
+				14CBB02C222E8CF3002D2768 /* Cyanic.podspec */,
 				F000D2A6221C1B6800D10D0D /* .sourcery.yml */,
 				14CBB02F222EA929002D2768 /* .swiftlint.yml */,
 				14E424CF220EE51C006BAA4F /* README.md */,
@@ -311,7 +316,7 @@
 		145AD74E220B1EBE004F02C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */,
+				145AD74D220B1EBE004F02C2 /* Cyanic.framework */,
 				145AD756220B1EBF004F02C2 /* Tests.xctest */,
 				1478E992220C59B9006AF8B3 /* Example.app */,
 			);
@@ -330,9 +335,9 @@
 		145AD75A220B1EBF004F02C2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				145AD75B220B1EBF004F02C2 /* BaseViewModelTests.swift */,
+				145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */,
 				14C324DB2243827E00FA6496 /* StateStoreTests.swift */,
-				1443607A2247B70F0090FCF9 /* BaseStateListeningVCTests.swift */,
+				1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */,
 				1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */,
 				145AD75D220B1EBF004F02C2 /* Info.plist */,
 			);
@@ -376,11 +381,11 @@
 				14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				14A4576A22468E0F006E75C6 /* AnyViewModel.swift */,
-				1437BDC922157C4F00A35FFE /* BaseViewModel.swift */,
+				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
 				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
 				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
-				1478E9B0220C5D1E006AF8B3 /* BaseComponentVC.swift */,
-				14C324D92243728600FA6496 /* BaseStateListeningVC.swift */,
+				1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */,
+				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
 			);
 			path = Classes;
@@ -470,6 +475,7 @@
 				862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */,
 				D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */,
 				730F77D4A7854D2322155566 /* Pods_Tests.framework */,
+				685742A8C23801FBEAE7465F /* Pods_Cyanic.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -483,6 +489,8 @@
 				03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */,
 				1BF31DBC741F7929C83DE40F /* Pods-Tests.debug.xcconfig */,
 				479EBB0F43D74C3AD9AFAEF1 /* Pods-Tests.release.xcconfig */,
+				3257F016F9341966539EC776 /* Pods-Cyanic.debug.xcconfig */,
+				72EB596E4D7D5F93AF75B284 /* Pods-Cyanic.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -490,9 +498,9 @@
 		F000D2A7221C1D6F00D10D0D /* Sourcery */ = {
 			isa = PBXGroup;
 			children = (
-				14B022AF22490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift */,
-				14B022B022490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift */,
-				141FA6442246DC5F005C802F /* ComponentsController+FFUFComponents.swift */,
+				14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */,
+				14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */,
+				141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */,
 			);
 			path = Sourcery;
 			sourceTree = "<group>";
@@ -511,9 +519,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		145AD74C220B1EBE004F02C2 /* FFUFComponents */ = {
+		145AD74C220B1EBE004F02C2 /* Cyanic */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 145AD761220B1EBF004F02C2 /* Build configuration list for PBXNativeTarget "FFUFComponents" */;
+			buildConfigurationList = 145AD761220B1EBF004F02C2 /* Build configuration list for PBXNativeTarget "Cyanic" */;
 			buildPhases = (
 				296F66475D7218E30389EE3C /* [CP] Check Pods Manifest.lock */,
 				145AD748220B1EBE004F02C2 /* Headers */,
@@ -526,9 +534,9 @@
 			);
 			dependencies = (
 			);
-			name = FFUFComponents;
+			name = Cyanic;
 			productName = "MvRx-iOS";
-			productReference = 145AD74D220B1EBE004F02C2 /* FFUFComponents.framework */;
+			productReference = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		145AD755220B1EBF004F02C2 /* Tests */ = {
@@ -595,7 +603,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 145AD747220B1EBE004F02C2 /* Build configuration list for PBXProject "FFUFComponents" */;
+			buildConfigurationList = 145AD747220B1EBE004F02C2 /* Build configuration list for PBXProject "Cyanic" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -608,7 +616,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				145AD74C220B1EBE004F02C2 /* FFUFComponents */,
+				145AD74C220B1EBE004F02C2 /* Cyanic */,
 				145AD755220B1EBF004F02C2 /* Tests */,
 				1478E991220C59B9006AF8B3 /* Example */,
 			);
@@ -719,7 +727,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FFUFComponents-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Cyanic-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -821,10 +829,10 @@
 				14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */,
 				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
-				1437BDCA22157C4F00A35FFE /* BaseViewModel.swift in Sources */,
+				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
-				14B022B222490AD7003F848F /* AutoHashableComponent+FFUFComponents.swift in Sources */,
+				14B022B222490AD7003F848F /* AutoHashableComponent+Cyanic.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
@@ -836,29 +844,29 @@
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
-				14CBB029222E7287002D2768 /* CGSize+FFUFComponents.swift in Sources */,
-				14C324DA2243728600FA6496 /* BaseStateListeningVC.swift in Sources */,
+				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,
+				14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
-				14B022B122490AD7003F848F /* AutoEquatableComponent+FFUFComponents.swift in Sources */,
+				14B022B122490AD7003F848F /* AutoEquatableComponent+Cyanic.swift in Sources */,
 				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
-				141FA6452246DC5F005C802F /* ComponentsController+FFUFComponents.swift in Sources */,
+				141FA6452246DC5F005C802F /* ComponentsController+Cyanic.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
-				1478E9B1220C5D1E006AF8B3 /* BaseComponentVC.swift in Sources */,
+				1478E9B1220C5D1E006AF8B3 /* ComponentViewController.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
-				1437BDD92215BA6000A35FFE /* Text+FFUFComponents.swift in Sources */,
+				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
 				14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
-				14A4576922468D9E006E75C6 /* Array+FFUFComponents.swift in Sources */,
+				14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
 				14CBB027222D71E9002D2768 /* UserInterfaceModel.swift in Sources */,
 			);
@@ -868,9 +876,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145AD75C220B1EBF004F02C2 /* BaseViewModelTests.swift in Sources */,
+				145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */,
 				14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */,
-				1443607B2247B70F0090FCF9 /* BaseStateListeningVCTests.swift in Sources */,
+				1443607B2247B70F0090FCF9 /* CyanicViewControllerTests.swift in Sources */,
 				1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -894,12 +902,12 @@
 /* Begin PBXTargetDependency section */
 		145AD759220B1EBF004F02C2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 145AD74C220B1EBE004F02C2 /* FFUFComponents */;
+			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
 			targetProxy = 145AD758220B1EBF004F02C2 /* PBXContainerItemProxy */;
 		};
 		1478E9AD220C5B6D006AF8B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 145AD74C220B1EBE004F02C2 /* FFUFComponents */;
+			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
 			targetProxy = 1478E9AC220C5B6D006AF8B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1042,7 +1050,7 @@
 		};
 		145AD762220B1EBF004F02C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 751299F31D4B84C4DC5C0246 /* Pods-FFUFComponents.debug.xcconfig */;
+			baseConfigurationReference = 3257F016F9341966539EC776 /* Pods-Cyanic.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1059,7 +1067,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.de.FFUFComponents;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Cyanic;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1070,7 +1078,7 @@
 		};
 		145AD763220B1EBF004F02C2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */;
+			baseConfigurationReference = 72EB596E4D7D5F93AF75B284 /* Pods-Cyanic.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1087,7 +1095,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.de.FFUFComponents;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Cyanic;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1148,7 +1156,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.de.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1168,7 +1176,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.de.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1178,7 +1186,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		145AD747220B1EBE004F02C2 /* Build configuration list for PBXProject "FFUFComponents" */ = {
+		145AD747220B1EBE004F02C2 /* Build configuration list for PBXProject "Cyanic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				145AD75F220B1EBF004F02C2 /* Debug */,
@@ -1187,7 +1195,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		145AD761220B1EBF004F02C2 /* Build configuration list for PBXNativeTarget "FFUFComponents" */ = {
+		145AD761220B1EBF004F02C2 /* Build configuration list for PBXNativeTarget "Cyanic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				145AD762220B1EBF004F02C2 /* Debug */,

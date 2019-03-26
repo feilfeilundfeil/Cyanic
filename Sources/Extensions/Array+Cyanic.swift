@@ -1,6 +1,6 @@
 //
-//  Array+FFUFComponents.swift
-//  FFUFComponents
+//  Array+Cyanic.swift
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/23/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.

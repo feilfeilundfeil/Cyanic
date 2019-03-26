@@ -17,7 +17,7 @@
                BlueprintIdentifier = "1478E991220C59B9006AF8B3"
                BuildableName = "Example.app"
                BlueprintName = "Example"
-               ReferencedContainer = "container:FFUFComponents.xcodeproj">
+               ReferencedContainer = "container:Cyanic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "1478E991220C59B9006AF8B3"
             BuildableName = "Example.app"
             BlueprintName = "Example"
-            ReferencedContainer = "container:FFUFComponents.xcodeproj">
+            ReferencedContainer = "container:Cyanic.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "1478E991220C59B9006AF8B3"
             BuildableName = "Example.app"
             BlueprintName = "Example"
-            ReferencedContainer = "container:FFUFComponents.xcodeproj">
+            ReferencedContainer = "container:Cyanic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "1478E991220C59B9006AF8B3"
             BuildableName = "Example.app"
             BlueprintName = "Example"
-            ReferencedContainer = "container:FFUFComponents.xcodeproj">
+            ReferencedContainer = "container:Cyanic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

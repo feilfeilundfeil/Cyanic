@@ -1,19 +1,19 @@
 //
 //  TwoViewModelComponentVC.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/11/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import FFUFComponents
+import Cyanic
 import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
 import struct CoreGraphics.CGFloat
 
 /**
- A BaseComponentVC subclass that is managed by two BaseViewModels. State changes from any of the two BaseViewModels triggers
+ A ComponentViewController subclass that is managed by two BaseViewModels. State changes from any of the two BaseViewModels triggers
  a rebuild of the AnyComponents array.
 */
 open class TwoViewModelComponentVC<
@@ -24,8 +24,8 @@ open class TwoViewModelComponentVC<
     /**
      Initializer.
      - Parameters:
-        - viewModelOne: The first BaseViewModel that manages this BaseComponentVC
-        - viewModelTwo: The second BaseViewModel that manages this BaseComponentVC
+        - viewModelOne: The first ViewModel that manages this ComponentViewController
+        - viewModelTwo: The second ViewModel that manages this ComponentViewController
     */
     public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel) {
         self.viewModelOne = viewModelOne

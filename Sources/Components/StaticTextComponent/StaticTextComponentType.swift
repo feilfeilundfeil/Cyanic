@@ -1,6 +1,6 @@
 //
 //  StaticTextComponentType.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/1/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.

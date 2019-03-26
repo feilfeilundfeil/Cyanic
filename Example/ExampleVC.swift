@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FFUFComponents
+import Cyanic
 import Alacrity
 import LayoutKit
 import RxCocoa

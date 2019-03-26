@@ -14,14 +14,14 @@
 - Create a UITableView subclass with identical functionality as the BaseComponentsVC
 - Refine the README.md to fully explain what the architecture is and the best practices. [✅ 25.03.2019]
 
-# FFUFComponents
+# Cyanic
 * * *
-FFUFComponents is an iOS framework created at Feil, Feil, & Feil GmbH (FFUF) in response to a need for state-driven UI. It borrows heavily
+Cyanic is an iOS framework created at Feil, Feil, & Feil GmbH (FFUF) in response to a need for state-driven UI. It borrows heavily
 from the concepts of Airbnb's [MvRx](https://github.com/airbnb/MvRx) framework (which our Android developers use) to create a very similar
 code base with Android thereby unifying the business logic in both platforms. We use this framework to create complex, performant, and reactive
 screens in our projects.
 
-FFUFComponents is a Swift only framework. There are no plans to make it compatible with Objective-C.
+Cyanic is a Swift only framework. There are no plans to make it compatible with Objective-C.
 
 ## Core Concepts
 * * *
@@ -194,9 +194,9 @@ class YourVC: BaseStateListeningVC {
 
 **NOTE**: `invalidate` is called once when the BaseStateListeningVC's `viewDidLoad` is called then after that, on very State change.
 
-## FFUFComponents on UICollectionView
+## Cyanic on UICollectionView
 * * *
-Set up for implementing the reactive UICollectionView provided by FFUFComponents is a little more complex than setting up 
+Set up for implementing the reactive UICollectionView provided by Cyanic is a little more complex than setting up 
 BaseStateListeningVC. But we will continue to work hard on making it as simple as possible. The following literature breaks down each
 unit in implementing BaseComponentVC correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
 
@@ -595,7 +595,7 @@ public extension ComponentsController {
 
 [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 helps greatly with the boilerplate code when creating custom Components but is completely optional. You can even define your own templates!
 
-### FFUFComponents-specific Sourcery annotations
+### Cyanic-specific Sourcery annotations
 * * *
 * **isExcluded**: will be excluded out of the auto generation of properties from the `AutoGenerateComponent` template.
 * **defaultValue**: specifies the defaultValue of the property for code generation via the `AutoGenerateComponent` template.

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FFUFComponents
+import Cyanic
 import RxCocoa
 
 class TestVC: BaseStateListeningVC {

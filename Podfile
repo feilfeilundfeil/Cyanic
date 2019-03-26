@@ -13,7 +13,7 @@ def pods
 
 end
 
-target 'FFUFComponents' do
+target 'Cyanic' do
   pods
 end
 

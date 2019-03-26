@@ -1,6 +1,6 @@
 //
 //  ThrottleType.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/10/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -9,7 +9,7 @@
 import struct RxSwift.RxTimeInterval
 
 /**
- Represents the kind of throttling option available for BaseComponentVC
+ Represents the kind of throttling option available for ComponentViewController
 */
 public enum ThrottleType {
 

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import FFUFComponents
+import Cyanic
 import Alacrity
 import LayoutKit
 import RxCocoa

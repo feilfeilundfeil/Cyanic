@@ -1,6 +1,6 @@
 //
-//  BaseViewModel.swift
-//  FFUFComponents
+//  ViewModel.swift
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/14/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
@@ -15,7 +15,7 @@ import protocol RxSwift.Disposable
  reading / mutating State. A ViewModel handles the business logic necessary to render the screen it
  is responsible for. ViewModels own state and its state can be observed.
 */
-open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
+open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
 
     /**
      This instance as a type erased AnyViewModel.
@@ -208,7 +208,7 @@ open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
 }
 
-public extension BaseViewModel where StateType: ExpandableState {
+public extension ViewModel where StateType: ExpandableState {
 
     /**
      Calls the setState method where it updates (mutates) the ExpandableState's expandableDict with the given id as a key

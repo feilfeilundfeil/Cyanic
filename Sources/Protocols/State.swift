@@ -1,13 +1,13 @@
 //
 //  State.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/14/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
 /**
- State is the data structure representing the state of your screen.
+ State is a protocol adopted structs representing the state of your view model.
 */
 public protocol State: Hashable, Copyable {
 
@@ -19,7 +19,7 @@ public protocol State: Hashable, Copyable {
 }
 
 /**
- State that has expandable UI and needs to persist the isExpanded/isCollapsed state.
+ State type that has expandable UI and needs to persist the isExpanded/isCollapsed state.
 */
 public protocol ExpandableState: State {
 

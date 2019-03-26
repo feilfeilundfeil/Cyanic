@@ -1,19 +1,19 @@
 //
 //  ThreeViewModelComponentVC.swift
-//  FFUFComponents
+//  Cyanic
 //
 //  Created by Julio Miguel Alorro on 3/11/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import FFUFComponents
+import Cyanic
 import class Foundation.NSCoder
 import class RxSwift.Observable
 import class UIKit.UICollectionViewLayout
 import struct CoreGraphics.CGFloat
 
 /**
- A BaseComponentVC subclass that is managed by three BaseViewModels. State changes from any of the three BaseViewModels
+ A ComponentViewController subclass that is managed by three BaseViewModels. State changes from any of the three BaseViewModels
  triggers a rebuild of the AnyComponents array.
 */
 open class ThreeViewModelComponentVC<
@@ -25,9 +25,9 @@ open class ThreeViewModelComponentVC<
     /**
      Initializer.
      - Parameters:
-        - viewModelOne: The first BaseViewModel that manages this BaseComponentVC
-        - viewModelTwo: The second BaseViewModel that manages this BaseComponentVC
-        - viewModelThree: The third BaseViewModel that manages this BaseComponentVC
+        - viewModelOne: The first ViewModel that manages this ComponentViewController
+        - viewModelTwo: The second ViewModel that manages this ComponentViewController
+        - viewModelThree: The third ViewModel that manages this ComponentViewController
     */
     public init(viewModelOne: FirstViewModel, viewModelTwo: SecondViewModel, viewModelThree: ThirdViewModel) {
         self.viewModelOne = viewModelOne
