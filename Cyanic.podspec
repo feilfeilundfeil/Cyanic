@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.name         = "Cyanic"
-  spec.version      = "0.4.1"
+  spec.version      = "0.4.2"
   spec.summary      = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
 
   spec.homepage     = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
