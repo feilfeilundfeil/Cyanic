@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.name         = "FFUFComponents"
-  spec.version      = "0.4.0"
+  spec.version      = "0.4.1"
   spec.summary      = "FFUFComponents is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView / UITableView."
 
   spec.homepage     = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
