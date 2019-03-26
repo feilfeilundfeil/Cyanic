@@ -10,7 +10,7 @@ import UIKit
 import Cyanic
 import RxCocoa
 
-class TestVC: BaseStateListeningVC {
+class TestVC: CyanicViewController {
 
     override func loadView() {
         let view = UILabel()
@@ -32,11 +32,7 @@ class TestVC: BaseStateListeningVC {
 
     }
 
-    var count: Int = 0 {
-        didSet {
-            (self.view as! UILabel).text = self.count.description
-        }
-    }
+    var count: Int = 0
     let viewModel: TestViewModel = TestViewModel(initialState: TestVC.TestState.default)
 
     override var viewModels: [AnyViewModel] {
@@ -47,13 +43,14 @@ class TestVC: BaseStateListeningVC {
 
     override func invalidate() {
         self.count += 1
+        (self.view as! UILabel).text = self.count.description
     }
 
     @objc func addButtonItemTapped() {
         self.viewModel.setState(with: { $0.changeCount += 1 })
     }
 
-    class TestViewModel: BaseViewModel<TestVC.TestState> {}
+    class TestViewModel: ViewModel<TestVC.TestState> {}
 
     struct TestState: State {
 

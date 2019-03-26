@@ -14,7 +14,16 @@ import RxCocoa
 import RxSwift
 import SideMenu
 
-class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
+class ExampleVC: ComponentViewController {
+
+    init(viewModel: ExampleViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +74,12 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     
     }
 
+    let viewModel: ExampleViewModel
+
     override var throttleType: ThrottleType { return ThrottleType.none }
 
     override var viewModels: [AnyViewModel] {
-        return [AnyViewModel(self.viewModel)]
+        return [self.viewModel.asAnyViewModel]
     }
 
     @objc public func buttonTapped() {
@@ -254,7 +265,7 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
     }
 }
 
-class ExampleViewModel: BaseViewModel<ExampleState> {
+class ExampleViewModel: ViewModel<ExampleState> {
 
     func buttonWasTapped() {
         print("IS TRUE IS SET")

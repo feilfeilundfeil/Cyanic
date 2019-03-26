@@ -32,7 +32,7 @@ struct StateB: State {
 
 }
 
-class ViewModelA: BaseViewModel<StateA> {
+class ViewModelA: ViewModel<StateA> {
 
     func addButtonTapped() {
         self.setState(with: { $0.isTrue = true } )
@@ -43,7 +43,7 @@ class ViewModelA: BaseViewModel<StateA> {
     }
 
 }
-class ViewModelB: BaseViewModel<StateB> {
+class ViewModelB: ViewModel<StateB> {
     func addButtonTapped() {
         self.setState(with: { $0.isTrue = false })
     }
@@ -54,8 +54,18 @@ class ViewModelB: BaseViewModel<StateB> {
 }
 
 
-class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModelB> {
-    
+class CompositeVC: ComponentViewController {
+
+    init(viewModelOne: ViewModelA, viewModelTwo: ViewModelB) {
+        self.viewModelOne = viewModelOne
+        self.viewModelTwo = viewModelTwo
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     deinit {
         print("CompositeVC Deallocated")
     }
@@ -79,6 +89,9 @@ class CompositeVC: TwoViewModelComponentVC<StateA, ViewModelA, StateB, ViewModel
             ].reversed()
         }
     }
+
+    let viewModelOne: ViewModelA
+    let viewModelTwo: ViewModelB
 
     override var throttleType: ThrottleType { return ThrottleType.debounce(0.1) }
     override var viewModels: [AnyViewModel] {

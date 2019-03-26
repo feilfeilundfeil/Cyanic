@@ -40,9 +40,6 @@
 		1478E9B1220C5D1E006AF8B3 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
 		14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576322464434006E75C6 /* StateObservableBuilder.swift */; };
-		14A4576522468CF7006E75C6 /* OneViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C45072236877F002360F5 /* OneViewModelComponentVC.swift */; };
-		14A4576622468CFC006E75C6 /* TwoViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */; };
-		14A4576722468D02006E75C6 /* ThreeViewModelComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */; };
 		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
@@ -110,9 +107,6 @@
 		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
 		141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+Cyanic.swift"; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
-		142C45072236877F002360F5 /* OneViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneViewModelComponentVC.swift; sourceTree = "<group>"; };
-		142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewModelComponentVC.swift; sourceTree = "<group>"; };
-		142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewModelComponentVC.swift; sourceTree = "<group>"; };
 		142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponentExtensions.swifttemplate; sourceTree = "<group>"; };
 		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
 		142C451B223939DB002360F5 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
@@ -365,9 +359,6 @@
 				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
 				1443607C2247BC0E0090FCF9 /* TestVC.swift */,
 				141315B42235924500513FD9 /* CompositeVC.swift */,
-				142C45072236877F002360F5 /* OneViewModelComponentVC.swift */,
-				142C450922368CB2002360F5 /* TwoViewModelComponentVC.swift */,
-				142C450B2236A224002360F5 /* ThreeViewModelComponentVC.swift */,
 				1478E99B220C59BC006AF8B3 /* Assets.xcassets */,
 				1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */,
 				1478E9A0220C59BC006AF8B3 /* Info.plist */,
@@ -887,11 +878,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14A4576722468D02006E75C6 /* ThreeViewModelComponentVC.swift in Sources */,
 				1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */,
 				141315B52235924600513FD9 /* CompositeVC.swift in Sources */,
-				14A4576522468CF7006E75C6 /* OneViewModelComponentVC.swift in Sources */,
-				14A4576622468CFC006E75C6 /* TwoViewModelComponentVC.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
 				1443607D2247BC0E0090FCF9 /* TestVC.swift in Sources */,
 			);
