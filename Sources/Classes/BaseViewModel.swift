@@ -17,6 +17,9 @@ import protocol RxSwift.Disposable
 */
 open class BaseViewModel<StateType: State>: AbstractViewModel<StateType> {
 
+    /**
+     This instance as a type erased AnyViewModel.
+    */
     public var asAnyViewModel: AnyViewModel {
         return AnyViewModel(self)
     }

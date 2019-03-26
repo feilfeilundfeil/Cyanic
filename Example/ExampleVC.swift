@@ -133,7 +133,6 @@ class ExampleVC: OneViewModelComponentVC<ExampleState, ExampleViewModel> {
                 $0.width = 999_999_999.0
                 $0.insets = expandableContentInsets
                 $0.style = AlacrityStyle<UIView> { (view: UIView) -> Void in
-//                    view.subviews.forEa ch { $0.removeFromSuperview() }
                     let divider: UIView = UIView().avd.apply { $0.backgroundColor = UIColor.green }
                     view.addSubview(divider)
                     divider.frame = CGRect(x: 20.0, y: view.bounds.height - 5.0, width: view.bounds.width - 20.0, height: 5.0)

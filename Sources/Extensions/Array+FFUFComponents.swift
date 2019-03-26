@@ -15,7 +15,7 @@ internal extension Array where Element == AnyViewModel {
      - Returns:
         The ViewModels' states as an Observable<[Any]>
     */
-    internal func combineStateObservables() -> Observable<[Any]> {
+    func combineStateObservables() -> Observable<[Any]> {
         let stateObservables: [Observable<Any>] = self.map { $0.state }
         let combinedStatesObservables: Observable<[Any]> = Observable.combineLatest(stateObservables)
         return combinedStatesObservables

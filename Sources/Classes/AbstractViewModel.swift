@@ -55,14 +55,14 @@ internal extension AbstractViewModel {
     /**
      Accessor for the State Observable of the AbstractViewModel.
     */
-    internal var state: Observable<StateType> {
+    var state: Observable<StateType> {
         return self.stateStore.state
     }
 
     /**
      Accessor for the current State of the AbstractViewModel.
     */
-    internal var currentState: StateType {
+    var currentState: StateType {
         return self.stateStore.currentState
     }
 

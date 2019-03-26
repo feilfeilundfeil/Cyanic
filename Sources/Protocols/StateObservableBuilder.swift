@@ -29,7 +29,7 @@ internal extension StateObservableBuilder {
         The throttled Observable if ThrottleType.debounce or ThrottleType.throttle are used. Otherwise, it returns
         the same observable.
     */
-    internal func setUpThrottleType<State>(
+    func setUpThrottleType<State>(
         on observable: Observable<State>,
         throttleType: ThrottleType,
         scheduler: SchedulerType

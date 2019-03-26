@@ -49,7 +49,7 @@ public struct ComponentsController {
      - Parameters:
         - components: The Component instances to be added to the components array.
     */
-    public mutating func add<Components: Sequence>(_ components: Components) where Components.Element == Component {
+    public mutating func add<Components: Sequence, C: Component>(_ components: Components) where Components.Element == C {
         self.components.append(contentsOf: components.map({ $0.asAnyComponent}))
     }
 

@@ -56,7 +56,8 @@ public enum ComponentStateValidator {
      */
     public static func validateChildVCComponent(_ component: ChildVCComponent) -> Bool {
         var mutableComponent: ChildVCComponent = component
-        let isInvalidChildComponentVC: Bool = mutableComponent.childVC is InvalidChildComponentVC
+        let childVC: ChildComponentVC = mutableComponent.childVC
+        let isInvalidChildComponentVC: Bool = childVC is InvalidChildComponentVC
         return !isInvalidChildComponentVC && component.parentVC != nil
     }
 
