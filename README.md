@@ -245,6 +245,7 @@ class YourComponentVC: ComponentViewController {
 }
 ```
 ## Other Core Concepts
+* * *
 ### CyanicViewController
 * * *
 CyanicViewController is the base class for UIViewControllers that wish to use the Rx functionality of the framework. We tried to be as
