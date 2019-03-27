@@ -12,6 +12,7 @@ import RxCocoa
 
 class TestVC: CyanicViewController {
 
+    // MARK: UIViewController Lifecycle Methods
     override func loadView() {
         let view = UILabel()
         view.backgroundColor = UIColor.white
@@ -29,36 +30,27 @@ class TestVC: CyanicViewController {
                 target: self,
                 action: #selector(TestVC.addButtonItemTapped))
         }
-
     }
 
-    var count: Int = 0
-    let viewModel: TestViewModel = TestViewModel(initialState: TestVC.TestState.default)
+    // MARK: Stored Properties
+    private var count: Int = 0
+    private let viewModel: TestViewModel = TestViewModel(initialState: TestState.default)
 
+    // MARK: Computed Properties
     override var viewModels: [AnyViewModel] {
         return [
             self.viewModel.asAnyViewModel
         ]
     }
 
+    // MARK: Methods
     override func invalidate() {
         self.count += 1
         (self.view as! UILabel).text = self.count.description
     }
 
+    // MARK: Target Action Methods
     @objc func addButtonItemTapped() {
         self.viewModel.setState(with: { $0.changeCount += 1 })
-    }
-
-    class TestViewModel: ViewModel<TestVC.TestState> {}
-
-    struct TestState: State {
-
-        static var `default`: TestState {
-            return TestState(changeCount: 0)
-        }
-
-        var changeCount: Int
-
     }
 }

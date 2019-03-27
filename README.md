@@ -1,5 +1,5 @@
 ## TODO
-- Create a BaseComponentVC subclasses that handle one, two, three ViewModels [✅ 11.03.2019] (Deprecated)
+- Create a ComponentViewController subclasses that handle one, two, three ViewModels [✅ 11.03.2019] (Deprecated)
 - Update the documentation of each file [✅  05.03.2019]
 - Refactor Components into structs [✅ 01.03.2019]
 - Create Stencil templates for said structs to generate default values for properties [✅ 01.03.2019]
@@ -8,10 +8,10 @@
 - Create the Sourcery template containing the logic to generate extensions for ComponentsArray [✅ 13.03.2019]
 - Create unit tests for BaseViewModel [✅ 17.03.2019]
 - Create unit tests for StateStore [✅ 22.03.2019]
-- Create unit tests for BaseComponentVC and BaseStateListeningVC [✅ 24.03.2019]
+- Create unit tests for ComponentViewController and CyanicViewController [✅ 24.03.2019]
 - Change ComponentLayout subclasses to use the Component struct as the argument in initializer [✅ 22.03.2019]
 - Refactor Sourcery template to autogenerate the layout property of Components [✅ 01.03.2019]
-- Create a UITableView subclass with identical functionality as the BaseComponentsVC
+- Create a UITableView subclass with identical functionality as the ComponentViewController
 - Refine the README.md to fully explain what the architecture is and the best practices. [✅ 25.03.2019]
 
 # Cyanic
@@ -103,7 +103,7 @@ will be changed.
 
 There are three ways to subscribe to State:
 
-The `invalidate` method in `BaseStateListeningVC` and `BaseComponentVC` is called any their viewModel(s)' State changes. You
+The `invalidate` method in `CyanicViewController` and `ComponentViewController` is called any their viewModel(s)' State changes. You
 may get the current State in the method by doing the following:
 
 ```
@@ -164,41 +164,11 @@ yourViewModel.asyncSubscribe(
 
 ```
 
-### BaseStateListeningVC
-* * *
-BaseStateListeningVC is the base class for UIViewControllers that wish to use the Rx functionality of the framework. We tried to be as
-flexible as possible and the only method with custom logic is **viewDidLoad** where we set up the RxSwift functionality for you 🙌
-
-A very basic example:
-
-```
-class YourVC: BaseStateListeningVC {
-    ... other things ...
-    
-    override var viewModels: [AnyViewModel] { // any viewModels here will have their state observed by YourVC.
-        return [
-            yourViewModel.asAnyViewModel,
-            yourOtherViewModel.asAnyViewModel
-        ]
-    }
-    
-    override func invalidate() {
-        withState(yourViewModel, yourOtherViewModel) { // Call this method if you want to read the States.
-            ... your logic here for state changes ...
-        }
-    }
-
-}
-
-```
-
-**NOTE**: `invalidate` is called once when the BaseStateListeningVC's `viewDidLoad` is called then after that, on very State change.
-
-## Cyanic on UICollectionView
+### UICollectionView related Core Concepts
 * * *
 Set up for implementing the reactive UICollectionView provided by Cyanic is a little more complex than setting up 
-BaseStateListeningVC. But we will continue to work hard on making it as simple as possible. The following literature breaks down each
-unit in implementing BaseComponentVC correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
+CyanicViewController. But we will continue to work hard on making it as simple as possible. The following literature breaks down each
+unit in implementing ComponentViewController correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
 
 ### ComponentCell
 * * *
@@ -217,14 +187,14 @@ those subviews based on the Component's properties.
 ### Component
 * * *
 A Component is the UI specific data model that defines the characteristics of the content to be displayed on the ComponentCell. Components
-are created in the `buildComponents` method of BaseComponentVC.
+are created in the `buildComponents` method of ComponentViewController.
 Some requirements when creating custom Components:
 * Must have a unique `id`
 * Must be `Hashable` (for the diffing aspect of the framework). The Component protocol already conforms to Hashable.
 
-### BaseComponentVC
+### ComponentViewController
 * * *
-BaseComponentVC is a subclass of BaseStateListeningVC that has additional set up code so that it is geared towards managing
+ComponentViewController is a subclass of CyanicViewController that has additional set up code so that it is geared towards managing
 a UICollectionView. In addition to calling `invalidate` when its viewModels' States change, it will also call another method called
 `buildComponents` which recreates the UICollectionView's data source and is diffed by [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) diffing algorithm. Components are created inside the `buildComponents` method where State(s) from the ViewModel(s) can
 be read.
@@ -232,7 +202,7 @@ be read.
 A super simple example.
 
 ```
-class YourComponentVC: BaseComponentVC {
+class YourComponentVC: ComponentViewController {
 
     ... other stuff ...
     
@@ -271,6 +241,36 @@ class YourComponentVC: BaseComponentVC {
 
 ```
 
+### CyanicViewController
+* * *
+CyanicViewController is the base class for UIViewControllers that wish to use the Rx functionality of the framework. We tried to be as
+flexible as possible and the only method with custom logic is **viewDidLoad** where we set up the RxSwift functionality for you 🙌
+
+A very basic example:
+
+```
+class YourVC: CyanicViewController {
+    ... other things ...
+
+    override var viewModels: [AnyViewModel] { // any viewModels here will have their state observed by YourVC.
+        return [
+            yourViewModel.asAnyViewModel,
+            yourOtherViewModel.asAnyViewModel
+        ]
+    }
+
+    override func invalidate() {
+        withState(yourViewModel, yourOtherViewModel) { // Call this method if you want to read the States.
+            ... your logic here for state changes ...
+        }
+    }
+
+}
+
+```
+
+**NOTE**: `invalidate` is called once when the CyanicViewController's `viewDidLoad` is called then after that, on every State change.
+
 ### Using [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 to automatically generate your Components
 * * *
 Here at FFUF, we use Sourcery to generate our Components and ComponentsController extensions! So we can automate a lot of the
@@ -278,150 +278,13 @@ boring Component creation process including the Equatable/Hashable implementatio
 
 These are the templates we use:
 
-**AutoEquatableComponent.stencil:**
-```
-// swiftlint:disable private_over_fileprivate
-fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
-    switch (lhs, rhs) {
-        case let (lValue?, rValue?):
-            return compare(lValue, rValue)
-        case (nil, nil):
-            return true
-        default:
-            return false
-    }
-}
+[AutoEquatableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoEquatableComponent.stencil)
 
-fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
-    guard lhs.count == rhs.count else { return false }
-        for (idx, lhsItem) in lhs.enumerated() {
-            guard compare(lhsItem, rhs[idx]) else { return false }
-        }
+[AutoHashableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoHashableComponent.stencil)
 
-    return true
-}
+[AutoGenerateComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponent.stencil)
 
-{% macro compareVariables variables %}
-    {% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}{% if not variable.annotations.skipEquality %}guard {% if not variable.isOptional %}{% if not variable.annotations.arrayEquality %}lhs.{{ variable.name }} == rhs.{{ variable.name }}{% else %}compareArrays(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %}{% else %}compareOptionals(lhs: lhs.{{ variable.name }}, rhs: rhs.{{ variable.name }}, compare: ==){% endif %} else { return false }{% endif %}
-    {% endfor %}
-{% endmacro %}
-// MARK: - AutoEquatableComponent
-{% for type in types.types|!enum where type|annotated:"AutoEquatableComponent" %}
-// MARK: - {{ type.annotations.Component }} AutoEquatableComponent
-extension {{ type.annotations.Component }}: Equatable {}
-{{ type.accessLevel }} func == (lhs: {{ type.annotations.Component }}, rhs: {{ type.annotations.Component }}) -> Bool {
-    {% if not type.kind == "protocol" %}
-    {% call compareVariables type.storedVariables %}
-    {% else %}
-    {% call compareVariables type.allVariables %}
-    {% endif %}
-    return true
-}
-{% endfor %}
-```
-
-**AutoHashableComponent.stencil:**
-```
-// swiftlint:disable all
-
-{% macro combineVariableHashes variables %}
-{% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}
-{% if not variable.annotations.skipHashing %}
-        {% if variable.isStatic %}type(of: self).{% else %}self.{% endif %}{{ variable.name }}.hash(into: &hasher)
-{% endif %}
-{% endfor %}
-{% endmacro %}
-
-// MARK: - AutoHashableComponent
-{% for type in types.types|!enum where type|annotated:"AutoHashableComponent" %}
-// MARK: - {{ type.name }} AutoHashableComponent
-extension {{ type.annotations.Component }}: Hashable {
-    {{ type.accessLevel }}{% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %} override{% endif %} func hash(into hasher: inout Hasher) {
-        {% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %}
-        super.hash(into: hasher)
-        {% endif %}
-        {% if not type.kind == "protocol" %}
-        {% call combineVariableHashes type.storedVariables %}
-        {% else %}
-        {% call combineVariableHashes type.allVariables %}
-        {% endif %}
-    }
-}
-{% endfor %}
-```
-
-**AutoGenerateComponent.stencil**
-```
-{% for type in types.all %}
-{% if type|annotated:"AutoGenerateComponent" %}
-// sourcery:inline:auto:{{ type.name }}.AutoGenerateComponent
-    /**
-    Work around Initializer because memberwise initializers are all or nothing
-    - Parameters:
-    - id: The unique identifier of the {{ type.name }}.
-    */
-    {{ type.accessLevel }} init(id: String) {
-        self.id = id
-    }
-
-{% for var in type.allVariables|!annotated:"isExcluded" %}
-{% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
-{% if var.annotations.defaultValue %}
-    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.annotations.isLazy %}lazy {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
-
-{% elif var.annotations.isLayout %}
-    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.ComponentLayout }}(component: self) }
-
-{% else %}
-    {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
-
-{% endif %}
-{% endfor %}
-    {{ type.accessLevel }} var identity: {{ type.name }} { return self }
-
-// sourcery:end
-{% endif %}
-{% endfor %}
-```
-
-**AutoGenerateComponentExtensions.swifttemplate**
-```
-<%
-func lowerCamelCaseName(for type: Type) -> String {
-let name: String = type.name
-return name.prefix(1).lowercased() + name.dropFirst()
-}
--%>
-public extension ComponentsController {
-<%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
-<%_ let functionName = lowerCamelCaseName(for: type) -%>
-
-    /**
-        Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a
-        unique id in the configuration block, otherwise it will force a fatalError.
-        - Parameters:
-            - configuration: The closure that mutates the mutable <%= type.name %>.
-            - mutableComponent: The <%= type.name %> instance to be mutated/configured.
-        - Returns:
-            <%= type.name %>
-    */
-    @discardableResult
-    mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
-        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
-        configuration(&mutableComponent)
-        mutableComponent.width = self.width
-        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
-            else { fatalError("You must have a unique identifier for this component") }
-    <%_ if type.annotations["RequiredVariables"] != nil { -%>
-        guard ComponentStateValidator.validate<%= type.name %>(mutableComponent)
-            else { fatalError("You did not configure all required variables in this component") }
-    <%_ } -%>
-        self.add(mutableComponent)
-        return mutableComponent
-    }
-<%_ } -%>
-}
-```
+[AutoGenerateComponentExtensions.swifttemplate](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponentExtensions.swifttemplate)
 
 We generally use the following process:
 

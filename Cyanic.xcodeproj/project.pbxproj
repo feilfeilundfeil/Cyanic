@@ -61,6 +61,13 @@
 		14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */; };
 		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
+		14F06052224B58E700CC62B0 /* ExampleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06051224B58E700CC62B0 /* ExampleState.swift */; };
+		14F06054224B591200CC62B0 /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06053224B591200CC62B0 /* ExampleViewModel.swift */; };
+		14F06056224B593500CC62B0 /* ChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06055224B593500CC62B0 /* ChildVC.swift */; };
+		14F06058224B5A9A00CC62B0 /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06057224B5A9A00CC62B0 /* TestViewModel.swift */; };
+		14F0605A224B5AB900CC62B0 /* TestState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06059224B5AB900CC62B0 /* TestState.swift */; };
+		14F0605C224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */; };
+		14F0605E224B5BC400CC62B0 /* StateA+StateB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */; };
 		14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */; };
 		14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */; };
 		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
@@ -180,6 +187,13 @@
 		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		14F06051224B58E700CC62B0 /* ExampleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleState.swift; sourceTree = "<group>"; };
+		14F06053224B591200CC62B0 /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
+		14F06055224B593500CC62B0 /* ChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC.swift; sourceTree = "<group>"; };
+		14F06057224B5A9A00CC62B0 /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		14F06059224B5AB900CC62B0 /* TestState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestState.swift; sourceTree = "<group>"; };
+		14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelA+ViewModelB.swift"; sourceTree = "<group>"; };
+		14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateA+StateB.swift"; sourceTree = "<group>"; };
 		14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
@@ -355,10 +369,10 @@
 		1478E993220C59B9006AF8B3 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				14F06050224B58BE00CC62B0 /* View Controllers */,
+				14F0604F224B58B300CC62B0 /* View Models */,
+				14F0604E224B58AC00CC62B0 /* States */,
 				1478E994220C59B9006AF8B3 /* AppDelegate.swift */,
-				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
-				1443607C2247BC0E0090FCF9 /* TestVC.swift */,
-				141315B42235924500513FD9 /* CompositeVC.swift */,
 				1478E99B220C59BC006AF8B3 /* Assets.xcassets */,
 				1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */,
 				1478E9A0220C59BC006AF8B3 /* Info.plist */,
@@ -447,6 +461,37 @@
 				14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */,
 			);
 			path = ChildVCComponent;
+			sourceTree = "<group>";
+		};
+		14F0604E224B58AC00CC62B0 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				14F06051224B58E700CC62B0 /* ExampleState.swift */,
+				14F06059224B5AB900CC62B0 /* TestState.swift */,
+				14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		14F0604F224B58B300CC62B0 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				14F06053224B591200CC62B0 /* ExampleViewModel.swift */,
+				14F06057224B5A9A00CC62B0 /* TestViewModel.swift */,
+				14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		14F06050224B58BE00CC62B0 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
+				1443607C2247BC0E0090FCF9 /* TestVC.swift */,
+				141315B42235924500513FD9 /* CompositeVC.swift */,
+				14F06055224B593500CC62B0 /* ChildVC.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		98F8D2D4C2A9710903B34A80 /* Frameworks */ = {
@@ -879,8 +924,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */,
+				14F06054224B591200CC62B0 /* ExampleViewModel.swift in Sources */,
+				14F06058224B5A9A00CC62B0 /* TestViewModel.swift in Sources */,
+				14F06056224B593500CC62B0 /* ChildVC.swift in Sources */,
 				141315B52235924600513FD9 /* CompositeVC.swift in Sources */,
+				14F06052224B58E700CC62B0 /* ExampleState.swift in Sources */,
+				14F0605E224B5BC400CC62B0 /* StateA+StateB.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
+				14F0605A224B5AB900CC62B0 /* TestState.swift in Sources */,
+				14F0605C224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift in Sources */,
 				1443607D2247BC0E0090FCF9 /* TestVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

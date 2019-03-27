@@ -12,48 +12,6 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-struct StateA: State {
-
-    static var `default`: StateA {
-        return StateA(isTrue: true)
-    }
-
-    var isTrue: Bool
-
-}
-
-struct StateB: State {
-
-    static var `default`: StateB {
-        return StateB(isTrue: false)
-    }
-
-    var isTrue: Bool
-
-}
-
-class ViewModelA: ViewModel<StateA> {
-
-    func addButtonTapped() {
-        self.setState(with: { $0.isTrue = true } )
-    }
-
-    func otherButtonTapped() {
-        self.setState(with: { $0.isTrue = false } )
-    }
-
-}
-class ViewModelB: ViewModel<StateB> {
-    func addButtonTapped() {
-        self.setState(with: { $0.isTrue = false })
-    }
-
-    func otherButtonTapped() {
-        self.setState(with: { $0.isTrue = true })
-    }
-}
-
-
 class CompositeVC: ComponentViewController {
 
     init(viewModelOne: ViewModelA, viewModelTwo: ViewModelB) {

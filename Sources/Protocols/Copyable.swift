@@ -18,7 +18,8 @@ public extension Copyable {
      - Parameters:
         - block: The closure that mutates the mutable copy of Self
         - mutableSelf: The mutable copy of Self passed to the closure.
-     - Returns: Mutated copy of Self.
+     - Returns:
+        A copy of Self with the changes from the closure.
     */
     func copy(with changes: (_ mutableSelf: inout Self) -> Void) -> Self {
         var mutableSelf: Self = self

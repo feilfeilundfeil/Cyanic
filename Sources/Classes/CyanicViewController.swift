@@ -105,7 +105,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
      When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
      should react to changes in state. This method is run on the main thread asynchronously.
 
-     When overriding, no need to call super because it does nothing.
+     When overriding, no need to call super because the default implementation does nothing.
     */
     open func invalidate() {}
 

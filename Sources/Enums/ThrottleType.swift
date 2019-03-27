@@ -15,7 +15,7 @@ public enum ThrottleType {
 
     /**
      Changes in State are ignored until a specified time interval has passed, the time interval is reset
-     for changes that happen within the time interval.
+     when changes in State occur within the time interval.
     */
     case debounce(RxTimeInterval)
 
