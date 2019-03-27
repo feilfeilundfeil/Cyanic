@@ -73,7 +73,6 @@
 		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
 		14F6BD802229738A008B0692 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7F2229738A008B0692 /* Copyable.swift */; };
 		3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F77D4A7854D2322155566 /* Pods_Tests.framework */; };
-		9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4E552E5727508CE2BBC0F70 /* Pods_FFUFComponents.framework */; };
 		A04C2BBF254770C7996B36CE /* Pods_Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685742A8C23801FBEAE7465F /* Pods_Cyanic.framework */; };
 		D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -217,7 +216,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AD8EB8B6EE26D9F9C8C27ED /* Pods_FFUFComponents.framework in Frameworks */,
 				A04C2BBF254770C7996B36CE /* Pods_Cyanic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1196,7 +1194,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.CyanicExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1216,7 +1214,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.CyanicExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

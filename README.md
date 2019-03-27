@@ -112,7 +112,6 @@ override func invalidate() {
         ... your logic here ...
     }
 }
-
 ```
 If you want a more granular scope, you may target properties from State specifically with the following:
 
@@ -161,35 +160,37 @@ yourViewModel.asyncSubscribe(
         ... you logic here if failed ...
     }
 )
-
 ```
 
-### UICollectionView related Core Concepts
+## Core Concepts of implementing a UICollectionView powered by Cyanic
 * * *
-Set up for implementing the reactive UICollectionView provided by Cyanic is a little more complex than setting up 
-CyanicViewController. But we will continue to work hard on making it as simple as possible. The following literature breaks down each
-unit in implementing ComponentViewController correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
+Set up for implementing the reactive UICollectionView provided by Cyanic is a little more complex than setting up a regular UIViewController.
+But we will continue to work hard on making it as simple as possible. The following literature breaks down each
+step in implementing a ComponentViewController correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
 
 ### ComponentCell
 * * *
-ComponentCell is a UICollectionViewCell that leverages the power of [LayoutKit](https://github.com/linkedin/LayoutKit). It simply calls the 
-necessary logic to be performant on the main thread. You probably won't need to subclass this.
+ComponentCell is a UICollectionViewCell subclass that leverages the power of [LayoutKit](https://github.com/linkedin/LayoutKit). It simply calls the
+takes a ComponentLayout, tells it to perform size and arrangement calculations in a background thread then tells it to make the subviews in its `contentView` on the
+main thread asynchronously. You probably won't need to subclass this.
 
 ### ComponentLayout
 * * *
 ComponentLayout is an protocol that conforms to Layout from [LayoutKit](https://github.com/linkedin/LayoutKit). Any custom layout you define
-must conform to this to be usable by a Component. Please read up on how to use LayoutKit [here](https://layoutkit.org). It's super easy to
-pick up, more performant than AutoLayout, and calculations can be done in a background thread. 
+must conform to this protocol to be usable by a Component. Please read up on how to use LayoutKit [here](https://layoutkit.org). It's super easy to
+pick up, more performant than AutoLayout, and size calculations can be done in a background thread. 
 
-The ComponentLayout defines what subviews are displayed on the ComponentCell. It sizes and places those subviews, and it styles
-those subviews based on the Component's properties.
+The ComponentLayout defines what subviews are displayed on the ComponentCell. It sizes and arranges those subviews within a root UIView
+(in our case, the `contentView` of ComponentCell), and it styles those subviews based on the Component's properties. It also defines the size of the `contentView`
+in the ComponentCell.
 
 ### Component
 * * *
 A Component is the UI specific data model that defines the characteristics of the content to be displayed on the ComponentCell. Components
-are created in the `buildComponents` method of ComponentViewController.
+are created in the `buildComponents` method of ComponentViewController and added to the mutable `ComponentsController`.
+
 Some requirements when creating custom Components:
-* Must have a unique `id`
+* Must have a unique `id`.
 * Must be `Hashable` (for the diffing aspect of the framework). The Component protocol already conforms to Hashable.
 
 ### ComponentViewController
@@ -198,6 +199,10 @@ ComponentViewController is a subclass of CyanicViewController that has additiona
 a UICollectionView. In addition to calling `invalidate` when its viewModels' States change, it will also call another method called
 `buildComponents` which recreates the UICollectionView's data source and is diffed by [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources) diffing algorithm. Components are created inside the `buildComponents` method where State(s) from the ViewModel(s) can
 be read.
+
+Some additional functionality:
+* Reads each Component's ComponentLayout and sizes each cell accordingly.
+* If the Component adopts `Selectable`, ComponentViewControllers will call `onSelect` when `collectionView(collectionView:didSelectItemAt:)`  is called.
 
 A super simple example.
 
@@ -213,7 +218,7 @@ class YourComponentVC: ComponentViewController {
     }
 
     override func buildComponents(_ componentsController: inout ComponentsController) { 
-    // This is called in a background thread 
+        // This is called in a background thread 
         withState(yourViewModel) { (currentState: YourState) -> Void in
             componentsController.staticTextComponent {
                 $0.id = "First static component"
@@ -238,9 +243,8 @@ class YourComponentVC: ComponentViewController {
         }
     }
 }
-
 ```
-
+## Other Core Concepts
 ### CyanicViewController
 * * *
 CyanicViewController is the base class for UIViewControllers that wish to use the Rx functionality of the framework. We tried to be as
@@ -266,7 +270,6 @@ class YourVC: CyanicViewController {
     }
 
 }
-
 ```
 
 **NOTE**: `invalidate` is called once when the CyanicViewController's `viewDidLoad` is called then after that, on every State change.
@@ -278,13 +281,13 @@ boring Component creation process including the Equatable/Hashable implementatio
 
 These are the templates we use:
 
-[AutoEquatableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoEquatableComponent.stencil)
+* [AutoEquatableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoEquatableComponent.stencil)
 
-[AutoHashableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoHashableComponent.stencil)
+* [AutoHashableComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoHashableComponent.stencil)
 
-[AutoGenerateComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponent.stencil)
+* [AutoGenerateComponent.stencil](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponent.stencil)
 
-[AutoGenerateComponentExtensions.swifttemplate](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponentExtensions.swifttemplate)
+* [AutoGenerateComponentExtensions.swifttemplate](https://bitbucket.org/FFUF/ffuf-ios-components/src/master/Templates/AutoGenerateComponentExtensions.swifttemplate)
 
 We generally use the following process:
 
@@ -321,7 +324,6 @@ extension YourComponentType { // You can also define other protocols
     }
 
 }
-
 ```
 
 **Step Two:** 

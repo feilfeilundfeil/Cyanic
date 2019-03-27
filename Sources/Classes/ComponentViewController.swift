@@ -17,6 +17,7 @@ import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewFlowLayout
 import class UIKit.UICollectionViewLayout
+import class UIKit.UIView
 import class UIKit.UIViewController
 import enum Foundation.DispatchTimeInterval
 import enum RxDataSources.UITableViewRowAnimation
@@ -44,7 +45,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     // MARK: UIViewController Lifecycle Methods
     override open func loadView() {
         let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view = collectionView
     }
@@ -109,17 +110,15 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     internal private(set) var width: CGFloat = 0.0
 
-    // MARK: Computed Properties
     /**
-     The layout of the UICollectionView. This is not the exact instance as the one used in the UICollectionView but a copy.
-     The instance used by the UICollectionView was injected via initializer in the loadView method.
-    */
-    open var layout: UICollectionViewLayout {
+     The layout of the UICollectionView.
+     */
+    public let layout: UICollectionViewLayout = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0.0
         layout.minimumInteritemSpacing = 0.0
         return layout
-    }
+    }()
 
     // MARK: Views
     /**
