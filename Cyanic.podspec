@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  spec.author             = { "Julio Alorro" => "julio.alorro@ffuf.de" }
+  spec.author             = { "Feil, Feil, & Feil GmbH" => "mail@ffuf.de" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
@@ -23,7 +23,6 @@ Pod::Spec.new do |spec|
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   spec.source       = { :git => "git@bitbucket.org:FFUF/ffuf-ios-components.git", :tag => spec.version }
-
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
