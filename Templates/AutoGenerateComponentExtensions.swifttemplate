@@ -5,6 +5,9 @@ func lowerCamelCaseName(for type: Type) -> String {
 }
 -%>
 // sourcery:file:ComponentsController+Cyanic.swift
+import enum Cyanic.ComponentStateValidator
+import struct Cyanic.ComponentsController
+
 public extension ComponentsController {
 <%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
 <%_ let functionName = lowerCamelCaseName(for: type) -%>
