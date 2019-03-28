@@ -17,7 +17,7 @@ public enum ComponentStateValidator {
      - Returns:
         Bool indicating whether or not the id is valid.
      */
-    internal static func hasValidIdentifier<ConcreteComponent: Component>(_ component: ConcreteComponent) -> Bool {
+    public static func hasValidIdentifier<ConcreteComponent: Component>(_ component: ConcreteComponent) -> Bool {
         return component.id != Constants.invalidID
     }
 
