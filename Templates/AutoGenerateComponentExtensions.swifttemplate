@@ -6,6 +6,7 @@ func lowerCamelCaseName(for type: Type) -> String {
 -%>
 // sourcery:file:ComponentsController+Cyanic.swift
 import enum Cyanic.ComponentStateValidator
+import enum Cyanic.Constants
 import struct Cyanic.ComponentsController
 
 public extension ComponentsController {
