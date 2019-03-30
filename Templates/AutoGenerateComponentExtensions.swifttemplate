@@ -4,14 +4,17 @@ func lowerCamelCaseName(for type: Type) -> String {
     return name.prefix(1).lowercased() + name.dropFirst()
 }
 -%>
-// sourcery:file:ComponentsController+Cyanic.swift
+// sourcery:file:ComponentsController+<%= argument["project"] as? String ?? "Cyanic" %>.swift
+<%_ if let isFramework = argument["isFramework"] as? Bool, isFramework {-%>
+<%_ } else { -%>
 import enum Cyanic.ComponentStateValidator
 import enum Cyanic.Constants
 import struct Cyanic.ComponentsController
 
+<%_ } -%>
 public extension ComponentsController {
 <%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
-<%_ let functionName = lowerCamelCaseName(for: type) -%>
+<%_ let functionName: String = lowerCamelCaseName(for: type) -%>
 
     /**
         Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a

@@ -2,8 +2,6 @@
 // DO NOT EDIT
 
 // swiftlint:disable all
-
-
 // MARK: - AutoHashableComponent
 // MARK: - ButtonComponentType AutoHashableComponent
 extension ButtonComponent: Hashable {

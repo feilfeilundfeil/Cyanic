@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
-		141FA6452246DC5F005C802F /* ComponentsController+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
 		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		142C451C223939DB002360F5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451B223939DB002360F5 /* Async.swift */; };
@@ -42,9 +41,10 @@
 		14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576322464434006E75C6 /* StateObservableBuilder.swift */; };
 		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
+		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
+		14A7EE09224F6B13007FAB4D /* ComponentsController+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */; };
+		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
-		14B022B122490AD7003F848F /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */; };
-		14B022B222490AD7003F848F /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
@@ -111,7 +111,6 @@
 /* Begin PBXFileReference section */
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
 		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
-		141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+Cyanic.swift"; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
 		142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponentExtensions.swifttemplate; sourceTree = "<group>"; };
 		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
@@ -161,11 +160,12 @@
 		14A4576322464434006E75C6 /* StateObservableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateObservableBuilder.swift; sourceTree = "<group>"; };
 		14A4576822468D9E006E75C6 /* Array+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Cyanic.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
+		14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
+		14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+Cyanic.swift"; sourceTree = "<group>"; };
+		14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
-		14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
-		14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
@@ -532,9 +532,9 @@
 		F000D2A7221C1D6F00D10D0D /* Sourcery */ = {
 			isa = PBXGroup;
 			children = (
-				14B022AF22490AD7003F848F /* AutoEquatableComponent+Cyanic.swift */,
-				14B022B022490AD7003F848F /* AutoHashableComponent+Cyanic.swift */,
-				141FA6442246DC5F005C802F /* ComponentsController+Cyanic.swift */,
+				14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */,
+				14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */,
+				14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */,
 			);
 			path = Sourcery;
 			sourceTree = "<group>";
@@ -866,7 +866,6 @@
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
-				14B022B222490AD7003F848F /* AutoHashableComponent+Cyanic.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
@@ -878,14 +877,13 @@
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
+				14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,
 				14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
-				14B022B122490AD7003F848F /* AutoEquatableComponent+Cyanic.swift in Sources */,
 				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
-				141FA6452246DC5F005C802F /* ComponentsController+Cyanic.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
@@ -896,9 +894,11 @@
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
+				14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
 				14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
+				14A7EE09224F6B13007FAB4D /* ComponentsController+Cyanic.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
 				14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,

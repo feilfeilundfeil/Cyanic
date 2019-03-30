@@ -1,6 +1,5 @@
-// sourcery:file:AutoHashableComponent+Cyanic.swift
+// sourcery:file:AutoHashableComponent+{{ argument.project }}.swift
 // swiftlint:disable all
-
 {% macro combineVariableHashes variables %}
 {% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}
 {% if not variable.annotations.skipHashing %}
@@ -8,7 +7,6 @@
 {% endif %}
 {% endfor %}
 {% endmacro %}
-
 // MARK: - AutoHashableComponent
 {% for type in types.types|!enum where type|annotated:"AutoHashableComponent" %}
 // MARK: - {{ type.name }} AutoHashableComponent
