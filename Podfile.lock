@@ -1,7 +1,7 @@
 PODS:
   - Alacrity (0.5.2)
+  - CommonWidgets (0.1.1)
   - Differentiator (3.1.0)
-  - FFUFWidgets (0.1.0)
   - Kio (2.2.0)
   - LayoutKit (10.1.2)
   - Nimble (8.0.1)
@@ -15,22 +15,18 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.2):
     - RxAtomic (>= 4.4.2, ~> 4.4)
-  - RxTest (4.4.2):
-    - RxAtomic (>= 4.4.2, ~> 4.4)
-    - RxSwift (>= 4.4.2, ~> 4.4)
   - SideMenu (5.0.3)
   - Sourcery (0.16.0)
 
 DEPENDENCIES:
   - Alacrity
-  - "FFUFWidgets (from `git@bitbucket.org:FFUF/ffuf-ios-widgets.git`)"
+  - CommonWidgets (from `https://github.com/feilfeilundfeil/CommonWidgets.git`)
   - Kio
-  - "LayoutKit (from `git@github.com:hooliooo/LayoutKit.git`)"
+  - LayoutKit (from `https://github.com/hooliooo/LayoutKit.git`)
   - Nimble
   - Quick
   - RxDataSources
   - RxSwift
-  - RxTest
   - SideMenu
   - Sourcery
 
@@ -45,28 +41,27 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
-    - RxTest
     - SideMenu
     - Sourcery
 
 EXTERNAL SOURCES:
-  FFUFWidgets:
-    :git: "git@bitbucket.org:FFUF/ffuf-ios-widgets.git"
+  CommonWidgets:
+    :git: https://github.com/feilfeilundfeil/CommonWidgets.git
   LayoutKit:
-    :git: "git@github.com:hooliooo/LayoutKit.git"
+    :git: https://github.com/hooliooo/LayoutKit.git
 
 CHECKOUT OPTIONS:
-  FFUFWidgets:
-    :commit: 391c845bb6737a40ef499f1fb3e1b51d7f25fba3
-    :git: "git@bitbucket.org:FFUF/ffuf-ios-widgets.git"
+  CommonWidgets:
+    :commit: ce91929f45c0a0a371b7e22aa4360013405d9c0a
+    :git: https://github.com/feilfeilundfeil/CommonWidgets.git
   LayoutKit:
     :commit: 9eab2939e92318d6c4cbb2ae7535453aee95f619
-    :git: "git@github.com:hooliooo/LayoutKit.git"
+    :git: https://github.com/hooliooo/LayoutKit.git
 
 SPEC CHECKSUMS:
   Alacrity: 42b451c6f16d92fdee7b21cdb956051a421e5dcd
+  CommonWidgets: 053c4c50692f9f2eb568abc04adcfba6086edf48
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  FFUFWidgets: 9e4ea4da04bb7900942408c71fad3e58ec8f3b9d
   Kio: fd92d41add2216a5db33590e7f4fd273deb70224
   LayoutKit: 184627866d9da10de0a1919a21ec2fdc2ec9d9e7
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
@@ -75,10 +70,9 @@ SPEC CHECKSUMS:
   RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
-  RxTest: 6433d5b6229f5de424fa534bc22b5e6c38b0b671
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
 
-PODFILE CHECKSUM: d297abac5d5e8bd891a303f982abf5ad25761f28
+PODFILE CHECKSUM: 2db2539622fbe151abcb90b8fed85f2c3d2fe6c4
 
 COCOAPODS: 1.6.1

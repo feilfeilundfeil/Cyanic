@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
 
   spec.homepage              = "https://github.com/feilfeilundfeil/Cyanic"
   spec.license               = { :type => "MIT", :file => "LICENSE" }
-  spec.authors               =  "Feil, Feil, & Feil GmbH", "Julio Alorro", "Jonas Bark" }
+  spec.authors               =  "Feil, Feil, & Feil GmbH", "Julio Alorro", "Jonas Bark"
   spec.ios.deployment_target = "10.0"
   spec.source                = { :git => "https://github.com/feilfeilundfeil/Cyanic.git", :tag => spec.version }
   spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"

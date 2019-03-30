@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class FFUFWidgets.ChevronView
+import class CommonWidgets.ChevronView
 import class UIKit.UIColor
 import class UIKit.UIView
 import struct Alacrity.AlacrityStyle
