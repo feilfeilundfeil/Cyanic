@@ -1,4 +1,4 @@
-// sourcery:file:AutoHashableComponent+{{ argument.project }}.swift
+// sourcery:file:AutoHashableComponent+{% if argument.project %}{{ argument.project }}{% else %}Cyanic{%endif %}.swift
 // swiftlint:disable all
 {% macro combineVariableHashes variables %}
 {% for variable in variables where variable.readAccess != "private" and variable.readAccess != "fileprivate" %}

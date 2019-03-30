@@ -14,14 +14,7 @@ import protocol LayoutKit.Layout
  A ComponentLayout calculates the size and location of the subviews in a given CGRect. The subviews are styled based on the
  data of the Component that owns this ComponentLayout
 */
-public protocol ComponentLayout: class, Layout {
-
-    /**
-     The DisposeBag to deallocate any subscriptions tied to the lifetime of this ComponentLayout instance.
-    */
-    var disposeBag: DisposeBag { get }
-
-}
+public protocol ComponentLayout: class, Layout {}
 
 public extension ComponentLayout {
 

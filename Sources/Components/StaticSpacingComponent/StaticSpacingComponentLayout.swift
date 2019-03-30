@@ -7,7 +7,6 @@
 //
 
 import class LayoutKit.SizeLayout
-import class RxSwift.DisposeBag
 import class UIKit.UIColor
 import class UIKit.UIView
 import struct CoreGraphics.CGSize
@@ -41,6 +40,4 @@ public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLa
             }
         )
     }
-
-    public let disposeBag: DisposeBag = DisposeBag()
 }

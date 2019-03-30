@@ -1,41 +1,26 @@
 Pod::Spec.new do |spec|
 
-  # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
+  spec.name                  = "Cyanic"
+  spec.version               = "0.4.5"
+  spec.summary               = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
 
-  spec.name         = "Cyanic"
-  spec.version      = "0.4.5"
-  spec.summary      = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
+  spec.description           = <<-DESC
+                               Cyanic is a MvRx-inspired framework that aims to build reactive UI in a UICollectionView.
+                               It borrows heavily from MvRx in terms of API and structure while falling within the constraints of
+                               Swift and iOS development. It leverages RxSwift to have reactive functionality, LayoutKit to have
+                               performance close to manual layout when sizing and arranging subviews, and Sourcery fast creation of
+                               custom components. It uses an Model-View-ViewModel (MVVM) style of architecture.
+                               DESC
 
-  spec.homepage     = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
-
-  # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.license      = { :type => "MIT", :file => "LICENSE" }
-
-  # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.author             = { "Feil, Feil, & Feil GmbH" => "mail@ffuf.de" }
-
-  # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
+  spec.homepage              = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
+  spec.license               = { :type => "MIT", :file => "LICENSE" }
+  spec.authors               =  "Julio Alorro", "Feil, Feil, & Feil GmbH"
   spec.ios.deployment_target = "10.0"
-
-  # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.source       = { :git => "git@bitbucket.org:FFUF/ffuf-ios-components.git", :tag => spec.version }
-
-  # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.source_files  = "Sources/**/*.swift", "Sources/Components/**/*.swift"
-
-  # ――― Resources --―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.resources = ["Templates/*"]
-
-  # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-
-  spec.requires_arc = true
-  spec.swift_version = "5.0"
+  spec.source                = { :git => "git@bitbucket.org:FFUF/ffuf-ios-components.git", :tag => spec.version }
+  spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"
+  spec.resources             = ["Templates/*"]
+  spec.requires_arc          = true
+  spec.swift_version         = "5.0"
 
   spec.dependency "RxSwift"
   spec.dependency "RxDataSources"

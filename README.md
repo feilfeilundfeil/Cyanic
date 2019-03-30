@@ -164,9 +164,21 @@ yourViewModel.asyncSubscribe(
 
 ## Core Concepts of implementing a UICollectionView powered by Cyanic
 * * *
-Set up for implementing the reactive UICollectionView provided by Cyanic is a little more complex than setting up a regular UIViewController.
-But we will continue to work hard on making it as simple as possible. The following literature breaks down each
-step in implementing a ComponentViewController correctly as well as some convenience with the help of [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈. 
+Set up for implementing the reactive UICollectionView provided by Cyanic is exteremly simple! All you have to do is define a `.sourcery.yml` and input the
+following configuration (assuming you're in the root directory of your project):
+```
+sources:
+    - Pods/Cyanic/Sources/Protocols
+templates:
+    - Pods/Cyanic/Templates
+output:
+    YOUR_PROJECT/PATH_TO_DIRECTORY_FOR_GENERATED_FILES
+args:
+    "project": "YOUR_PROJECT_NAME"
+```
+
+This will allow you to use our built-in [Sourcery](https://github.com/krzysztofzablocki/Sourcery) 🌈 templates and generate your files
+whenever you run `Pods/Sourcery/bin/sourcery` in your terminal.
 
 ### ComponentCell
 * * *

@@ -8,7 +8,6 @@
 
 import class LayoutKit.SizeLayout
 import class LayoutKit.TextViewLayout
-import class RxSwift.DisposeBag
 import class UIKit.UIFont
 import class UIKit.UIColor
 import class UIKit.UITextView
@@ -63,6 +62,4 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             }
         )
     }
-
-    public let disposeBag: DisposeBag = DisposeBag()
 }

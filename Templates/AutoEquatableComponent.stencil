@@ -1,4 +1,4 @@
-// sourcery:file:AutoEquatableComponent+{{ argument.project }}.swift
+// sourcery:file:AutoEquatableComponent+{% if argument.project %}{{ argument.project }}{% else %}Cyanic{%endif %}.swift
 // swiftlint:disable private_over_fileprivate
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
     switch (lhs, rhs) {

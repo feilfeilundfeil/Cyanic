@@ -7,7 +7,6 @@
 //
 
 import class LayoutKit.SizeLayout
-import class RxSwift.DisposeBag
 import class UIKit.UIView
 import class UIKit.UIViewController
 import struct CoreGraphics.CGFloat
@@ -46,5 +45,4 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
         )
     }
 
-    public let disposeBag: DisposeBag = DisposeBag()
 }

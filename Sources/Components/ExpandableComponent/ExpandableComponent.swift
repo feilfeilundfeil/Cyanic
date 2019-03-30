@@ -7,14 +7,11 @@
 //
 
 import class FFUFWidgets.ChevronView
-import class RxSwift.DisposeBag
-import class RxCocoa.PublishRelay
 import class UIKit.UIColor
 import class UIKit.UIView
 import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
-import struct LayoutKit.Alignment
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension,RequiredVariables

@@ -7,17 +7,14 @@
 //
 
 import class FFUFWidgets.ChevronView
-import class RxSwift.DisposeBag
 import class LayoutKit.InsetLayout
 import class LayoutKit.SizeLayout
 import class LayoutKit.StackLayout
 import class UIKit.UIColor
 import class UIKit.UIView
-import class RxCocoa.PublishRelay
 import enum LayoutKit.Axis
 import enum LayoutKit.StackLayoutDistribution
 import struct Alacrity.AlacrityStyle
-import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
@@ -96,6 +93,4 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
                 .style
         )
     }
-
-    public let disposeBag: DisposeBag = DisposeBag()
 }
