@@ -1,6 +1,6 @@
 # Cyanic
 
-Cyanic is an iOS framework created at Feil, Feil, & Feil GmbH (FFUF) in response to a need for state-driven UI. It borrows heavily
+Cyanic is an iOS framework created at [Feil, Feil, & Feil GmbH](https://ffuf.de/en/)  in response to a need for state-driven UI. It borrows heavily
 from the concepts of Airbnb's [MvRx](https://github.com/airbnb/MvRx) framework (which our Android developers use) to create a very similar
 code base with Android thereby unifying the business logic in both platforms. We use this framework to create complex, performant, and reactive
 screens in our projects.
