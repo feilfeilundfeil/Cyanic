@@ -16,7 +16,7 @@ Requirements:
 
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
-    pod 'Cyanic'
+    pod 'Cyanic', :git => 'https://github.com/feilfeilundfeil/Cyanic.git'
     pod 'CommonWidgets', :git => 'https://github.com/feilfeilundfeil/CommonWidgets.git'
     pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
     ```

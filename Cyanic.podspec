@@ -22,12 +22,14 @@ Pod::Spec.new do |spec|
   spec.requires_arc          = true
   spec.swift_version         = "5.0"
 
-  spec.dependency "RxSwift"
-  spec.dependency "RxDataSources"
   spec.dependency "LayoutKit"
+  spec.dependency "RxDataSources"
+  spec.dependency "RxSwift"
+  spec.dependency "Sourcery"
+
   spec.dependency "Kio"
   spec.dependency "Alacrity"
   spec.dependency "CommonWidgets"
-  spec.dependency "Sourcery"
+
 
 end
