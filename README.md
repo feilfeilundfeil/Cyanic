@@ -48,7 +48,7 @@ Check out our [wiki](https://github.com/feilfeilundfeil/Cyanic/wiki) for full do
 
 A very simple example:
 
-```
+```swift
 struct YourState: State {
     static var `default`: YourState { 
         return YourState(text: "Hello, World!") 
@@ -86,7 +86,6 @@ class YourComponentViewController: ComponentViewController {
             }
         }
     }
-    
 }
 ```
 
