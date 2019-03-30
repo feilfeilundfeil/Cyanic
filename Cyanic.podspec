@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                  = "Cyanic"
-  spec.version               = "0.4.5"
+  spec.version               = "0.4.6"
   spec.summary               = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
 
   spec.description           = <<-DESC
@@ -12,11 +12,11 @@ Pod::Spec.new do |spec|
                                custom components. It uses an Model-View-ViewModel (MVVM) style of architecture.
                                DESC
 
-  spec.homepage              = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
+  spec.homepage              = "https://github.com/feilfeilundfeil/Cyanic"
   spec.license               = { :type => "MIT", :file => "LICENSE" }
   spec.authors               =  "Feil, Feil, & Feil GmbH", "Julio Alorro", "Jonas Bark" }
   spec.ios.deployment_target = "10.0"
-  spec.source                = { :git => "git@github.com:feilfeilundfeil/Cyanic.git", :tag => spec.version }
+  spec.source                = { :git => "https://github.com/feilfeilundfeil/Cyanic.git", :tag => spec.version }
   spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"
   spec.resources             = ["Templates/*"]
   spec.requires_arc          = true
@@ -27,7 +27,7 @@ Pod::Spec.new do |spec|
   spec.dependency "LayoutKit"
   spec.dependency "Kio"
   spec.dependency "Alacrity"
-  spec.dependency "FFUFWidgets"
+  spec.dependency "CommonWidgets"
   spec.dependency "Sourcery"
 
 end

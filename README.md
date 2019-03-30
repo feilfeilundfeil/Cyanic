@@ -29,7 +29,7 @@ Cyanic is a Swift only framework. There are no plans to make it compatible with 
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
     pod 'Cyanic'
-    pod 'FFUFWidgets', :git => 'git@bitbucket.org:FFUF/ffuf-ios-widgets.git'
+    pod 'CommonWidgets', :git => 'https://github.com/feilfeilundfeil/CommonWidgets.git'
     pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
     ```
 
