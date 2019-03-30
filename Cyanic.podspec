@@ -14,9 +14,9 @@ Pod::Spec.new do |spec|
 
   spec.homepage              = "https://bitbucket.org/FFUF/ffuf-ios-components/src/master/"
   spec.license               = { :type => "MIT", :file => "LICENSE" }
-  spec.authors               =  "Julio Alorro", "Feil, Feil, & Feil GmbH"
+  spec.authors               =  "Feil, Feil, & Feil GmbH", "Julio Alorro", "Jonas Bark" }
   spec.ios.deployment_target = "10.0"
-  spec.source                = { :git => "git@bitbucket.org:FFUF/ffuf-ios-components.git", :tag => spec.version }
+  spec.source                = { :git => "git@github.com:feilfeilundfeil/Cyanic.git", :tag => spec.version }
   spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"
   spec.resources             = ["Templates/*"]
   spec.requires_arc          = true
