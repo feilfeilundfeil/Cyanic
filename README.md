@@ -26,6 +26,10 @@ Cyanic is a Swift only framework. There are no plans to make it compatible with 
 ## Installation
 ### [CocoaPods](http://cocoapods.org/)
 
+Requirements:
+* Swift 5.0+
+* iOS 10.0+
+
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
     pod 'Cyanic'
@@ -42,7 +46,49 @@ Check out our [wiki](https://github.com/feilfeilundfeil/Cyanic/wiki) for full do
 
 ## A Simple Example
 
-** Under Construction **
+A very simple example:
+
+```
+struct YourState: State {
+    static var `default`: YourState { 
+        return YourState(text: "Hello, World!") 
+    } 
+
+    var text: String 
+}
+
+class YourViewModel: ViewModel<YourState> {
+    func showCyanic() {
+        self.setState { $0.text = "Hello, Cyanic!" }
+    }
+}
+
+class YourComponentViewController: ComponentViewController {
+    
+    private let viewModel: YourViewModel = YourViewModel(initialState: YourState.default)
+    
+    override var viewModels: [AnyViewModel] {
+        return [self.viewModel.asAnyViewModel]
+    }
+    
+    override func buildComponents(_ componentsController: inout ComponentsController) {
+        withState(self.viewModel) { (state: YourState) -> Void in
+            componentsController.staticTextComponent {
+                $0.id = "title"
+                $0.text = state.text
+            }
+            
+            componentsController.buttonComponent {
+                $0.id = "button"
+                $0.onTap = { [weak self]
+                    self?.viewModel.showCyanic()
+                }
+            }
+        }
+    }
+    
+}
+```
 
 ## Contributors
 
