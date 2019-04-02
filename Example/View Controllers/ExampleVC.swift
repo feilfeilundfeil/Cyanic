@@ -265,6 +265,7 @@ class ExampleVC: ComponentViewController {
     @objc func navButtonTapped() {
         let vc: TestVC = TestVC()
 
-        self.navigationController?.pushViewController(vc, animated: true)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        self.present(vc, animated: true, completion: nil)
     }
 }

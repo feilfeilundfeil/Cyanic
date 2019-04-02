@@ -1,20 +1,18 @@
 PODS:
-  - Alacrity (0.5.2)
+  - Alacrity (0.5.4)
   - CommonWidgets (0.1.1)
   - Differentiator (3.1.0)
   - Kio (2.2.0)
   - LayoutKit (10.1.2)
   - Nimble (8.0.1)
   - Quick (2.0.0)
-  - RxAtomic (4.4.2)
-  - RxCocoa (4.4.2):
+  - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.4.2):
-    - RxAtomic (>= 4.4.2, ~> 4.4)
+  - RxSwift (4.5.0)
   - SideMenu (5.0.3)
   - Sourcery (0.16.0)
 
@@ -37,7 +35,6 @@ SPEC REPOS:
     - Kio
     - Nimble
     - Quick
-    - RxAtomic
     - RxCocoa
     - RxDataSources
     - RxSwift
@@ -59,17 +56,16 @@ CHECKOUT OPTIONS:
     :git: https://github.com/hooliooo/LayoutKit.git
 
 SPEC CHECKSUMS:
-  Alacrity: 42b451c6f16d92fdee7b21cdb956051a421e5dcd
+  Alacrity: f69c0bbe4917912d83a63c981884420f857ddeff
   CommonWidgets: 053c4c50692f9f2eb568abc04adcfba6086edf48
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Kio: fd92d41add2216a5db33590e7f4fd273deb70224
   LayoutKit: 184627866d9da10de0a1919a21ec2fdc2ec9d9e7
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Quick: ce1276c7c27ba2da3cb2fd0cde053c3648b3b22d
-  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
-  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
   Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
 
