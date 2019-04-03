@@ -20,8 +20,8 @@ class ComponentViewControllerTests: QuickSpec {
                 let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
                                                    // RxDataSource error
-                vc._width = BehaviorRelay<CGFloat>(value: 555.0).asObservable() // Fake having a width value
-                                                                                // so buildComponents is called
+                vc._width.accept(555.0)            // Fake having a width value
+                                                   // so buildComponents is called
                 vc.viewDidLoad()
 
                 it("should call invalidate and buildComponents to get the intial state") {
