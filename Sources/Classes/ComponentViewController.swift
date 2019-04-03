@@ -8,6 +8,7 @@
 
 import class Foundation.NSCoder
 import class RxCocoa.BehaviorRelay
+import class RxCocoa.PublishRelay
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
@@ -83,8 +84,14 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
             .disposed(by: self.disposeBag)
     }
 
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self._width1.accept(self.view.bounds.width)
+    }
+
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
+        self._width1.accept(size.width)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
@@ -95,18 +102,10 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
     /**
-     When the view is loaded, its width and height are initially all zero. It is useful to observe these changes to
-     determine the max width of the content inside the UICollectionView.
-     The _width Observable listens to changes in the root UIVIew's bounds. It is used as the width when sizing the
-     ComponentCell.
-
-     This Observable is filtered so it doesn't repeat the duplicate values.
+     When the view is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
+     This PublishRelay represents that emitted value.
     */
-    internal lazy var _width: Observable<CGFloat> = self.view.rx
-        .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
-        .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
-        .map({ (rect: CGRect?) -> CGFloat in rect!.width })
-        .distinctUntilChanged()
+    internal let _width1: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
 
     internal private(set) var width: CGFloat = 0.0
 
@@ -140,8 +139,14 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     internal override func setUpObservables(with viewModels: [AnyViewModel]) {
         guard !viewModels.isEmpty else { return }
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
+
+        // Ensure that the width is not zero and only emit values if the view's width changes
+        let filteredWidth: Observable<CGFloat> = self._width1
+            .filter({ (width: CGFloat) -> Bool in return width > 0.0 })
+            .distinctUntilChanged()
+
         let allObservables: Observable<(CGFloat, [Any])> = Observable.combineLatest(
-            self._width, combinedStatesObservables
+            filteredWidth, combinedStatesObservables
         )
 
         let throttledStateObservable: Observable<(CGFloat, [Any])> = self.setUpThrottleType(
