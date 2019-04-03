@@ -86,12 +86,12 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._width1.accept(self.view.bounds.width)
+        self._width.accept(self.view.bounds.width)
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self._width1.accept(size.width)
+        self._width.accept(size.width)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
@@ -105,7 +105,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
      When the view is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
      This PublishRelay represents that emitted value.
     */
-    internal let _width1: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
+    internal let _width: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
 
     internal private(set) var width: CGFloat = 0.0
 
@@ -125,7 +125,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     */
     open var collectionView: UICollectionView { return self.view as! UICollectionView } // swiftlint:disable:this force_cast
 
-    // MARK: Functions
+    // MARK: Methods
     /**
      Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
 
@@ -141,7 +141,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
 
         // Ensure that the width is not zero and only emit values if the view's width changes
-        let filteredWidth: Observable<CGFloat> = self._width1
+        let filteredWidth: Observable<CGFloat> = self._width
             .filter({ (width: CGFloat) -> Bool in return width > 0.0 })
             .distinctUntilChanged()
 
