@@ -48,7 +48,7 @@ class CompositeVC: ComponentViewController {
             ].reversed()
         }
 
-        self.topConstraint.constant = -20.0
+        self.topAnchorConstraint.constant = -20.0
         self.view.layoutIfNeeded()
     }
 
