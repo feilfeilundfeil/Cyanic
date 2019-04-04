@@ -93,12 +93,19 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self._width.accept(self.view.bounds.width)
+
+        switch self.width {
+            case .automatic:
+                self._widthRelay.accept(self.collectionView.frame.width)
+            case .exactly:
+                break
+        }
+
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self._width.accept(size.width)
+        self._widthRelay.accept(size.width)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
@@ -145,9 +152,9 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
      When the view is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
      This PublishRelay represents that emitted value.
     */
-    internal let _width: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
+    internal let _widthRelay: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
 
-    internal private(set) var width: CGFloat = 0.0
+    internal private(set) var _width: CGFloat = 0.0
 
     /**
      The layout of the UICollectionView.
@@ -158,6 +165,9 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         layout.minimumInteritemSpacing = 0.0
         return layout
     }()
+
+    // MARK: Computed Properties
+    open var width: ComponentViewController.Width { return ComponentViewController.Width.automatic }
 
     // MARK: Views
     /**
@@ -183,10 +193,18 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         guard !viewModels.isEmpty else { return }
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
 
-        // Ensure that the width is not zero and only emit values if the view's width changes
-        let filteredWidth: Observable<CGFloat> = self._width
-            .filter({ (width: CGFloat) -> Bool in return width > 0.0 })
-            .distinctUntilChanged()
+        let filteredWidth: Observable<CGFloat>
+
+        switch self.width {
+            case .automatic:
+                // Ensure that the width is not zero and only emit values if the view's width changes
+                filteredWidth = self._widthRelay
+                    .filter({ (width: CGFloat) -> Bool in return width > 0.0 })
+                    .distinctUntilChanged()
+
+            case .exactly(let width):
+                filteredWidth = Observable<CGFloat>.just(width)
+        }
 
         let allObservables: Observable<(CGFloat, [Any])> = Observable.combineLatest(
             filteredWidth, combinedStatesObservables
@@ -211,7 +229,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         throttledStateObservable
             .map({ [weak self] (width: CGFloat, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
-                s.width = width
+                s._width = width
                 var controller: ComponentsController = ComponentsController(width: width)
                 s.buildComponents(&controller)
                 return controller.components
@@ -260,7 +278,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
 
-        let size: CGSize = CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: self._width, height: CGFloat.greatestFiniteMagnitude)
 
         let cellSize: CGSize = layout.measurement(within: size).size
         return cellSize
@@ -271,6 +289,28 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         let component: AnyComponent = self._components.value[indexPath.item]
         guard let selectable = component.identity.base as? Selectable else { return }
         selectable.onSelect()
+    }
+
+}
+
+// MARK: - Width Enum
+public extension ComponentViewController {
+
+    /**
+     In cases where ComponentViewController is a childViewController. It is sometimes necessary to have an exact width.
+     This enum allows the the programmer to specify if there's an exact width for the ComponentViewController or if it should be taken
+     cared of by UIKit.
+    */
+    enum Width {
+        /**
+         Width is defined by UIKit automatically. It is calculated by taking the UICollectionView's frame width.
+        */
+        case automatic
+
+        /**
+         Width is defined by a constant value.
+        */
+        case exactly(CGFloat)
     }
 
 }

@@ -30,7 +30,7 @@ class CompositeVC: ComponentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
+//        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.white
 
         self.kio.setUpNavigationItem {
@@ -47,15 +47,13 @@ class CompositeVC: ComponentViewController {
                 )
             ].reversed()
         }
-
-        self.topAnchorConstraint.constant = -20.0
-        self.view.layoutIfNeeded()
     }
 
     let viewModelOne: ViewModelA
     let viewModelTwo: ViewModelB
 
     override var throttleType: ThrottleType { return ThrottleType.debounce(0.1) }
+    override var width: ComponentViewController.Width { return .exactly(240.0) }
     override var viewModels: [AnyViewModel] {
         return [AnyViewModel(self.viewModelOne), AnyViewModel(self.viewModelTwo)]
     }
@@ -117,6 +115,19 @@ class CompositeVC: ComponentViewController {
                 $0.backgroundColor = UIColor.yellow
                 $0.height = 44.0
             }
+        }
+    }
+
+    override func invalidate() {
+        withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: StateA, state2: StateB) -> Void in
+            switch state1.isTrue {
+                case true:
+                    self.topAnchorConstraint.constant = -20.0
+                case false:
+                    self.topAnchorConstraint.constant = 0.0
+            }
+
+            self.view.layoutIfNeeded()
         }
     }
 
