@@ -30,6 +30,7 @@ class CompositeVC: ComponentViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         self.view.backgroundColor = UIColor.white
 
         self.kio.setUpNavigationItem {
@@ -46,6 +47,9 @@ class CompositeVC: ComponentViewController {
                 )
             ].reversed()
         }
+
+        self.topConstraint.constant = -20.0
+        self.view.layoutIfNeeded()
     }
 
     let viewModelOne: ViewModelA

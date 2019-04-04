@@ -14,6 +14,7 @@ import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
 import class RxSwift.Observable
 import class RxSwift.SerialDispatchQueueScheduler
+import class UIKit.NSLayoutConstraint
 import class UIKit.UICollectionView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewFlowLayout
@@ -45,10 +46,16 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     // MARK: UIViewController Lifecycle Methods
     override open func loadView() {
-        let collectionView: UICollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: self.layout)
-        collectionView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.view = collectionView
+        self.view = UIView()
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self.collectionView)
+
+        NSLayoutConstraint.activate([
+            self.topAnchorConstraint,
+            self.bottomAnchorConstraint,
+            self.leadingAnchorConstraint,
+            self.trailingAnchorConstraint
+        ])
     }
 
     open override func viewDidLoad() {
@@ -95,6 +102,39 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
+    // MARK: Constraints
+    /**
+     The top anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+    */
+    public lazy var topAnchorConstraint: NSLayoutConstraint = {
+        return self.collectionView.topAnchor
+            .constraint(equalTo: self.view.topAnchor, constant: 0.0)
+    }()
+
+    /**
+     The bottom anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+    */
+    public lazy var bottomAnchorConstraint: NSLayoutConstraint = {
+        return self.collectionView.bottomAnchor
+            .constraint(equalTo: self.view.bottomAnchor, constant: 0.0)
+    }()
+
+    /**
+     The leading anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+    */
+    public lazy var leadingAnchorConstraint: NSLayoutConstraint = {
+        return self.collectionView.leadingAnchor
+            .constraint(equalTo: self.view.leadingAnchor, constant: 0.0)
+    }()
+
+    /**
+     The trailing anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+    */
+    public lazy var trailingAnchorConstraint: NSLayoutConstraint = {
+        return self.collectionView.trailingAnchor
+            .constraint(equalTo: self.view.trailingAnchor, constant: 0.0)
+    }()
+
     // MARK: Stored Properties
     /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
@@ -123,7 +163,10 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     /**
      The UICollectionView instance managed by this ComponentViewController subclass.
     */
-    open var collectionView: UICollectionView { return self.view as! UICollectionView } // swiftlint:disable:this force_cast
+    public private(set) lazy var collectionView: UICollectionView = UICollectionView(
+        frame: CGRect.zero,
+        collectionViewLayout: self.layout
+    )
 
     // MARK: Methods
     /**
