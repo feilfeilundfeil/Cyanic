@@ -23,6 +23,7 @@ class ComponentViewControllerTests: QuickSpec {
                 vc._width.accept(555.0)            // Fake having a width value
                                                    // so buildComponents is called
                 vc.viewDidLoad()
+                vc._width.accept(100.0)
 
                 it("should call invalidate and buildComponents to get the intial state") {
                     expect(vc.invalidateCount).toEventually(equal(1))
