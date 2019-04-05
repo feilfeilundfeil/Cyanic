@@ -34,7 +34,6 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var width: CGFloat = 0.0
 
-    // sourcery: skipHashing, skipEquality 
     public var contentLayout: ExpandableContentLayout = EmptyContentLayout()
 
     public var backgroundColor: UIColor = UIColor.clear

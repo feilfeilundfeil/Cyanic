@@ -64,8 +64,13 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayout: chevronLayout
         )
 
-        let contentWidth: CGFloat = contentInsetLayout.measurement(within: size).size.width
-        let chevronWidth: CGFloat = chevronInsetLayout.measurement(within: size).size.width
+        let adjustedSize: CGSize = CGSize(
+            width: size.width - insets.left - insets.right,
+            height: component.height - insets.top - insets.bottom
+        )
+
+        let contentWidth: CGFloat = contentInsetLayout.measurement(within: adjustedSize).size.width
+        let chevronWidth: CGFloat = chevronInsetLayout.measurement(within: adjustedSize).size.width
 
         let spacing: CGFloat = size.width - contentWidth - chevronWidth
 

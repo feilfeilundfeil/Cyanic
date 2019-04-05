@@ -19,7 +19,6 @@ import struct UIKit.UIEdgeInsets
 /// with content that can be hidden / shown on tap.
 public protocol ExpandableComponentType: StaticHeightComponent {
 
-    // sourcery: skipHashing, skipEquality
     // sourcery: defaultValue = "EmptyContentLayout()"
     /// The content of the ExpandableComponentType to be displayed. Excludes the ChevronView which is built in.
     var contentLayout: ExpandableContentLayout { get set }

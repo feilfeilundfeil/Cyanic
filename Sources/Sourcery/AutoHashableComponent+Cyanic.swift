@@ -27,6 +27,7 @@ extension ChildVCComponent: Hashable {
 // MARK: - ExpandableComponentType AutoHashableComponent
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
+        self.contentLayout.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.chevronSize.hash(into: &hasher)
         self.isExpanded.hash(into: &hasher)
