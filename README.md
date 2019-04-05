@@ -30,15 +30,28 @@ Check out our [wiki](https://github.com/feilfeilundfeil/Cyanic/wiki) for full do
 
 ## A Simple Example
 
-A very simple example:
+A very simple example with expandable functionality:
 
 ```swift
-struct YourState: State {
+struct YourState: ExpandableState {
+    
+    enum Section: String, CaseIterable {
+        case first
+        case second
+    }
+
     static var `default`: YourState { 
-        return YourState(text: "Hello, World!") 
+        return YourState(
+            text: "Hello, World!",
+            expandableDict: YourState.Section.allCases.map { $0.rawValue }
+                .reduce(into: [String: Bool](), { (current, element) -> Void in
+                    current[element] = false
+                }
+        ) 
     } 
 
-    var text: String 
+    var text: String
+    var expandableDict: [String: Bool]
 }
 
 class YourViewModel: ViewModel<YourState> {
@@ -66,6 +79,31 @@ class YourComponentViewController: ComponentViewController {
                 $0.id = "button"
                 $0.onTap = { [weak self]
                     self?.viewModel.showCyanic()
+                }
+            }
+            
+            let firstExpandableID: String = YourState.Section.first.rawValue
+            
+            let yourExpandable = components.expandableComponent { [weak self] in
+                guard let s = self else { return }
+                $0.id = firstExpandableID
+                $0.contentLayout = LabelContentLayout(text: Text.unattributed("Hello, World!"))
+                $0.isExpanded = state.expandableDict[firstExpandableID] ?? false
+                $0.setExpandableState = self.viewModel.setExpandableState
+                $0.backgroundColor = UIColor.lightGray
+                $0.height = 55.0
+            }
+            
+            // These ButtonComponents will only show up when yourExpandable is expanded.
+            if yourExpandable.isExpanded {
+                for number in 1...5 {
+                    componentsController.buttonComponent {
+                        $0.id = "button\(number)"
+                        $0.title = "\(number)"
+                        $0.onTap = { [weak self]
+                            print("Hello, World from Button \(number)")
+                        }
+                    }
                 }
             }
         }
