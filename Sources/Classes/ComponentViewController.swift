@@ -139,7 +139,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
      This Observable emits the nonzero widths UICollectionView when it changes. This may not work in some circumstances when this
      ComponentViewController is inside a custom Container UIViewController. If that happens override **width** and use **.exactly**.
     */
-    internal private(set) lazy var _widthObservable: Observable<CGFloat> = self.collectionView.rx
+    internal lazy var _widthObservable: Observable<CGFloat> = self.collectionView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
         .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
         .map({ (rect: CGRect?) -> CGFloat in rect!.width })

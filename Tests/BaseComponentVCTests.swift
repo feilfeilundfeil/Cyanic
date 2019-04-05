@@ -19,11 +19,11 @@ class ComponentViewControllerTests: QuickSpec {
             context("When CyanicComponentViewController is initialized and view is loaded") {
                 let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
-                                                   // RxDataSource error
-                vc._widthRelay.accept(555.0)            // Fake having a width value
-                                                   // so buildComponents is called
+
+                // Fake a width so buildComponents is called.
+                vc._widthObservable = BehaviorRelay<CGFloat>(value: 555.0).asObservable()
+
                 vc.viewDidLoad()
-                vc._widthRelay.accept(100.0)
 
                 it("should call invalidate and buildComponents to get the intial state") {
                     expect(vc.invalidateCount).toEventually(equal(1))
