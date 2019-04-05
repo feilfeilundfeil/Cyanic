@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name                  = "Cyanic"
-  spec.version               = "0.4.10"
+  spec.version               = "0.4.11"
   spec.summary               = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
 
   spec.description           = <<-DESC
