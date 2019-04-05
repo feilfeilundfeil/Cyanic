@@ -44,8 +44,8 @@ struct YourState: ExpandableState {
         return YourState(
             text: "Hello, World!",
             expandableDict: YourState.Section.allCases.map { $0.rawValue }
-                .reduce(into: [String: Bool](), { (current, element) -> Void in
-                    current[element] = false
+                .reduce(into: [String: Bool](), { (current: inout [String: Bool], id: String) -> Void in
+                    current[id] = false
                 }
         ) 
     } 
