@@ -135,8 +135,9 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
     /**
-     When the view is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
-     This Observable represents that emitted value.
+     When the collectionView is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
+     This Observable emits the nonzero widths UICollectionView when it changes. This may not work in some circumstances when this
+     ComponentViewController is inside a custom Container UIViewController. If that happens override **width** and use **.exactly**.
     */
     internal private(set) lazy var _widthObservable: Observable<CGFloat> = self.collectionView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
@@ -187,7 +188,6 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
         switch self.width {
             case .automatic:
-                // Ensure that the width is not zero and only emit values if the view's width changes
                 filteredWidth = self._widthObservable
 
             case .exactly(let width):
