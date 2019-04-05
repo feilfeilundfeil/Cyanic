@@ -15,6 +15,7 @@ import class UIKit.UIView
 import enum LayoutKit.Axis
 import enum LayoutKit.StackLayoutDistribution
 import struct Alacrity.AlacrityStyle
+import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
@@ -40,13 +41,6 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayout: component.contentLayout
         )
 
-        let flexibleLayout: SizeLayout<UIView> = SizeLayout<UIView>(
-            size: CGSize(width: size.width, height: size.height),
-            alignment: Alignment.center,
-            flexibility: Flexibility.flexible,
-            viewReuseId: "\(ExpandableComponentLayout.identifier)flexibleSpace"
-        )
-
         let chevronLayout: SizeLayout<ChevronView> = SizeLayout<ChevronView>(
             size: component.chevronSize,
             alignment: Alignment.center,
@@ -70,13 +64,18 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             sublayout: chevronLayout
         )
 
+        let contentWidth: CGFloat = contentInsetLayout.measurement(within: size).size.width
+        let chevronWidth: CGFloat = chevronInsetLayout.measurement(within: size).size.width
+
+        let spacing: CGFloat = size.width - contentWidth - chevronWidth
+
         let stackLayout: StackLayout<UIView> = StackLayout<UIView>(
             axis: Axis.horizontal,
-            spacing: 0.0,
-            distribution: StackLayoutDistribution.fillFlexing,
+            spacing: spacing,
+            distribution: StackLayoutDistribution.fillEqualSpacing,
             alignment: Alignment.fillLeading,
             viewReuseId: "\(ExpandableComponentLayout.identifier)HorizontalStack",
-            sublayouts: [contentInsetLayout, flexibleLayout, chevronInsetLayout]
+            sublayouts: [contentInsetLayout, chevronInsetLayout]
         )
 
         super.init(

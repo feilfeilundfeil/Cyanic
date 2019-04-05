@@ -67,45 +67,17 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         // UICollectionViewDelegate, and UIScrollViewDelegate
         self.collectionView.delegate = self
 
-        // Delegate the UICollectionViewDataSource management to RxDataSources
-        // swiftlint:disable:next line_length
-        let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-                guard let cell = cv.dequeueReusableCell(
-                    withReuseIdentifier: ComponentCell.identifier,
-                    for: indexPath
-                ) as? ComponentCell
-                    else { fatalError("Cell not registered to UICollectionView")}
-
-                cell.configure(with: component)
-                return cell
-            }
-        )
-
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
                 return [AnimatableSectionModel(model: "Test", items: components)]
             })
-            .drive(self.collectionView.rx.items(dataSource: dataSource))
+            .drive(self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
-    }
-
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        switch self.width {
-            case .automatic:
-                self._widthRelay.accept(self.collectionView.frame.width)
-            case .exactly:
-                break
-        }
-
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self._widthRelay.accept(size.width)
         self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
@@ -143,6 +115,20 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     }()
 
     // MARK: Stored Properties
+    // swiftlint:disable:next line_length
+    public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
+        configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
+            guard let cell = cv.dequeueReusableCell(
+                withReuseIdentifier: ComponentCell.identifier,
+                for: indexPath
+            ) as? ComponentCell
+                else { fatalError("Cell not registered to UICollectionView")}
+
+            cell.configure(with: component)
+            return cell
+        }
+    )
+
     /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
     */
@@ -150,9 +136,13 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     /**
      When the view is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
-     This PublishRelay represents that emitted value.
+     This Observable represents that emitted value.
     */
-    internal let _widthRelay: PublishRelay<CGFloat> = PublishRelay<CGFloat>()
+    internal private(set) lazy var _widthObservable: Observable<CGFloat> = self.collectionView.rx
+        .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
+        .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
+        .map({ (rect: CGRect?) -> CGFloat in rect!.width })
+        .distinctUntilChanged()
 
     internal private(set) var _width: CGFloat = 0.0
 
@@ -198,9 +188,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         switch self.width {
             case .automatic:
                 // Ensure that the width is not zero and only emit values if the view's width changes
-                filteredWidth = self._widthRelay
-                    .filter({ (width: CGFloat) -> Bool in return width > 0.0 })
-                    .distinctUntilChanged()
+                filteredWidth = self._widthObservable
 
             case .exactly(let width):
                 filteredWidth = Observable<CGFloat>.just(width)
