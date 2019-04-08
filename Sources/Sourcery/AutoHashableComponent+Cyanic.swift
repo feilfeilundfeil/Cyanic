@@ -3,7 +3,7 @@
 
 // swiftlint:disable all
 // MARK: - AutoHashableComponent
-// MARK: - ButtonComponentType AutoHashableComponent
+// MARK: - ButtonComponent AutoHashableComponent
 extension ButtonComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.type.hash(into: &hasher)
@@ -14,7 +14,7 @@ extension ButtonComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
-// MARK: - ChildVCComponentType AutoHashableComponent
+// MARK: - ChildVCComponent AutoHashableComponent
 extension ChildVCComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.name.hash(into: &hasher)
@@ -24,7 +24,7 @@ extension ChildVCComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
-// MARK: - ExpandableComponentType AutoHashableComponent
+// MARK: - ExpandableComponent AutoHashableComponent
 extension ExpandableComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.contentLayout.hash(into: &hasher)
@@ -36,7 +36,7 @@ extension ExpandableComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
-// MARK: - StaticSpacingComponentType AutoHashableComponent
+// MARK: - StaticSpacingComponent AutoHashableComponent
 extension StaticSpacingComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.backgroundColor.hash(into: &hasher)
@@ -45,7 +45,7 @@ extension StaticSpacingComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
-// MARK: - StaticTextComponentType AutoHashableComponent
+// MARK: - StaticTextComponent AutoHashableComponent
 extension StaticTextComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.text.hash(into: &hasher)

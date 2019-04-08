@@ -9,7 +9,7 @@
 {% endmacro %}
 // MARK: - AutoHashableComponent
 {% for type in types.types|!enum where type|annotated:"AutoHashableComponent" %}
-// MARK: - {{ type.name }} AutoHashableComponent
+// MARK: - {{ type.annotations.Component }} AutoHashableComponent
 extension {{ type.annotations.Component }}: Hashable {
     {{ type.accessLevel }}{% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %} override{% endif %} func hash(into hasher: inout Hasher) {
         {% if type.based.NSObject or type.supertype.implements.AutoHashableComponent or type.supertype|annotated:"AutoHashableComponent" or type.supertype.based.Hashable %}
