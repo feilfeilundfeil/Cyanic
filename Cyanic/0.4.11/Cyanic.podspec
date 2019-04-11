@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
                                Cyanic is a MvRx-inspired framework that aims to build reactive UI in a UICollectionView.
                                It borrows heavily from MvRx in terms of API and structure while falling within the constraints of
                                Swift and iOS development. It leverages RxSwift to have reactive functionality, LayoutKit to have
-                               performance close to manual layout when sizing and arranging subviews, and Sourcery fast creation of
+                               performance close to manual layout when sizing and arranging subviews, and Sourcery for fast creation of
                                custom components. It uses an Model-View-ViewModel (MVVM) style of architecture.
                                DESC
 
