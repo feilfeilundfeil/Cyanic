@@ -21,7 +21,7 @@ class ComponentViewControllerTests: QuickSpec {
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
 
                 // Fake a width so buildComponents is called.
-                vc._widthObservable = BehaviorRelay<CGFloat>(value: 555.0).asObservable()
+                vc._sizeObservable = BehaviorRelay<CGSize>(value: CGSize(width: 555.0, height: 675.0)).asObservable()
 
                 vc.viewDidLoad()
 
