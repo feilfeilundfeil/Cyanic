@@ -62,7 +62,7 @@ class ExampleVC: ComponentViewController {
         )
 
         let rightVC: UISideMenuNavigationController = UISideMenuNavigationController(
-            rootViewController: CompositeVC(
+            rootViewController: ExampleLoginVC(
                 viewModelOne: ViewModelA(initialState: StateA.default),
                 viewModelTwo: ViewModelB(initialState: StateB.default)
             )
@@ -132,12 +132,12 @@ class ExampleVC: ComponentViewController {
                 $0.height = 55.0
                 $0.width = 999_999_999.0
                 $0.insets = expandableContentInsets
-                $0.style = AlacrityStyle<UIView> { (view: UIView) -> Void in
-                    let divider: UIView = UIView().avd.apply { $0.backgroundColor = UIColor.green }
-                    view.addSubview(divider)
-                    divider.frame = CGRect(x: 20.0, y: view.bounds.height - 5.0, width: view.bounds.width - 20.0, height: 5.0)
-                    print("Subviews: \(view.subviews)")
-                }
+                $0.dividerLine = DividerLine(
+                    backgroundColor: UIColor.green,
+                    insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0),
+                    height: 5.0
+                )
+
             }
 
             let randomColor: () -> UIColor = {
@@ -228,28 +228,23 @@ class ExampleVC: ComponentViewController {
                 buttonConfiguration("Third", .yellow, &$0)
             }
 
-            components.buttonComponent {
-                buttonConfiguration("Fourth",.green, &$0)
-            }
-
-            components.buttonComponent {
-                buttonConfiguration("Fifth", .blue, &$0)
-            }
-            components.buttonComponent {
-                buttonConfiguration("Sixth",.purple, &$0)
-            }
-            components.buttonComponent {
-               buttonConfiguration("Seventh",.brown, &$0)
-            }
-            components.buttonComponent {
-                buttonConfiguration("Eighth",.white, &$0)
-            }
-            components.buttonComponent {
-                buttonConfiguration("Ninth",.cyan, &$0)
-            }
-            components.buttonComponent {
-                buttonConfiguration("Tenth", .gray, &$0)
-            }
+//            components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
+//                component.id = "First TextField"
+//                component.didBeginEditing = { (textField: UITextField) -> Void in
+//                    print("Did Begin Editing! \(textField.text!)")
+//                }
+//
+//                component.didEndEditing = { (textField: UITextField) -> Void in
+//                    print("Did End Editing! \(textField.text!)")
+//                    let string: String = textField.text!
+//                    self.viewModel.setState(with: { $0.textFieldText = string })
+//
+//                }
+//
+//                component.text = state.textFieldText
+//                component.insets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 0.0)
+//                component.backgroundColor = .red
+//            })
         }
     }
 
@@ -263,9 +258,11 @@ class ExampleVC: ComponentViewController {
     }
 
     @objc func navButtonTapped() {
-        let vc: TestVC = TestVC()
+        let vc: ExampleLoginVC = ExampleLoginVC(
+            viewModelOne: ViewModelA(initialState: StateA.default, isDebugMode: true),
+            viewModelTwo: ViewModelB(initialState: StateB.default, isDebugMode: true)
+        )
 
-//        self.navigationController?.pushViewController(vc, animated: true)
-        self.present(vc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

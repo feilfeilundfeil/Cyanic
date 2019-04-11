@@ -25,6 +25,7 @@ public final class AnyComponent: IdentifiableType {
     */
     public init<C: Component>(_ component: C) {
         self.identity = AnyHashable(component.identity)
+        self.id = component.id
     }
 
     /**
@@ -38,6 +39,11 @@ public final class AnyComponent: IdentifiableType {
      The underlying Component instance wrapped in an AnyHashable type erased container.
     */
     public let identity: AnyHashable
+
+    /**
+     The unique identifier of the Component.
+    */
+    public let id: String
 
 }
 

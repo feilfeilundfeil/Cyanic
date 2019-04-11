@@ -56,3 +56,13 @@ extension StaticTextComponent: Hashable {
         self.width.hash(into: &hasher)
     }
 }
+// MARK: - TextFieldComponent AutoHashableComponent
+extension TextFieldComponent: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.placeholder.hash(into: &hasher)
+        self.backgroundColor.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+        self.width.hash(into: &hasher)
+        self.height.hash(into: &hasher)
+    }
+}

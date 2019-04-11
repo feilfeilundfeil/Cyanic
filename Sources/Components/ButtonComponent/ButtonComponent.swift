@@ -1,5 +1,5 @@
 //
-//  ButtonComponent2.swift
+//  ButtonComponent.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/27/19.

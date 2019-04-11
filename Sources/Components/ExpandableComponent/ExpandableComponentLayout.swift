@@ -14,6 +14,7 @@ import class UIKit.UIColor
 import class UIKit.UIView
 import enum LayoutKit.Axis
 import enum LayoutKit.StackLayoutDistribution
+import protocol LayoutKit.Layout
 import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
@@ -38,6 +39,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
         let insets: UIEdgeInsets = component.insets
         let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
             insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),
+            viewReuseId: "\(ExpandableComponentLayout.identifier)RealContentInset",
             sublayout: component.contentLayout
         )
 
@@ -74,14 +76,59 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
 
         let spacing: CGFloat = size.width - contentWidth - chevronWidth
 
-        let stackLayout: StackLayout<UIView> = StackLayout<UIView>(
+        let finalLayout: Layout
+
+        let horizontalStack: StackLayout<UIView> = StackLayout<UIView>(
             axis: Axis.horizontal,
             spacing: spacing,
             distribution: StackLayoutDistribution.fillEqualSpacing,
             alignment: Alignment.fillLeading,
+            flexibility: Flexibility.flexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)HorizontalStack",
             sublayouts: [contentInsetLayout, chevronInsetLayout]
         )
+
+        if let dividerLine = component.dividerLine {
+
+            let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
+                minWidth: component.width - dividerLine.insets.left - dividerLine.insets.right,
+                maxWidth: component.width,
+                minHeight: dividerLine.height,
+                maxHeight: dividerLine.height,
+                alignment: Alignment.bottomCenter,
+                flexibility: Flexibility.inflexible,
+                viewReuseId: "dividerLine",
+                sublayout: nil,
+                config: { (view: UIView) -> Void in
+                    view.backgroundColor = dividerLine.backgroundColor
+                }
+            )
+
+            let dividerLineInsetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
+                insets: dividerLine.insets,
+                sublayout: sizeLayout
+            )
+
+            let remainingSpace: CGFloat = (component.height - horizontalStack.measurement(within: component.size).size.height)
+            let bottomRemainingSpace: CGFloat = remainingSpace / 2.0
+
+            let dividerSpacing: CGFloat = bottomRemainingSpace - dividerLine.height
+
+            let verticalStack: StackLayout<UIView> = StackLayout<UIView>(
+                axis: Axis.vertical,
+                spacing: dividerSpacing,
+                distribution: StackLayoutDistribution.fillFlexing,
+                alignment: Alignment.bottomCenter,
+                flexibility: Flexibility.inflexible,
+                viewReuseId: "\(ExpandableComponentLayout.identifier)VerticalStack",
+                sublayouts: [horizontalStack, dividerLineInsetLayout],
+                config: nil
+            )
+            finalLayout = verticalStack
+
+        } else {
+            finalLayout = horizontalStack
+        }
 
         super.init(
             minWidth: size.width,
@@ -89,7 +136,7 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             minHeight: size.height,
             maxHeight: size.height,
             viewReuseId: ExpandableComponentLayout.identifier,
-            sublayout: stackLayout,
+            sublayout: finalLayout,
             config: component.style
                 .modifying { (view: UIView) -> Void in
                     view.backgroundColor = component.backgroundColor

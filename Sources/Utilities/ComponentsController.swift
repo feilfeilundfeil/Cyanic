@@ -7,6 +7,7 @@
 //
 
 import struct CoreGraphics.CGFloat
+import struct CoreGraphics.CGSize
 
 /**
  ComponentsController is a helper struct that transforms Component instances into AnyComponent instances and
@@ -21,14 +22,28 @@ public struct ComponentsController {
                  will also determine the width of the Component by mutating its width property to the width
                  of the UICollectionView.
     */
-    internal init(width: CGFloat) {
-        self.width = width
+    internal init(size: CGSize) {
+        self.size = size
     }
 
     /**
-     The width of the UICollectionView
+     The CGSize of the UICollectionView where the components will be displayed.
     */
-    public let width: CGFloat
+    public let size: CGSize
+
+    /**
+     The width of the UICollectionView where the components will be displayed.
+    */
+    public var width: CGFloat {
+        return self.size.width
+    }
+
+    /**
+     The height of the UICollectionView where the components will be displayed.
+    */
+    public var height: CGFloat {
+        return self.size.height
+    }
 
     /**
      The AnyComponent array mutated by this ComponentsController.

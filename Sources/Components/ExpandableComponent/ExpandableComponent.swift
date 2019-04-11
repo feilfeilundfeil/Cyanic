@@ -56,6 +56,9 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
         fatalError("This default closure must be replaced!")
     }
 
+    // sourcery: skipHashing, skipEquality 
+    public var dividerLine: DividerLine?
+
     public var height: CGFloat = 44.0
 
     // sourcery: skipHashing, skipEquality 

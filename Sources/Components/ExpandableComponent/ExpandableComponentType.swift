@@ -11,6 +11,7 @@ import class UIKit.UIColor
 import class UIKit.UIView
 import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGSize
+import struct CoreGraphics.CGFloat
 import struct UIKit.UIEdgeInsets
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
@@ -53,4 +54,9 @@ public protocol ExpandableComponentType: StaticHeightComponent {
     // sourcery: defaultValue = "{ (_: String, _: Bool) -> Void in fatalError("This default closure must be replaced!") }"
     /// A reference to the function will set a new state when the ExpandableComponentType is tapped.
     var setExpandableState: (String, Bool) -> Void { get set }
+
+    // sourcery: skipHashing,skipEquality
+    /// The dividerLine
+    var dividerLine: DividerLine? { get set }
+
 }

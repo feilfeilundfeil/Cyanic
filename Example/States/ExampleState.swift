@@ -52,7 +52,8 @@ struct ExampleState: ExpandableState {
                 """
                 It's an old habit. I spent my whole life trying not to be careless. Women and children can afford to be careless, but not men. What's the matter with you? Is this what you've become, a Hollywood finocchio who cries like a woman? "Oh, what do I do? What do I do?" What is that nonsense? Ridiculous! You talk about vengeance. Is vengeance going to bring your son back to you? Or my boy to me? I don't like violence, Tom. I'm a businessman; blood is a big expense.
                 """
-            ]
+            ],
+            textFieldText: "Hello, World"
         )
     }
 
@@ -61,6 +62,7 @@ struct ExampleState: ExpandableState {
     var expandableDict: [String: Bool]
     var strings: [String]
     var otherStrings: [String]
+    var textFieldText: String
 
 }
 

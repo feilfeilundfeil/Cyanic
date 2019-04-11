@@ -136,29 +136,21 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     /**
      When the collectionView is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
-     This Observable emits the nonzero widths UICollectionView when it changes. This may not work in some circumstances when this
+     This Observable emits the nonzero sizes of UICollectionView when it changes. This may not work in some circumstances when this
      ComponentViewController is inside a custom Container UIViewController. If that happens override **width** and use **.exactly**.
     */
-    internal lazy var _widthObservable: Observable<CGFloat> = self.collectionView.rx
+    internal lazy var _sizeObservable: Observable<CGSize> = self.collectionView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
-        .filter({ (rect: CGRect?) -> Bool in rect?.width != nil && rect?.width != 0.0 })
-        .map({ (rect: CGRect?) -> CGFloat in rect!.width })
+        .filter({ (rect: CGRect?) -> Bool in
+            return rect?.size != nil && rect?.size != CGSize.zero
+        })
+        .map({ (rect: CGRect?) -> CGSize in rect!.size })
         .distinctUntilChanged()
 
-    internal private(set) var _width: CGFloat = 0.0
-
-    /**
-     The layout of the UICollectionView.
-     */
-    public let layout: UICollectionViewLayout = {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0.0
-        layout.minimumInteritemSpacing = 0.0
-        return layout
-    }()
+    internal private(set) var _size: CGSize = CGSize.zero
 
     // MARK: Computed Properties
-    open var width: ComponentViewController.Width { return ComponentViewController.Width.automatic }
+    open var size: ComponentViewController.Size { return ComponentViewController.Size.automatic }
 
     // MARK: Views
     /**
@@ -166,7 +158,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     */
     public private(set) lazy var collectionView: UICollectionView = UICollectionView(
         frame: CGRect.zero,
-        collectionViewLayout: self.layout
+        collectionViewLayout: self.createUICollectionViewLayout()
     )
 
     // MARK: Methods
@@ -184,21 +176,21 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         guard !viewModels.isEmpty else { return }
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
 
-        let filteredWidth: Observable<CGFloat>
+        let filteredSize: Observable<CGSize>
 
-        switch self.width {
+        switch self.size {
             case .automatic:
-                filteredWidth = self._widthObservable
+                filteredSize = self._sizeObservable
 
-            case .exactly(let width):
-                filteredWidth = Observable<CGFloat>.just(width)
+            case .exactly(let size):
+                filteredSize = Observable<CGSize>.just(size)
         }
 
-        let allObservables: Observable<(CGFloat, [Any])> = Observable.combineLatest(
-            filteredWidth, combinedStatesObservables
+        let allObservables: Observable<(CGSize, [Any])> = Observable.combineLatest(
+            filteredSize, combinedStatesObservables
         )
 
-        let throttledStateObservable: Observable<(CGFloat, [Any])> = self.setUpThrottleType(
+        let throttledStateObservable: Observable<(CGSize, [Any])> = self.setUpThrottleType(
             on: allObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
@@ -215,10 +207,10 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
-            .map({ [weak self] (width: CGFloat, _: [Any]) -> [AnyComponent] in
+            .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
-                s._width = width
-                var controller: ComponentsController = ComponentsController(width: width)
+                s._size = size
+                var controller: ComponentsController = ComponentsController(size: size)
                 s.buildComponents(&controller)
                 return controller.components
             })
@@ -226,7 +218,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
-            .map({ (width: CGFloat, states: [Any]) -> [Any] in
+            .map({ (width: CGSize, states: [Any]) -> [Any] in
                 let width: Any = width as Any
                 return [width] + states
             })
@@ -236,12 +228,24 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         throttledStateObservable
             .observeOn(MainScheduler.asyncInstance)
             .bind(
-                onNext: { [weak self] (_: CGFloat, _: [Any]) -> Void in
+                onNext: { [weak self] (_: CGSize, _: [Any]) -> Void in
                     self?.invalidate()
                 }
             )
             .disposed(by: self.disposeBag)
 
+    }
+
+    /**
+     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this ComponentViewController
+     - Returns:
+        A UICollectionViewLayout instance.
+    */
+    open func createUICollectionViewLayout() -> UICollectionViewLayout {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+        return layout
     }
 
     /**
@@ -266,7 +270,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
         let layout: ComponentLayout = self._components.value[indexPath.item].layout
 
-        let size: CGSize = CGSize(width: self._width, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 
         let cellSize: CGSize = layout.measurement(within: size).size
         return cellSize
@@ -281,24 +285,24 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
 }
 
-// MARK: - Width Enum
+// MARK: - Size Enum
 public extension ComponentViewController {
 
     /**
-     In cases where ComponentViewController is a childViewController. It is sometimes necessary to have an exact width.
-     This enum allows the the programmer to specify if there's an exact width for the ComponentViewController or if it should be taken
+     In cases where ComponentViewController is a childViewController. It is sometimes necessary to have an exact size.
+     This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it should be taken
      cared of by UIKit.
     */
-    enum Width {
+    enum Size {
         /**
-         Width is defined by UIKit automatically. It is calculated by taking the UICollectionView's frame width.
+         Size is defined by UIKit automatically. It is calculated by taking the UICollectionView's frame.
         */
         case automatic
 
         /**
-         Width is defined by a constant value.
+         Size is defined by a constant value.
         */
-        case exactly(CGFloat)
+        case exactly(CGSize)
     }
 
 }

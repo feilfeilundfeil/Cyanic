@@ -76,3 +76,13 @@ public func == (lhs: StaticTextComponent, rhs: StaticTextComponent) -> Bool {
     guard lhs.width == rhs.width else { return false }
     return true
 }
+// MARK: - TextFieldComponent AutoEquatableComponent
+extension TextFieldComponent: Equatable {}
+public func == (lhs: TextFieldComponent, rhs: TextFieldComponent) -> Bool {
+    guard lhs.placeholder == rhs.placeholder else { return false }
+    guard lhs.backgroundColor == rhs.backgroundColor else { return false }
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
+    return true
+}

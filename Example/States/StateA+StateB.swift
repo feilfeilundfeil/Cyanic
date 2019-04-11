@@ -11,19 +11,23 @@ import Cyanic
 struct StateA: State {
 
     static var `default`: StateA {
-        return StateA(isTrue: true)
+        return StateA(isTrue: true, isFirstResponder: false, userName: "User")
     }
 
     var isTrue: Bool
+    var isFirstResponder: Bool
+    var userName: String
 
 }
 
 struct StateB: State {
 
     static var `default`: StateB {
-        return StateB(isTrue: false)
+        return StateB(isTrue: false, isFirstResponder: false, password: "")
     }
 
     var isTrue: Bool
+    var isFirstResponder: Bool
+    var password: String
 
 }

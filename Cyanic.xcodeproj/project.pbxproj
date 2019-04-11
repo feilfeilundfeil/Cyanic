@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		141315B52235924600513FD9 /* CompositeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* CompositeVC.swift */; };
+		141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* ExampleLoginVC.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
 		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		142C451C223939DB002360F5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451B223939DB002360F5 /* Async.swift */; };
@@ -30,6 +30,7 @@
 		145AD757220B1EBF004F02C2 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145D4E9F225DF602005F3531 /* DividerLine.swift */; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
@@ -37,7 +38,11 @@
 		1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1478E9B1220C5D1E006AF8B3 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */; };
+		1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
+		14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16528225C68F50031517C /* TextFieldComponentType.swift */; };
+		14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A1652A225C69050031517C /* TextFieldComponent.swift */; };
+		14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A1652C225C69190031517C /* TextFieldComponentLayout.swift */; };
 		14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576322464434006E75C6 /* StateObservableBuilder.swift */; };
 		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
@@ -110,7 +115,7 @@
 
 /* Begin PBXFileReference section */
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
-		141315B42235924500513FD9 /* CompositeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositeVC.swift; sourceTree = "<group>"; };
+		141315B42235924500513FD9 /* ExampleLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleLoginVC.swift; sourceTree = "<group>"; };
 		142C44FF2235A105002360F5 /* ThrottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrottleType.swift; sourceTree = "<group>"; };
 		142C45122238F7AB002360F5 /* AutoGenerateComponentExtensions.swifttemplate */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoGenerateComponentExtensions.swifttemplate; sourceTree = "<group>"; };
 		142C451822392C09002360F5 /* ComponentStateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateValidator.swift; sourceTree = "<group>"; };
@@ -138,6 +143,7 @@
 		145AD756220B1EBF004F02C2 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		145D4E9F225DF602005F3531 /* DividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLine.swift; sourceTree = "<group>"; };
 		1470FDD5223BCE0C008CDD25 /* Alacrity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alacrity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD7223BCE0C008CDD25 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD9223BCE0C008CDD25 /* FFUFWidgets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFUFWidgets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,7 +162,11 @@
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
+		1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicNoFadeFlowLayout.swift; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsController.swift; sourceTree = "<group>"; };
+		14A16528225C68F50031517C /* TextFieldComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentType.swift; sourceTree = "<group>"; };
+		14A1652A225C69050031517C /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
+		14A1652C225C69190031517C /* TextFieldComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentLayout.swift; sourceTree = "<group>"; };
 		14A4576322464434006E75C6 /* StateObservableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateObservableBuilder.swift; sourceTree = "<group>"; };
 		14A4576822468D9E006E75C6 /* Array+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Cyanic.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
@@ -288,6 +298,7 @@
 				1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */,
 				1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */,
 				14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */,
+				145D4E9F225DF602005F3531 /* DividerLine.swift */,
 			);
 			path = ExpandableComponent;
 			sourceTree = "<group>";
@@ -390,8 +401,19 @@
 				1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
+				1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		14A16527225C68B90031517C /* TextFieldComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14A16528225C68F50031517C /* TextFieldComponentType.swift */,
+				14A1652A225C69050031517C /* TextFieldComponent.swift */,
+				14A1652C225C69190031517C /* TextFieldComponentLayout.swift */,
+			);
+			path = TextFieldComponent;
 			sourceTree = "<group>";
 		};
 		14B01E3F222723E200EE0A9A /* Templates */ = {
@@ -413,6 +435,7 @@
 				1437BDDA2216C14100A35FFE /* ExpandableComponent */,
 				1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */,
 				1437BDD42215B57800A35FFE /* StaticTextComponent */,
+				14A16527225C68B90031517C /* TextFieldComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -486,7 +509,7 @@
 			children = (
 				1478E996220C59B9006AF8B3 /* ExampleVC.swift */,
 				1443607C2247BC0E0090FCF9 /* TestVC.swift */,
-				141315B42235924500513FD9 /* CompositeVC.swift */,
+				141315B42235924500513FD9 /* ExampleLoginVC.swift */,
 				14F06055224B593500CC62B0 /* ChildVC.swift */,
 			);
 			path = "View Controllers";
@@ -860,10 +883,13 @@
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
+				14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
+				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
+				1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				142C451C223939DB002360F5 /* Async.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
@@ -886,12 +912,14 @@
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
+				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
 				14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
+				14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */,
 				14A7EE09224F6B13007FAB4D /* ComponentsController+Cyanic.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
 				14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */,
@@ -919,7 +947,7 @@
 				14F06054224B591200CC62B0 /* ExampleViewModel.swift in Sources */,
 				14F06058224B5A9A00CC62B0 /* TestViewModel.swift in Sources */,
 				14F06056224B593500CC62B0 /* ChildVC.swift in Sources */,
-				141315B52235924600513FD9 /* CompositeVC.swift in Sources */,
+				141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */,
 				14F06052224B58E700CC62B0 /* ExampleState.swift in Sources */,
 				14F0605E224B5BC400CC62B0 /* StateA+StateB.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,

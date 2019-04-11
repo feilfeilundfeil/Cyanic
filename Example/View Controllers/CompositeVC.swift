@@ -12,7 +12,7 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-class CompositeVC: ComponentViewController {
+class ExampleLoginVC: ComponentViewController {
 
     init(viewModelOne: ViewModelA, viewModelTwo: ViewModelB) {
         self.viewModelOne = viewModelOne
@@ -38,12 +38,12 @@ class CompositeVC: ComponentViewController {
                 UIBarButtonItem(
                     title: "Second", style: UIBarButtonItem.Style.plain,
                     target: self,
-                    action: #selector(CompositeVC.addButtonTapped)
+                    action: #selector(ExampleLoginVC.addButtonTapped)
                 ),
                 UIBarButtonItem(
                     title: "Third", style: UIBarButtonItem.Style.plain,
                     target: self,
-                    action: #selector(CompositeVC.otherButtonTapped)
+                    action: #selector(ExampleLoginVC.otherButtonTapped)
                 )
             ].reversed()
         }

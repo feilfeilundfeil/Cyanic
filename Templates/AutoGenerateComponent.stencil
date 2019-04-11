@@ -1,5 +1,4 @@
-{% for type in types.all %}
-{% if type|annotated:"AutoGenerateComponent" %}
+{% for type in types.all|annotated:"AutoGenerateComponent" %}
 // sourcery:inline:auto:{{ type.name }}.AutoGenerateComponent
     /**
      Work around Initializer because memberwise initializers are all or nothing
@@ -26,5 +25,4 @@
     {{ type.accessLevel }} var identity: {{ type.name }} { return self }
 
 // sourcery:end
-{% endif %}
 {% endfor %}

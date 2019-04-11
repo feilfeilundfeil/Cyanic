@@ -18,6 +18,10 @@ class ViewModelA: ViewModel<StateA> {
         self.setState(with: { $0.isTrue = false } )
     }
 
+    func setUserName(_ userName: String) {
+        self.setState(with: { $0.userName = userName })
+    }
+
 }
 class ViewModelB: ViewModel<StateB> {
     func addButtonTapped() {
@@ -26,5 +30,9 @@ class ViewModelB: ViewModel<StateB> {
 
     func otherButtonTapped() {
         self.setState(with: { $0.isTrue = true })
+    }
+
+    func setPassword(_ password: String) {
+        self.setState(with: { $0.password = password })
     }
 }
