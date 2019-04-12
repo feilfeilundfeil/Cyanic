@@ -290,7 +290,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        let component: AnyComponent = self._components.value[indexPath.item]
+        let component: AnyComponent = self.component(at: indexPath)
         guard let selectable = component.identity.base as? Selectable else { return }
         selectable.onSelect()
     }

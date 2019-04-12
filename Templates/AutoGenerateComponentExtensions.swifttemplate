@@ -4,12 +4,13 @@ func lowerCamelCaseName(for type: Type) -> String {
     return name.prefix(1).lowercased() + name.dropFirst()
 }
 -%>
-// sourcery:file:ComponentsController+<%= argument["project"] as? String ?? "Cyanic" %>.swift
+// sourcery:file:DataSourceControllers+<%= argument["project"] as? String ?? "Cyanic" %>.swift
 <%_ if let isFramework = argument["isFramework"] as? Bool, isFramework {-%>
 <%_ } else { -%>
 import enum Cyanic.ComponentStateValidator
 import enum Cyanic.Constants
 import struct Cyanic.ComponentsController
+import struct Cyanic.SectionController
 
 <%_ } -%>
 public extension ComponentsController {
@@ -37,6 +38,36 @@ public extension ComponentsController {
             else { fatalError("You did not configure all required variables in this component") }
     <%_ } -%>
         self.add(mutableComponent)
+        return mutableComponent
+    }
+<%_ } -%>
+}
+
+public extension SectionController {
+<%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
+<%_ let functionName: String = lowerCamelCaseName(for: type) -%>
+
+    /**
+        Generates a <%= type.name %> instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable <%= type.name %>.
+            - mutableComponent: The <%= type.name %> instance to be mutated/configured.
+        - Returns:
+            <%= type.name %>
+    */
+    @discardableResult
+    mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+    <%_ if type.annotations["RequiredVariables"] != nil { -%>
+        guard ComponentStateValidator.validate<%= type.name %>(mutableComponent)
+            else { fatalError("You did not configure all required variables in this component") }
+    <%_ } -%>
+        self.sectionComponent = AnyComponent(mutableComponent)
         return mutableComponent
     }
 <%_ } -%>

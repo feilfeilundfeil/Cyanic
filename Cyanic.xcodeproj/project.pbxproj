@@ -40,6 +40,8 @@
 		1478E9B1220C5D1E006AF8B3 /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */; };
 		1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */; };
 		1498048E22607A720044194C /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048D22607A720044194C /* ExampleViewModel.swift */; };
+		1498049122608F900044194C /* SectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048F22608F8C0044194C /* SectionController.swift */; };
+		14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14980492226097610044194C /* DataSourceControllers+Cyanic.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
 		14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16528225C68F50031517C /* TextFieldComponentType.swift */; };
 		14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A1652A225C69050031517C /* TextFieldComponent.swift */; };
@@ -48,7 +50,6 @@
 		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
 		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
-		14A7EE09224F6B13007FAB4D /* ComponentsController+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */; };
 		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
@@ -165,6 +166,8 @@
 		1478E9B0220C5D1E006AF8B3 /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
 		1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicNoFadeFlowLayout.swift; sourceTree = "<group>"; };
 		1498048D22607A720044194C /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
+		1498048F22608F8C0044194C /* SectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionController.swift; sourceTree = "<group>"; };
+		14980492226097610044194C /* DataSourceControllers+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataSourceControllers+Cyanic.swift"; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsController.swift; sourceTree = "<group>"; };
 		14A16528225C68F50031517C /* TextFieldComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentType.swift; sourceTree = "<group>"; };
 		14A1652A225C69050031517C /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
@@ -173,7 +176,6 @@
 		14A4576822468D9E006E75C6 /* Array+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Cyanic.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
 		14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
-		14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ComponentsController+Cyanic.swift"; sourceTree = "<group>"; };
 		14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				142C4520223BB36C002360F5 /* GlobalFunctions.swift */,
 				149D5B8E221B33A100482F28 /* ComponentsController.swift */,
+				1498048F22608F8C0044194C /* SectionController.swift */,
 				14C96F072211C30F00731265 /* Constants.swift */,
 			);
 			path = Utilities;
@@ -568,7 +571,7 @@
 			children = (
 				14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */,
 				14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */,
-				14A7EE06224F6B13007FAB4D /* ComponentsController+Cyanic.swift */,
+				14980492226097610044194C /* DataSourceControllers+Cyanic.swift */,
 			);
 			path = Sourcery;
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 			files = (
 				149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */,
 				14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */,
+				1498049122608F900044194C /* SectionController.swift in Sources */,
 				1437BDC62215573300A35FFE /* AnyComponent.swift in Sources */,
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
@@ -926,12 +930,12 @@
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
+				14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */,
 				14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
 				14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
 				14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */,
-				14A7EE09224F6B13007FAB4D /* ComponentsController+Cyanic.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
 				14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */,
 				14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */,
