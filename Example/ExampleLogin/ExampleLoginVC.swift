@@ -22,7 +22,7 @@ public final class ExampleLoginVC: ComponentViewController {
      An example custom initializer that demostrates dependency injection via initializer. One way to
      give a UIViewController its business logic controllers aka "ViewModels" in the context of Cyanic.
     */
-    public init(viewModelOne: ViewModelA, viewModelTwo: ViewModelB) {
+    public init(viewModelOne: ExampleLoginViewModelA, viewModelTwo: ExampleLoginViewModelB) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
         super.init(nibName: nil, bundle: nil)
@@ -59,8 +59,8 @@ public final class ExampleLoginVC: ComponentViewController {
     }
 
     // MARK: Stored Properties
-    private let viewModelOne: ViewModelA
-    private let viewModelTwo: ViewModelB
+    private let viewModelOne: ExampleLoginViewModelA
+    private let viewModelTwo: ExampleLoginViewModelB
 
     // MARK: TextFields
     private weak var userTextField: UITextField?
@@ -82,7 +82,7 @@ public final class ExampleLoginVC: ComponentViewController {
     // MARK: Overridden ComponentViewController Methods
     public override func buildComponents(_ componentsController: inout ComponentsController) {
 
-        withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: StateA, state2: StateB) -> Void in
+        withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in
 
             componentsController.staticSpacingComponent(configuration: { (component: inout StaticSpacingComponent) -> Void in
                 component.height = 70.0
@@ -262,6 +262,10 @@ public class TestTextField: UITextField {
         var bounds: CGRect = super.editingRect(forBounds: bounds)
         bounds.origin.x += 10.0
         return bounds
+    }
+
+    deinit {
+        print("\(type(of: self)) was deallocated" )
     }
 
 }

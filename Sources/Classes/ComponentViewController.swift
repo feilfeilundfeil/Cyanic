@@ -70,7 +70,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components.asDriver()
             .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
-                return [AnimatableSectionModel(model: "Test", items: components)]
+                return [AnimatableSectionModel<String, AnyComponent>(model: "Test", items: components)]
             })
             .drive(self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)

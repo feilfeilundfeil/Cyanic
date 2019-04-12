@@ -238,8 +238,8 @@ private extension ExampleListVC {
 
     @objc func navButtonTapped() {
         let vc: ExampleLoginVC = ExampleLoginVC(
-            viewModelOne: ViewModelA(initialState: StateA.default),
-            viewModelTwo: ViewModelB(initialState: StateB.default)
+            viewModelOne: ExampleLoginViewModelA(initialState: ExampleLoginStateA.default),
+            viewModelTwo: ExampleLoginViewModelB(initialState: ExampleLoginStateB.default)
         )
 
         self.navigationController?.pushViewController(vc, animated: true)

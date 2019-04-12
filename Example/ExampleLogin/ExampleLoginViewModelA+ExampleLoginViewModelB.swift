@@ -1,5 +1,5 @@
 //
-//  ViewModelA.swift
+//  ExampleLoginViewModelA+ExampleLoginViewModelB.swift
 //  Example
 //
 //  Created by Julio Miguel Alorro on 3/27/19.
@@ -8,7 +8,7 @@
 
 import Cyanic
 
-public final class ViewModelA: ExampleViewModel<StateA> {
+public final class ExampleLoginViewModelA: ExampleViewModel<ExampleLoginStateA> {
 
     public func secondButtonTapped() {
         self.setState(with: { $0.isTrue = true } )
@@ -24,7 +24,7 @@ public final class ViewModelA: ExampleViewModel<StateA> {
 
 }
 
-public final class ViewModelB: ExampleViewModel<StateB> {
+public final class ExampleLoginViewModelB: ExampleViewModel<ExampleLoginStateB> {
 
     public func secondButtonTapped() {
         self.setState(with: { $0.isTrue = false })

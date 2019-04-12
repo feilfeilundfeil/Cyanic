@@ -72,8 +72,8 @@
 		14F06056224B593500CC62B0 /* ChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06055224B593500CC62B0 /* ChildVC.swift */; };
 		14F06058224B5A9A00CC62B0 /* ExampleCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06057224B5A9A00CC62B0 /* ExampleCounterViewModel.swift */; };
 		14F0605A224B5AB900CC62B0 /* ExampleCounterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06059224B5AB900CC62B0 /* ExampleCounterState.swift */; };
-		14F0605C224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */; };
-		14F0605E224B5BC400CC62B0 /* StateA+StateB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */; };
+		14F0605C224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */; };
+		14F0605E224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */; };
 		14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */; };
 		14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */; };
 		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
@@ -203,8 +203,8 @@
 		14F06055224B593500CC62B0 /* ChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC.swift; sourceTree = "<group>"; };
 		14F06057224B5A9A00CC62B0 /* ExampleCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCounterViewModel.swift; sourceTree = "<group>"; };
 		14F06059224B5AB900CC62B0 /* ExampleCounterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCounterState.swift; sourceTree = "<group>"; };
-		14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModelA+ViewModelB.swift"; sourceTree = "<group>"; };
-		14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StateA+StateB.swift"; sourceTree = "<group>"; };
+		14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExampleLoginViewModelA+ExampleLoginViewModelB.swift"; sourceTree = "<group>"; };
+		14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExampleLoginStateA+ExampleLoginStateB.swift"; sourceTree = "<group>"; };
 		14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
@@ -413,8 +413,8 @@
 			isa = PBXGroup;
 			children = (
 				141315B42235924500513FD9 /* ExampleLoginVC.swift */,
-				14F0605D224B5BC400CC62B0 /* StateA+StateB.swift */,
-				14F0605B224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift */,
+				14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */,
+				14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */,
 			);
 			path = ExampleLogin;
 			sourceTree = "<group>";
@@ -961,10 +961,10 @@
 				14F06056224B593500CC62B0 /* ChildVC.swift in Sources */,
 				141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */,
 				14F06052224B58E700CC62B0 /* ExampleListState.swift in Sources */,
-				14F0605E224B5BC400CC62B0 /* StateA+StateB.swift in Sources */,
+				14F0605E224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
 				14F0605A224B5AB900CC62B0 /* ExampleCounterState.swift in Sources */,
-				14F0605C224B5B8500CC62B0 /* ViewModelA+ViewModelB.swift in Sources */,
+				14F0605C224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift in Sources */,
 				1443607D2247BC0E0090FCF9 /* ExampleCounterVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
