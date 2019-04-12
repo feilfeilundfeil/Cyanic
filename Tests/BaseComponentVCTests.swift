@@ -15,7 +15,7 @@ import RxCocoa
 class ComponentViewControllerTests: QuickSpec {
 
     override func spec() {
-        describe("ComponentViewController functionality") {
+        describe("SingleSectionComponentViewController functionality") {
             context("When CyanicComponentViewController is initialized and view is loaded") {
                 let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
@@ -62,7 +62,7 @@ class ComponentViewControllerTests: QuickSpec {
         }
     }
 
-    class TestVC: ComponentViewController {
+    class TestVC: SingleSectionComponentViewController {
 
         var invalidateCount: Int = 0
         var buildComponentsCount: Int = 0

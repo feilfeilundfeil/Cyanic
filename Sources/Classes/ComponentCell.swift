@@ -14,7 +14,6 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct Dispatch.DispatchQoS
-import struct Foundation.IndexPath
 import struct LayoutKit.LayoutArrangement
 import struct LayoutKit.LayoutMeasurement
 

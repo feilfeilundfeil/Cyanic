@@ -13,9 +13,9 @@ import RxCocoa
 import RxSwift
 
 /**
- An example of a hypothetical login screen built in a ComponentViewController. Example includes usage of UITextFieldDelegate.
+ An example of a hypothetical login screen built in a SingleSectionComponentViewController. Example includes usage of UITextFieldDelegate.
 */
-public final class ExampleLoginVC: ComponentViewController {
+public final class ExampleLoginVC: SingleSectionComponentViewController {
 
     // MARK: Initializers
     /**
@@ -67,7 +67,7 @@ public final class ExampleLoginVC: ComponentViewController {
     private weak var passwordTextField: UITextField?
     private weak var activeTextField: UITextField?
 
-    // MARK: Overridden ComponentViewController Properties
+    // MARK: Overridden SingleSectionComponentViewController Properties
     public override var throttleType: ThrottleType {
         return ThrottleType.debounce(0.1)
     }
@@ -79,7 +79,7 @@ public final class ExampleLoginVC: ComponentViewController {
         ]
     }
 
-    // MARK: Overridden ComponentViewController Methods
+    // MARK: Overridden SingleSectionComponentViewController Methods
     public override func buildComponents(_ componentsController: inout ComponentsController) {
 
         withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in

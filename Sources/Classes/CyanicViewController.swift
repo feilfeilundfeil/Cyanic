@@ -62,6 +62,8 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
     */
     open var viewModels: [AnyViewModel] { return [] }
 
+    typealias Element = [Any]
+
     // MARK: Methods
     /**
      Creates an Observables based on ThrottleType and binds it to the invalidate method.
@@ -72,8 +74,9 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
      - Parameters:
         - viewModels: The ViewModels whose States will be observed.
      */
-    internal func setUpObservables(with viewModels: [AnyViewModel]) {
-        guard !viewModels.isEmpty else { return }
+    @discardableResult
+    internal func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<[Any]> {
+        guard !viewModels.isEmpty else { return Observable<Element>.empty() }
         let combinedStatesObservables: Observable<[Any]> = viewModels
             .combineStateObservables()
 
@@ -99,6 +102,8 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
         throttledStateObservable
             .bind(to: self.state)
             .disposed(by: self.disposeBag)
+
+        return throttledStateObservable
     }
 
     /**

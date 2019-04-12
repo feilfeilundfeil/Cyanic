@@ -11,7 +11,10 @@ import protocol RxSwift.SchedulerType
 
 internal protocol StateObservableBuilder {
 
-    func setUpObservables(with viewModels: [AnyViewModel])
+    associatedtype CombinedState
+
+    @discardableResult
+    func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<CombinedState>
 
 }
 

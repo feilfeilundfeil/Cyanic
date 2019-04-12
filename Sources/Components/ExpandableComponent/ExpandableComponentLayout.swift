@@ -8,6 +8,7 @@
 
 import class CommonWidgets.ChevronView
 import class LayoutKit.InsetLayout
+import class LayoutKit.OverlayLayout
 import class LayoutKit.SizeLayout
 import class LayoutKit.StackLayout
 import class UIKit.UIColor
@@ -26,7 +27,7 @@ import struct UIKit.UIEdgeInsets
  The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.
  Used to create, size, and arrange the subviews associated with ExpandableComponent.
 */
-public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayout {
+public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLayout {
 
     /**
      Initializer
@@ -76,8 +77,6 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
 
         let spacing: CGFloat = size.width - contentWidth - chevronWidth
 
-        let finalLayout: Layout
-
         let horizontalStack: StackLayout<UIView> = StackLayout<UIView>(
             axis: Axis.horizontal,
             spacing: spacing,
@@ -87,6 +86,18 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
             viewReuseId: "\(ExpandableComponentLayout.identifier)HorizontalStack",
             sublayouts: [contentInsetLayout, chevronInsetLayout]
         )
+
+        let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
+            minWidth: component.width,
+            maxWidth: component.width,
+            minHeight: component.height,
+            maxHeight: component.height,
+            flexibility: Flexibility.inflexible,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)SizeLayout",
+            sublayout: horizontalStack
+        )
+
+        var overlayLayouts: [Layout] = []
 
         if let dividerLine = component.dividerLine {
 
@@ -109,34 +120,16 @@ public final class ExpandableComponentLayout: SizeLayout<UIView>, ComponentLayou
                 sublayout: sizeLayout
             )
 
-            let remainingSpace: CGFloat = (component.height - horizontalStack.measurement(within: component.size).size.height)
-            let bottomRemainingSpace: CGFloat = remainingSpace / 2.0
-
-            let dividerSpacing: CGFloat = bottomRemainingSpace - dividerLine.height
-
-            let verticalStack: StackLayout<UIView> = StackLayout<UIView>(
-                axis: Axis.vertical,
-                spacing: dividerSpacing,
-                distribution: StackLayoutDistribution.fillFlexing,
-                alignment: Alignment.bottomCenter,
-                flexibility: Flexibility.inflexible,
-                viewReuseId: "\(ExpandableComponentLayout.identifier)VerticalStack",
-                sublayouts: [horizontalStack, dividerLineInsetLayout],
-                config: nil
-            )
-            finalLayout = verticalStack
-
-        } else {
-            finalLayout = horizontalStack
+            overlayLayouts.append(dividerLineInsetLayout)
         }
 
         super.init(
-            minWidth: size.width,
-            maxWidth: size.width,
-            minHeight: size.height,
-            maxHeight: size.height,
+            primaryLayouts: [sizeLayout],
+            backgroundLayouts: [],
+            overlayLayouts: overlayLayouts,
+            alignment: Alignment.centerLeading,
+            flexibility: Flexibility.flexible,
             viewReuseId: ExpandableComponentLayout.identifier,
-            sublayout: finalLayout,
             config: component.style
                 .modifying { (view: UIView) -> Void in
                     view.backgroundColor = component.backgroundColor

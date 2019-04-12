@@ -14,7 +14,7 @@ import RxCocoa
 import RxSwift
 import SideMenu
 
-public final class ExampleListVC: ComponentViewController {
+public final class ExampleListVC: SingleSectionComponentViewController {
 
     // MARK: Initializer
     public init(viewModel: ExampleListViewModel) {
@@ -66,7 +66,7 @@ public final class ExampleListVC: ComponentViewController {
     // MARK: Stored Properties
     private let viewModel: ExampleListViewModel
 
-    // MARK: Overridden ComponentViewController Properties
+    // MARK: Overridden SingleSectionComponentViewController Properties
     public override var throttleType: ThrottleType { return ThrottleType.none }
 
     public override var viewModels: [AnyViewModel] { return [self.viewModel.asAnyViewModel] }

@@ -2,13 +2,11 @@
 //  ComponentViewController.swift
 //  Cyanic
 //
-//  Created by Julio Miguel Alorro on 2/7/19.
+//  Created by Julio Miguel Alorro on 4/12/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class Foundation.NSCoder
 import class RxCocoa.BehaviorRelay
-import class RxCocoa.PublishRelay
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
@@ -21,28 +19,20 @@ import class UIKit.UICollectionViewFlowLayout
 import class UIKit.UICollectionViewLayout
 import class UIKit.UIView
 import class UIKit.UIViewController
-import enum Foundation.DispatchTimeInterval
-import enum RxDataSources.UITableViewRowAnimation
 import protocol UIKit.UICollectionViewDelegateFlowLayout
 import protocol UIKit.UIViewControllerTransitionCoordinator
-import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct Foundation.DispatchQoS
 import struct Foundation.IndexPath
 import struct Foundation.UUID
 import struct RxCocoa.KeyValueObservingOptions
-import struct RxDataSources.AnimatableSectionModel
-import struct RxDataSources.AnimationConfiguration
 import struct RxSwift.RxTimeInterval
-import struct UIKit.UIEdgeInsets
 
 /**
- ComponentViewController is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
- boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
- ComponentViewController is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
+ ComponentViewController is the base class of UIViewControllers that use Cyanic's state driven UI logic
 */
-open class ComponentViewController: CyanicViewController, UICollectionViewDelegateFlowLayout {
+open class ComponentViewController: UIViewController, StateObservableBuilder, UICollectionViewDelegateFlowLayout {
 
     // MARK: UIViewController Lifecycle Methods
     open override func loadView() {
@@ -60,20 +50,12 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setUpObservables(with: self.viewModels)
         self.collectionView.register(ComponentCell.self, forCellWithReuseIdentifier: ComponentCell.identifier)
 
         // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout,
         // UICollectionViewDelegate, and UIScrollViewDelegate
         self.collectionView.delegate = self
-
-        // When _components emits a new element, bind the new element to the UICollectionView.
-        self._components.asDriver()
-            .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
-                return [AnimatableSectionModel<String, AnyComponent>(model: "Test", items: components)]
-            })
-            .drive(self.collectionView.rx.items(dataSource: self.dataSource))
-            .disposed(by: self.disposeBag)
     }
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -115,29 +97,10 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     }()
 
     // MARK: Stored Properties
-    // swiftlint:disable:next line_length
-    public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-        configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-            guard let cell = cv.dequeueReusableCell(
-                withReuseIdentifier: ComponentCell.identifier,
-                for: indexPath
-            ) as? ComponentCell
-                else { fatalError("Cell not registered to UICollectionView")}
-
-            cell.configure(with: component)
-            return cell
-        }
-    )
-
-    /**
-     The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
-    */
-    internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
-
     /**
      When the collectionView is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
      This Observable emits the nonzero sizes of UICollectionView when it changes. This may not work in some circumstances when this
-     ComponentViewController is inside a custom Container UIViewController. If that happens override **width** and use **.exactly**.
+     ComponentViewController is inside a custom container UIViewController. If that happens override **width** and use **.exactly**.
     */
     internal lazy var _sizeObservable: Observable<CGSize> = self.collectionView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
@@ -147,19 +110,54 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         .map({ (rect: CGRect?) -> CGSize in rect!.size })
         .distinctUntilChanged()
 
-    internal private(set) var _size: CGSize = CGSize.zero
+    internal var _size: CGSize = CGSize.zero
+
+    /**
+     The combined state of the ViewModels as a BehviorRelay for debugging purposes.
+    */
+    internal let state: BehaviorRelay<[Any]> = BehaviorRelay<[Any]>(value: [()])
+
+    /**
+     DisposeBag for Rx-related subscriptions.
+    */
+    internal let disposeBag: DisposeBag = DisposeBag()
+
+    /**
+     The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
+     */
+    internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+        qos: DispatchQoS.userInitiated,
+        internalSerialQueueName: "\(UUID().uuidString)"
+    )
 
     // MARK: Computed Properties
+    /**
+     The ViewModels whose State is observed by this CyanicViewController.
+    */
+    open var viewModels: [AnyViewModel] { return [] }
+
+    /**
+     Limits the frequency of state updates.
+    */
+    open var throttleType: ThrottleType { return ThrottleType.none }
+
+    /**
+     The current state of the ViewModels from the state BehaviorRelay.
+    */
+    public var currentState: Any { return self.state.value }
+
     open var size: ComponentViewController.Size { return ComponentViewController.Size.automatic }
 
     // MARK: Views
     /**
-     The UICollectionView instance managed by this ComponentViewController subclass.
+     The UICollectionView instance managed by this ComponentViewController instance.
     */
     public private(set) lazy var collectionView: UICollectionView = UICollectionView(
         frame: CGRect.zero,
         collectionViewLayout: self.createUICollectionViewLayout()
     )
+
+    internal typealias CombinedState = (CGSize, [Any])
 
     // MARK: Methods
     /**
@@ -172,8 +170,9 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
      - Parameters:
         - viewModels: The ViewModels whose States will be observed.
     */
-    internal override func setUpObservables(with viewModels: [AnyViewModel]) {
-        guard !viewModels.isEmpty else { return }
+    @discardableResult
+    internal func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
+        guard !viewModels.isEmpty else { return Observable<(CGSize, [Any])>.empty() }
         let combinedStatesObservables: Observable<[Any]> = viewModels.combineStateObservables()
 
         let filteredSize: Observable<CGSize>
@@ -195,27 +194,10 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
-        .observeOn(self.scheduler)
-        .subscribeOn(self.scheduler)
-        .debug("\(type(of: self))", trimOutput: false)
-        .share()
-
-        // Call buildComponents method when a new element in combinedObservable is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay.
-        // NOTE:
-        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. So, there is no point in
-        // in executing operations in quick succession when it is throttled anyway.
-        throttledStateObservable
-            .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
-                guard let s = self else { return [] }
-                s._size = size
-                var controller: ComponentsController = ComponentsController(size: size)
-                s.buildComponents(&controller)
-                return controller.components
-            })
-            .bind(to: self._components)
-            .disposed(by: self.disposeBag)
+            .observeOn(self.scheduler)
+            .subscribeOn(self.scheduler)
+//            .debug("\(type(of: self))", trimOutput: false)
+            .share()
 
         throttledStateObservable
             .map({ (width: CGSize, states: [Any]) -> [Any] in
@@ -234,6 +216,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
             )
             .disposed(by: self.disposeBag)
 
+        return throttledStateObservable
     }
 
     /**
@@ -255,46 +238,25 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
      - Returns:
         The AnyComponent instance at the IndexPath.
     */
-    public final func component(at indexPath: IndexPath) -> AnyComponent {
-        let component: AnyComponent = self._components.value[indexPath.item]
-        return component
+    open func component(at indexPath: IndexPath) -> AnyComponent? {
+        fatalError("Override this!")
     }
 
     /**
-     Builds the AnyComponents array.
+     When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
+     should react to changes in state. This method is run on the main thread asynchronously.
 
-     This is where you create for logic to add Components to the ComponentsController data structure. This method is
-     called every time the State of your ViewModels change. You can access the State(s) via the FFUFComponent enum's
-     static functions.
-
-     - Parameters:
-        - componentsController: The ComponentsController that is mutated by this method. It is always
-                                starts as an empty ComponentsController.
-    */
-    open func buildComponents(_ componentsController: inout ComponentsController) {}
+     When overriding, no need to call super because the default implementation does nothing.
+     */
+    open func invalidate() {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        if self._components.value.endIndex <= indexPath.item {
-            return CGSize.zero
-        }
-
-        let layout: ComponentLayout = self._components.value[indexPath.item].layout
-
-        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
-
-        let cellSize: CGSize = layout.measurement(within: size).size
-        return cellSize
-    }
-
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        let component: AnyComponent = self.component(at: indexPath)
+        guard let component: AnyComponent = self.component(at: indexPath) else { return }
         guard let selectable = component.identity.base as? Selectable else { return }
         selectable.onSelect()
     }
-
 }
 
 // MARK: - Size Enum
@@ -302,8 +264,8 @@ public extension ComponentViewController {
 
     /**
      In cases where ComponentViewController is a childViewController, it is sometimes necessary to have an exact size.
-     This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it should be taken
-     cared of by UIKit.
+     This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it
+     should be taken cared of by UIKit.
     */
     enum Size {
         /**

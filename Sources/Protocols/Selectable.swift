@@ -8,7 +8,7 @@
 
 /**
  Selectable is a protocol adopted by Components that want to utilize the collectionView(collectionView:didSelectItemAt:)
- method in ComponentViewController.
+ method in SingleSectionComponentViewController.
 */
 public protocol Selectable {
 

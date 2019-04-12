@@ -17,7 +17,7 @@ public struct SectionController {
     // MARK: Initializer
     public init(size: CGSize) {
         self.size = size
-        self.components = ComponentsController(size: size)
+        self.componentsController = ComponentsController(size: size)
     }
 
     // MARK: Stored Properties
@@ -29,12 +29,12 @@ public struct SectionController {
     /**
      The Component representing the section header in the UICollectionView.
     */
-    public var sectionComponent: AnyComponent!
+    public var sectionComponent: AnyComponent! // swiftlint:disable:this implicitly_unwrapped_optional
 
     /**
      The components for this section of the UICollectionView.
      */
-    public private(set) var components: ComponentsController
+    public private(set) var componentsController: ComponentsController
 
     // MARK: Computed Properties
     /**
@@ -51,8 +51,8 @@ public struct SectionController {
         return self.size.height
     }
 
-    public mutating func buildComponents(_ block: (_ components: inout ComponentsController) -> Void) {
-        block(&self.components)
+    public mutating func buildComponents(_ block: (_ componentsController: inout ComponentsController) -> Void) {
+        block(&self.componentsController)
     }
 
 }

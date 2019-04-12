@@ -17,7 +17,7 @@ import struct Foundation.IndexPath
 
  **Caveats**
 
- This shouldn't be used with the ExpandableComponent or any ComponentViewController where the elements are changing. It makes
+ This shouldn't be used with the ExpandableComponent or any SingleSectionComponentViewController where the elements are changing. It makes
  the animation look broken
  */
 open class CyanicNoFadeFlowLayout: UICollectionViewFlowLayout {
