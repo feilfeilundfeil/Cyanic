@@ -8,7 +8,7 @@
 
 import Cyanic
 
-class ExampleViewModel: ViewModel<ExampleState> {
+public final class ExampleListViewModel: ExampleViewModel<ExampleListState> {
 
     // MARK: Methods
     func buttonWasTapped() {

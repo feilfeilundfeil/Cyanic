@@ -1,5 +1,5 @@
 //
-//  TestViewModel.swift
+//  ExampleCounterViewModel.swift
 //  Example
 //
 //  Created by Julio Miguel Alorro on 3/27/19.
@@ -8,4 +8,4 @@
 
 import Cyanic
 
-class TestViewModel: ViewModel<TestState> {}
+class ExampleCounterViewModel: ExampleViewModel<ExampleCounterState> {}

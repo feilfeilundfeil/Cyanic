@@ -10,19 +10,27 @@ import UIKit
 import Cyanic
 import RxCocoa
 
-class TestVC: CyanicViewController {
+class ExampleCounterVC: CyanicViewController {
 
     // MARK: UIViewController Lifecycle Methods
     override func loadView() {
         self.view = UIView()
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(white: 0.85, alpha: 1.0)
 
         self.label = UILabel()
         self.label.textAlignment = .center
         self.label.text = self.count.description
 
         self.view.addSubview(self.label)
-        self.label.center = self.view.center
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            self.label.heightAnchor.constraint(equalToConstant: 50.0),
+            self.label.widthAnchor.constraint(equalToConstant: 100.0),
+            self.label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.label.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+
     }
 
     override func viewDidLoad() {
@@ -32,7 +40,7 @@ class TestVC: CyanicViewController {
             item.rightBarButtonItem = UIBarButtonItem(
                 barButtonSystemItem: UIBarButtonItem.SystemItem.add,
                 target: self,
-                action: #selector(TestVC.addButtonItemTapped)
+                action: #selector(ExampleCounterVC.addButtonItemTapped)
             )
         }
 
@@ -40,7 +48,7 @@ class TestVC: CyanicViewController {
             let button: UIButton = UIButton(type: UIButton.ButtonType.system)
             button.setTitleColor(UIColor.black, for: UIControl.State.normal)
             button.setTitle("Back", for: UIControl.State.normal)
-            button.addTarget(self, action: #selector(TestVC.cancelButtonItemTapped), for: UIControl.Event.touchUpInside)
+            button.addTarget(self, action: #selector(ExampleCounterVC.cancelButtonItemTapped), for: UIControl.Event.touchUpInside)
             button.frame = CGRect(origin: CGPoint(x: 100.0, y: 100.0), size: CGSize(width: 100.0, height: 44.0))
             button.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(button)
@@ -51,7 +59,7 @@ class TestVC: CyanicViewController {
     // MARK: Stored Properties
     private var label: UILabel!
     private var count: Int = 0
-    private let viewModel: TestViewModel = TestViewModel(initialState: TestState.default)
+    private let viewModel: ExampleCounterViewModel = ExampleCounterViewModel(initialState: ExampleCounterState.default)
 
     // MARK: Computed Properties
     override var viewModels: [AnyViewModel] {
@@ -62,13 +70,14 @@ class TestVC: CyanicViewController {
 
     // MARK: Methods
     override func invalidate() {
-        self.count += 1
         self.label.text = self.count.description
     }
 
     // MARK: Target Action Methods
     @objc func addButtonItemTapped() {
-        self.viewModel.setState(with: { $0.changeCount += 1 })
+        self.count += 1
+        let count: Int = self.count
+        self.viewModel.setState(with: { $0.changeCount = count })
     }
 
     @objc func cancelButtonItemTapped() {

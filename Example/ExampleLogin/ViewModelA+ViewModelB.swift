@@ -8,31 +8,33 @@
 
 import Cyanic
 
-class ViewModelA: ViewModel<StateA> {
+public final class ViewModelA: ExampleViewModel<StateA> {
 
-    func addButtonTapped() {
+    public func secondButtonTapped() {
         self.setState(with: { $0.isTrue = true } )
     }
 
-    func otherButtonTapped() {
+    public func thirdButtonTapped() {
         self.setState(with: { $0.isTrue = false } )
     }
 
-    func setUserName(_ userName: String) {
+    public func setUserName(_ userName: String) {
         self.setState(with: { $0.userName = userName })
     }
 
 }
-class ViewModelB: ViewModel<StateB> {
-    func addButtonTapped() {
+
+public final class ViewModelB: ExampleViewModel<StateB> {
+
+    public func secondButtonTapped() {
         self.setState(with: { $0.isTrue = false })
     }
 
-    func otherButtonTapped() {
+    public func thirdButtonTapped() {
         self.setState(with: { $0.isTrue = true })
     }
 
-    func setPassword(_ password: String) {
+    public func setPassword(_ password: String) {
         self.setState(with: { $0.password = password })
     }
 }

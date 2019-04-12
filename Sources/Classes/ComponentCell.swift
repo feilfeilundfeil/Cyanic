@@ -54,6 +54,7 @@ open class ComponentCell: UICollectionViewCell {
                 within: bounds.size
             )
 
+            // Do the arrangement calculation in a background thread
             let arrangement: LayoutArrangement = measurement
                 .arrangement(within: bounds)
 
@@ -79,8 +80,10 @@ open class ComponentCell: UICollectionViewCell {
     }
 
     /**
-     Binds the layout from the AnyComponent instance, sets the contentView.frame.size to the cell's intrinsicContentSize
-     and calls setNeedsLayout.
+     Reads the layout from the AnyComponent instance to create the subviews in this ComponentCell instance. This also
+     sets the contentView.frame.size to the cell's intrinsicContentSize and calls setNeedsLayout.
+     - Parameters:
+        - component: The AnyComponent instance that represents this ComponentCell
     */
     open func configure(with component: AnyComponent) {
         self.layout = component.layout

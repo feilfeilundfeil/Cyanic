@@ -14,20 +14,20 @@ import RxCocoa
 import RxSwift
 import SideMenu
 
-class ExampleVC: ComponentViewController {
+public final class ExampleListVC: ComponentViewController {
 
     // MARK: Initializer
-    init(viewModel: ExampleViewModel) {
+    public init(viewModel: ExampleListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: UIViewController Lifecycle Methods
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.collectionView.backgroundColor = UIColor.white
@@ -56,40 +56,25 @@ class ExampleVC: ComponentViewController {
         self.navigationItem.rightBarButtonItems = [sideMenuButton, navigationVCButton]
 
         self.viewModel.selectSubscribe(
-            keyPath1: \ExampleState.isTrue,
-            keyPath2: \ExampleState.expandableDict,
+            keyPath1: \ExampleListState.isTrue,
+            keyPath2: \ExampleListState.expandableDict,
             onNewValue: { print("from a different subscription: \($0)") }
         )
-
-        let rightVC: UISideMenuNavigationController = UISideMenuNavigationController(
-            rootViewController: ExampleLoginVC(
-                viewModelOne: ViewModelA(initialState: StateA.default),
-                viewModelTwo: ViewModelB(initialState: StateB.default)
-            )
-        )
-
-        SideMenuManager.default.menuFadeStatusBar = false
-        SideMenuManager.default.menuRightNavigationController = rightVC
-        SideMenuManager.default.menuLeftNavigationController = nil
-        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
     
     }
 
     // MARK: Stored Properties
-    let viewModel: ExampleViewModel
+    private let viewModel: ExampleListViewModel
 
-    // MARK: Computed Properties
-    override var throttleType: ThrottleType { return ThrottleType.none }
+    // MARK: Overridden ComponentViewController Properties
+    public override var throttleType: ThrottleType { return ThrottleType.none }
 
-    override var viewModels: [AnyViewModel] { return [self.viewModel.asAnyViewModel] }
+    public override var viewModels: [AnyViewModel] { return [self.viewModel.asAnyViewModel] }
 
-    // MARK: Methods
-    override func buildComponents(_ components: inout ComponentsController) {
-        print("BUILD")
-        let width: CGFloat = components.width
-
-        withState(of: self.viewModel) { (state: ExampleState) -> Void in
+    // MARK: Overridden ComponentViewController Methods
+    public override func buildComponents(_ components: inout ComponentsController) {
+        withState(of: self.viewModel) { (state: ExampleListState) -> Void in
+            let width: CGFloat = components.width
 
             components.staticTextComponent {
                 $0.id = "First"
@@ -114,7 +99,7 @@ class ExampleVC: ComponentViewController {
 
             let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
             let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-            let firstID: String = ExampleState.Expandable.first.rawValue
+            let firstID: String = ExampleListState.Expandable.first.rawValue
             let firstExpandable: ExpandableComponent = components.expandableComponent { [weak self] in
                 guard let s = self else { return }
                 $0.id = firstID
@@ -137,7 +122,6 @@ class ExampleVC: ComponentViewController {
                     insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0),
                     height: 5.0
                 )
-
             }
 
             let randomColor: () -> UIColor = {
@@ -156,13 +140,14 @@ class ExampleVC: ComponentViewController {
                     }
                 }
             }
+
             components.staticSpacingComponent {
                 $0.id = "Second"
                 $0.height = 50.0
                 $0.backgroundColor = UIColor.black
             }
 
-            let secondId: String = ExampleState.Expandable.second.rawValue
+            let secondId: String = ExampleListState.Expandable.second.rawValue
 
             let secondExpandable = components.expandableComponent { [weak self] in
                 guard let s = self else { return }
@@ -227,28 +212,22 @@ class ExampleVC: ComponentViewController {
             components.buttonComponent {
                 buttonConfiguration("Third", .yellow, &$0)
             }
-
-//            components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
-//                component.id = "First TextField"
-//                component.didBeginEditing = { (textField: UITextField) -> Void in
-//                    print("Did Begin Editing! \(textField.text!)")
-//                }
-//
-//                component.didEndEditing = { (textField: UITextField) -> Void in
-//                    print("Did End Editing! \(textField.text!)")
-//                    let string: String = textField.text!
-//                    self.viewModel.setState(with: { $0.textFieldText = string })
-//
-//                }
-//
-//                component.text = state.textFieldText
-//                component.insets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 0.0)
-//                component.backgroundColor = .red
-//            })
         }
     }
 
-    // MARK: Target Action Methods
+    public override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        super.collectionView(collectionView, didSelectItemAt: indexPath)
+        let component: AnyComponent = self.component(at: indexPath)
+
+        if component.identity.base is ExpandableComponent {
+            collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.top, animated: true)
+        }
+
+    }
+}
+
+// MARK: - Target Action Methods
+private extension ExampleListVC {
     @objc func buttonTapped() {
         self.viewModel.buttonWasTapped()
     }
@@ -259,8 +238,8 @@ class ExampleVC: ComponentViewController {
 
     @objc func navButtonTapped() {
         let vc: ExampleLoginVC = ExampleLoginVC(
-            viewModelOne: ViewModelA(initialState: StateA.default, isDebugMode: true),
-            viewModelTwo: ViewModelB(initialState: StateB.default, isDebugMode: true)
+            viewModelOne: ViewModelA(initialState: StateA.default),
+            viewModelTwo: ViewModelB(initialState: StateB.default)
         )
 
         self.navigationController?.pushViewController(vc, animated: true)

@@ -45,7 +45,7 @@ import struct UIKit.UIEdgeInsets
 open class ComponentViewController: CyanicViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: UIViewController Lifecycle Methods
-    override open func loadView() {
+    open override func loadView() {
         self.view = UIView()
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.collectionView)
@@ -249,6 +249,18 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     }
 
     /**
+     Gets the AnyComponent instance at the specified indexPath.
+     - Parameters:
+        - indexPath: The IndexPath of the AnyComponent.
+     - Returns:
+        The AnyComponent instance at the IndexPath.
+    */
+    public final func component(at indexPath: IndexPath) -> AnyComponent {
+        let component: AnyComponent = self._components.value[indexPath.item]
+        return component
+    }
+
+    /**
      Builds the AnyComponents array.
 
      This is where you create for logic to add Components to the ComponentsController data structure. This method is
@@ -262,7 +274,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
     open func buildComponents(_ componentsController: inout ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         if self._components.value.endIndex <= indexPath.item {
             return CGSize.zero
@@ -276,7 +288,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
         return cellSize
     }
 
-    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         let component: AnyComponent = self._components.value[indexPath.item]
         guard let selectable = component.identity.base as? Selectable else { return }
@@ -289,7 +301,7 @@ open class ComponentViewController: CyanicViewController, UICollectionViewDelega
 public extension ComponentViewController {
 
     /**
-     In cases where ComponentViewController is a childViewController. It is sometimes necessary to have an exact size.
+     In cases where ComponentViewController is a childViewController, it is sometimes necessary to have an exact size.
      This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it should be taken
      cared of by UIKit.
     */

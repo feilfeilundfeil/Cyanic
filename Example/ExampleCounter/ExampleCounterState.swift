@@ -1,5 +1,5 @@
 //
-//  TestState.swift
+//  ExampleCounterState.swift
 //  Example
 //
 //  Created by Julio Miguel Alorro on 3/27/19.
@@ -8,11 +8,11 @@
 
 import Cyanic
 
-struct TestState: State {
+struct ExampleCounterState: State {
 
     // MARK: Static Properties
-    static var `default`: TestState {
-        return TestState(changeCount: 0)
+    static var `default`: ExampleCounterState {
+        return ExampleCounterState(changeCount: 0)
     }
 
     // MARK: Stored Properties

@@ -8,19 +8,19 @@
 
 import Cyanic
 
-struct ExampleState: ExpandableState {
+public struct ExampleListState: ExpandableState {
 
     // MARK: Enums
-    enum Expandable: String, CaseIterable {
+    public enum Expandable: String, CaseIterable {
         case first = "First Expandable"
         case second = "Second Expandable"
     }
 
     // MARK: Static Properties
-    static var `default`: ExampleState {
-        return ExampleState(
+    public static var `default`: ExampleListState {
+        return ExampleListState(
             isTrue: true,
-            expandableDict: ExampleState.Expandable.allCases.map { $0.rawValue }
+            expandableDict: ExampleListState.Expandable.allCases.map { $0.rawValue }
                 .reduce(into: [String: Bool](), { (current, element) -> Void in
                     current[element] = false
                 }
@@ -58,11 +58,11 @@ struct ExampleState: ExpandableState {
     }
 
     // MARK: Stored Properties
-    var isTrue: Bool
-    var expandableDict: [String: Bool]
-    var strings: [String]
-    var otherStrings: [String]
-    var textFieldText: String
+    public var isTrue: Bool
+    public var expandableDict: [String: Bool]
+    public var strings: [String]
+    public var otherStrings: [String]
+    public var textFieldText: String
 
 }
 
