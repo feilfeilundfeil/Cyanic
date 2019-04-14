@@ -18,7 +18,7 @@ import struct CoreGraphics.CGSize
 
  A Component is what is used to diff between two collections by RxDataSources.
 */
-public protocol Component: IdentifiableType, Copyable, UserInterfaceModel where Identity == Self {
+public protocol Component: IdentifiableType, Copyable, UserInterfaceModel, CustomStringConvertible where Identity == Self {
 
     /// The unique id of the Component. This is mutable because structs are the only data structure
     /// that should conform to Component this allows deep copying of Component structs
@@ -40,6 +40,16 @@ public extension Component {
     /// so Components can be grouped in Collections.
     var asAnyComponent: AnyComponent {
         return AnyComponent(self)
+    }
+
+}
+
+extension Component {
+
+    // sourcery: isExcluded
+    // sourcery: skipHashing, skipEquality
+    public var description: String {
+        return self.id
     }
 
 }

@@ -13,12 +13,12 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionComponentViewController {
+public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.collectionView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
     }
 
     // MARK: Stored Properties
@@ -30,14 +30,6 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
     }
 
     // MARK: Methods
-    public override func createUICollectionViewLayout() -> UICollectionViewLayout {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0.0
-        layout.minimumInteritemSpacing = 0.0
-        layout.sectionHeadersPinToVisibleBounds = true
-        return layout
-    }
-
     public override func buildSections(_ sectionsController: MultiSectionController) {
 
         withState(of: self.viewModel) { (state: ExampleSectionedState) -> Void in
@@ -61,16 +53,6 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
                         component.isExpanded = state.expandableDict[id] == true
                         component.setExpandableState =  { (id: String, isExpanded: Bool) -> Void in
                             self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
-
-                            if state.expandableDict[id] == true {
-                                if let attributes = self.collectionView.layoutAttributesForSupplementaryElement(
-                                    ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) {
-                                    self.collectionView.setContentOffset(
-                                        CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top),
-                                        animated: true
-                                    )
-                                }
-                            }
                         }
                     }
                 )
@@ -110,16 +92,6 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
                         component.isExpanded = state.expandableDict[id] == true
                         component.setExpandableState = { (id, isExpanded) in
                             self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
-
-                            if state.expandableDict[id] == true {
-                                if let attributes = self.collectionView.layoutAttributesForSupplementaryElement(
-                                    ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 1)) {
-                                    self.collectionView.setContentOffset(
-                                        CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top),
-                                        animated: true
-                                    )
-                                }
-                            }
                         }
                     }
                 )

@@ -30,9 +30,8 @@ open class SingleSectionComponentViewController: ComponentViewController {
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components
-            .observeOn(self.scheduler)
             .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
-                return [AnimatableSectionModel<String, AnyComponent>(model: "Test", items: components)]
+                return [AnimatableSectionModel<String, AnyComponent>(model: "Cyanic", items: components)]
             })
             .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)

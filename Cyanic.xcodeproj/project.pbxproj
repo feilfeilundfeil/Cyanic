@@ -31,6 +31,10 @@
 		145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145D4E9F225DF602005F3531 /* DividerLine.swift */; };
+		14609BA422635B77007B2AFC /* TableViewComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA322635B77007B2AFC /* TableViewComponentCell.swift */; };
+		14609BA622635BF3007B2AFC /* TableViewComponentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */; };
+		14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA722635C70007B2AFC /* TableComponentViewController.swift */; };
+		14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleListVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
@@ -151,6 +155,10 @@
 		145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145D4E9F225DF602005F3531 /* DividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLine.swift; sourceTree = "<group>"; };
+		14609BA322635B77007B2AFC /* TableViewComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewComponentCell.swift; sourceTree = "<group>"; };
+		14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewComponentHeaderView.swift; sourceTree = "<group>"; };
+		14609BA722635C70007B2AFC /* TableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentViewController.swift; sourceTree = "<group>"; };
+		14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionTableComponentViewController.swift; sourceTree = "<group>"; };
 		1470FDD5223BCE0C008CDD25 /* Alacrity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alacrity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD7223BCE0C008CDD25 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD9223BCE0C008CDD25 /* FFUFWidgets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFUFWidgets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -384,9 +392,35 @@
 				14C96F062211C2EF00731265 /* Utilities */,
 				14C1E3DC2210491E0053E318 /* Components */,
 				1478E9AF220C5CDA006AF8B3 /* Classes */,
+				14609BA222635B41007B2AFC /* TableView */,
+				14609BA122635B04007B2AFC /* CollectionView */,
 				14CBC9C9220C415200597FAA /* Protocols */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		14609BA122635B04007B2AFC /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
+				149804982260C2070044194C /* ComponentSupplementaryView.swift */,
+				149804962260ACA20044194C /* ComponentViewController.swift */,
+				1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */,
+				149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */,
+				1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */,
+			);
+			path = CollectionView;
+			sourceTree = "<group>";
+		};
+		14609BA222635B41007B2AFC /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				14609BA322635B77007B2AFC /* TableViewComponentCell.swift */,
+				14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */,
+				14609BA722635C70007B2AFC /* TableComponentViewController.swift */,
+				14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 		1478E993220C59B9006AF8B3 /* Example */ = {
@@ -413,14 +447,8 @@
 				14A4576A22468E0F006E75C6 /* AnyViewModel.swift */,
 				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
 				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
-				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
-				149804982260C2070044194C /* ComponentSupplementaryView.swift */,
-				149804962260ACA20044194C /* ComponentViewController.swift */,
-				1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */,
-				149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
-				1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -928,6 +956,7 @@
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
+				14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */,
 				1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */,
 				149804952260ABEA0044194C /* MultiSectionComponentViewController.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
@@ -939,6 +968,7 @@
 				149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
 				14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */,
+				14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,
 				14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
@@ -948,8 +978,10 @@
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
+				14609BA622635BF3007B2AFC /* TableViewComponentHeaderView.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
+				14609BA422635B77007B2AFC /* TableViewComponentCell.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
