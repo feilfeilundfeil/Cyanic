@@ -13,16 +13,13 @@ import struct CoreGraphics.CGRect
 import struct Foundation.IndexPath
 
 /**
- TableComponentViewController is a subclass of AbstractComponentViewController. It serves as the base class for the
- TableSingleSectionViewController and TableMultiSectionViewController.
+ TableComponentViewController is the base class of UIViewControllers that use Cyanic's state driven UI logic
 */
 open class TableComponentViewController: AbstractComponentViewController, UITableViewDelegate {
 
     // MARK: UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Register TableComponentCell
         self.tableView.register(TableComponentCell.self, forCellReuseIdentifier: TableComponentCell.identifier)
 
         // Set up as the UITableView's UITableViewDelegate
@@ -32,16 +29,13 @@ open class TableComponentViewController: AbstractComponentViewController, UITabl
 
     // MARK: Views
     /**
-     The UITableView instance managed by this CollectionComponentViewController instance.
+     The UITableView instance managed by this ComponentViewController instance.
      */
     public var tableView: UITableView {
         return self._listView as! UITableView // swiftlint:disable:this force_cast
     }
 
     // MARK: Methods
-    /**
-     Instantiates a UITableView instance for use.
-    */
     internal override func setUpListView() -> UIView {
         return UITableView(
             frame: CGRect.zero,

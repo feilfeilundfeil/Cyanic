@@ -1,5 +1,5 @@
 //
-//  TableViewComponentHeaderView.swift
+//  TableComponentHeaderView.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/14/19.
@@ -22,11 +22,11 @@ import struct Dispatch.DispatchQoS
 import struct LayoutKit.LayoutArrangement
 import struct LayoutKit.LayoutMeasurement
 
-public final class TableViewComponentHeaderView: UIView {
+public final class TableComponentHeaderView: UIView {
 
     // MARK: Class Properties
     /**
-     The String identifier used by the ComponentCell to register to a UICollectionView instance
+     The String identifier used by the TableComponentHeaderView.
      */
     public class var identifier: String {
         return String(describing: Mirror(reflecting: self).subjectType)
@@ -43,7 +43,7 @@ public final class TableViewComponentHeaderView: UIView {
 
     // MARK: Stored Properties
     /**
-     The current ComponentLayout instance that created and arranged the subviews in the contentView of this ComponentCell.
+     The current ComponentLayout instance that creates and arranges the subviews in this TableComponentHeaderView.
      */
     private var layout: ComponentLayout?
     private var tap: UITapGestureRecognizer?
@@ -91,10 +91,10 @@ public final class TableViewComponentHeaderView: UIView {
     }
 
     /**
-     Reads the layout from the AnyComponent instance to create the subviews in this ComponentCell instance. This also
-     sets the contentView.frame.size to the cell's intrinsicContentSize and calls setNeedsLayout.
+     Reads the layout from the AnyComponent instance to create the subviews in this TableComponentHeaderView instance. This also
+     sets the frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
      - Parameters:
-     - component: The AnyComponent instance that represents this ComponentCell
+     - component: The AnyComponent instance that represents this TableComponentHeaderView.
      */
     public func configure(with component: AnyComponent) {
         self.layout = component.layout

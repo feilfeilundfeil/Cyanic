@@ -13,7 +13,7 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
+public final class ExampleSectionedVC: TableMultiSectionViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()

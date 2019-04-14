@@ -1,5 +1,5 @@
 //
-//  MultiSectionTableComponentViewController.swift
+//  TableMultiSectionViewController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/14/19.
@@ -7,22 +7,19 @@
 //
 
 import class RxCocoa.BehaviorRelay
-import class RxDataSources.TableViewSectionedDataSource
 import class RxDataSources.RxTableViewSectionedAnimatedDataSource
-import struct RxDataSources.AnimationConfiguration
 import class RxSwift.Observable
-import class RxSwift.MainScheduler
 import class UIKit.UITableView
 import class UIKit.UITableViewCell
 import class UIKit.UIView
-import enum RxDataSources.ViewTransition
 import enum RxDataSources.UITableViewRowAnimation
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
+import struct RxDataSources.AnimationConfiguration
 import struct RxDataSources.AnimatableSectionModel
 
-open class MultiSectionTableComponentViewController: TableComponentViewController {
+open class TableMultiSectionViewController: TableComponentViewController {
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
@@ -61,9 +58,9 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
             ),
             configureCell: { (_, cv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
                 guard let cell = cv.dequeueReusableCell(
-                    withIdentifier: TableViewComponentCell.identifier,
+                    withIdentifier: TableComponentCell.identifier,
                     for: indexPath
-                ) as? TableViewComponentCell
+                ) as? TableComponentCell
                     else { fatalError("Cell not registered to UITableView")}
 
                 cell.configure(with: component)
@@ -135,7 +132,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
     open func buildSections(_ sectionsController: MultiSectionController) {}
 
     // MARK: UITableViewDelegate Methods
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if self._sections.value.sectionControllers.count < indexPath.section {
             return 0.0
         }
@@ -149,7 +146,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         return rowSize.height
     }
 
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if self._sections.value.sectionControllers.count < section {
             return 0.0
         }
@@ -163,9 +160,9 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         return headerSize.height
     }
 
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let component = self.sectionController(at: section)?.sectionComponent else { return nil }
-        let headerView: TableViewComponentHeaderView = TableViewComponentHeaderView()
+        let headerView: TableComponentHeaderView = TableComponentHeaderView()
         headerView.configure(with: component)
         return headerView
     }

@@ -22,7 +22,7 @@ import struct RxDataSources.AnimatableSectionModel
  boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
  SingleSectionComponentViewController is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
 */
-open class SingleSectionComponentViewController: ComponentViewController {
+open class SingleSectionComponentViewController: CollectionComponentViewController {
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
@@ -42,9 +42,9 @@ open class SingleSectionComponentViewController: ComponentViewController {
     public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
         configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
             guard let cell = cv.dequeueReusableCell(
-                withReuseIdentifier: ComponentCell.identifier,
+                withReuseIdentifier: CollectionComponentCell.identifier,
                 for: indexPath
-            ) as? ComponentCell
+            ) as? CollectionComponentCell
                 else { fatalError("Cell not registered to UICollectionView")}
 
             cell.configure(with: component)

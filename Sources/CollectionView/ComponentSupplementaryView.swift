@@ -26,7 +26,7 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
 
     // MARK: Class Properties
     /**
-     The String identifier used by the ComponentCell to register to a UICollectionView instance
+     The String identifier used by the ComponentSupplementaryView to register to a UICollectionView instance
      */
     public class var identifier: String {
         return String(describing: Mirror(reflecting: self).subjectType)
@@ -43,8 +43,8 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
 
     // MARK: Stored Properties
     /**
-     The current ComponentLayout instance that created and arranged the subviews in the contentView of this ComponentCell.
-     */
+     The current ComponentLayout instance that created and arranged the subviews in this ComponentSupplementaryView.
+    */
     private var layout: ComponentLayout?
     private var tap: UITapGestureRecognizer?
     private let disposeBag: DisposeBag = DisposeBag()
@@ -104,10 +104,10 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
     }
 
     /**
-     Reads the layout from the AnyComponent instance to create the subviews in this ComponentCell instance. This also
-     sets the contentView.frame.size to the cell's intrinsicContentSize and calls setNeedsLayout.
+     Reads the layout from the AnyComponent instance to create the subviews in this ComponentSupplementaryView instance. This also
+     sets its frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
      - Parameters:
-        - component: The AnyComponent instance that represents this ComponentCell
+        - component: The AnyComponent instance that represents this ComponentSupplementaryView.
     */
     public func configure(with component: AnyComponent) {
         self.layout = component.layout

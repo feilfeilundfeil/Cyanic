@@ -31,10 +31,12 @@
 		145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */; };
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145D4E9F225DF602005F3531 /* DividerLine.swift */; };
-		14609BA422635B77007B2AFC /* TableViewComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA322635B77007B2AFC /* TableViewComponentCell.swift */; };
-		14609BA622635BF3007B2AFC /* TableViewComponentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */; };
+		14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA322635B77007B2AFC /* TableComponentCell.swift */; };
+		14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */; };
 		14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA722635C70007B2AFC /* TableComponentViewController.swift */; };
-		14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */; };
+		14609BAA22635E06007B2AFC /* TableMultiSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */; };
+		14609BAC22636805007B2AFC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAB22636805007B2AFC /* Size.swift */; };
+		14609BAE226378A5007B2AFC /* AbstractComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleListVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
@@ -47,7 +49,7 @@
 		1498049122608F900044194C /* SectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048F22608F8C0044194C /* SectionController.swift */; };
 		14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14980492226097610044194C /* DataSourceControllers+Cyanic.swift */; };
 		149804952260ABEA0044194C /* MultiSectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */; };
-		149804972260ACA20044194C /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804962260ACA20044194C /* ComponentViewController.swift */; };
+		149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804962260ACA20044194C /* CollectionComponentViewController.swift */; };
 		149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804982260C2070044194C /* ComponentSupplementaryView.swift */; };
 		1498049C2260CE030044194C /* ExampleSectionedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049B2260CE030044194C /* ExampleSectionedVC.swift */; };
 		1498049E2260D8340044194C /* MultiSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049D2260D8340044194C /* MultiSectionController.swift */; };
@@ -75,7 +77,7 @@
 		14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */; };
 		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
 		14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */; };
-		14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* ComponentCell.swift */; };
+		14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		14F06052224B58E700CC62B0 /* ExampleListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06051224B58E700CC62B0 /* ExampleListState.swift */; };
 		14F06054224B591200CC62B0 /* ExampleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06053224B591200CC62B0 /* ExampleListViewModel.swift */; };
@@ -155,10 +157,12 @@
 		145AD75B220B1EBF004F02C2 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145D4E9F225DF602005F3531 /* DividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLine.swift; sourceTree = "<group>"; };
-		14609BA322635B77007B2AFC /* TableViewComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewComponentCell.swift; sourceTree = "<group>"; };
-		14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewComponentHeaderView.swift; sourceTree = "<group>"; };
+		14609BA322635B77007B2AFC /* TableComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentCell.swift; sourceTree = "<group>"; };
+		14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentHeaderView.swift; sourceTree = "<group>"; };
 		14609BA722635C70007B2AFC /* TableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentViewController.swift; sourceTree = "<group>"; };
-		14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionTableComponentViewController.swift; sourceTree = "<group>"; };
+		14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMultiSectionViewController.swift; sourceTree = "<group>"; };
+		14609BAB22636805007B2AFC /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractComponentViewController.swift; sourceTree = "<group>"; };
 		1470FDD5223BCE0C008CDD25 /* Alacrity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alacrity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD7223BCE0C008CDD25 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD9223BCE0C008CDD25 /* FFUFWidgets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFUFWidgets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +186,7 @@
 		1498048F22608F8C0044194C /* SectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionController.swift; sourceTree = "<group>"; };
 		14980492226097610044194C /* DataSourceControllers+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataSourceControllers+Cyanic.swift"; sourceTree = "<group>"; };
 		149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionComponentViewController.swift; sourceTree = "<group>"; };
-		149804962260ACA20044194C /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
+		149804962260ACA20044194C /* CollectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentViewController.swift; sourceTree = "<group>"; };
 		149804982260C2070044194C /* ComponentSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentSupplementaryView.swift; sourceTree = "<group>"; };
 		1498049B2260CE030044194C /* ExampleSectionedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSectionedVC.swift; sourceTree = "<group>"; };
 		1498049D2260D8340044194C /* MultiSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionController.swift; sourceTree = "<group>"; };
@@ -215,7 +219,7 @@
 		14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponent.swift; sourceTree = "<group>"; };
 		14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentLayout.swift; sourceTree = "<group>"; };
 		14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildComponentVC.swift; sourceTree = "<group>"; };
-		14E424C6220E5B8D006BAA4F /* ComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentCell.swift; sourceTree = "<group>"; };
+		14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		14F06051224B58E700CC62B0 /* ExampleListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleListState.swift; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 				142C451B223939DB002360F5 /* Async.swift */,
 				142C451822392C09002360F5 /* ComponentStateValidator.swift */,
 				142C44FF2235A105002360F5 /* ThrottleType.swift */,
+				14609BAB22636805007B2AFC /* Size.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -402,9 +407,9 @@
 		14609BA122635B04007B2AFC /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				14E424C6220E5B8D006BAA4F /* ComponentCell.swift */,
+				14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */,
 				149804982260C2070044194C /* ComponentSupplementaryView.swift */,
-				149804962260ACA20044194C /* ComponentViewController.swift */,
+				149804962260ACA20044194C /* CollectionComponentViewController.swift */,
 				1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */,
 				149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */,
 				1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */,
@@ -415,10 +420,10 @@
 		14609BA222635B41007B2AFC /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				14609BA322635B77007B2AFC /* TableViewComponentCell.swift */,
-				14609BA522635BF3007B2AFC /* TableViewComponentHeaderView.swift */,
+				14609BA322635B77007B2AFC /* TableComponentCell.swift */,
+				14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */,
 				14609BA722635C70007B2AFC /* TableComponentViewController.swift */,
-				14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */,
+				14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -449,6 +454,7 @@
 				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
+				14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -948,21 +954,22 @@
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
-				14E424C7220E5B8D006BAA4F /* ComponentCell.swift in Sources */,
+				14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */,
 				14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
-				149804972260ACA20044194C /* ComponentViewController.swift in Sources */,
+				149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */,
 				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
-				14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */,
+				14609BAA22635E06007B2AFC /* TableMultiSectionViewController.swift in Sources */,
 				1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */,
 				149804952260ABEA0044194C /* MultiSectionComponentViewController.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				142C451C223939DB002360F5 /* Async.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
+				14609BAE226378A5007B2AFC /* AbstractComponentViewController.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */,
@@ -972,16 +979,17 @@
 				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,
 				14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */,
 				14496DB622273CE000C5C278 /* ButtonComponent.swift in Sources */,
+				14609BAC22636805007B2AFC /* Size.swift in Sources */,
 				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
-				14609BA622635BF3007B2AFC /* TableViewComponentHeaderView.swift in Sources */,
+				14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
-				14609BA422635B77007B2AFC /* TableViewComponentCell.swift in Sources */,
+				14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,

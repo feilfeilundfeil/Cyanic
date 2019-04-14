@@ -1,45 +1,40 @@
 //
-//  ComponentViewController.swift
+//  AbstractComponentViewController.swift
 //  Cyanic
 //
-//  Created by Julio Miguel Alorro on 4/12/19.
+//  Created by Julio Miguel Alorro on 4/14/19.
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
 import class RxCocoa.BehaviorRelay
-import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.DisposeBag
 import class RxSwift.MainScheduler
 import class RxSwift.Observable
 import class RxSwift.SerialDispatchQueueScheduler
 import class UIKit.NSLayoutConstraint
-import class UIKit.UICollectionView
-import class UIKit.UICollectionViewCell
-import class UIKit.UICollectionViewFlowLayout
-import class UIKit.UICollectionViewLayout
-import class UIKit.UIScrollView
 import class UIKit.UIView
 import class UIKit.UIViewController
-import protocol UIKit.UICollectionViewDelegateFlowLayout
-import protocol UIKit.UIViewControllerTransitionCoordinator
 import struct CoreGraphics.CGRect
 import struct CoreGraphics.CGSize
 import struct Foundation.DispatchQoS
 import struct Foundation.IndexPath
 import struct Foundation.UUID
 import struct RxCocoa.KeyValueObservingOptions
-import struct RxSwift.RxTimeInterval
 
 /**
- ComponentViewController is the base class of UIViewControllers that use Cyanic's state driven UI logic
-*/
-open class ComponentViewController: UIViewController, StateObservableBuilder, UICollectionViewDelegateFlowLayout {
+ AbstractComponentViewController contains all the logic that is shared between the CollectionComponentView and
+ TableComponentViewController.
 
-    // MARK: UIViewController Lifecycle Methods
+ Most of the logic sets up the UITablview / UICollectionView constraints and setting up the combined State observable.
+ This class also contains the necessary properties and methods shared by both subclasses.
+*/
+open class AbstractComponentViewController: UIViewController, StateObservableBuilder {
+
     open override func loadView() {
         self.view = UIView()
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(self.collectionView)
+        self._listView = self.setUpListView()
+        self._listView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(self._listView)
 
         NSLayoutConstraint.activate([
             self.topAnchorConstraint,
@@ -52,16 +47,6 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpObservables(with: self.viewModels)
-        self.collectionView.register(ComponentCell.self, forCellWithReuseIdentifier: ComponentCell.identifier)
-
-        // Set up as the UICollectionView's UICollectionViewDelegateFlowLayout,
-        // UICollectionViewDelegate, and UIScrollViewDelegate
-        self.collectionView.delegate = self
-    }
-
-    open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     // MARK: Constraints
@@ -69,7 +54,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
      The top anchor NSLayoutConstraint of the UICollectionView in the root UIView.
     */
     public lazy var topAnchorConstraint: NSLayoutConstraint = {
-        return self.collectionView.topAnchor
+        return self._listView.topAnchor
             .constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0.0)
     }()
 
@@ -77,7 +62,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
      The bottom anchor NSLayoutConstraint of the UICollectionView in the root UIView.
     */
     public lazy var bottomAnchorConstraint: NSLayoutConstraint = {
-        return self.collectionView.bottomAnchor
+        return self._listView.bottomAnchor
             .constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: 0.0)
     }()
 
@@ -85,7 +70,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
      The leading anchor NSLayoutConstraint of the UICollectionView in the root UIView.
     */
     public lazy var leadingAnchorConstraint: NSLayoutConstraint = {
-        return self.collectionView.leadingAnchor
+        return self._listView.leadingAnchor
             .constraint(equalTo: self.view.leadingAnchor, constant: 0.0)
     }()
 
@@ -93,25 +78,26 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
      The trailing anchor NSLayoutConstraint of the UICollectionView in the root UIView.
     */
     public lazy var trailingAnchorConstraint: NSLayoutConstraint = {
-        return self.collectionView.trailingAnchor
+        return self._listView.trailingAnchor
             .constraint(equalTo: self.view.trailingAnchor, constant: 0.0)
     }()
 
     // MARK: Stored Properties
+    internal var _listView: UIView! // swiftlint:disable:this implicitly_unwrapped_optional
+    internal var _size: CGSize = CGSize.zero
+
     /**
      When the collectionView is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
      This Observable emits the nonzero sizes of UICollectionView when it changes. This may not work in some circumstances when this
-     ComponentViewController is inside a custom container UIViewController. If that happens override **width** and use **.exactly**.
+     CollectionComponentViewController is inside a custom container UIViewController. If that happens override **width** and use **.exactly**.
     */
-    internal lazy var _sizeObservable: Observable<CGSize> = self.collectionView.rx
+    internal lazy var _sizeObservable: Observable<CGSize> = self._listView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
         .filter({ (rect: CGRect?) -> Bool in
             return rect?.size != nil && rect?.size != CGSize.zero
         })
         .map({ (rect: CGRect?) -> CGSize in rect!.size })
         .distinctUntilChanged()
-
-    internal var _size: CGSize = CGSize.zero
 
     /**
      The combined state of the ViewModels as a BehviorRelay for debugging purposes.
@@ -125,7 +111,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
 
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
-     */
+    */
     internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
         qos: DispatchQoS.userInitiated,
         internalSerialQueueName: "\(UUID().uuidString)"
@@ -147,20 +133,13 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
     */
     public var currentState: Any { return self.state.value }
 
-    open var size: ComponentViewController.Size { return ComponentViewController.Size.automatic }
+    open var size: Size { return Size.automatic }
 
-    // MARK: Views
-    /**
-     The UICollectionView instance managed by this ComponentViewController instance.
-    */
-    public private(set) lazy var collectionView: UICollectionView = UICollectionView(
-        frame: CGRect.zero,
-        collectionViewLayout: self.createUICollectionViewLayout()
-    )
+    // MARK: Methods
+    internal func setUpListView() -> UIView { fatalError("Override this") }
 
     internal typealias CombinedState = (CGSize, [Any])
 
-    // MARK: Methods
     /**
      Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
 
@@ -194,14 +173,14 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
             on: allObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
-        )
+            )
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
 
-//        if self.viewModels.contains(where: { $0.isDebugMode }) {
-//            throttledStateObservable = throttledStateObservable
-//                .debug("\(type(of: self))", trimOutput: false)
-//        }
+        //        if self.viewModels.contains(where: { $0.isDebugMode }) {
+        //            throttledStateObservable = throttledStateObservable
+        //                .debug("\(type(of: self))", trimOutput: false)
+        //        }
 
         throttledStateObservable = throttledStateObservable.share()
 
@@ -226,18 +205,6 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
     }
 
     /**
-     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this ComponentViewController
-     - Returns:
-        A UICollectionViewLayout instance.
-    */
-    open func createUICollectionViewLayout() -> UICollectionViewLayout {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0.0
-        layout.minimumInteritemSpacing = 0.0
-        return layout
-    }
-
-    /**
      Gets the AnyComponent instance at the specified indexPath.
      - Parameters:
         - indexPath: The IndexPath of the AnyComponent.
@@ -253,36 +220,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
      should react to changes in state. This method is run on the main thread asynchronously.
 
      When overriding, no need to call super because the default implementation does nothing.
-     */
-    open func invalidate() {}
-
-    // MARK: UICollectionViewDelegateFlowLayout Methods
-    open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.deselectItem(at: indexPath, animated: false)
-        guard let component: AnyComponent = self.component(at: indexPath) else { return }
-        guard let selectable = component.identity.base as? Selectable else { return }
-        selectable.onSelect()
-    }
-}
-
-// MARK: - Size Enum
-public extension ComponentViewController {
-
-    /**
-     In cases where ComponentViewController is a childViewController, it is sometimes necessary to have an exact size.
-     This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it
-     should be taken cared of by UIKit.
     */
-    enum Size {
-        /**
-         Size is defined by UIKit automatically. It is calculated by taking the UICollectionView's frame.
-        */
-        case automatic
-
-        /**
-         Size is defined by a constant value.
-        */
-        case exactly(CGSize)
-    }
+    open func invalidate() {}
 
 }

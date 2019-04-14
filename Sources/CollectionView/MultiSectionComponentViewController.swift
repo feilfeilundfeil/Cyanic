@@ -21,7 +21,7 @@ import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
 import struct RxDataSources.AnimatableSectionModel
 
-open class MultiSectionComponentViewController: ComponentViewController {
+open class MultiSectionComponentViewController: CollectionComponentViewController {
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
@@ -62,9 +62,9 @@ open class MultiSectionComponentViewController: ComponentViewController {
             decideViewTransition: { _, _, _ in .animated },
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(
-                    withReuseIdentifier: ComponentCell.identifier,
+                    withReuseIdentifier: CollectionComponentCell.identifier,
                     for: indexPath
-                ) as? ComponentCell
+                ) as? CollectionComponentCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
