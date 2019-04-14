@@ -167,7 +167,7 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
     /**
      Gets the first withState closure if there is one and removes that callback from the withStateQueue.
      - Returns:
-        an optional withState closure
+        An optional withState closure
     */
     mutating func dequeueFirstWithStateCallback() -> ((State) -> Void)? {
         guard !self.withStateQueue.isEmpty else { return nil }
@@ -177,7 +177,7 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
     /**
      Gets all the set callbacks currently in the setQueue and clears the setStateQueue.
      - Returns:
-        all the setState closures currently in the setStateQueue.
+        All the setState closures currently in the setStateQueue.
     */
     mutating func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
         guard !self.setStateQueue.isEmpty else { return [] }

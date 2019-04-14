@@ -29,11 +29,12 @@ open class SingleSectionComponentViewController: ComponentViewController {
         super.viewDidLoad()
 
         // When _components emits a new element, bind the new element to the UICollectionView.
-        self._components.asDriver()
+        self._components
+            .observeOn(self.scheduler)
             .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
                 return [AnimatableSectionModel<String, AnyComponent>(model: "Test", items: components)]
             })
-            .drive(self.collectionView.rx.items(dataSource: self.dataSource))
+            .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
     }
 
@@ -63,6 +64,8 @@ open class SingleSectionComponentViewController: ComponentViewController {
         return component
     }
 
+    internal typealias Element = (CGSize, [Any])
+
     internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
@@ -76,8 +79,8 @@ open class SingleSectionComponentViewController: ComponentViewController {
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s._size = size
-                var controller: ComponentsController = ComponentsController(size: size)
-                s.buildComponents(&controller)
+                let controller: ComponentsController = ComponentsController(size: size)
+                s.buildComponents(controller)
                 return controller.components
             })
             .bind(to: self._components)
@@ -97,7 +100,7 @@ open class SingleSectionComponentViewController: ComponentViewController {
         - componentsController: The ComponentsController that is mutated by this method. It is always
                                 starts as an empty ComponentsController.
      */
-    open func buildComponents(_ componentsController: inout ComponentsController) {}
+    open func buildComponents(_ componentsController: ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -62,7 +62,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
     */
     open var viewModels: [AnyViewModel] { return [] }
 
-    typealias Element = [Any]
+    internal typealias Element = [Any]
 
     // MARK: Methods
     /**

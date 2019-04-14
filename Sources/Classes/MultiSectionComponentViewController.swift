@@ -10,10 +10,12 @@ import class RxCocoa.BehaviorRelay
 import class RxDataSources.CollectionViewSectionedDataSource
 import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
 import class RxSwift.Observable
+import class RxSwift.MainScheduler
 import class UIKit.UICollectionView
 import class UIKit.UICollectionReusableView
 import class UIKit.UICollectionViewCell
 import class UIKit.UICollectionViewLayout
+import enum RxDataSources.ViewTransition
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
@@ -32,8 +34,12 @@ open class MultiSectionComponentViewController: ComponentViewController {
         )
 
         // When _components emits a new element, bind the new element to the UICollectionView.
-        self._sections.asDriver()
-            .map({ (sections: SectionsController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
+        self._sections
+//            .observeOn(self.scheduler)
+//            .subscribeOn(self.scheduler)
+//            .observeOn(MainScheduler.asyncInstance)
+//            .subscribeOn(MainScheduler.asyncInstance)
+            .map({ (sections: MultiSectionController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
                 let models: [AnimatableSectionModel<AnyComponent, AnyComponent>] = sections.sectionControllers
                     .map({ (section: SectionController) -> AnimatableSectionModel<AnyComponent, AnyComponent> in
                         return AnimatableSectionModel<AnyComponent, AnyComponent>(
@@ -43,7 +49,7 @@ open class MultiSectionComponentViewController: ComponentViewController {
                     })
                 return models
             })
-            .drive(self.collectionView.rx.items(dataSource: self.dataSource))
+            .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
     }
 
@@ -51,12 +57,13 @@ open class MultiSectionComponentViewController: ComponentViewController {
     /**
      The SectionController BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
      */
-    internal let _sections: BehaviorRelay<SectionsController> = BehaviorRelay<SectionsController>(
-        value: SectionsController(size: CGSize.zero)
+    internal let _sections: BehaviorRelay<MultiSectionController> = BehaviorRelay<MultiSectionController>(
+        value: MultiSectionController(size: CGSize.zero)
     )
 
     public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> =
         RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+            decideViewTransition: { _, _, _ in .animated },
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(
                     withReuseIdentifier: ComponentCell.identifier,
@@ -97,7 +104,13 @@ open class MultiSectionComponentViewController: ComponentViewController {
         let component: AnyComponent = sectionController.componentsController.components[indexPath.item]
         return component
     }
-
+    /**
+     Gets the SectionController at the specified index.
+     - Parameters:
+        - section: The index of the SectionController.
+     - Returns:
+        A SectionController or nil if the index is out of range.
+    */
     public final func sectionController(at section: Int) -> SectionController? {
         guard section < self._sections.value.sectionControllers.count  else {
             return nil
@@ -106,6 +119,8 @@ open class MultiSectionComponentViewController: ComponentViewController {
         let sectionController: SectionController = self._sections.value.sectionControllers[section]
         return sectionController
     }
+
+    internal typealias Element = (CGSize, [Any])
 
     internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
@@ -117,12 +132,12 @@ open class MultiSectionComponentViewController: ComponentViewController {
         // UICollectionView has problems with fast updates. So, there is no point in
         // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
-            .map({ [weak self] (size: CGSize, _: [Any]) -> SectionsController in
-                guard let s = self else { return SectionsController(size: CGSize.zero) }
+            .map({ [weak self] (size: CGSize, _: [Any]) -> MultiSectionController in
+                guard let s = self else { return MultiSectionController(size: CGSize.zero) }
                 s._size = size
-                var sections: SectionsController = SectionsController(size: size)
-                s.buildSections(&sections)
-                return sections
+                let controller: MultiSectionController = MultiSectionController(size: size)
+                s.buildSections(controller)
+                return controller
             })
             .bind(to: self._sections)
             .disposed(by: self.disposeBag)
@@ -133,25 +148,23 @@ open class MultiSectionComponentViewController: ComponentViewController {
     /**
      Builds the SectionController array.
 
-     This is where you create for logic to add Components to the ComponentsController data structure. This method is
-     called every time the State of your ViewModels change. You can access the State(s) via the global withState methods.
+     This is where you create the logic to add Components to the MultiSectionController data structure. This method is
+     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods.
      - Parameters:
-        - sections: The SectionsController that is mutated by this method. It is always
-                    starts as an empty SectionsController.
+        - sections: The MultiSectionController that is mutated by this method. It always
+                    starts as an empty MultiSectionController.
     */
-    open func buildSections(_ sectionsController: inout SectionsController) {}
+    open func buildSections(_ sectionsController: MultiSectionController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        if self._sections.value.sectionControllers.endIndex <= indexPath.section {
+        if self._sections.value.sectionControllers.count < indexPath.section {
             return CGSize.zero
         }
 
-        guard let component = self.component(at: indexPath)
+        guard let layout = self.component(at: indexPath)?.layout
             else { return CGSize.zero }
-
-        let layout: ComponentLayout = component.layout
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 
@@ -161,14 +174,12 @@ open class MultiSectionComponentViewController: ComponentViewController {
 
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 
-        if self._sections.value.sectionControllers.endIndex <= section {
+        if self._sections.value.sectionControllers.count < section {
             return CGSize.zero
         }
 
-        guard let sectionController = self.sectionController(at: section)
+        guard let layout = self.sectionController(at: section)?.sectionComponent?.layout
             else { return CGSize.zero }
-
-        let layout: ComponentLayout = sectionController.sectionComponent.layout
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 

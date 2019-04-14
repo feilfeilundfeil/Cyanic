@@ -69,7 +69,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
     */
     public lazy var topAnchorConstraint: NSLayoutConstraint = {
         return self.collectionView.topAnchor
-            .constraint(equalTo: self.view.topAnchor, constant: 0.0)
+            .constraint(equalTo: self.topLayoutGuide.bottomAnchor, constant: 0.0)
     }()
 
     /**
@@ -77,7 +77,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
     */
     public lazy var bottomAnchorConstraint: NSLayoutConstraint = {
         return self.collectionView.bottomAnchor
-            .constraint(equalTo: self.view.bottomAnchor, constant: 0.0)
+            .constraint(equalTo: self.bottomLayoutGuide.bottomAnchor, constant: 0.0)
     }()
 
     /**
@@ -189,15 +189,20 @@ open class ComponentViewController: UIViewController, StateObservableBuilder, UI
             filteredSize, combinedStatesObservables
         )
 
-        let throttledStateObservable: Observable<(CGSize, [Any])> = self.setUpThrottleType(
+        var throttledStateObservable: Observable<(CGSize, [Any])> = self.setUpThrottleType(
             on: allObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
-//            .debug("\(type(of: self))", trimOutput: false)
-            .share()
+
+//        if self.viewModels.contains(where: { $0.isDebugMode }) {
+//            throttledStateObservable = throttledStateObservable
+//                .debug("\(type(of: self))", trimOutput: false)
+//        }
+
+        throttledStateObservable = throttledStateObservable.share()
 
         throttledStateObservable
             .map({ (width: CGSize, states: [Any]) -> [Any] in

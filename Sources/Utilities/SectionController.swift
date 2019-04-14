@@ -12,7 +12,7 @@ import struct CoreGraphics.CGSize
 /**
  A SectionController is a helper struct that represents a section and its items in a UICollectionView.
 */
-public struct SectionController {
+public final class SectionController {
 
     // MARK: Initializer
     public init(size: CGSize) {
@@ -51,8 +51,8 @@ public struct SectionController {
         return self.size.height
     }
 
-    public mutating func buildComponents(_ block: (_ componentsController: inout ComponentsController) -> Void) {
-        block(&self.componentsController)
+    public func buildComponents(_ block: (_ componentsController: ComponentsController) -> Void) {
+        block(self.componentsController)
     }
 
 }

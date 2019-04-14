@@ -22,6 +22,7 @@ public final class AnyViewModel {
     public init<ConcreteState: State, ConcreteViewModel: ViewModel<ConcreteState>>(_ viewModel: ConcreteViewModel) {
         self.viewModel = viewModel
         self.state = viewModel.state.map({ (state: ConcreteState) -> Any in state as Any })
+        self.isDebugMode = viewModel.isDebugMode
     }
 
     /**
@@ -33,5 +34,10 @@ public final class AnyViewModel {
      The ViewModel's State as an Observable<Any>
     */
     public let state: Observable<Any>
+
+    /**
+     The debug mode of the underlying ViewModel instance
+    */
+    public let isDebugMode: Bool
 
 }

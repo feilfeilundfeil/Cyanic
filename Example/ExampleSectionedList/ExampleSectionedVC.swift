@@ -38,22 +38,18 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
         return layout
     }
 
-    public override func buildSections(_ sectionsController: inout SectionsController) {
+    public override func buildSections(_ sectionsController: MultiSectionController) {
 
         withState(of: self.viewModel) { (state: ExampleSectionedState) -> Void in
 
-            let randomColor: () -> UIColor = {
-                return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
-            }
-
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+            sectionsController.sectionController(with: { (sectionController: SectionController) -> Void in
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
-                        let id: String = "Shit"
+                        let id: String = "First Section"
                         component.id = id
 
                         component.contentLayout = LabelContentLayout(
-                            text: Text.unattributed("First Section"),
+                            text: Text.unattributed(id),
                             font: UIFont.boldSystemFont(ofSize: 17.0),
                             alignment: Alignment.centerLeading,
                             style: AlacrityStyle<UILabel>{ (view: UILabel) -> Void in
@@ -61,38 +57,33 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
                             }
                         )
                         component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 5.0)
-                        component.backgroundColor = UIColor.green
-                        component.isExpanded = state.expandableDict[id] ?? false
-                        component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                        component.backgroundColor = UIColor.lightGray
+                        component.isExpanded = state.expandableDict[id] == true
+                        component.setExpandableState =  { (id: String, isExpanded: Bool) -> Void in
                             self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
 
-//                            self.viewModel.withState(block: { (latestState: ExampleSectionedState) -> Void in
-//                                DispatchQueue.main.async {
-//                                    if latestState.expandableDict.values.allSatisfy({ $0 == false }) {
-//                                        self.collectionView.reloadData()
-//                                    } else {
-//                                        let indexPath = IndexPath(item: 1, section: 0)
-//                                        if let attributes =  self.collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
-//
-//                                            let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top)
-//                                            self.collectionView.setContentOffset(topOfHeader, animated:true)
-//                                        }
-//                                    }
-//                                }
-//                            })
+                            if state.expandableDict[id] == true {
+                                if let attributes = self.collectionView.layoutAttributesForSupplementaryElement(
+                                    ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) {
+                                    self.collectionView.setContentOffset(
+                                        CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top),
+                                        animated: true
+                                    )
+                                }
+                            }
                         }
                     }
                 )
 
                 if expandableComponent.isExpanded {
 
-                    sectionController.buildComponents({ (components: inout  ComponentsController) -> Void in
+                    sectionController.buildComponents({ (components:  ComponentsController) -> Void in
                         state.strings.enumerated().forEach { (offset: Int, value: String) -> Void in
                             components.staticTextComponent(configuration: { (component: inout StaticTextComponent) -> Void in
                                 component.id = "First \(offset.description)"
                                 component.text = Text.unattributed(value)
                                 component.font = UIFont.systemFont(ofSize: 17.0)
-                                component.backgroundColor = randomColor()
+                                component.backgroundColor = .white
                                 component.insets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
                             })
                         }
@@ -100,14 +91,14 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
                 }
             })
 
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+            sectionsController.sectionController(with: { (sectionController: SectionController) -> Void in
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
-                        let id: String = "Fuck"
+                        let id: String = "Second Section"
                         component.id = id
 
                         component.contentLayout = LabelContentLayout(
-                            text: Text.unattributed("Second Section"),
+                            text: Text.unattributed(id),
                             font: UIFont.boldSystemFont(ofSize: 17.0),
                             alignment: Alignment.centerLeading,
                             style: AlacrityStyle<UILabel>{ (view: UILabel) -> Void in
@@ -115,61 +106,38 @@ public final class ExampleSectionedVC: MultiSectionComponentViewController {
                             }
                         )
                         component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 5.0)
-                        component.backgroundColor = UIColor.blue
-                        component.isExpanded = state.expandableDict[id] ?? false
-                        component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                        component.backgroundColor = UIColor.lightGray
+                        component.isExpanded = state.expandableDict[id] == true
+                        component.setExpandableState = { (id, isExpanded) in
                             self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
 
-//                            self.viewModel.withState(block: { (latestState: ExampleSectionedState) -> Void in
-//                                DispatchQueue.main.async {
-//                                    if latestState.expandableDict.values.allSatisfy({ $0 == false }) {
-//                                        self.collectionView.reloadData()
-//                                    } else {
-//                                        let indexPath = IndexPath(item: 1, section: 1)
-//                                        if let attributes =  self.collectionView.layoutAttributesForSupplementaryElement(ofKind: UICollectionView.elementKindSectionHeader, at: indexPath) {
-//
-//                                            let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top)
-//                                            self.collectionView.setContentOffset(topOfHeader, animated:true)
-//                                        }
-//                                    }
-//                                }
-//                            })
+                            if state.expandableDict[id] == true {
+                                if let attributes = self.collectionView.layoutAttributesForSupplementaryElement(
+                                    ofKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 1)) {
+                                    self.collectionView.setContentOffset(
+                                        CGPoint(x: 0, y: attributes.frame.origin.y - self.collectionView.contentInset.top),
+                                        animated: true
+                                    )
+                                }
+                            }
                         }
                     }
                 )
 
                 if expandableComponent.isExpanded {
 
-                    sectionController.buildComponents({ (components: inout  ComponentsController) -> Void in
+                    sectionController.buildComponents({ (components:  ComponentsController) -> Void in
                         state.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
                             components.staticTextComponent(configuration: { (component: inout StaticTextComponent) -> Void in
                                 component.id = "Second \(offset.description)"
                                 component.text = Text.unattributed(value)
                                 component.font = UIFont.systemFont(ofSize: 17.0)
-                                component.backgroundColor = randomColor()
+                                component.backgroundColor = .white
                                 component.insets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
                             })
                         }
                     })
                 }
-            })
-
-            let height: CGFloat
-
-            if state.expandableDict.values.allSatisfy({ $0 == false }) {
-                height = sectionsController.size.height - 44.0 * sectionsController.sectionControllers.count.kio.cgFloatValue
-            } else if state.expandableDict.values.contains(false) {
-                height = sectionsController.size.height - 44.0 * (sectionsController.sectionControllers.count - 1).kio.cgFloatValue
-            } else {
-                height = 0.0
-            }
-
-            sectionsController.sectionController(with: { section in
-                section.staticSpacingComponent(configuration: { component in
-                    component.id = "sdasda"
-                    component.height = height - 64.0
-                    component.backgroundColor = .red
-                })
             })
         }
     }

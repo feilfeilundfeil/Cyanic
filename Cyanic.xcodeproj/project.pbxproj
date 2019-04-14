@@ -46,7 +46,7 @@
 		149804972260ACA20044194C /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804962260ACA20044194C /* ComponentViewController.swift */; };
 		149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804982260C2070044194C /* ComponentSupplementaryView.swift */; };
 		1498049C2260CE030044194C /* ExampleSectionedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049B2260CE030044194C /* ExampleSectionedVC.swift */; };
-		1498049E2260D8340044194C /* SectionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049D2260D8340044194C /* SectionsController.swift */; };
+		1498049E2260D8340044194C /* MultiSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049D2260D8340044194C /* MultiSectionController.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
 		14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16528225C68F50031517C /* TextFieldComponentType.swift */; };
 		14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A1652A225C69050031517C /* TextFieldComponent.swift */; };
@@ -177,7 +177,7 @@
 		149804962260ACA20044194C /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
 		149804982260C2070044194C /* ComponentSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentSupplementaryView.swift; sourceTree = "<group>"; };
 		1498049B2260CE030044194C /* ExampleSectionedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSectionedVC.swift; sourceTree = "<group>"; };
-		1498049D2260D8340044194C /* SectionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsController.swift; sourceTree = "<group>"; };
+		1498049D2260D8340044194C /* MultiSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionController.swift; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsController.swift; sourceTree = "<group>"; };
 		14A16528225C68F50031517C /* TextFieldComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentType.swift; sourceTree = "<group>"; };
 		14A1652A225C69050031517C /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				142C4520223BB36C002360F5 /* GlobalFunctions.swift */,
-				1498049D2260D8340044194C /* SectionsController.swift */,
+				1498049D2260D8340044194C /* MultiSectionController.swift */,
 				1498048F22608F8C0044194C /* SectionController.swift */,
 				149D5B8E221B33A100482F28 /* ComponentsController.swift */,
 				14C96F072211C30F00731265 /* Constants.swift */,
@@ -954,7 +954,7 @@
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
-				1498049E2260D8340044194C /* SectionsController.swift in Sources */,
+				1498049E2260D8340044194C /* MultiSectionController.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */,

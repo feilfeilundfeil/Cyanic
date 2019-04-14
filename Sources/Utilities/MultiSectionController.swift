@@ -1,5 +1,5 @@
 //
-//  SectionsController.swift
+//  MultiSectionController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/12/19.
@@ -9,7 +9,7 @@
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
-public struct SectionsController {
+public final class MultiSectionController {
 
         // MARK: Initializer
     public init(size: CGSize) {
@@ -52,9 +52,9 @@ public struct SectionsController {
         SectionController
     */
     @discardableResult
-    public mutating func sectionController(with configuration: (_ sectionController: inout SectionController) -> Void) -> SectionController {
-        var sectionController: SectionController = SectionController(size: self.size)
-        configuration(&sectionController)
+    public func sectionController(with configuration: (_ sectionController: SectionController) -> Void) -> SectionController {
+        let sectionController: SectionController = SectionController(size: self.size)
+        configuration(sectionController)
         self.sectionControllers.append(sectionController)
         return sectionController
     }

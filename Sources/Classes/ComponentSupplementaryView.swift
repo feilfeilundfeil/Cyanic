@@ -79,7 +79,7 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
         // Get the rect of the contentView in the main thread.
         let bounds: CGRect = self.bounds
 
-//        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { () -> Void in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { () -> Void in
             guard let layout = self.layout else { return }
 
             // Do the size calculation in a background thread
@@ -92,10 +92,10 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
                 .arrangement(within: bounds)
 
             // Size and place the subviews on the main thread
-//            DispatchQueue.main.async(execute: { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 arrangement.makeViews(in: self)
-//            })
-//        })
+            })
+        })
     }
 
     public override final func sizeThatFits(_ size: CGSize) -> CGSize {
