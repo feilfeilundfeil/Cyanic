@@ -14,8 +14,8 @@ import struct Foundation.IndexPath
 
 /**
  TableComponentViewController is a subclass of AbstractComponentViewController. It serves as the base class for the
- TableSingleSectionViewController and MultiSectionTableComponentViewController, therefore it contains the logic and implementations
- shared between the two subclasses.
+ TableSingleSectionViewController and MultiSectionTableComponentViewController, therefore it contains the logic
+ and implementations shared between the two subclasses.
 */
 open class TableComponentViewController: ComponentViewController, UITableViewDelegate {
 
@@ -34,7 +34,7 @@ open class TableComponentViewController: ComponentViewController, UITableViewDel
     // MARK: Views
     /**
      The UITableView instance managed by this CollectionComponentViewController instance.
-     */
+    */
     public var tableView: UITableView {
         return self._listView as! UITableView // swiftlint:disable:this force_cast
     }

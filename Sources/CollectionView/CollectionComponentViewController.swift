@@ -33,7 +33,8 @@ import struct RxSwift.RxTimeInterval
 /**
  CollectionComponentViewController is the base class of UIViewControllers that use a UICollectionView to leverage
  Cyanic's state-driven UI functionality. It contains all the implementation necessary for subclasses to function with
- a UICollectionView. CollectionComponentViewController serves as a UICollectionViewDelegateFlowLayout and UICollectionViewDataSource.
+ a UICollectionView. CollectionComponentViewController serves as a UICollectionViewDelegateFlowLayout and
+ UICollectionViewDataSource.
 */
 open class CollectionComponentViewController: ComponentViewController, UICollectionViewDelegateFlowLayout {
 

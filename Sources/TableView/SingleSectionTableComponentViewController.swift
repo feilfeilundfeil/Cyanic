@@ -20,7 +20,7 @@ import struct RxDataSources.AnimatableSectionModel
  SingleSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView
  with one section. It has most of the boilerplate needed to have a reactive UITableView
  with a single section. It responds to new elements emitted by its ViewModel(s) State(s).
- */
+*/
 open class SingleSectionTableComponentViewController: TableComponentViewController { // swiftlint:disable:this type_name
 
     // MARK: Overridden UIViewController Lifecycle Methods
@@ -44,15 +44,15 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
     /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this relay, the UICollectionView performs a batch
      update based on the diffing produced by RxDataSources.
-     */
+    */
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
     // MARK: Methods
     /**
      Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
      - Returns:
-     A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
-     */
+        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
+    */
     open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
         return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
@@ -106,9 +106,9 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
      or a ViewModel's withState instance method.
 
      - Parameters:
-     - componentsController: The ComponentsController that is mutated by this method. It is always
-     starts as an empty ComponentsController.
-     */
+        - componentsController: The ComponentsController that is mutated by this method. It is always
+                                starts as an empty ComponentsController.
+    */
     open func buildComponents(_ componentsController: ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods

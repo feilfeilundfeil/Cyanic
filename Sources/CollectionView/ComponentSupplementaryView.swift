@@ -120,8 +120,8 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
     }
 
     /**
-     Reads the layout from the AnyComponent instance to create the subviews in this ComponentSupplementaryView instance. This also
-     sets its frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
+     Reads the layout from the AnyComponent instance to create the subviews in this ComponentSupplementaryView instance.
+     This also sets its frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
      - Parameters:
         - component: The AnyComponent instance that represents this ComponentSupplementaryView.
     */

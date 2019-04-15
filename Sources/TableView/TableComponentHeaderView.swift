@@ -30,7 +30,7 @@ public final class TableComponentHeaderView: UIView {
     // MARK: Class Properties
     /**
      The String identifier used by the TableComponentHeaderView.
-     */
+    */
     public class var identifier: String {
         return String(describing: Mirror(reflecting: self).subjectType)
     }
@@ -106,11 +106,11 @@ public final class TableComponentHeaderView: UIView {
     }
 
     /**
-     Reads the layout from the AnyComponent instance to create the subviews in this TableComponentHeaderView instance. This also
-     sets the frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
+     Reads the layout from the AnyComponent instance to create the subviews in this TableComponentHeaderView instance. T
+     his also sets the frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
      - Parameters:
-     - component: The AnyComponent instance that represents this TableComponentHeaderView.
-     */
+        - component: The AnyComponent instance that represents this TableComponentHeaderView.
+    */
     public func configure(with component: AnyComponent) {
         self.layout = component.layout
         self.frame.size = self.intrinsicContentSize

@@ -12,13 +12,13 @@ import struct Foundation.IndexPath
 
 /**
  The default behavior for UICollectionViewFlowLayout when its UICollectionView updates its cell  is to show a "flash",
- sometimes this behaviour is acceptable and other times it isn't. This UICollectionViewFlowLayout will keep the alpha of updated
- UICollectionViewCells therefore eliminating the "flash".
+ sometimes this behaviour is acceptable and other times it isn't. This UICollectionViewFlowLayout will keep the alpha
+ of updated UICollectionViewCells therefore eliminating the "flash".
 
  **Caveats**
 
- This shouldn't be used with the ExpandableComponent or any SingleSectionComponentViewController where the elements are changing. It makes
- the animation look broken
+ This shouldn't be used with the ExpandableComponent or any SingleSectionComponentViewController where the elements
+ are changing. It makes the animation look broken
  */
 open class CyanicNoFadeFlowLayout: UICollectionViewFlowLayout {
 

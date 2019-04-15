@@ -115,6 +115,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         let component: AnyComponent = sectionController.componentsController.components[indexPath.item]
         return component
     }
+
     /**
      Gets the SectionController at the specified index.
      - Parameters:
@@ -160,8 +161,8 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
      Builds the MultiSectionController.
 
      This is where you create the logic to add Components to the MultiSectionController data structure. This method is
-     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods or
-     a ViewModel's withState instance method.
+     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState
+     methods or a ViewModel's withState instance method.
      - Parameters:
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.
