@@ -33,20 +33,20 @@ public final class SectionController {
 
     /**
      The components for this section of the UICollectionView.
-     */
+    */
     public private(set) var componentsController: ComponentsController
 
     // MARK: Computed Properties
     /**
      The width of the UICollectionView where the components will be displayed.
-     */
+    */
     public var width: CGFloat {
         return self.size.width
     }
 
     /**
      The height of the UICollectionView where the components will be displayed.
-     */
+    */
     public var height: CGFloat {
         return self.size.height
     }

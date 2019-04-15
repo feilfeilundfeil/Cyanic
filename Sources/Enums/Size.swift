@@ -21,6 +21,6 @@ public enum Size {
 
     /**
      Size is defined by a constant value.
-     */
+    */
     case exactly(CGSize)
 }

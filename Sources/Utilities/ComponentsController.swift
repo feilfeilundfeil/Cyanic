@@ -72,7 +72,7 @@ public final class ComponentsController {
      Adds Components of the same type to the array. Variadic version of the method.
      - Parameters:
         - components: The Component instances to be added to the components array.
-     */
+    */
     public func add<Components: Component>(_ components: Components...) {
         self.components.append(contentsOf: components.map({ $0.asAnyComponent}))
     }

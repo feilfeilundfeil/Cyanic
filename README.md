@@ -60,7 +60,7 @@ class YourViewModel: ViewModel<YourState> {
     }
 }
 
-class YourComponentViewController: ComponentViewController {
+class YourComponentViewController: SingleSectionCollectionComponentViewController {
     
     private let viewModel: YourViewModel = YourViewModel(initialState: YourState.default)
     

@@ -11,7 +11,7 @@ import struct CoreGraphics.CGSize
 
 public final class MultiSectionController {
 
-        // MARK: Initializer
+    // MARK: Initializer
     public init(size: CGSize) {
         self.size = size
     }
@@ -19,12 +19,12 @@ public final class MultiSectionController {
     // MARK: Stored Properties
     /**
      The CGSize of the UICollectionView where the components will be displayed.
-     */
+    */
     public let size: CGSize
 
     /**
      The SectionControllers representing the sections in the UICollectionView.
-     */
+    */
     public private(set) var sectionControllers: [SectionController] = []
 
     // MARK: Computed Properties
