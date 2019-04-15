@@ -13,7 +13,7 @@ public extension ComponentsController {
             ButtonComponent
     */
     @discardableResult
-    func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
+    mutating func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
         var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -33,7 +33,7 @@ public extension ComponentsController {
             ChildVCComponent
     */
     @discardableResult
-    func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
+    mutating func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
         var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -55,7 +55,7 @@ public extension ComponentsController {
             ExpandableComponent
     */
     @discardableResult
-    func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
+    mutating func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
         var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -77,7 +77,7 @@ public extension ComponentsController {
             StaticSpacingComponent
     */
     @discardableResult
-    func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
+    mutating func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
         var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -97,7 +97,7 @@ public extension ComponentsController {
             StaticTextComponent
     */
     @discardableResult
-    func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
+    mutating func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
         var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -117,7 +117,7 @@ public extension ComponentsController {
             TextFieldComponent
     */
     @discardableResult
-    func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
+    mutating func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
         var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -140,7 +140,7 @@ public extension SectionController {
             ButtonComponent
     */
     @discardableResult
-    func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
+    mutating func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
         var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -160,7 +160,7 @@ public extension SectionController {
             ChildVCComponent
     */
     @discardableResult
-    func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
+    mutating func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
         var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -182,7 +182,7 @@ public extension SectionController {
             ExpandableComponent
     */
     @discardableResult
-    func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
+    mutating func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
         var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -204,7 +204,7 @@ public extension SectionController {
             StaticSpacingComponent
     */
     @discardableResult
-    func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
+    mutating func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
         var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -224,7 +224,7 @@ public extension SectionController {
             StaticTextComponent
     */
     @discardableResult
-    func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
+    mutating func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
         var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -244,7 +244,7 @@ public extension SectionController {
             TextFieldComponent
     */
     @discardableResult
-    func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
+    mutating func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
         var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width

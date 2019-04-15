@@ -12,7 +12,7 @@ import struct CoreGraphics.CGSize
 /**
  A SectionController is a helper struct that represents a section and its items in a UICollectionView.
 */
-public final class SectionController {
+public struct SectionController {
 
     // MARK: Initializer
     public init(size: CGSize) {

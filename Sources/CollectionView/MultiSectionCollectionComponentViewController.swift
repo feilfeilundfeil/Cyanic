@@ -147,8 +147,8 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             .map({ [weak self] (size: CGSize, _: [Any]) -> MultiSectionController in
                 guard let s = self else { return MultiSectionController(size: CGSize.zero) }
                 s._size = size
-                let controller: MultiSectionController = MultiSectionController(size: size)
-                s.buildSections(controller)
+                var controller: MultiSectionController = MultiSectionController(size: size)
+                s.buildSections(&controller)
                 return controller
             })
             .bind(to: self._sections)
@@ -167,7 +167,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.
     */
-    open func buildSections(_ sectionsController: MultiSectionController) {}
+    open func buildSections(_ sectionsController: inout MultiSectionController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

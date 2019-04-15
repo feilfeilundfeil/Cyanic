@@ -13,7 +13,7 @@ import struct CoreGraphics.CGSize
  ComponentsController is a helper struct that transforms Component instances into AnyComponent instances and
  adds it to an array.
 */
-public final class ComponentsController {
+public struct ComponentsController {
 
     /**
      Initializer.
@@ -55,7 +55,7 @@ public final class ComponentsController {
      - Parameters:
         - component: The Component instance to be added to the components array.
     */
-    public func add<C: Component>(_ component: C) {
+    public mutating func add<C: Component>(_ component: C) {
         self.components.append(component.asAnyComponent)
     }
 
@@ -64,7 +64,7 @@ public final class ComponentsController {
      - Parameters:
         - components: The Component instances to be added to the components array.
     */
-    public func add<Components: Sequence, C: Component>(_ components: Components) where Components.Element == C {
+    public mutating func add<Components: Sequence, C: Component>(_ components: Components) where Components.Element == C {
         self.components.append(contentsOf: components.map({ $0.asAnyComponent}))
     }
 
@@ -73,7 +73,7 @@ public final class ComponentsController {
      - Parameters:
         - components: The Component instances to be added to the components array.
     */
-    public func add<Components: Component>(_ components: Components...) {
+    public mutating func add<Components: Component>(_ components: Components...) {
         self.components.append(contentsOf: components.map({ $0.asAnyComponent}))
     }
 

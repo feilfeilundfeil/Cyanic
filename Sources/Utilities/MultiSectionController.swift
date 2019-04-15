@@ -9,7 +9,7 @@
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
-public final class MultiSectionController {
+public struct MultiSectionController {
 
     // MARK: Initializer
     public init(size: CGSize) {
@@ -52,7 +52,7 @@ public final class MultiSectionController {
         SectionController
     */
     @discardableResult
-    public func sectionController(with configuration: (_ sectionController: SectionController) -> Void) -> SectionController {
+    public mutating func sectionController(with configuration: (_ sectionController: SectionController) -> Void) -> SectionController {
         let sectionController: SectionController = SectionController(size: self.size)
         configuration(sectionController)
         self.sectionControllers.append(sectionController)

@@ -81,7 +81,7 @@ class ComponentViewControllerTests: QuickSpec {
             self.invalidateCount += 1
         }
 
-        override func buildComponents(_ componentsController: ComponentsController) {
+        override func buildComponents(_ componentsController: inout ComponentsController) {
             self.buildComponentsCount += 1
             withState(
                 viewModel1: self.viewModelOne,

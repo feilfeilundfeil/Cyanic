@@ -90,8 +90,8 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s._size = size
-                let controller: ComponentsController = ComponentsController(size: size)
-                s.buildComponents(controller)
+                var controller: ComponentsController = ComponentsController(size: size)
+                s.buildComponents(&controller)
                 return controller.components
             })
             .bind(to: self._components)
@@ -111,7 +111,7 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         - componentsController: The ComponentsController that is mutated by this method. It is always
                                 starts as an empty ComponentsController.
     */
-    open func buildComponents(_ componentsController: ComponentsController) {}
+    open func buildComponents(_ componentsController: inout ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

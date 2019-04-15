@@ -88,8 +88,8 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s._size = size
-                let controller: ComponentsController = ComponentsController(size: size)
-                s.buildComponents(controller)
+                var controller: ComponentsController = ComponentsController(size: size)
+                s.buildComponents(&controller)
                 return controller.components
             })
             .bind(to: self._components)
@@ -109,7 +109,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
         - componentsController: The ComponentsController that is mutated by this method. It is always
                                 starts as an empty ComponentsController.
     */
-    open func buildComponents(_ componentsController: ComponentsController) {}
+    open func buildComponents(_ componentsController: inout ComponentsController) {}
 
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
