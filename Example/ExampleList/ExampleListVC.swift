@@ -14,7 +14,7 @@ import RxCocoa
 import RxSwift
 import SideMenu
 
-public final class ExampleListVC: SingleSectionComponentViewController {
+public final class ExampleListVC: SingleSectionCollectionComponentViewController {
 
     // MARK: Initializer
     public init(viewModel: ExampleListViewModel) {

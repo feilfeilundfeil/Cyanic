@@ -22,6 +22,9 @@ import struct Dispatch.DispatchQoS
 import struct LayoutKit.LayoutArrangement
 import struct LayoutKit.LayoutMeasurement
 
+/**
+ TableComponentHeaderView serves as the root UIView for any section UIView for UITableViews.
+*/
 public final class TableComponentHeaderView: UIView {
 
     // MARK: Class Properties
@@ -44,10 +47,22 @@ public final class TableComponentHeaderView: UIView {
     // MARK: Stored Properties
     /**
      The current ComponentLayout instance that creates and arranges the subviews in this TableComponentHeaderView.
-     */
+    */
     private var layout: ComponentLayout?
+
+    /**
+     The UITapGestureRecognizer instance that handles user tap gestures, if there is one.
+    */
     private var tap: UITapGestureRecognizer?
+
+    /**
+     The DisposeBag that manages Rx-related subscriptions.
+    */
     private let disposeBag: DisposeBag = DisposeBag()
+
+    /**
+     The SerialDisposable that ensures there is only one subscription at a time for the UITapGestureRecognizer.
+    */
     private let serialDisposable: SerialDisposable = SerialDisposable()
 
     // MARK: Overridden Properties

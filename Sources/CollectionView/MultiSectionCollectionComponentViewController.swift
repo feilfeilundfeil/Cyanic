@@ -1,5 +1,5 @@
 //
-//  MultiSectionComponentViewController.swift
+//  MultiSectionCollectionComponentViewController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/12/19.
@@ -21,12 +21,17 @@ import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
 import struct RxDataSources.AnimatableSectionModel
 
-open class MultiSectionComponentViewController: CollectionComponentViewController {
+/**
+ MultiSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView
+ with one or more sections that is displayed with supplementary views. It has most of the boilerplate needed to have a
+ reactive UICollectionView with a multiple sections. It responds to new elements emitted by its  ViewModel(s) State(s).
+*/
+open class MultiSectionCollectionComponentViewController: CollectionComponentViewController { // swiftlint:disable:this type_name
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.dataSource = self.setUpDataSource()
         self.collectionView.register(
             ComponentSupplementaryView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -51,20 +56,29 @@ open class MultiSectionComponentViewController: CollectionComponentViewControlle
 
     // MARK: Stored Properties
     /**
-     The SectionController BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
-     */
+     The SectionController BehaviorRelay. Every time a new element is emitted by this relay, the UICollectionView is performs a
+     batch update based on the diffing produced by RxDataSources.
+    */
     internal let _sections: BehaviorRelay<MultiSectionController> = BehaviorRelay<MultiSectionController>(
         value: MultiSectionController(size: CGSize.zero)
     )
 
-    public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> =
-        RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
+
+    // MARK: Methods
+    /**
+     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
+     - Returns:
+        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
+    */
+    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
+        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
             decideViewTransition: { _, _, _ in .animated },
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(
                     withReuseIdentifier: CollectionComponentCell.identifier,
                     for: indexPath
-                ) as? CollectionComponentCell
+                    ) as? CollectionComponentCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
@@ -77,7 +91,7 @@ open class MultiSectionComponentViewController: CollectionComponentViewControlle
                     ofKind: kind,
                     withReuseIdentifier: ComponentSupplementaryView.identifier,
                     for: indexPath
-                ) as? ComponentSupplementaryView
+                    ) as? ComponentSupplementaryView
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 print("ID: \(sectionModel.model.id), IndexPath: \(indexPath)")
@@ -88,9 +102,9 @@ open class MultiSectionComponentViewController: CollectionComponentViewControlle
                 return view
             }
         )
+    }
 
-    // MARK: Methods
-    open override func component(at indexPath: IndexPath) -> AnyComponent? {
+    public override final func component(at indexPath: IndexPath) -> AnyComponent? {
         guard let sectionController = self.sectionController(at: indexPath.section)
             else { return nil }
 
@@ -142,10 +156,11 @@ open class MultiSectionComponentViewController: CollectionComponentViewControlle
     }
 
     /**
-     Builds the SectionController array.
+     Builds the MultiSectionController.
 
      This is where you create the logic to add Components to the MultiSectionController data structure. This method is
-     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods.
+     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods or
+     a ViewModel's withState instance method.
      - Parameters:
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.

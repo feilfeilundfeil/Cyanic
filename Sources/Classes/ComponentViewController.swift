@@ -1,5 +1,5 @@
 //
-//  AbstractComponentViewController.swift
+//  ComponentViewController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/14/19.
@@ -22,13 +22,13 @@ import struct Foundation.UUID
 import struct RxCocoa.KeyValueObservingOptions
 
 /**
- AbstractComponentViewController contains all the logic that is shared between the CollectionComponentView and
+ ComponentViewController contains all the logic that is shared between the CollectionComponentViewController and
  TableComponentViewController.
 
  Most of the logic sets up the UITablview / UICollectionView constraints and setting up the combined State observable.
  This class also contains the necessary properties and methods shared by both subclasses.
 */
-open class AbstractComponentViewController: UIViewController, StateObservableBuilder {
+open class ComponentViewController: UIViewController, StateObservableBuilder {
 
     open override func loadView() {
         self.view = UIView()
@@ -51,7 +51,7 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
 
     // MARK: Constraints
     /**
-     The top anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+     The top anchor NSLayoutConstraint of the UICollectionView/UITableView in the root UIView.
     */
     public lazy var topAnchorConstraint: NSLayoutConstraint = {
         return self._listView.topAnchor
@@ -59,7 +59,7 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
     }()
 
     /**
-     The bottom anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+     The bottom anchor NSLayoutConstraint of the UICollectionView/UITableView in the root UIView.
     */
     public lazy var bottomAnchorConstraint: NSLayoutConstraint = {
         return self._listView.bottomAnchor
@@ -67,7 +67,7 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
     }()
 
     /**
-     The leading anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+     The leading anchor NSLayoutConstraint of the UICollectionView/UITableView in the root UIView.
     */
     public lazy var leadingAnchorConstraint: NSLayoutConstraint = {
         return self._listView.leadingAnchor
@@ -75,7 +75,7 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
     }()
 
     /**
-     The trailing anchor NSLayoutConstraint of the UICollectionView in the root UIView.
+     The trailing anchor NSLayoutConstraint of the UICollectionView/UITableView in the root UIView.
     */
     public lazy var trailingAnchorConstraint: NSLayoutConstraint = {
         return self._listView.trailingAnchor
@@ -83,7 +83,14 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
     }()
 
     // MARK: Stored Properties
+    /**
+     This UIView should either be a UICollectionView or UITableView instance, depending on the subclass used.
+    */
     internal var _listView: UIView! // swiftlint:disable:this implicitly_unwrapped_optional
+
+    /**
+     The CGSize of this UIViewController.
+    */
     internal var _size: CGSize = CGSize.zero
 
     /**
@@ -100,7 +107,7 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
         .distinctUntilChanged()
 
     /**
-     The combined state of the ViewModels as a BehviorRelay for debugging purposes.
+     The combined States of the ViewModels as a BehviorRelay for debugging purposes.
     */
     internal let state: BehaviorRelay<[Any]> = BehaviorRelay<[Any]>(value: [()])
 
@@ -119,24 +126,36 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
 
     // MARK: Computed Properties
     /**
-     The ViewModels whose State is observed by this CyanicViewController.
+     The ViewModels whose States is observed by this ComponentViewController.
     */
     open var viewModels: [AnyViewModel] { return [] }
 
     /**
-     Limits the frequency of state updates.
+     Limits the frequency of state updates. There are some cases where this is necessary.
     */
     open var throttleType: ThrottleType { return ThrottleType.none }
 
     /**
-     The current state of the ViewModels from the state BehaviorRelay.
+     The current States of the ViewModels from the state BehaviorRelay.
     */
     public var currentState: Any { return self.state.value }
 
+    /**
+     In cases where ComponentViewController is a childViewController, it is sometimes necessary to have an exact size.
+     This enum allows the the programmer to specify if there's an exact size for the ComponentViewController or if it
+     should be taken cared of by UIKit.
+
+     Most of the time, you don't need to override this.
+    */
     open var size: Size { return Size.automatic }
 
     // MARK: Methods
-    internal func setUpListView() -> UIView { fatalError("Override this") }
+    /**
+     Creates the UICollectionView or UITableView.
+     - Returns:
+        - This method should reutrn either a UICollectionView or UITableView.
+    */
+    open func setUpListView() -> UIView { fatalError("Override this") }
 
     internal typealias CombinedState = (CGSize, [Any])
 
@@ -209,14 +228,14 @@ open class AbstractComponentViewController: UIViewController, StateObservableBui
      - Parameters:
         - indexPath: The IndexPath of the AnyComponent.
      - Returns:
-        The AnyComponent instance at the IndexPath.
+        The AnyComponent instance at the IndexPath, if there is one.
     */
     open func component(at indexPath: IndexPath) -> AnyComponent? {
         fatalError("Override this!")
     }
 
     /**
-     When the State of the ViewModel changes, invalidate is called, therefore, you should place logic here that
+     When the State of a ViewModel changes, invalidate is called, therefore, you should place logic here that
      should react to changes in state. This method is run on the main thread asynchronously.
 
      When overriding, no need to call super because the default implementation does nothing.

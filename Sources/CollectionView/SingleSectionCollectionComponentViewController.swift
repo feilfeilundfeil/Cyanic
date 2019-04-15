@@ -1,5 +1,5 @@
 //
-//  SingleSectionComponentViewController.swift
+//  SingleSectionCollectionComponentViewController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 2/7/19.
@@ -18,15 +18,17 @@ import struct Foundation.IndexPath
 import struct RxDataSources.AnimatableSectionModel
 
 /**
- SingleSectionComponentViewController is a UIViewController with a UICollectionView managed by RxDataSources. It has most of the
- boilerplate needed to have a reactive UICollectionView. It responds to new elements emitted by its ViewModel's state.
- SingleSectionComponentViewController is the delegate of the UICollectionView and serves as the UICollectionViewDataSource as well.
+ SingleSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView
+ with one section. It does NOT display a supplementary view, if you need to display a supplementary view, you should
+ use MultiSectionCollectionComponentViewController. It has most of the boilerplate needed to have a reactive UICollectionView
+ with a single section. It responds to new elements emitted by its ViewModel(s) State(s).
 */
-open class SingleSectionComponentViewController: CollectionComponentViewController {
+open class SingleSectionCollectionComponentViewController: CollectionComponentViewController { // swiftlint:disable:this type_name
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
+        self.dataSource = self.setUpDataSource()
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components
@@ -39,25 +41,35 @@ open class SingleSectionComponentViewController: CollectionComponentViewControll
 
     // MARK: Stored Properties
     // swiftlint:disable:next line_length
-    public let dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> = RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-        configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-            guard let cell = cv.dequeueReusableCell(
-                withReuseIdentifier: CollectionComponentCell.identifier,
-                for: indexPath
-            ) as? CollectionComponentCell
-                else { fatalError("Cell not registered to UICollectionView")}
-
-            cell.configure(with: component)
-            return cell
-        }
-    )
+    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
 
     /**
-     The AnyComponent BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
+     The AnyComponent BehaviorRelay. Every time a new element is emitted by this relay, the UICollectionView performs a batch
+     update based on the diffing produced by RxDataSources.
     */
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
     // MARK: Methods
+    /**
+     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
+     - Returns:
+        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
+    */
+    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
+        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
+            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
+                guard let cell = cv.dequeueReusableCell(
+                    withReuseIdentifier: CollectionComponentCell.identifier,
+                    for: indexPath
+                ) as? CollectionComponentCell
+                    else { fatalError("Cell not registered to UICollectionView")}
+
+                cell.configure(with: component)
+                return cell
+            }
+        )
+    }
+
     open override func component(at indexPath: IndexPath) -> AnyComponent {
         let component: AnyComponent = self._components.value[indexPath.item]
         return component
@@ -89,11 +101,11 @@ open class SingleSectionComponentViewController: CollectionComponentViewControll
     }
 
     /**
-     Builds the AnyComponents array.
+     Builds the ComponentsController.
 
      This is where you create for logic to add Components to the ComponentsController data structure. This method is
-     called every time the State of your ViewModels change. You can access the State(s) via the FFUFComponent enum's
-     static functions.
+     called every time the State of your ViewModels change. You can access the State(s) via the global withState functions
+     or a ViewModel's withState instance method.
 
      - Parameters:
         - componentsController: The ComponentsController that is mutated by this method. It is always

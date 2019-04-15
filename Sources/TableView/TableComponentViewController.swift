@@ -14,9 +14,10 @@ import struct Foundation.IndexPath
 
 /**
  TableComponentViewController is a subclass of AbstractComponentViewController. It serves as the base class for the
- TableSingleSectionViewController and TableMultiSectionViewController.
+ TableSingleSectionViewController and MultiSectionTableComponentViewController, therefore it contains the logic and implementations
+ shared between the two subclasses.
 */
-open class TableComponentViewController: AbstractComponentViewController, UITableViewDelegate {
+open class TableComponentViewController: ComponentViewController, UITableViewDelegate {
 
     // MARK: UIViewController Lifecycle Methods
     open override func viewDidLoad() {
@@ -40,9 +41,12 @@ open class TableComponentViewController: AbstractComponentViewController, UITabl
 
     // MARK: Methods
     /**
-     Instantiates a UITableView instance for use.
+     Instantiates a UITableView instance for use. The default implementation creates a UITableView with a style of
+     UITableView.Style.plain.
+     - Returns:
+        A UITableView instance.
     */
-    internal override func setUpListView() -> UIView {
+    open override func setUpListView() -> UIView {
         return UITableView(
             frame: CGRect.zero,
             style: UITableView.Style.plain

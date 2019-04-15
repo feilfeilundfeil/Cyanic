@@ -34,25 +34,26 @@
 		14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA322635B77007B2AFC /* TableComponentCell.swift */; };
 		14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */; };
 		14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA722635C70007B2AFC /* TableComponentViewController.swift */; };
-		14609BAA22635E06007B2AFC /* TableMultiSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */; };
+		14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */; };
 		14609BAC22636805007B2AFC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAB22636805007B2AFC /* Size.swift */; };
-		14609BAE226378A5007B2AFC /* AbstractComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */; };
+		14609BAE226378A5007B2AFC /* ComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAD226378A5007B2AFC /* ComponentViewController.swift */; };
 		1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E994220C59B9006AF8B3 /* AppDelegate.swift */; };
 		1478E997220C59B9006AF8B3 /* ExampleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleListVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
 		1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */; };
 		1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1478E9B1220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */; };
+		1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift */; };
 		1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */; };
 		1498048E22607A720044194C /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048D22607A720044194C /* ExampleViewModel.swift */; };
 		1498049122608F900044194C /* SectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048F22608F8C0044194C /* SectionController.swift */; };
 		14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14980492226097610044194C /* DataSourceControllers+Cyanic.swift */; };
-		149804952260ABEA0044194C /* MultiSectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */; };
+		149804952260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804942260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift */; };
 		149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804962260ACA20044194C /* CollectionComponentViewController.swift */; };
 		149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149804982260C2070044194C /* ComponentSupplementaryView.swift */; };
 		1498049C2260CE030044194C /* ExampleSectionedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049B2260CE030044194C /* ExampleSectionedVC.swift */; };
 		1498049E2260D8340044194C /* MultiSectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498049D2260D8340044194C /* MultiSectionController.swift */; };
+		149A29DF22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A29DE22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift */; };
 		149D5B8F221B33A100482F28 /* ComponentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149D5B8E221B33A100482F28 /* ComponentsController.swift */; };
 		14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A16528225C68F50031517C /* TextFieldComponentType.swift */; };
 		14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A1652A225C69050031517C /* TextFieldComponent.swift */; };
@@ -160,9 +161,9 @@
 		14609BA322635B77007B2AFC /* TableComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentCell.swift; sourceTree = "<group>"; };
 		14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentHeaderView.swift; sourceTree = "<group>"; };
 		14609BA722635C70007B2AFC /* TableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentViewController.swift; sourceTree = "<group>"; };
-		14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableMultiSectionViewController.swift; sourceTree = "<group>"; };
+		14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionTableComponentViewController.swift; sourceTree = "<group>"; };
 		14609BAB22636805007B2AFC /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
-		14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractComponentViewController.swift; sourceTree = "<group>"; };
+		14609BAD226378A5007B2AFC /* ComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentViewController.swift; sourceTree = "<group>"; };
 		1470FDD5223BCE0C008CDD25 /* Alacrity.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alacrity.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD7223BCE0C008CDD25 /* Differentiator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Differentiator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDD9223BCE0C008CDD25 /* FFUFWidgets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FFUFWidgets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,16 +181,17 @@
 		1478E99B220C59BC006AF8B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1478E99E220C59BC006AF8B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1478E9A0220C59BC006AF8B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionComponentViewController.swift; sourceTree = "<group>"; };
+		1478E9B0220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionCollectionComponentViewController.swift; sourceTree = "<group>"; };
 		1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicNoFadeFlowLayout.swift; sourceTree = "<group>"; };
 		1498048D22607A720044194C /* ExampleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewModel.swift; sourceTree = "<group>"; };
 		1498048F22608F8C0044194C /* SectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionController.swift; sourceTree = "<group>"; };
 		14980492226097610044194C /* DataSourceControllers+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataSourceControllers+Cyanic.swift"; sourceTree = "<group>"; };
-		149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionComponentViewController.swift; sourceTree = "<group>"; };
+		149804942260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionCollectionComponentViewController.swift; sourceTree = "<group>"; };
 		149804962260ACA20044194C /* CollectionComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentViewController.swift; sourceTree = "<group>"; };
 		149804982260C2070044194C /* ComponentSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentSupplementaryView.swift; sourceTree = "<group>"; };
 		1498049B2260CE030044194C /* ExampleSectionedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleSectionedVC.swift; sourceTree = "<group>"; };
 		1498049D2260D8340044194C /* MultiSectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionController.swift; sourceTree = "<group>"; };
+		149A29DE22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSectionTableComponentViewController.swift; sourceTree = "<group>"; };
 		149D5B8E221B33A100482F28 /* ComponentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentsController.swift; sourceTree = "<group>"; };
 		14A16528225C68F50031517C /* TextFieldComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponentType.swift; sourceTree = "<group>"; };
 		14A1652A225C69050031517C /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
@@ -410,8 +412,8 @@
 				14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */,
 				149804982260C2070044194C /* ComponentSupplementaryView.swift */,
 				149804962260ACA20044194C /* CollectionComponentViewController.swift */,
-				1478E9B0220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift */,
-				149804942260ABEA0044194C /* MultiSectionComponentViewController.swift */,
+				1478E9B0220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift */,
+				149804942260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift */,
 				1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */,
 			);
 			path = CollectionView;
@@ -423,7 +425,8 @@
 				14609BA322635B77007B2AFC /* TableComponentCell.swift */,
 				14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */,
 				14609BA722635C70007B2AFC /* TableComponentViewController.swift */,
-				14609BA922635E06007B2AFC /* TableMultiSectionViewController.swift */,
+				149A29DE22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift */,
+				14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */,
 			);
 			path = TableView;
 			sourceTree = "<group>";
@@ -454,7 +457,7 @@
 				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
-				14609BAD226378A5007B2AFC /* AbstractComponentViewController.swift */,
+				14609BAD226378A5007B2AFC /* ComponentViewController.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -962,14 +965,14 @@
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
-				14609BAA22635E06007B2AFC /* TableMultiSectionViewController.swift in Sources */,
+				14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */,
 				1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */,
-				149804952260ABEA0044194C /* MultiSectionComponentViewController.swift in Sources */,
+				149804952260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
 				142C451C223939DB002360F5 /* Async.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
-				14609BAE226378A5007B2AFC /* AbstractComponentViewController.swift in Sources */,
+				14609BAE226378A5007B2AFC /* ComponentViewController.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */,
@@ -987,7 +990,7 @@
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
 				14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */,
-				1478E9B1220C5D1E006AF8B3 /* SingleSectionComponentViewController.swift in Sources */,
+				1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
@@ -997,6 +1000,7 @@
 				1498049E2260D8340044194C /* MultiSectionController.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
+				149A29DF22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift in Sources */,
 				14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */,
 				14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */,
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,

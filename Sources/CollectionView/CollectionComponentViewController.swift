@@ -27,12 +27,15 @@ import struct Foundation.DispatchQoS
 import struct Foundation.IndexPath
 import struct Foundation.UUID
 import struct RxCocoa.KeyValueObservingOptions
+import struct RxDataSources.AnimatableSectionModel
 import struct RxSwift.RxTimeInterval
 
 /**
- CollectionComponentViewController is the base class of UIViewControllers that use Cyanic's state driven UI logic
+ CollectionComponentViewController is the base class of UIViewControllers that use a UICollectionView to leverage
+ Cyanic's state-driven UI functionality. It contains all the implementation necessary for subclasses to function with
+ a UICollectionView. CollectionComponentViewController serves as a UICollectionViewDelegateFlowLayout and UICollectionViewDataSource.
 */
-open class CollectionComponentViewController: AbstractComponentViewController, UICollectionViewDelegateFlowLayout {
+open class CollectionComponentViewController: ComponentViewController, UICollectionViewDelegateFlowLayout {
 
     // MARK: UIViewController Lifecycle Methods
     open override func viewDidLoad() {
@@ -60,7 +63,7 @@ open class CollectionComponentViewController: AbstractComponentViewController, U
     internal typealias CombinedState = (CGSize, [Any])
 
     // MARK: Methods
-    internal override func setUpListView() -> UIView {
+    open override func setUpListView() -> UIView {
         return UICollectionView(
             frame: CGRect.zero,
             collectionViewLayout: self.createUICollectionViewLayout()

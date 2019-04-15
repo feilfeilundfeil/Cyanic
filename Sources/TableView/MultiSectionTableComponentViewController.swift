@@ -1,5 +1,5 @@
 //
-//  TableMultiSectionViewController.swift
+//  MultiSectionTableComponentViewController.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/14/19.
@@ -19,13 +19,18 @@ import struct Foundation.IndexPath
 import struct RxDataSources.AnimationConfiguration
 import struct RxDataSources.AnimatableSectionModel
 
-open class TableMultiSectionViewController: TableComponentViewController {
+/**
+ MultiSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView with multiple sections.
+ It has most of the boilerplate needed to have a reactive UITableView with a multiple sections. It responds
+ to new elements emitted by its  ViewModel(s) State(s).
+*/
+open class MultiSectionTableComponentViewController: TableComponentViewController {
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        // When _components emits a new element, bind the new element to the UICollectionView.
+        self.dataSource = self.setUpDataSource()
+        // When _components emits a new element, bind the new element to the UITableView.
         self._sections
             .map({ (sections: MultiSectionController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
                 let models: [AnimatableSectionModel<AnyComponent, AnyComponent>] = sections.sectionControllers
@@ -43,32 +48,44 @@ open class TableMultiSectionViewController: TableComponentViewController {
 
     // MARK: Stored Properties
     /**
-     The SectionController BehaviorRelay. Every time a new element is emitted by this Relay, the UICollectionView is refreshed.
-     */
+     The MultiSectionController BehaviorRelay. Every time a new element is emitted by this relay, the UITableView performs
+     a batch update based on the diffing produced by RxDataSources.
+    */
     internal let _sections: BehaviorRelay<MultiSectionController> = BehaviorRelay<MultiSectionController>(
         value: MultiSectionController(size: CGSize.zero)
     )
 
-    public let dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> =
-        RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+    /**
+     The RxTableViewSectionedAnimatedDataSource instance.
+    */
+    public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
+
+    // MARK: Methods
+    /**
+     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
+     - Returns:
+        A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
+    */
+    open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
+        return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
             animationConfiguration: AnimationConfiguration(
                 insertAnimation: UITableViewRowAnimation.fade,
                 reloadAnimation: UITableViewRowAnimation.automatic,
                 deleteAnimation: UITableViewRowAnimation.fade
             ),
-            configureCell: { (_, cv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
-                guard let cell = cv.dequeueReusableCell(
+            configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
+                guard let cell = tv.dequeueReusableCell(
                     withIdentifier: TableComponentCell.identifier,
                     for: indexPath
-                ) as? TableComponentCell
+                    ) as? TableComponentCell
                     else { fatalError("Cell not registered to UITableView")}
 
                 cell.configure(with: component)
                 return cell
             }
         )
+    }
 
-    // MARK: Methods
     open override func component(at indexPath: IndexPath) -> AnyComponent? {
         guard let sectionController = self.sectionController(at: indexPath.section)
             else { return nil }
@@ -80,7 +97,7 @@ open class TableMultiSectionViewController: TableComponentViewController {
         return component
     }
     /**
-     Gets the SectionController at the specified index.
+     Gets the SectionController at the specified index if there is one.
      - Parameters:
         - section: The index of the SectionController.
      - Returns:
@@ -121,10 +138,11 @@ open class TableMultiSectionViewController: TableComponentViewController {
     }
 
     /**
-     Builds the SectionController array.
+     Builds the MultiSectionController.
 
      This is where you create the logic to add Components to the MultiSectionController data structure. This method is
-     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods.
+     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods or
+     a ViewModel's withState instance method.
      - Parameters:
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.
