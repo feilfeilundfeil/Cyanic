@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
 
   spec.name                  = "Cyanic"
-  spec.version               = "0.4.11"
-  spec.summary               = "Cyanic is a MvRx-inspired framework that aims to build a reactive UI in a UICollectionView."
+  spec.version               = "0.5.0"
+  spec.summary               = "Cyanic is a MvRx and Epoxy inspired framework that aims to build a reactive UI in a UICollectionView."
 
   spec.description           = <<-DESC
-                               Cyanic is a MvRx-inspired framework that aims to build reactive UI in a UICollectionView.
+                               Cyanic is a MvRx and Epoxy inspired framework framework that aims to build reactive UI in a UICollectionView.
                                It borrows heavily from MvRx in terms of API and structure while falling within the constraints of
                                Swift and iOS development. It leverages RxSwift to have reactive functionality, LayoutKit to have
                                performance close to manual layout when sizing and arranging subviews, and Sourcery for fast creation of

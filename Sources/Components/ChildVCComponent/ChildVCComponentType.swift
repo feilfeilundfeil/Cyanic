@@ -13,7 +13,7 @@ import struct CoreGraphics.CGFloat
 // sourcery: Component = ChildVCComponent
 /// ChildVCComponentType is a protocol for Component data structures that want to show other UIViewControllers as a
 /// child UIViewController to the SingleSectionComponentViewController.
-public protocol ChildVCComponentType: StaticHeightComponent, CustomStringConvertible {
+public protocol ChildVCComponentType: StaticHeightComponent {
 
     // sourcery: skipHashing, skipEquality
     // sourcery: defaultValue = "InvalidChildComponentVC()", isLazy

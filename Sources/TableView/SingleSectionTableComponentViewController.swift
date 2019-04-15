@@ -38,7 +38,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
     }
 
     // MARK: Stored Properties
-    // swiftlint:disable:next line_length
+    // swiftlint:disable:next implicitly_unwrapped_optional
     public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
 
     /**

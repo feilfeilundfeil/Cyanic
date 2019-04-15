@@ -63,6 +63,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         value: MultiSectionController(size: CGSize.zero)
     )
 
+    // swiftlint:disable:next implicitly_unwrapped_optional line_length
     public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
 
     // MARK: Methods

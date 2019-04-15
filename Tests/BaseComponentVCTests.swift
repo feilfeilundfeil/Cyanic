@@ -18,6 +18,7 @@ class ComponentViewControllerTests: QuickSpec {
         describe("SingleSectionCollectionComponentViewController functionality") {
             context("When CyanicComponentViewController is initialized and view is loaded") {
                 let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
+                vc.loadView()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
 
                 // Fake a width so buildComponents is called.
@@ -80,7 +81,7 @@ class ComponentViewControllerTests: QuickSpec {
             self.invalidateCount += 1
         }
 
-        override func buildComponents(_ componentsController: inout ComponentsController) {
+        override func buildComponents(_ componentsController: ComponentsController) {
             self.buildComponentsCount += 1
             withState(
                 viewModel1: self.viewModelOne,

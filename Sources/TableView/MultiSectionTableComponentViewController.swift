@@ -57,7 +57,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
 
     /**
      The RxTableViewSectionedAnimatedDataSource instance.
-    */
+    */ // swiftlint:disable:next line_length implicitly_unwrapped_optional
     public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
 
     // MARK: Methods
