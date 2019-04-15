@@ -72,7 +72,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
     public override var viewModels: [AnyViewModel] { return [self.viewModel.asAnyViewModel] }
 
     // MARK: Overridden CollectionComponentViewController Methods
-    public override func buildComponents(_ components: ComponentsController) {
+    public override func buildComponents(_ components: inout ComponentsController) {
         withState(of: self.viewModel) { (state: ExampleListState) -> Void in
             let width: CGFloat = components.width
 

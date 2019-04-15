@@ -51,8 +51,8 @@ public struct SectionController {
         return self.size.height
     }
 
-    public func buildComponents(_ block: (_ componentsController: ComponentsController) -> Void) {
-        block(self.componentsController)
+    public mutating func buildComponents(_ block: (_ componentsController: inout ComponentsController) -> Void) {
+        block(&self.componentsController)
     }
 
 }

@@ -52,9 +52,9 @@ public struct MultiSectionController {
         SectionController
     */
     @discardableResult
-    public mutating func sectionController(with configuration: (_ sectionController: SectionController) -> Void) -> SectionController {
-        let sectionController: SectionController = SectionController(size: self.size)
-        configuration(sectionController)
+    public mutating func sectionController(with configuration: (_ sectionController: inout SectionController) -> Void) -> SectionController {
+        var sectionController: SectionController = SectionController(size: self.size)
+        configuration(&sectionController)
         self.sectionControllers.append(sectionController)
         return sectionController
     }

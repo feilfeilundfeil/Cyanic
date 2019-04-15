@@ -30,11 +30,11 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
     }
 
     // MARK: Methods
-    public override func buildSections(_ sectionsController: MultiSectionController) {
+    public override func buildSections(_ sectionsController: inout MultiSectionController) {
 
         withState(of: self.viewModel) { (state: ExampleSectionedState) -> Void in
 
-            sectionsController.sectionController(with: { (sectionController: SectionController) -> Void in
+            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
                         let id: String = "First Section"
@@ -59,7 +59,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
 
                 if expandableComponent.isExpanded {
 
-                    sectionController.buildComponents({ (components:  ComponentsController) -> Void in
+                    sectionController.buildComponents({ (components: inout ComponentsController) -> Void in
                         state.strings.enumerated().forEach { (offset: Int, value: String) -> Void in
                             components.staticTextComponent(configuration: { (component: inout StaticTextComponent) -> Void in
                                 component.id = "First \(offset.description)"
@@ -73,7 +73,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                 }
             })
 
-            sectionsController.sectionController(with: { (sectionController: SectionController) -> Void in
+            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
                         let id: String = "Second Section"
@@ -98,7 +98,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
 
                 if expandableComponent.isExpanded {
 
-                    sectionController.buildComponents({ (components:  ComponentsController) -> Void in
+                    sectionController.buildComponents({ (components: inout ComponentsController) -> Void in
                         state.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
                             components.staticTextComponent(configuration: { (component: inout StaticTextComponent) -> Void in
                                 component.id = "Second \(offset.description)"

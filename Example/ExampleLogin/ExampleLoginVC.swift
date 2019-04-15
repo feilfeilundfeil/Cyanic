@@ -80,7 +80,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
     }
 
     // MARK: Overridden SingleSectionCollectionComponentViewController Methods
-    public override func buildComponents(_ componentsController: ComponentsController) {
+    public override func buildComponents(_ componentsController: inout ComponentsController) {
 
         withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in
 
