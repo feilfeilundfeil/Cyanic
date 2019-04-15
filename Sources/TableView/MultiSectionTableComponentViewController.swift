@@ -20,9 +20,9 @@ import struct RxDataSources.AnimationConfiguration
 import struct RxDataSources.AnimatableSectionModel
 
 /**
- MultiSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView with multiple sections.
- It has most of the boilerplate needed to have a reactive UITableView with a multiple sections. It responds
- to new elements emitted by its  ViewModel(s) State(s).
+ MultiSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView with
+ multiple sections. It has most of the boilerplate needed to have a reactive UITableView with a multiple sections.
+ It responds to new elements emitted by its  ViewModel(s) State(s).
 */
 open class MultiSectionTableComponentViewController: TableComponentViewController {
 
@@ -77,7 +77,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
                 guard let cell = tv.dequeueReusableCell(
                     withIdentifier: TableComponentCell.identifier,
                     for: indexPath
-                    ) as? TableComponentCell
+                ) as? TableComponentCell
                     else { fatalError("Cell not registered to UITableView")}
 
                 cell.configure(with: component)

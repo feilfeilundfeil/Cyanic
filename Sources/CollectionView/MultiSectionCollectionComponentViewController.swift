@@ -78,7 +78,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                 guard let cell = cv.dequeueReusableCell(
                     withReuseIdentifier: CollectionComponentCell.identifier,
                     for: indexPath
-                    ) as? CollectionComponentCell
+                ) as? CollectionComponentCell
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 cell.configure(with: component)
@@ -91,7 +91,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                     ofKind: kind,
                     withReuseIdentifier: ComponentSupplementaryView.identifier,
                     for: indexPath
-                    ) as? ComponentSupplementaryView
+                ) as? ComponentSupplementaryView
                     else { fatalError("Cell not registered to UICollectionView")}
 
                 print("ID: \(sectionModel.model.id), IndexPath: \(indexPath)")
