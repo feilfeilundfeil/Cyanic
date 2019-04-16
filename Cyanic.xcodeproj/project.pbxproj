@@ -41,8 +41,6 @@
 		1478E997220C59B9006AF8B3 /* ExampleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E996220C59B9006AF8B3 /* ExampleListVC.swift */; };
 		1478E99C220C59BC006AF8B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99B220C59BC006AF8B3 /* Assets.xcassets */; };
 		1478E99F220C59BC006AF8B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1478E99D220C59BC006AF8B3 /* LaunchScreen.storyboard */; };
-		1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
-		1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478E9B0220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift */; };
 		1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048A225F27320044194C /* CyanicNoFadeFlowLayout.swift */; };
 		1498048E22607A720044194C /* ExampleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1498048D22607A720044194C /* ExampleViewModel.swift */; };
@@ -104,28 +102,7 @@
 			remoteGlobalIDString = 145AD74C220B1EBE004F02C2;
 			remoteInfo = "MvRx-iOS";
 		};
-		1478E9AC220C5B6D006AF8B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 145AD744220B1EBE004F02C2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 145AD74C220B1EBE004F02C2;
-			remoteInfo = "MvRx-iOS";
-		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		1478E9AE220C5B6D006AF8B3 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				1478E9AB220C5B6D006AF8B3 /* Cyanic.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
@@ -271,7 +248,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1478E9AA220C5B6D006AF8B3 /* Cyanic.framework in Frameworks */,
 				D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,13 +674,11 @@
 				1478E98E220C59B9006AF8B3 /* Sources */,
 				1478E98F220C59B9006AF8B3 /* Frameworks */,
 				1478E990220C59B9006AF8B3 /* Resources */,
-				1478E9AE220C5B6D006AF8B3 /* Embed Frameworks */,
 				8D7698403E07A00D3CD1E7BC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1478E9AD220C5B6D006AF8B3 /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -922,6 +896,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Cyanic/Cyanic.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -936,6 +911,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cyanic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1052,11 +1028,6 @@
 			isa = PBXTargetDependency;
 			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
 			targetProxy = 145AD758220B1EBF004F02C2 /* PBXContainerItemProxy */;
-		};
-		1478E9AD220C5B6D006AF8B3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
-			targetProxy = 1478E9AC220C5B6D006AF8B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1295,7 +1266,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9AAD379A2F04502A88BC9632 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;
@@ -1315,7 +1285,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAE01790233F583D5FA3BB4C /* Pods-Example.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;

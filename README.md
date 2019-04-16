@@ -16,9 +16,9 @@ Requirements:
 
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
-    pod 'Cyanic', :git => 'https://github.com/feilfeilundfeil/Cyanic.git'
-    pod 'CommonWidgets', :git => 'https://github.com/feilfeilundfeil/CommonWidgets.git'
-    pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
+    pod 'Cyanic'
+    pod 'CommonWidgets'
+    pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git' // Use this fork until LayoutKit updates to Swift 5
     ```
 
 2. Integrate your dependencies using frameworks: add `use_frameworks!` to your Podfile. 

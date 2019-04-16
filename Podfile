@@ -8,7 +8,7 @@ def pods
   pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
   pod 'Kio'
   pod 'Alacrity'
-  pod 'CommonWidgets', :git => 'https://github.com/feilfeilundfeil/CommonWidgets.git'
+  pod 'CommonWidgets'
   pod 'Sourcery'
 
 end
@@ -26,4 +26,5 @@ end
 target 'Example' do
   pods
   pod 'SideMenu'
+  pod 'Cyanic'
 end
