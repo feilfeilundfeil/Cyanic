@@ -1,8 +1,8 @@
 platform :ios, '10.0'
 
-def pods
-  use_frameworks!
+use_frameworks!
 
+def pods
   pod 'RxSwift'
   pod 'RxDataSources'
   pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
@@ -18,13 +18,12 @@ target 'Cyanic' do
 end
 
 target 'Tests' do
-  pods
+  pod 'Cyanic'
   pod 'Quick'
   pod 'Nimble'
 end
 
 target 'Example' do
-  pods
   pod 'SideMenu'
   pod 'Cyanic'
 end
