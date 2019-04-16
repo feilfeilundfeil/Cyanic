@@ -56,7 +56,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
     )
 
     /**
-     The RxTableViewSectionedAnimatedDataSource instance.
+     The RxDataSource instance used for the Rx aspect of the UITableViewDataSource.
     */ // swiftlint:disable:next line_length implicitly_unwrapped_optional
     public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
 
@@ -86,7 +86,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         )
     }
 
-    open override func component(at indexPath: IndexPath) -> AnyComponent? {
+    public final override func component(at indexPath: IndexPath) -> AnyComponent? {
         guard let sectionController = self.sectionController(at: indexPath.section)
             else { return nil }
 
@@ -112,9 +112,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         return sectionController
     }
 
-    internal typealias Element = (CGSize, [Any])
-
-    internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
+    public final override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
         // Call buildComponents method when a new element in combinedObservable is emitted
@@ -141,8 +139,8 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
      Builds the MultiSectionController.
 
      This is where you create the logic to add Components to the MultiSectionController data structure. This method is
-     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState methods or
-     a ViewModel's withState instance method.
+     called every time the State(s) of your ViewModel(s) change. You can access the State(s) via the global withState
+     methods or a ViewModel's withState instance method.
      - Parameters:
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.

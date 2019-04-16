@@ -13,12 +13,12 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
+public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = UIColor.white
+        self.collectionView.backgroundColor = UIColor.white
     }
 
     // MARK: Stored Properties

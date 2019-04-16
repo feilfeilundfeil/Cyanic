@@ -25,8 +25,11 @@ import struct RxCocoa.KeyValueObservingOptions
  ComponentViewController contains all the logic that is shared between the CollectionComponentViewController and
  TableComponentViewController.
 
- Most of the logic sets up the UITablview / UICollectionView constraints and setting up the combined State observable.
- This class also contains the necessary properties and methods shared by both subclasses.
+ Most of the logic sets up the UITableView / UICollectionView constraints and setting up the combined State observable.
+ This class contains the necessary properties and methods shared by both subclasses.
+
+ The goal of sharing parent classes between a UICollectionView Controller and UITableView Controller means
+ they can be interchangable.
 */
 open class ComponentViewController: UIViewController, StateObservableBuilder {
 
@@ -36,6 +39,8 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
         self._listView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self._listView)
 
+        // The reason why the UITableView/UICollectionView is not the root UIView, is because there are times
+        // where you'd want other subviews in the UIViewController other than a UITableView/UICollectionView.
         NSLayoutConstraint.activate([
             self.topAnchorConstraint,
             self.bottomAnchorConstraint,
@@ -94,9 +99,11 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     internal var _size: CGSize = CGSize.zero
 
     /**
-     When the collectionView is loaded, its width and height are initially all zero. When viewWillAppear is called, the views are sized.
-     This Observable emits the nonzero sizes of UICollectionView when it changes. This may not work in some circumstances when this
-     CollectionComponentViewController is inside a custom container UIViewController. If that happens override **width** and use **.exactly**.
+     When the UITableView/UICollectionView is loaded, its width and height are initially all zero. When viewWillAppear
+     is called, the views are sized. This Observable emits the nonzero sizes of the UICollectionView/UITableView when
+     it changes. This may not work in some circumstances where ComponentViewController is inside a custom
+     container UIViewController such as the numerous side menu libraries out there. If that happens
+     override **size** and use **.exactly**.
     */
     internal lazy var _sizeObservable: Observable<CGSize> = self._listView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
@@ -192,14 +199,14 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
             on: allObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
-            )
+        )
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
 
-        //        if self.viewModels.contains(where: { $0.isDebugMode }) {
-        //            throttledStateObservable = throttledStateObservable
-        //                .debug("\(type(of: self))", trimOutput: false)
-        //        }
+        if self.viewModels.contains(where: { $0.isDebugMode }) {
+            throttledStateObservable = throttledStateObservable
+                .debug("\(type(of: self))", trimOutput: false)
+        }
 
         throttledStateObservable = throttledStateObservable.share()
 
@@ -235,8 +242,8 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     }
 
     /**
-     When the State of a ViewModel changes, invalidate is called, therefore, you should place logic here that
-     should react to changes in state. This method is run on the main thread asynchronously.
+     When the State of a ViewModel in the viewModels array changes, invalidate is called, therefore, you should
+     place logic here that should react to changes in State. This method is run on the main thread asynchronously.
 
      When overriding, no need to call super because the default implementation does nothing.
     */

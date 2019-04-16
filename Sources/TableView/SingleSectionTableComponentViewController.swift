@@ -18,8 +18,8 @@ import struct RxDataSources.AnimatableSectionModel
 
 /**
  SingleSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView
- with one section. It has most of the boilerplate needed to have a reactive UITableView
- with a single section. It responds to new elements emitted by its ViewModel(s) State(s).
+ with one section. It has most of the boilerplate needed to have a reactive UITableView with a single section.
+ It responds to new elements emitted by its ViewModel(s) State(s).
 */
 open class SingleSectionTableComponentViewController: TableComponentViewController { // swiftlint:disable:this type_name
 
@@ -38,7 +38,9 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
     }
 
     // MARK: Stored Properties
-    // swiftlint:disable:next implicitly_unwrapped_optional
+    /**
+     The RxDataSource instance used for the Rx aspect of the UITableViewDataSource.
+    */ // swiftlint:disable:next implicitly_unwrapped_optional
     public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
 
     /**
@@ -49,9 +51,9 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
 
     // MARK: Methods
     /**
-     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
+     Instantiates the RxTableViewSectionedAnimatedDataSource for the UITableVIew.
      - Returns:
-        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
+        A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
     */
     open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
         return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
@@ -68,14 +70,13 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
         )
     }
 
-    open override func component(at indexPath: IndexPath) -> AnyComponent? {
+    public final override func component(at indexPath: IndexPath) -> AnyComponent? {
+        guard indexPath.item < self._components.value.count else { return nil }
         let component: AnyComponent = self._components.value[indexPath.item]
         return component
     }
 
-    internal typealias Element = (CGSize, [Any])
-
-    internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
+    internal final override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
         // Call buildComponents method when a new element in combinedObservable is emitted

@@ -63,7 +63,9 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         value: MultiSectionController(size: CGSize.zero)
     )
 
-    // swiftlint:disable:next implicitly_unwrapped_optional line_length
+    /**
+     The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
+    */ // swiftlint:disable:next implicitly_unwrapped_optional line_length
     public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
 
     // MARK: Methods
@@ -131,8 +133,6 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         let sectionController: SectionController = self._sections.value.sectionControllers[section]
         return sectionController
     }
-
-    internal typealias Element = (CGSize, [Any])
 
     internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)

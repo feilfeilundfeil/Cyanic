@@ -40,7 +40,9 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
     }
 
     // MARK: Stored Properties
-    // swiftlint:disable:next implicitly_unwrapped_optional
+    /**
+     The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
+    */ // swiftlint:disable:next implicitly_unwrapped_optional
     public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
 
     /**
@@ -74,8 +76,6 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         let component: AnyComponent = self._components.value[indexPath.item]
         return component
     }
-
-    internal typealias Element = (CGSize, [Any])
 
     internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)

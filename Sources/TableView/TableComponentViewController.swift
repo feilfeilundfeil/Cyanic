@@ -13,9 +13,9 @@ import struct CoreGraphics.CGRect
 import struct Foundation.IndexPath
 
 /**
- TableComponentViewController is a subclass of AbstractComponentViewController. It serves as the base class for the
- TableSingleSectionViewController and MultiSectionTableComponentViewController, therefore it contains the logic
- and implementations shared between the two subclasses.
+ TableComponentViewController is a subclass of ComponentViewController. It serves as the base class for the
+ SingleSectionTableComponentViewController and MultiSectionTableComponentViewController, therefore it contains
+ the logic and implementations shared between the two subclasses.
 */
 open class TableComponentViewController: ComponentViewController, UITableViewDelegate {
 
@@ -41,11 +41,11 @@ open class TableComponentViewController: ComponentViewController, UITableViewDel
 
     // MARK: Methods
     /**
-     Instantiates a UITableView instance for use. The default implementation creates a UITableView with a style of
-     UITableView.Style.plain.
+     Creates a UITableView with a UITableView.Style of plain. This method is called in the ComponentViewController's
+     loadView method.
      - Returns:
-        A UITableView instance.
-    */
+        - UITableView instance typed as a UIView.
+     */
     open override func setUpListView() -> UIView {
         return UITableView(
             frame: CGRect.zero,

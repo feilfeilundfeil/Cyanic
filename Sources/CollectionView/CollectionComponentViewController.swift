@@ -31,10 +31,9 @@ import struct RxDataSources.AnimatableSectionModel
 import struct RxSwift.RxTimeInterval
 
 /**
- CollectionComponentViewController is the base class of UIViewControllers that use a UICollectionView to leverage
- Cyanic's state-driven UI functionality. It contains all the implementation necessary for subclasses to function with
- a UICollectionView. CollectionComponentViewController serves as a UICollectionViewDelegateFlowLayout and
- UICollectionViewDataSource.
+ CollectionComponentViewController is a subclass of ComponentViewController. It serves as the base class for the
+ SingleSectionCollectionComponentViewController and MultiSectionCollectionComponentViewController, therefore it contains
+ the logic and implementations shared between the two subclasses.
 */
 open class CollectionComponentViewController: ComponentViewController, UICollectionViewDelegateFlowLayout {
 
@@ -64,6 +63,12 @@ open class CollectionComponentViewController: ComponentViewController, UICollect
     internal typealias CombinedState = (CGSize, [Any])
 
     // MARK: Methods
+    /**
+     Creates a UICollectionView with a UICollectionViewLayout instantiated from the createUICollectionViewLayout method.
+     This method is called in the ComponentViewController's loadView method.
+     - Returns:
+        - UICollectionView instance typed as a UIView.
+    */
     open override func setUpListView() -> UIView {
         return UICollectionView(
             frame: CGRect.zero,

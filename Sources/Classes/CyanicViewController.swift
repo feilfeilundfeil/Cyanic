@@ -62,7 +62,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
     */
     open var viewModels: [AnyViewModel] { return [] }
 
-    internal typealias Element = [Any]
+    internal typealias CombinedState = [Any]
 
     // MARK: Methods
     /**
@@ -76,7 +76,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
      */
     @discardableResult
     internal func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<[Any]> {
-        guard !viewModels.isEmpty else { return Observable<Element>.empty() }
+        guard !viewModels.isEmpty else { return Observable<[Any]>.empty() }
         let combinedStatesObservables: Observable<[Any]> = viewModels
             .combineStateObservables()
 
