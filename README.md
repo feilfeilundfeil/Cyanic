@@ -17,7 +17,6 @@ Requirements:
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
     pod 'Cyanic'
-    pod 'CommonWidgets'
     pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git' // Use this fork until LayoutKit updates to Swift 5
     ```
 
