@@ -30,7 +30,7 @@ LayoutKit is the library that is responsible for most of the UI logic in Cyanic.
 1. It is not updated to use Swift 5
 2. Cyanic needs access to an internal initializer of the Layouts that allows you to declare the UIView subclass type as an argument.
 
-Without these changes Cyanic, will continue to use the forked version.
+Without these changes, Cyanic will continue to use the forked version.
 
 ## Documentation
 
