@@ -12,7 +12,6 @@ import class RxSwift.Observable
 import class UIKit.UITableView
 import class UIKit.UITableViewCell
 import class UIKit.UIView
-import enum RxDataSources.UITableViewRowAnimation
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
@@ -69,9 +68,9 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
     open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
         return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
             animationConfiguration: AnimationConfiguration(
-                insertAnimation: UITableViewRowAnimation.fade,
-                reloadAnimation: UITableViewRowAnimation.automatic,
-                deleteAnimation: UITableViewRowAnimation.fade
+                insertAnimation: UITableView.RowAnimation.fade,
+                reloadAnimation: UITableView.RowAnimation.automatic,
+                deleteAnimation: UITableView.RowAnimation.fade
             ),
             configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
                 guard let cell = tv.dequeueReusableCell(

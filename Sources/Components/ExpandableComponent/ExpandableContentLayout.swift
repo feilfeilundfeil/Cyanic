@@ -64,7 +64,7 @@ public final class LabelContentLayout: ExpandableContentLayout {
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
         alignment: Alignment = Alignment.center,
-        configuration: @escaping (UILabel) -> Void =  { _ in }
+        configuration: @escaping (UILabel) -> Void = { _ in }
     ) {
 
         let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
