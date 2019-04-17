@@ -11,6 +11,9 @@ import protocol RxSwift.SchedulerType
 
 internal protocol StateObservableBuilder {
 
+    /**
+     CombineState represents the aggregate of the Observables being monitored for new values.
+    */
     associatedtype CombinedState
 
     @discardableResult

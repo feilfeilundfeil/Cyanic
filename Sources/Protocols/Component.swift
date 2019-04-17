@@ -12,7 +12,7 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
 /**
- Component is the data model representation of the UICollectionViewCell rendered on the BaseComponentVC.
+ Component is the data model representation of the UICollectionViewCell/UITableViewCell rendered on a ComponentViewController.
  A Component should be an immutable struct and it should contain UI specific characteristics related to the content
  that should be displayed in the ComponentCell.
 
@@ -57,7 +57,7 @@ extension Component {
 public protocol StaticHeightComponent: Component {
 
     // sourcery: defaultValue = "44.0"
-    /// The width of the UICollectionViewCell that hosts the content created by the Component.
+    /// The height of the UICollectionViewCell/UITableViewCell that hosts the content created by the Component.
     /// The default value is 44.0
     var height: CGFloat { get set }
 

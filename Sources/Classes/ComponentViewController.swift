@@ -167,14 +167,20 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     internal typealias CombinedState = (CGSize, [Any])
 
     /**
-     Creates an Observables based on ThrottleType and binds it to the AnyComponents Observables.
+     Creates an Observable that combines all Observables that will drive the changes in the UICollectionView/UITableView.
 
-     It creates a new Observables based on the ViewModels' States and  BaseComponenVC's ThrottleType and
-     binds it to the AnyComponents Observable so any new State change creates a new AnyComponents array
-     which in turn updates the UICollectionView.
+     This method creates a new Observable based on the ViewModels' States and **_sizeObservable**. The combined Observable is
+     throttled base on **throttleType** and is observed and subscribed on the **scheduler**.
+
+     If any of the ViewModels are in debug mode, the observable will emit RxSwift debug messages.
+
+     The Observable is then shared, binded to the **state**  relay and binded to the **invalidate** method.
 
      - Parameters:
         - viewModels: The ViewModels whose States will be observed.
+     - Returns:
+        - Observable that monitors the size of the UICollectionView/UITableView and the States of the ViewModels
+          inside the **viewModels** array.
     */
     @discardableResult
     internal func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {

@@ -16,7 +16,7 @@ class ComponentViewControllerTests: QuickSpec {
 
     override func spec() {
         describe("SingleSectionCollectionComponentViewController functionality") {
-            context("When CyanicComponentViewController is initialized and view is loaded") {
+            context("When a ComponentViewController is initialized and its view is loaded") {
                 let vc: ComponentViewControllerTests.TestVC = ComponentViewControllerTests.TestVC()
                 vc.loadView()
                 vc.collectionView.dataSource = nil // Make this nil before calling viewDidLoad otherwise throws
@@ -43,12 +43,12 @@ class ComponentViewControllerTests: QuickSpec {
                     expect(vc.viewModelTwo.currentState.changeCount).toEventually(equal(1))
                 }
 
-                it("should have 2 components displayed on its UICollectionView if viewModelOne's currentState.showStaticText == false") {
+                it("should have 2 components displayed on its UICollectionView/UITableView if viewModelOne's currentState.showStaticText == false") {
                     expect(vc.collectionView.numberOfItems(inSection: 0)).toEventually(equal(2))
                     expect(vc.viewModelOne.currentState.showStaticText).to(equal(false))
                 }
 
-                it("should have 3 components displayed on its UICollectionView if viewModelOne's currentState.showStaticText == true") {
+                it("should have 3 components displayed on its UICollectionView/UITableView if viewModelOne's currentState.showStaticText == true") {
                     vc.viewModelOne.setState(with: { $0.showStaticText = true })
                     expect(vc.collectionView.numberOfItems(inSection: 0)).toEventually(equal(3))
                     expect(

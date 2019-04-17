@@ -78,6 +78,23 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         return component
     }
 
+    /**
+     Creates an Observable that combines all Observables that will drive the changes in the UICollectionView.
+
+     This method creates a new Observable based on the ViewModels' States and **_sizeObservable**. The combined Observable is
+     throttled base on **throttleType** and is observed and subscribed on the **scheduler**.
+
+     If any of the ViewModels are in debug mode, the observable will emit RxSwift debug messages.
+
+     The Observable is then shared, binded to the **state**  relay, binded to the **invalidate** method, and binded to
+     the **buildComponents** method
+
+     - Parameters:
+        - viewModels: The ViewModels whose States will be observed.
+     - Returns:
+        - Observable that monitors the size of the UICollectionView and the States of the ViewModels inside
+          the **viewModels** array.
+    */
     internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 

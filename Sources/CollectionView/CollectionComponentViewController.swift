@@ -77,7 +77,9 @@ open class CollectionComponentViewController: ComponentViewController, UICollect
     }
 
     /**
-     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this CollectionComponentViewController
+     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this CollectionComponentViewController.
+     The default implementation creates a UICollectionViewFlowLayout with a minimumLineSpacing and minimumInteritemSpacing of
+     0.0.
      - Returns:
         A UICollectionViewLayout instance.
     */
