@@ -25,7 +25,7 @@ Requirements:
 
 ## Why we use a forked version of LayoutKit
 
-LayoutKit is the library that is responsible for most of the UI logic in Cyanic. However, as of April 17, 2019, there are some limitations of the current LayoutKit version in Cocoapods:
+LayoutKit is the library that is responsible for most of the UI logic in Cyanic. However, as of April 17, 2019, there are some limitations to the current LayoutKit version in Cocoapods:
 
 1. It is not updated to use Swift 5
 2. Cyanic needs access to an internal initializer of the Layouts that allows you to declare the UIView subclass type as an argument.
