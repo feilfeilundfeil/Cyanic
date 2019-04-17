@@ -11,7 +11,6 @@ import class UIKit.UIColor
 import class UIKit.UIFont
 import class UIKit.UITextView
 import enum LayoutKit.Text
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct UIKit.UIEdgeInsets
 import struct LayoutKit.Alignment
@@ -54,7 +53,7 @@ public struct StaticTextComponent: StaticTextComponentType {
     public var flexibility: Flexibility = TextViewLayoutDefaults.defaultFlexibility
 
     // sourcery: skipHashing, skipEquality 
-    public var style: AlacrityStyle<UITextView> = AlacrityStyle<UITextView> { _ in }
+    public var configuration: (UITextView) -> Void = { _ in }
 
     // sourcery: skipHashing, skipEquality 
     public var layout: ComponentLayout { return StaticTextComponentLayout(component: self) }

@@ -8,7 +8,6 @@
 
 import class UIKit.UIColor
 import class UIKit.UITextField
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGRect
 import struct LayoutKit.Alignment
@@ -53,7 +52,7 @@ public struct TextFieldComponent: TextFieldComponentType {
     public var flexibility: Flexibility = Flexibility.flexible
 
     // sourcery: skipHashing, skipEquality 
-    public var style: AlacrityStyle<UITextField> = AlacrityStyle<UITextField> { _ in }
+    public var configuration: (UITextField) -> Void = { _ in }
 
     // sourcery: skipHashing, skipEquality 
     public var textDidChange: (UITextField) -> Void = { (_: UITextField) -> Void in print("TextField has new text") }

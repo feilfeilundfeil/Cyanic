@@ -36,17 +36,17 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
             flexibility: component.flexibility,
             viewReuseId: "\(TextFieldComponentLayout.identifier)SizeLayout",
             viewClass: component.textFieldType,
-            config: { (textField: UIView) -> Void in
-                guard let textField = textField as? UITextField else { return }
-                component.style.applyStyle(to: textField)
+            config: { (view: UIView) -> Void in
+                guard let view = view as? UITextField else { return }
+                component.configuration(view)
 
-                textField.text = component.text
-                textField.placeholder = component.placeholder
+                view.text = component.text
+                view.placeholder = component.placeholder
 
                 let disposables: [Disposable] = [
-                    textField.rx
+                    view.rx
                         .controlEvent([UIControl.Event.editingChanged])
-                        .map({ (_: Void) -> UITextField in return textField })
+                        .map({ (_: Void) -> UITextField in return view })
                         .debounce(0.5, scheduler: MainScheduler.instance)
                         .bind(onNext: component.textDidChange)
                 ]

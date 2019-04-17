@@ -19,7 +19,6 @@ import class UIKit.UIView
 import enum LayoutKit.Axis
 import enum LayoutKit.Text
 import enum LayoutKit.StackLayoutDistribution
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct Foundation.Data
@@ -65,7 +64,7 @@ public final class LabelContentLayout: ExpandableContentLayout {
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
         alignment: Alignment = Alignment.center,
-        style: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in }
+        configuration: @escaping (UILabel) -> Void =  { _ in }
     ) {
 
         let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
@@ -75,7 +74,7 @@ public final class LabelContentLayout: ExpandableContentLayout {
             alignment: Alignment.centerLeading,
             flexibility: LabelLayoutDefaults.defaultFlexibility,
             viewReuseId: "\(ExpandableComponentLayout.identifier)ContentLabel",
-            config: style.style
+            config: configuration
         )
         self.text = text
         self.font = font
@@ -132,11 +131,11 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
     public init(
         text: Text,
         font: UIFont = UIFont.systemFont(ofSize: 17.0),
-        labelStyle: AlacrityStyle<UILabel> = AlacrityStyle<UILabel> { _ in },
+        labelConfiguration: @escaping (UILabel) -> Void = { _ in },
         image: UIImage,
         imageSize: CGSize,
         imageAlignment: Alignment = Alignment.aspectFit,
-        imageStyle: AlacrityStyle<UIImageView> = AlacrityStyle<UIImageView> { _ in },
+        imageConfiguration: @escaping (UIImageView) -> Void = { _ in },
         spacing: CGFloat
     ) {
 
@@ -147,7 +146,7 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
             alignment: Alignment.centerLeading,
             flexibility: LabelLayoutDefaults.defaultFlexibility,
             viewReuseId: "\(ExpandableComponentLayout.identifier)ContentLabelWithImage",
-            config: labelStyle.style
+            config: labelConfiguration
         )
 
         let imageLayout: SizeLayout<UIImageView> = SizeLayout<UIImageView>(
@@ -155,7 +154,10 @@ public final class ImageLabelContentLayout: ExpandableContentLayout {
             alignment: imageAlignment,
             flexibility: Flexibility.inflexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)ContentImage",
-            config: imageStyle.modifying(with: { $0.image = image }).style
+            config: { (view: UIImageView) -> Void in
+                imageConfiguration(view)
+                view.image = image
+            }
         )
 
         let stackLayout: StackLayout<UIView> = StackLayout<UIView>(
@@ -237,7 +239,7 @@ internal final class EmptyContentLayout: ExpandableContentLayout {
             alignment: Alignment.centerLeading,
             flexibility: LabelLayoutDefaults.defaultFlexibility,
             viewReuseId: "\(ExpandableComponentLayout.identifier)EmptyLabel",
-            config: AlacrityStyle<UILabel> { _ in }.style
+            config: { _ in }
         )
 
         super.init(

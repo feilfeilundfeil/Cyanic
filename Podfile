@@ -6,11 +6,7 @@ def pods
   pod 'RxSwift'
   pod 'RxDataSources'
   pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
-  pod 'Kio'
-  pod 'Alacrity'
-  pod 'CommonWidgets'
   pod 'Sourcery'
-
 end
 
 target 'Cyanic' do
@@ -25,5 +21,8 @@ end
 
 target 'Example' do
   pod 'SideMenu'
-  pod 'Cyanic'
+  pod 'Alacrity'
+  pod 'CommonWidgets'
+  pod 'Kio'
+#  pod 'Cyanic'
 end

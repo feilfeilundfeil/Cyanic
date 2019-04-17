@@ -27,10 +27,6 @@ Pod::Spec.new do |spec|
   spec.dependency "RxSwift"
   spec.dependency "Sourcery"
 
-  spec.dependency "Kio"
-  spec.dependency "Alacrity"
-  spec.dependency "CommonWidgets"
-
   spec.test_spec "Tests" do |test_spec|
     test_spec.source_files = "Tests/*.swift"
     test_spec.dependency "Quick"

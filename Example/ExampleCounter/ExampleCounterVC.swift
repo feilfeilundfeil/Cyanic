@@ -9,6 +9,7 @@
 import UIKit
 import Cyanic
 import RxCocoa
+import Kio
 
 class ExampleCounterVC: CyanicViewController {
 

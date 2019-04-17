@@ -8,7 +8,6 @@
 
 import class UIKit.UITextField
 import class UIKit.UIColor
-import struct Alacrity.AlacrityStyle
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
 import struct UIKit.UIEdgeInsets
@@ -48,10 +47,10 @@ public protocol TextFieldComponentType: StaticHeightComponent {
     /// The flexibility of the underlying SizeLayout. The default value is Flexibility.flexible.
     var flexibility: Flexibility { get set }
 
-    // sourcery: defaultValue = AlacrityStyle<UITextField> { _ in }
+    // sourcery: defaultValue = "{ _ in }"
     // sourcery: skipHashing, skipEquality
-    /// The styling applied to the UITextField. The default value is an empty style.
-    var style: AlacrityStyle<UITextField> { get set }
+    /// The configuration applied to the UITextField. The default closure does nothing.
+    var configuration: (UITextField) -> Void { get set }
 
     // sourcery: defaultValue = "{ (_: UITextField) -> Void in print("TextField has new text") }"
     // sourcery: skipHashing, skipEquality

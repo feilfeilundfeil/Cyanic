@@ -10,7 +10,6 @@ import class LayoutKit.ButtonLayoutDefaults
 import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
@@ -47,7 +46,7 @@ public struct ButtonComponent: ButtonComponentType {
     public var flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility
 
     // sourcery: skipHashing, skipEquality 
-    public var style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> { _ in }
+    public var configuration: (UIButton) -> Void = { _ in }
 
     // sourcery: skipHashing, skipEquality 
     public var onTap: () -> Void = { print("Hello World \(#file)") }

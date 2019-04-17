@@ -10,7 +10,6 @@ import class UIKit.UIColor
 import class UIKit.UIFont
 import class UIKit.UITextView
 import enum LayoutKit.Text
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
@@ -53,9 +52,9 @@ public protocol StaticTextComponentType: Component {
     /// The flexibility of the underlying TextViewLayout. The default value is TextViewLayoutDefaults.defaultFlexibility.
     var flexibility: Flexibility { get set }
 
-    // sourcery: defaultValue = AlacrityStyle<UITextView> { _ in }
+    // sourcery: defaultValue = "{ _ in }"
     // sourcery: skipHashing, skipEquality
-    /// The style applied to the UITextView. The default value is an empty style.
-    var style: AlacrityStyle<UITextView> { get set }
+    /// The configuration applied to the UITextView. The default closure does nothing.
+    var configuration: (UITextView) -> Void { get set }
 
 }

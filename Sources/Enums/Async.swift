@@ -6,8 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct Kio.MetaType
-
 /**
  Represents some data/model that is must be retrieved some time after the screen in rendered.
 */
@@ -60,7 +58,7 @@ public enum Async<T: Hashable>: Hashable {
 
             case .failure(let error):
                 error.localizedDescription.hash(into: &hasher)
-                MetaType<Async<T>>(type(of: self)).hash(into: &hasher)
+                ObjectIdentifier(type(of: self)).hash(into: &hasher)
 
             case .loading:
                 "loading".hash(into: &hasher)

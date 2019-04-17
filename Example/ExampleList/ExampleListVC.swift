@@ -191,7 +191,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 button.id = id
                 button.title = "This is a UIButton"
                 button.height = 44.0
-                button.style = style.modifying(with: { $0.backgroundColor = color })
+                button.configuration = style.modifying(with: { $0.backgroundColor = color }).style
                 button.onTap = { print("Hello World, \(id)") }
             }
 //

@@ -76,6 +76,8 @@
 		14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */; };
 		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
 		14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */; };
+		14DE09D7226620ED001C395F /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
+		14DE09D8226620ED001C395F /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */; };
 		14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */; };
 		14F06052224B58E700CC62B0 /* ExampleListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06051224B58E700CC62B0 /* ExampleListState.swift */; };
@@ -102,7 +104,28 @@
 			remoteGlobalIDString = 145AD74C220B1EBE004F02C2;
 			remoteInfo = "MvRx-iOS";
 		};
+		14DE09D9226620ED001C395F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 145AD744220B1EBE004F02C2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 145AD74C220B1EBE004F02C2;
+			remoteInfo = Cyanic;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		14DE09DB226620ED001C395F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				14DE09D8226620ED001C395F /* Cyanic.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		03006A39C0BA1B531F085BEB /* Pods-FFUFComponents.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FFUFComponents.release.xcconfig"; path = "Target Support Files/Pods-FFUFComponents/Pods-FFUFComponents.release.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */,
+				14DE09D7226620ED001C395F /* Cyanic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,10 +699,12 @@
 				1478E98F220C59B9006AF8B3 /* Frameworks */,
 				1478E990220C59B9006AF8B3 /* Resources */,
 				8D7698403E07A00D3CD1E7BC /* [CP] Embed Pods Frameworks */,
+				14DE09DB226620ED001C395F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				14DE09DA226620ED001C395F /* PBXTargetDependency */,
 			);
 			name = Example;
 			productName = Example;
@@ -848,15 +874,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alacrity/Alacrity.framework",
-				"${BUILT_PRODUCTS_DIR}/CommonWidgets/CommonWidgets.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/Kio/Kio.framework",
 				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Alacrity/Alacrity.framework",
+				"${BUILT_PRODUCTS_DIR}/CommonWidgets/CommonWidgets.framework",
 				"${BUILT_PRODUCTS_DIR}/Cyanic/Cyanic.framework",
+				"${BUILT_PRODUCTS_DIR}/Kio/Kio.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
@@ -864,15 +890,15 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alacrity.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonWidgets.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alacrity.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonWidgets.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cyanic.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
@@ -892,14 +918,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alacrity/Alacrity.framework",
 				"${BUILT_PRODUCTS_DIR}/CommonWidgets/CommonWidgets.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Kio/Kio.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/LayoutKit/LayoutKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Cyanic/Cyanic.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -907,14 +932,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alacrity.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CommonWidgets.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kio.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LayoutKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cyanic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1030,6 +1054,11 @@
 			isa = PBXTargetDependency;
 			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
 			targetProxy = 145AD758220B1EBF004F02C2 /* PBXContainerItemProxy */;
+		};
+		14DE09DA226620ED001C395F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 145AD74C220B1EBE004F02C2 /* Cyanic */;
+			targetProxy = 14DE09D9226620ED001C395F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1268,6 +1297,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9AAD379A2F04502A88BC9632 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;
@@ -1287,6 +1317,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAE01790233F583D5FA3BB4C /* Pods-Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 938GX6R6ZS;

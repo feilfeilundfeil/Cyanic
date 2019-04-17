@@ -18,7 +18,6 @@ import class UIKit.UIControl
 import class UIKit.UIView
 import enum LayoutKit.ButtonLayoutImage
 import enum LayoutKit.ButtonLayoutType
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
@@ -51,13 +50,12 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             image: ButtonLayoutImage.size(size),
             alignment: component.alignment,
             flexibility: component.flexibility,
-            config: component.style
-                .modifying { (view: UIButton) -> Void in
-                    serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
-                        .debug(component.id, trimOutput: false)
-                        .bind(onNext: component.onTap)
-                }
-                .style
+            config: { (view: UIButton) -> Void in
+                component.configuration(view)
+                serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
+                    .debug(component.id, trimOutput: false)
+                    .bind(onNext: component.onTap)
+            }
         )
 
         let insetLayout: InsetLayout = InsetLayout(

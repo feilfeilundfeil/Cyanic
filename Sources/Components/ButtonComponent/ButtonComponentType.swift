@@ -9,7 +9,6 @@
 import class UIKit.UIButton
 import class UIKit.UIColor
 import enum LayoutKit.ButtonLayoutType
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct LayoutKit.Alignment
 import struct LayoutKit.Flexibility
@@ -50,10 +49,10 @@ public protocol ButtonComponentType: StaticHeightComponent {
     /// ButtonLayoutDefaults.defaultFlexibility.
     var flexibility: Flexibility { get set }
 
-    // sourcery: defaultValue = AlacrityStyle<UIButton> { _ in }
+    // sourcery: defaultValue = "{ _ in }"
     // sourcery: skipHashing, skipEquality
     /// The styling applied to the UIButton. The default value is an empty style.
-    var style: AlacrityStyle<UIButton> { get set }
+    var configuration: (UIButton) -> Void { get set }
 
     // sourcery: defaultValue = { print("Hello World \(#file)") }
     // sourcery: skipHashing, skipEquality

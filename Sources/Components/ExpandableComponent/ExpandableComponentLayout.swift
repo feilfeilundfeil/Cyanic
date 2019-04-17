@@ -6,7 +6,6 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class CommonWidgets.ChevronView
 import class LayoutKit.InsetLayout
 import class LayoutKit.OverlayLayout
 import class LayoutKit.SizeLayout
@@ -16,7 +15,6 @@ import class UIKit.UIView
 import enum LayoutKit.Axis
 import enum LayoutKit.StackLayoutDistribution
 import protocol LayoutKit.Layout
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
@@ -44,27 +42,24 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
             sublayout: component.contentLayout
         )
 
-        let chevronLayout: SizeLayout<ChevronView> = SizeLayout<ChevronView>(
-            size: component.chevronSize,
+        let accessorySizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
+            minWidth: component.accessoryViewSize.width,
+            maxWidth: component.accessoryViewSize.width,
+            minHeight: component.accessoryViewSize.height,
+            maxHeight: component.accessoryViewSize.height,
             alignment: Alignment.center,
             flexibility: Flexibility.inflexible,
-            viewReuseId: "\(ExpandableComponentLayout.identifier)Chevron",
-            config: component.chevronStyle
-                .modifying { (view: ChevronView) -> Void in
-                    switch component.isExpanded {
-                        case true: view.direction = .up
-                        case false: view.direction = .down
-                    }
-                }
-                .style
+            viewReuseId: "\(ExpandableComponentLayout.identifier)AccessorySize",
+            viewClass: component.accessoryViewType,
+            config: component.accessoryViewConfiguration
         )
 
-        let chevronInsetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
+        let accessoryInsetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
             insets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: insets.right),
             alignment: Alignment.center,
-            flexibility: chevronLayout.flexibility,
-            viewReuseId: "\(ExpandableComponentLayout.identifier)ChevronInset",
-            sublayout: chevronLayout
+            flexibility: accessorySizeLayout.flexibility,
+            viewReuseId: "\(ExpandableComponentLayout.identifier)AccessoryInset",
+            sublayout: accessorySizeLayout
         )
 
         let adjustedSize: CGSize = CGSize(
@@ -73,9 +68,9 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
         )
 
         let contentWidth: CGFloat = contentInsetLayout.measurement(within: adjustedSize).size.width
-        let chevronWidth: CGFloat = chevronInsetLayout.measurement(within: adjustedSize).size.width
+        let accessoryWidth: CGFloat = accessoryInsetLayout.measurement(within: adjustedSize).size.width
 
-        let spacing: CGFloat = size.width - contentWidth - chevronWidth
+        let spacing: CGFloat = size.width - contentWidth - accessoryWidth
 
         let horizontalStack: StackLayout<UIView> = StackLayout<UIView>(
             axis: Axis.horizontal,
@@ -84,7 +79,7 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
             alignment: Alignment.fillLeading,
             flexibility: Flexibility.flexible,
             viewReuseId: "\(ExpandableComponentLayout.identifier)HorizontalStack",
-            sublayouts: [contentInsetLayout, chevronInsetLayout]
+            sublayouts: [contentInsetLayout, accessoryInsetLayout]
         )
 
         let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
@@ -130,11 +125,10 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
             alignment: Alignment.centerLeading,
             flexibility: Flexibility.flexible,
             viewReuseId: ExpandableComponentLayout.identifier,
-            config: component.style
-                .modifying { (view: UIView) -> Void in
-                    view.backgroundColor = component.backgroundColor
-                }
-                .style
+            config: { (view: UIView) -> Void in
+                component.configuration(view)
+                view.backgroundColor = component.backgroundColor
+            }
         )
     }
 }

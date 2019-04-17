@@ -16,6 +16,7 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct Foundation.IndexPath
 import struct RxDataSources.AnimatableSectionModel
+import class Foundation.Thread
 
 /**
  SingleSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView

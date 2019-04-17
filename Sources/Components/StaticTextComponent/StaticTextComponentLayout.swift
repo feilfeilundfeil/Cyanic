@@ -13,7 +13,6 @@ import class UIKit.UIColor
 import class UIKit.UITextView
 import class UIKit.UIView
 import enum LayoutKit.Text
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct LayoutKit.Alignment
@@ -40,12 +39,11 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             layoutAlignment: component.alignment,
             flexibility: component.flexibility,
             viewReuseId: "\(StaticTextComponentLayout.identifier)TextView",
-            config: AlacrityStyle<UITextView> {
-                $0.backgroundColor = UIColor.clear
-                $0.isEditable = false
+            config: { (view: UITextView) -> Void in
+                view.backgroundColor = UIColor.clear
+                view.isEditable = false
+                component.configuration(view)
             }
-            .modifying(with: component.style.style)
-            .style
         )
 
         let size: CGSize = CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude)

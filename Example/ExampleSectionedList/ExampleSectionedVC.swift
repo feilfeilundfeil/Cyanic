@@ -12,6 +12,7 @@ import Alacrity
 import LayoutKit
 import RxCocoa
 import RxSwift
+import CommonWidgets
 
 public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
@@ -34,7 +35,28 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
 
         withState(of: self.viewModel) { (state: ExampleSectionedState) -> Void in
 
+            let expandableComponentConfiguration: (String, inout ExpandableComponent) -> Void = {
+                (id: String, component: inout ExpandableComponent) -> Void in
+                let isExpanded: Bool = state.expandableDict[id] == true
+                component.isExpanded = isExpanded
+                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                    self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
+                }
+
+                component.accessoryViewType = ChevronView.self
+                component.accessoryViewConfiguration = { (view: UIView) -> Void in
+                    guard let view = view as? ChevronView else { return }
+                    switch isExpanded {
+                        case true:
+                            view.direction = .up
+                        case false:
+                            view.direction = .down
+                    }
+                }
+            }
+
             sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
                         let id: String = "First Section"
@@ -44,16 +66,13 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                             text: Text.unattributed(id),
                             font: UIFont.boldSystemFont(ofSize: 17.0),
                             alignment: Alignment.centerLeading,
-                            style: AlacrityStyle<UILabel>{ (view: UILabel) -> Void in
+                            configuration: { (view: UILabel) -> Void in
                                 view.textColor = UIColor.black
                             }
                         )
-                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 5.0)
+                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
                         component.backgroundColor = UIColor.lightGray
-                        component.isExpanded = state.expandableDict[id] == true
-                        component.setExpandableState =  { (id: String, isExpanded: Bool) -> Void in
-                            self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
-                        }
+                        expandableComponentConfiguration(id, &component)
                     }
                 )
 
@@ -83,16 +102,15 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                             text: Text.unattributed(id),
                             font: UIFont.boldSystemFont(ofSize: 17.0),
                             alignment: Alignment.centerLeading,
-                            style: AlacrityStyle<UILabel>{ (view: UILabel) -> Void in
+                            configuration: { (view: UILabel) -> Void in
                                 view.textColor = UIColor.black
                             }
                         )
-                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 5.0)
+
+
+                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
                         component.backgroundColor = UIColor.lightGray
-                        component.isExpanded = state.expandableDict[id] == true
-                        component.setExpandableState = { (id, isExpanded) in
-                            self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
-                        }
+                        expandableComponentConfiguration(id, &component)
                     }
                 )
 

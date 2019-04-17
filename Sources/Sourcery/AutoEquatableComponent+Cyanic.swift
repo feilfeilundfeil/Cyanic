@@ -49,7 +49,7 @@ extension ExpandableComponent: Equatable {}
 public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.contentLayout == rhs.contentLayout else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
-    guard lhs.chevronSize == rhs.chevronSize else { return false }
+    guard lhs.accessoryViewSize == rhs.accessoryViewSize else { return false }
     guard lhs.isExpanded == rhs.isExpanded else { return false }
     guard lhs.id == rhs.id else { return false }
     guard lhs.width == rhs.width else { return false }

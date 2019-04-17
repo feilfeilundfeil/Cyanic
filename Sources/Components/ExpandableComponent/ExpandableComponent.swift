@@ -6,10 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class CommonWidgets.ChevronView
 import class UIKit.UIColor
 import class UIKit.UIView
-import struct Alacrity.AlacrityStyle
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 import struct UIKit.UIEdgeInsets
@@ -41,13 +39,16 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     // sourcery: skipHashing, skipEquality 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
-    public var chevronSize: CGSize = CGSize(width: 12.0, height: 12.0)
+    // sourcery: skipHashing, skipEquality 
+    public var accessoryViewType: UIView.Type = UIView.self
+
+    public var accessoryViewSize: CGSize = CGSize(width: 12.0, height: 12.0)
 
     // sourcery: skipHashing, skipEquality 
-    public var chevronStyle: AlacrityStyle<ChevronView> = AlacrityStyle<ChevronView> { _ in }
+    public var accessoryViewConfiguration: (UIView) -> Void = { _ in }
 
     // sourcery: skipHashing, skipEquality 
-    public var style: AlacrityStyle<UIView> = AlacrityStyle<UIView> { _ in }
+    public var configuration: (UIView) -> Void = { _ in }
 
     public var isExpanded: Bool = false
 

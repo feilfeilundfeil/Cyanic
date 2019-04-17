@@ -111,7 +111,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     component.text = state1.userName
                 }
 
-                component.style = AlacrityStyle<UITextField> { [weak self] (textField: UITextField) -> Void in
+                component.configuration = { [weak self] (textField: UITextField) -> Void in
                     textField.backgroundColor = UIColor.white
                     textField.kio.cornerRadius(of: 5.0)
                     textField.tag = id.hashValue
@@ -143,7 +143,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     component.text = state2.password
                 }
 
-                component.style = AlacrityStyle<UITextField> { [weak self] (textField: UITextField) -> Void in
+                component.configuration = { [weak self] (textField: UITextField) -> Void in
                     textField.backgroundColor = UIColor.white
                     textField.kio.cornerRadius(of: 5.0)
                     textField.tag = id.hashValue
@@ -173,11 +173,10 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 component.title = "Submit"
                 component.insets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
 
-                component.style = AlacrityStyle<UIButton> { (view: UIButton) -> Void in
+                component.configuration = { (view: UIButton) -> Void in
                     view.backgroundColor = UIColor.red
                     view.setTitleColor(UIColor.white, for: UIControl.State.normal)
                     view.kio.cornerRadius(of: 5.0)
-
                 }
 
                 component.onTap = {
