@@ -17,11 +17,20 @@ Requirements:
 1. Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
     ```rb
     pod 'Cyanic'
-    pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git' // Use this fork until LayoutKit updates to Swift 5
+    pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git' // Use this fork until LayoutKit is updated
     ```
 
 2. Integrate your dependencies using frameworks: add `use_frameworks!` to your Podfile. 
 3. Run `pod install`.
+
+## Why we use a forked version of LayoutKit
+
+LayoutKit is the library that is responsible for most of the UI logic in Cyanic. However, as of April 17, 2019, there are some limitations of the current LayoutKit version in Cocoapods:
+
+1. It is not updated to use Swift 5
+2. Cyanic needs access to an internal initializer of the Layouts that allows you to declare the UIView subclass type as an argument.
+
+Without these changes Cyanic, will continue to use the forked version.
 
 ## Documentation
 
