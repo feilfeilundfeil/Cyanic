@@ -108,7 +108,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     internal lazy var _sizeObservable: Observable<CGSize> = self._listView.rx
         .observeWeakly(CGRect.self, "bounds", options: [KeyValueObservingOptions.new, KeyValueObservingOptions.initial])
         .filter({ (rect: CGRect?) -> Bool in
-            return rect?.size != nil && rect?.size != CGSize.zero
+            return rect?.size != nil && rect?.size.height != 0.0 && rect?.size.width != 0.0
         })
         .map({ (rect: CGRect?) -> CGSize in rect!.size })
         .distinctUntilChanged()

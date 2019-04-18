@@ -56,7 +56,7 @@ public func withState<ConcreteState1: State, ConcreteState2: State, ConcreteStat
     - viewModel3: The third ViewModel instance whose State will be accessed.
     - viewModel4: The fourth ViewModel instance whose State will be accessed.
     - block: The logic executed with the current States of the ViewModels.
- */
+*/
 public func withState<
     ConcreteState1: State,
     ConcreteState2: State,
@@ -81,7 +81,7 @@ public func withState<
     - viewModel4: The fourth ViewModel instance whose State will be accessed.
     - viewModel5: The fifth ViewModel instance whose State will be accessed.
     - block: The logic executed with the current States of the ViewModels.
- */
+*/
 public func withState< // swiftlint:disable:this function_parameter_count
     ConcreteState1: State,
     ConcreteState2: State,
