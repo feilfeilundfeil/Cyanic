@@ -13,7 +13,7 @@ import protocol Differentiator.IdentifiableType
 import struct Foundation.IndexPath
 
 /**
- Type Erased wrapper for a Component instance
+ Type-erased wrapper for a Component instance
 */
 public final class AnyComponent: IdentifiableType {
 

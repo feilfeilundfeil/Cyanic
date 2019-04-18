@@ -9,7 +9,7 @@
 import struct RxSwift.RxTimeInterval
 
 /**
- Represents the kind of throttling option available for SingleSectionComponentViewController
+ Represents the throttling option available for ComponentViewController and CyanicViewController
 */
 public enum ThrottleType {
 

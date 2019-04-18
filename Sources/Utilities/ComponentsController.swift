@@ -10,43 +10,42 @@ import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
 /**
- ComponentsController is a helper struct that transforms Component instances into AnyComponent instances and
- adds it to an array.
+ ComponentsController is responsible for managing an Array of AnyComponents. It functions as the data source for models
+ to display on a UICollectionView/UITableView.
 */
 public struct ComponentsController {
 
     /**
      Initializer.
      - Parameters:
-        - width: The width of the UICollectionView. Since ComponentsController adds components to itself, it
-                 will also determine the width of the Component by mutating its width property to the width
-                 of the UICollectionView.
+        - size: The size of the UICollectionView/UITableView. ComponentsController mutates the width property of every
+                Component that is added to its Array.
     */
     internal init(size: CGSize) {
         self.size = size
     }
 
     /**
-     The CGSize of the UICollectionView where the components will be displayed.
+     The CGSize of the UICollectionView/UITableView where the Components will be displayed.
     */
     public let size: CGSize
 
     /**
-     The width of the UICollectionView where the components will be displayed.
+     The width of the UICollectionView/UITableView where the Components will be displayed.
     */
     public var width: CGFloat {
         return self.size.width
     }
 
     /**
-     The height of the UICollectionView where the components will be displayed.
+     The height of the UICollectionView/UITableView where the Components will be displayed.
     */
     public var height: CGFloat {
         return self.size.height
     }
 
     /**
-     The AnyComponent array mutated by this ComponentsController.
+     The Array of AnyComponents managed by this ComponentsController.
     */
     public private(set) var components: [AnyComponent] = []
 

@@ -9,9 +9,19 @@
 import struct CoreGraphics.CGFloat
 import struct CoreGraphics.CGSize
 
+/**
+ MultiSectionController represents the entire data source of a UICollectionView/UITableView. It manages an Array of
+ SectionControllers.
+*/
 public struct MultiSectionController {
 
     // MARK: Initializer
+    /**
+     Initializer.
+     - Parameters:
+        - size: The size of the UICollectionView/UITableView. MultiSectionController initializes its SectionController
+                instances with it.
+    */
     public init(size: CGSize) {
         self.size = size
     }
@@ -43,7 +53,7 @@ public struct MultiSectionController {
     }
 
     /**
-     Generates a SectionController instance and configures its properties with the given closure. You must provide a
+     Creates a SectionController instance and configures its properties with the given closure. You must provide a
      sectionComponent, otherwise it will force a fatalError.
      - Parameters:
          - configuration: The closure that mutates the mutable ButtonComponent.
@@ -55,6 +65,7 @@ public struct MultiSectionController {
     public mutating func sectionController(with configuration: (_ sectionController: inout SectionController) -> Void) -> SectionController {
         var sectionController: SectionController = SectionController(size: self.size)
         configuration(&sectionController)
+        guard sectionController.sectionComponent != nil else { fatalError("Missing a sectionComponent!")}
         self.sectionControllers.append(sectionController)
         return sectionController
     }

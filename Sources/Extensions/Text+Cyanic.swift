@@ -12,7 +12,8 @@ import enum LayoutKit.Text
 extension Text: Hashable {
 
     /**
-     The associated string value of either the String from .unattributed or the NSAttributedString.string from .attributed cases.
+     The associated string value of either the String from .unattributed or the NSAttributedString.string from
+     .attributed cases.
     */
     public var value: String {
         switch self {

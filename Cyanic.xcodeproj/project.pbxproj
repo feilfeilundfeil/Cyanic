@@ -517,11 +517,11 @@
 		14C96F062211C2EF00731265 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				142C4520223BB36C002360F5 /* GlobalFunctions.swift */,
-				1498049D2260D8340044194C /* MultiSectionController.swift */,
-				1498048F22608F8C0044194C /* SectionController.swift */,
-				149D5B8E221B33A100482F28 /* ComponentsController.swift */,
 				14C96F072211C30F00731265 /* Constants.swift */,
+				142C4520223BB36C002360F5 /* GlobalFunctions.swift */,
+				149D5B8E221B33A100482F28 /* ComponentsController.swift */,
+				1498048F22608F8C0044194C /* SectionController.swift */,
+				1498049D2260D8340044194C /* MultiSectionController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

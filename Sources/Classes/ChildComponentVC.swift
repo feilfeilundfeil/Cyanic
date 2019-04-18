@@ -9,8 +9,9 @@
 import class UIKit.UIViewController
 
 /**
- The base class for UIViewControllers that should be shown inside a SingleSectionComponentViewController via a ChildVCComponent.
- When a ChildComponentVC is deinitialized, it removes itself from its parent and it removes its UIView from its superview.
+ The base class for UIViewControllers that should be shown inside a SingleSectionComponentViewController via
+ a ChildVCComponent. When a ChildComponentVC is deinitialized, it removes itself from its parent and it removes its
+ UIView from its superview.
 */
 open class ChildComponentVC: UIViewController {
 
