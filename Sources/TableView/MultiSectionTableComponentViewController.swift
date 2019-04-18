@@ -77,7 +77,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
                     withIdentifier: TableComponentCell.identifier,
                     for: indexPath
                 ) as? TableComponentCell
-                    else { fatalError("Cell not registered to UITableView")}
+                    else { fatalError("Cell not registered to UITableView") }
 
                 cell.configure(with: component)
                 return cell

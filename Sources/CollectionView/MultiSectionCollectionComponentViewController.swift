@@ -82,7 +82,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                     withReuseIdentifier: CollectionComponentCell.identifier,
                     for: indexPath
                 ) as? CollectionComponentCell
-                    else { fatalError("Cell not registered to UICollectionView")}
+                    else { fatalError("Cell not registered to UICollectionView") }
 
                 cell.configure(with: component)
                 return cell
@@ -95,11 +95,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                     withReuseIdentifier: ComponentSupplementaryView.identifier,
                     for: indexPath
                 ) as? ComponentSupplementaryView
-                    else { fatalError("Cell not registered to UICollectionView")}
-
-                print("ID: \(sectionModel.model.id), IndexPath: \(indexPath)")
-
-                print("DataSource: \(dataSource.sectionModels.map { $0.model.id }.joined(separator: ", ") )")
+                    else { fatalError("Cell not registered to UICollectionView") }
 
                 view.configure(with: sectionModel.model)
                 return view

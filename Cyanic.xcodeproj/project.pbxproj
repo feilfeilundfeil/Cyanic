@@ -399,8 +399,8 @@
 				14C96F062211C2EF00731265 /* Utilities */,
 				14C1E3DC2210491E0053E318 /* Components */,
 				1478E9AF220C5CDA006AF8B3 /* Classes */,
-				14609BA222635B41007B2AFC /* TableView */,
 				14609BA122635B04007B2AFC /* CollectionView */,
+				14609BA222635B41007B2AFC /* TableView */,
 				14CBC9C9220C415200597FAA /* Protocols */,
 			);
 			path = Sources;

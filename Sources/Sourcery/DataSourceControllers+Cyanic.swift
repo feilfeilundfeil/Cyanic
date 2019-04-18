@@ -146,7 +146,7 @@ public extension SectionController {
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 
@@ -168,7 +168,7 @@ public extension SectionController {
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateChildVCComponent(mutableComponent)
             else { fatalError("You did not configure all required variables in this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 
@@ -190,7 +190,7 @@ public extension SectionController {
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateExpandableComponent(mutableComponent)
             else { fatalError("You did not configure all required variables in this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 
@@ -210,7 +210,7 @@ public extension SectionController {
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 
@@ -230,7 +230,7 @@ public extension SectionController {
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 
@@ -250,7 +250,7 @@ public extension SectionController {
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
-        self.sectionComponent = AnyComponent(mutableComponent)
+        self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }
 }

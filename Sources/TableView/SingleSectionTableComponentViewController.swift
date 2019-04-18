@@ -62,7 +62,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
                     withIdentifier: TableComponentCell.identifier,
                     for: indexPath
                 ) as? TableComponentCell
-                    else { fatalError("Cell not registered to UICollectionView")}
+                    else { fatalError("Cell not registered to UICollectionView") }
 
                 cell.configure(with: component)
                 return cell
