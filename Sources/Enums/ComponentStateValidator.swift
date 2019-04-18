@@ -36,7 +36,7 @@ public enum ComponentStateValidator {
             let isValid: Bool = !(size.width == 0.0 || size.height == 0.0)
             #if DEBUG
             if !isValid {
-                let errorString = "Your imageSize cannot have zero values"
+                let errorString: String = "Your imageSize cannot have zero values"
                 print("ExpandableError: \(errorString)")
             }
             #endif
