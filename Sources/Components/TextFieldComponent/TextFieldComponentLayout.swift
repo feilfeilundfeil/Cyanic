@@ -44,11 +44,16 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
                 view.placeholder = component.placeholder
 
                 let disposables: [Disposable] = [
-                    view.rx
-                        .controlEvent([UIControl.Event.editingChanged])
-                        .map({ (_: Void) -> UITextField in return view })
+                    view.rx.text.orEmpty
+                        .map({ (_: String) -> UITextField in
+                            return view
+                        })
                         .debounce(0.5, scheduler: MainScheduler.instance)
-                        .bind(onNext: component.textDidChange)
+                        .bind(
+                            onNext: { (view: UITextField) -> Void in
+                                component.textDidChange(view)
+                            }
+                        )
                 ]
 
                 let compositeDisposable: CompositeDisposable = CompositeDisposable(disposables: disposables)

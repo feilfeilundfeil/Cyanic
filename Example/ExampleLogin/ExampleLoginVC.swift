@@ -81,8 +81,9 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
 
     // MARK: Overridden SingleSectionCollectionComponentViewController Methods
     public override func buildComponents(_ componentsController: inout ComponentsController) {
-
-        withState(viewModel1: self.viewModelOne, viewModel2: self.viewModelTwo) { (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in
+        let viewModelOne = self.viewModelOne
+        let viewModelTwo = self.viewModelTwo
+        withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) { [weak self] (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in
 
             componentsController.staticSpacingComponent(configuration: { (component: inout StaticSpacingComponent) -> Void in
                 component.height = 70.0
@@ -107,9 +108,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 component.insets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
                 component.placeholder = "Enter Username"
 
-                if !state1.userName.isEmpty {
-                    component.text = state1.userName
-                }
+                component.text = state1.userName
 
                 component.configuration = { [weak self] (textField: UITextField) -> Void in
                     textField.backgroundColor = UIColor.white
@@ -120,9 +119,11 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     self.userTextField = textField
                 }
 
-                component.textDidChange = { [weak self] (textField: UITextField) -> Void in
-                    guard let self = self, let text = textField.text, text != state1.userName else { return }
-                    self.viewModelOne.setUserName(text)
+                component.textDidChange = { (textField: UITextField) -> Void in
+                    withState(of: viewModelOne) { [weak self] (_: ExampleLoginStateA) -> Void in
+                        guard let text = textField.text else { return }
+                        viewModelOne.setUserName(text)
+                    }
                 }
 
                 component.textFieldType = TestTextField.self
@@ -139,9 +140,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 component.insets = UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 10.0)
                 component.placeholder = "Enter Password"
 
-                if !state2.password.isEmpty {
-                    component.text = state2.password
-                }
+                component.text = state2.password
 
                 component.configuration = { [weak self] (textField: UITextField) -> Void in
                     textField.backgroundColor = UIColor.white
@@ -180,12 +179,15 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 }
 
                 component.onTap = {
-                    print(
-                        """
-                        Username: \(state1.userName)
-                        Password: \(state2.password)
-                        """
-                    )
+                    withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) {
+                        (s1: ExampleLoginStateA, s2: ExampleLoginStateB) -> Void in
+                        print(
+                            """
+                            Username: \(s1.userName)
+                            Password: \(s2.password)
+                            """
+                        )
+                    }
                 }
             })
         }
