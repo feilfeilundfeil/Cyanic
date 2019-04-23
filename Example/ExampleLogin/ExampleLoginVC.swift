@@ -153,8 +153,10 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 }
 
                 component.textDidChange = { [weak self] (textField: UITextField) -> Void in
-                    guard let self = self, let text = textField.text, text != state2.password else { return }
-                    self.viewModelTwo.setPassword(text)
+                    withState(of: viewModelTwo) { [weak self] (_: ExampleLoginStateB) -> Void in
+                        guard let text = textField.text else { return }
+                        viewModelTwo.setPassword(text)
+                    }
                 }
 
                 component.textFieldType = TestTextField.self

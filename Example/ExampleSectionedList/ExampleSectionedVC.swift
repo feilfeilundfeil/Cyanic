@@ -115,7 +115,6 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                 )
 
                 if expandableComponent.isExpanded {
-
                     sectionController.buildComponents({ (components: inout ComponentsController) -> Void in
                         state.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
                             components.staticTextComponent(configuration: { (component: inout StaticTextComponent) -> Void in
