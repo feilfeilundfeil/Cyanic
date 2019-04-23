@@ -19,7 +19,7 @@ import struct Foundation.IndexPath
 
  This shouldn't be used with the ExpandableComponent or any SingleSectionComponentViewController where the elements
  are changing. It makes the animation look broken
- */
+*/
 open class CyanicNoFadeFlowLayout: UICollectionViewFlowLayout {
 
     override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

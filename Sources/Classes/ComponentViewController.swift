@@ -138,7 +138,8 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     open var viewModels: [AnyViewModel] { return [] }
 
     /**
-     Limits the frequency of state updates. There are some cases where this is necessary.
+     Limits the frequency of state updates. There are some cases where this is necessary. The default value is
+     ThrottleType.none.
     */
     open var throttleType: ThrottleType { return ThrottleType.none }
 

@@ -51,7 +51,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
 
     // MARK: Methods
     /**
-     Instantiates the RxTableViewSectionedAnimatedDataSource for the UITableVIew.
+     Instantiates the RxTableViewSectionedAnimatedDataSource for the UITableView.
      - Returns:
         A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
     */
@@ -96,12 +96,6 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
     internal final override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
-        // Call buildComponents method when a new element in combinedObservable is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay.
-        // NOTE:
-        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. So, there is no point in
-        // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
@@ -136,7 +130,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
         }
 
         guard let layout = self.component(at: indexPath)?.layout
-            else { return 0.0}
+            else { return 0.0 }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 

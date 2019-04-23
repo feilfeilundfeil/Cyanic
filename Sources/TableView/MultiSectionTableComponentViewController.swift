@@ -95,13 +95,14 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         let component: AnyComponent = sectionController.componentsController.components[indexPath.item]
         return component
     }
+
     /**
      Gets the SectionController at the specified index if there is one.
      - Parameters:
         - section: The index of the SectionController.
      - Returns:
         A SectionController or nil if the index is out of range.
-     */
+    */
     public final func sectionController(at section: Int) -> SectionController? {
         guard section < self._sections.value.sectionControllers.count  else {
             return nil
@@ -131,12 +132,6 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
     internal final override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
-        // Call buildComponents method when a new element in combinedObservable is emitted
-        // Bind the new AnyComponents array to the _components BehaviorRelay.
-        // NOTE:
-        // RxCollectionViewSectionedAnimatedDataSource.swift line 56.
-        // UICollectionView has problems with fast updates. So, there is no point in
-        // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
             .map({ [weak self] (size: CGSize, _: [Any]) -> MultiSectionController in
                 guard let s = self else { return MultiSectionController(size: CGSize.zero) }
@@ -160,7 +155,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
      - Parameters:
         - sections: The MultiSectionController that is mutated by this method. It always
                     starts as an empty MultiSectionController.
-     */
+    */
     open func buildSections(_ sectionsController: inout MultiSectionController) {}
 
     // MARK: UITableViewDelegate Methods
