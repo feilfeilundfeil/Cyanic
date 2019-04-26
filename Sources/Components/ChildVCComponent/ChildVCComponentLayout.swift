@@ -6,11 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.SizeLayout
-import class UIKit.UIView
-import class UIKit.UIViewController
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
+import LayoutKit
+import UIKit
 
 /**
  The ChildVCComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.

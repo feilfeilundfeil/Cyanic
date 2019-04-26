@@ -6,11 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UITableView
-import class UIKit.UIView
-import protocol UIKit.UITableViewDelegate
-import struct CoreGraphics.CGRect
-import struct Foundation.IndexPath
+import UIKit
 
 /**
  TableComponentViewController is a subclass of ComponentViewController. It serves as the base class for the

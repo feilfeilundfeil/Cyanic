@@ -6,9 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIColor
-import struct CoreGraphics.CGFloat
-import struct UIKit.UIEdgeInsets
+import UIKit
 
 /**
  DividerLine is a data structure representing the characteristics of the UIView used a "divider line" on the ExpandableComponent.

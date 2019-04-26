@@ -6,20 +6,10 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxSwift.DisposeBag
-import class RxSwift.MainScheduler
-import class RxSwift.Observable
-import class RxSwift.SerialDispatchQueueScheduler
-import class UIKit.NSLayoutConstraint
-import class UIKit.UIView
-import class UIKit.UIViewController
-import struct CoreGraphics.CGRect
-import struct CoreGraphics.CGSize
-import struct Foundation.DispatchQoS
-import struct Foundation.IndexPath
-import struct Foundation.UUID
-import struct RxCocoa.KeyValueObservingOptions
+import Foundation
+import RxCocoa
+import RxSwift
+import UIKit
 
 /**
  ComponentViewController contains all the logic that is shared between the CollectionComponentViewController and

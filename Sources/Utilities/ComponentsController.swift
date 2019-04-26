@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
+import CoreGraphics
 
 /**
  ComponentsController is responsible for managing an Array of AnyComponents. It functions as the data source for models

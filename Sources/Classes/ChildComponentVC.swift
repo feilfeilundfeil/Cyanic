@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIViewController
+import UIKit
 
 /**
  The base class for UIViewControllers that should be shown inside a SingleSectionComponentViewController via

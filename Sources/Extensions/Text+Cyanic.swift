@@ -6,8 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class Foundation.NSAttributedString
-import enum LayoutKit.Text
+import Foundation
+import LayoutKit
 
 extension Text: Hashable {
 

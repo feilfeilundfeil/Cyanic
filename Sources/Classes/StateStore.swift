@@ -6,13 +6,9 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxCocoa.PublishRelay
-import class RxSwift.DisposeBag
-import class RxSwift.Observable
-import class RxSwift.SerialDispatchQueueScheduler
-import struct Dispatch.DispatchQoS
-import struct Foundation.UUID
+import Foundation
+import RxCocoa
+import RxSwift
 
 /**
  StateStore manages the State of the ViewModel instance. It ensures that all setState calls are

@@ -6,20 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.InsetLayout
-import class LayoutKit.OverlayLayout
-import class LayoutKit.SizeLayout
-import class LayoutKit.StackLayout
-import class UIKit.UIColor
-import class UIKit.UIView
-import enum LayoutKit.Axis
-import enum LayoutKit.StackLayoutDistribution
-import protocol LayoutKit.Layout
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
-import struct UIKit.UIEdgeInsets
+import LayoutKit
+import UIKit
 
 /**
  The ExpandableComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.

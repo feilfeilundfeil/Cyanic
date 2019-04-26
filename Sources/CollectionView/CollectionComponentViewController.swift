@@ -6,29 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
-import class RxSwift.DisposeBag
-import class RxSwift.MainScheduler
-import class RxSwift.Observable
-import class RxSwift.SerialDispatchQueueScheduler
-import class UIKit.NSLayoutConstraint
-import class UIKit.UICollectionView
-import class UIKit.UICollectionViewCell
-import class UIKit.UICollectionViewFlowLayout
-import class UIKit.UICollectionViewLayout
-import class UIKit.UIView
-import class UIKit.UIViewController
-import protocol UIKit.UICollectionViewDelegateFlowLayout
-import protocol UIKit.UIViewControllerTransitionCoordinator
-import struct CoreGraphics.CGRect
-import struct CoreGraphics.CGSize
-import struct Foundation.DispatchQoS
-import struct Foundation.IndexPath
-import struct Foundation.UUID
-import struct RxCocoa.KeyValueObservingOptions
-import struct RxDataSources.AnimatableSectionModel
-import struct RxSwift.RxTimeInterval
+import UIKit
 
 /**
  CollectionComponentViewController is a subclass of ComponentViewController. It serves as the base class for the

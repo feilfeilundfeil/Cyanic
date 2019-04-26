@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.Observable
+import RxSwift
 
 internal extension Array where Element == AnyViewModel {
 

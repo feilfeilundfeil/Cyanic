@@ -7,10 +7,7 @@ func lowerCamelCaseName(for type: Type) -> String {
 // sourcery:file:DataSourceControllers+<%= argument["project"] as? String ?? "Cyanic" %>.swift
 <%_ if let isFramework = argument["isFramework"] as? Bool, isFramework {-%>
 <%_ } else { -%>
-import enum Cyanic.ComponentStateValidator
-import enum Cyanic.Constants
-import struct Cyanic.ComponentsController
-import struct Cyanic.SectionController
+import Cyanic
 
 <%_ } -%>
 public extension ComponentsController {

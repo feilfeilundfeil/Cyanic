@@ -6,25 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.InsetLayout
-import class LayoutKit.LabelLayout
-import class LayoutKit.LabelLayoutDefaults
-import class LayoutKit.SizeLayout
-import class LayoutKit.StackLayout
-import class UIKit.UIFont
-import class UIKit.UIImage
-import class UIKit.UIImageView
-import class UIKit.UILabel
-import class UIKit.UIView
-import enum LayoutKit.Axis
-import enum LayoutKit.Text
-import enum LayoutKit.StackLayoutDistribution
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
-import struct Foundation.Data
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
-import struct UIKit.UIEdgeInsets
+import LayoutKit
+import UIKit
 
 open class ExpandableContentLayout: InsetLayout<UIView>, Hashable {
     public static func == (lhs: ExpandableContentLayout, rhs: ExpandableContentLayout) -> Bool {

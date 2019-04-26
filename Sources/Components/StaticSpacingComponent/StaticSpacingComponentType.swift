@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIColor
-import struct CoreGraphics.CGFloat
+import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = StaticSpacingComponent

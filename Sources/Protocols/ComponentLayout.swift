@@ -6,8 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.DisposeBag
-import protocol LayoutKit.Layout
+import LayoutKit
+import RxSwift
 
 /**
  A ComponentLayout is simply a Layout that is customized for Cyanic.

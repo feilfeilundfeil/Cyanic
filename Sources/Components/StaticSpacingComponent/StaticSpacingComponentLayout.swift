@@ -6,12 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.SizeLayout
-import class UIKit.UIColor
-import class UIKit.UIView
-import struct CoreGraphics.CGSize
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
+import LayoutKit
+import UIKit
 
 /**
  The StaticSpacingComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.

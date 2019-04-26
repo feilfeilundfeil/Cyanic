@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct CoreGraphics.CGSize
+import CoreGraphics
 
 /**
  In cases where ComponentViewController is a childViewController, it is sometimes necessary to have an exact size.

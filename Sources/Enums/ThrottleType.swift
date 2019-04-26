@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct RxSwift.RxTimeInterval
+import RxSwift
 
 /**
  Represents the throttling option available for ComponentViewController and CyanicViewController

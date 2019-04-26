@@ -12,7 +12,6 @@ import Alacrity
 import LayoutKit
 import RxCocoa
 import RxSwift
-import CommonWidgets
 
 public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
@@ -43,14 +42,12 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                     self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
                 }
 
-                component.accessoryViewType = ChevronView.self
                 component.accessoryViewConfiguration = { (view: UIView) -> Void in
-                    guard let view = view as? ChevronView else { return }
                     switch isExpanded {
                         case true:
-                            view.direction = .up
+                            view.backgroundColor = UIColor.yellow
                         case false:
-                            view.direction = .down
+                            view.backgroundColor = UIColor.blue
                     }
                 }
             }

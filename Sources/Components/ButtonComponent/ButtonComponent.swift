@@ -6,14 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.ButtonLayoutDefaults
-import class UIKit.UIButton
-import class UIKit.UIColor
-import enum LayoutKit.ButtonLayoutType
-import struct CoreGraphics.CGFloat
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
-import struct UIKit.UIEdgeInsets
+import LayoutKit
+import UIKit
 
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = ButtonComponentLayout

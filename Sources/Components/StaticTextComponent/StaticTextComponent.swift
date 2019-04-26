@@ -6,15 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.TextViewLayoutDefaults
-import class UIKit.UIColor
-import class UIKit.UIFont
-import class UIKit.UITextView
-import enum LayoutKit.Text
-import struct CoreGraphics.CGFloat
-import struct UIKit.UIEdgeInsets
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
+import LayoutKit
+import UIKit
 
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = StaticTextComponentLayout

@@ -6,20 +6,10 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxDataSources.CollectionViewSectionedDataSource
-import class RxDataSources.RxCollectionViewSectionedAnimatedDataSource
-import class RxSwift.Observable
-import class RxSwift.MainScheduler
-import class UIKit.UICollectionView
-import class UIKit.UICollectionReusableView
-import class UIKit.UICollectionViewCell
-import class UIKit.UICollectionViewLayout
-import enum RxDataSources.ViewTransition
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
-import struct Foundation.IndexPath
-import struct RxDataSources.AnimatableSectionModel
+import UIKit
+import RxDataSources
+import RxSwift
+import RxCocoa
 
 /**
  MultiSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView

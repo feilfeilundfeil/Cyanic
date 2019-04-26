@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct CoreGraphics.CGSize
+import CoreGraphics
 
 public enum ComponentStateValidator {
 

@@ -6,17 +6,10 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxDataSources.RxTableViewSectionedAnimatedDataSource
-import class RxSwift.Observable
-import class UIKit.UITableView
-import class UIKit.UITableViewCell
-import class UIKit.UIView
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
-import struct Foundation.IndexPath
-import struct RxDataSources.AnimationConfiguration
-import struct RxDataSources.AnimatableSectionModel
+import RxCocoa
+import RxDataSources
+import RxSwift
+import UIKit
 
 /**
  MultiSectionTableComponentViewController is a TableComponentViewController subclass that manages a UITableView with

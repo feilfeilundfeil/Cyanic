@@ -6,9 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxCocoa.BehaviorRelay
-import class RxSwift.DisposeBag
-import class RxSwift.Observable
+import RxCocoa
+import RxSwift
 
 /**
  AbstractViewModel is a class that provides the essential functionality that must exist in all ViewModel subclasses.

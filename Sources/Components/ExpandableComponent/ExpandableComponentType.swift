@@ -6,11 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIColor
-import class UIKit.UIView
-import struct CoreGraphics.CGSize
-import struct CoreGraphics.CGFloat
-import struct UIKit.UIEdgeInsets
+import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
 // sourcery: Component = ExpandableComponent

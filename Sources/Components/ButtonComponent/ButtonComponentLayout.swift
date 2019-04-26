@@ -6,24 +6,9 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.ButtonLayout
-import class LayoutKit.ButtonLayoutDefaults
-import class LayoutKit.InsetLayout
-import class LayoutKit.SizeLayout
-import class RxSwift.DisposeBag
-import class RxSwift.SerialDisposable
-import class UIKit.UIButton
-import class UIKit.UIColor
-import class UIKit.UIControl
-import class UIKit.UIView
-import enum LayoutKit.ButtonLayoutImage
-import enum LayoutKit.ButtonLayoutType
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
-import struct UIKit.UIEdgeInsets
-import struct UIKit.UIControlEvents
+import LayoutKit
+import RxSwift
+import UIKit
 
 /**
  The ButtonComponentLayout is a ComponentLayout that is a subclass of SizeLayout<UIView>.

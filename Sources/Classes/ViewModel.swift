@@ -6,9 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.MainScheduler
-import protocol RxSwift.ObservableType
-import protocol RxSwift.Disposable
+import RxSwift
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for

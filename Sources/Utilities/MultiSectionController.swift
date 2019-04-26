@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
+import CoreGraphics
 
 /**
  MultiSectionController represents the entire data source of a UICollectionView/UITableView. It manages an Array of

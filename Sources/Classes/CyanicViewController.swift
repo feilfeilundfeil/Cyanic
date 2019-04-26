@@ -6,15 +6,10 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class Foundation.NSCoder
-import class RxCocoa.BehaviorRelay
-import class RxSwift.DisposeBag
-import class RxSwift.MainScheduler
-import class RxSwift.Observable
-import class RxSwift.SerialDispatchQueueScheduler
-import class UIKit.UIViewController
-import struct Foundation.DispatchQoS
-import struct Foundation.UUID
+import Foundation
+import RxCocoa
+import RxSwift
+import UIKit
 
 /**
  CyanicViewController is a UIViewController subclass that can listen to State changes to its ViewModels. Whenever the

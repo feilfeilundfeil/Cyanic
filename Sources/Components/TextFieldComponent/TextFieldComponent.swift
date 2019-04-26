@@ -6,13 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIColor
-import class UIKit.UITextField
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGRect
-import struct LayoutKit.Alignment
-import struct LayoutKit.Flexibility
-import struct UIKit.UIEdgeInsets
+import LayoutKit
+import UIKit
 
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = TextFieldComponentLayout

@@ -6,11 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.DisposeBag
-import class UIKit.UICollectionView
-import class UIKit.UICollectionViewCell
-import protocol Differentiator.IdentifiableType
-import struct Foundation.IndexPath
+import Differentiator
+import Foundation
 
 /**
  Type-erased wrapper for a Component instance

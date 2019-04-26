@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UIViewController
-import struct CoreGraphics.CGFloat
+import UIKit
 
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension,RequiredVariables
 // sourcery: ComponentLayout = "ChildVCComponentLayout"

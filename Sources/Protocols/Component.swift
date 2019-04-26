@@ -6,10 +6,9 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.DisposeBag
-import protocol Differentiator.IdentifiableType
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
+import CoreGraphics
+import RxSwift
+import Differentiator
 
 /**
  Component is the data model representation of the UICollectionViewCell/UITableViewCell rendered on a ComponentViewController.

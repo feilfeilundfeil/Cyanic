@@ -22,7 +22,5 @@ end
 target 'Example' do
   pod 'SideMenu'
   pod 'Alacrity'
-  pod 'CommonWidgets'
   pod 'Kio'
-#  pod 'Cyanic'
 end

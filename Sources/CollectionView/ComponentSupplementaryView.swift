@@ -6,21 +6,10 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class Dispatch.DispatchQueue
-import class Foundation.NSCoder
-import class RxSwift.DisposeBag
-import class RxSwift.SerialDisposable
-import class UIKit.UICollectionReusableView
-import class UIKit.UIColor
-import class UIKit.UITapGestureRecognizer
-import protocol LayoutKit.Layout
-import protocol RxSwift.Disposable
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGRect
-import struct CoreGraphics.CGSize
-import struct Dispatch.DispatchQoS
-import struct LayoutKit.LayoutArrangement
-import struct LayoutKit.LayoutMeasurement
+import Foundation
+import LayoutKit
+import RxSwift
+import UIKit
 
 /**
  ComponentSupplementaryView is a UICollectionReusableView subclass that serves as the root UIView for the UI

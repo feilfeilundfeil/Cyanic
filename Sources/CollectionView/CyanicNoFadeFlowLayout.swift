@@ -6,9 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class UIKit.UICollectionViewFlowLayout
-import class UIKit.UICollectionViewLayoutAttributes
-import struct Foundation.IndexPath
+import UIKit
 
 /**
  The default behavior for UICollectionViewFlowLayout when its UICollectionView updates its cell  is to show a "flash",

@@ -6,12 +6,8 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class LayoutKit.InsetLayout
-import class LayoutKit.SizeLayout
-import class UIKit.UITextField
-import class UIKit.UIView
-import struct CoreGraphics.CGSize
-import struct UIKit.UIEdgeInsets
+import LayoutKit
+import UIKit
 import RxSwift
 import RxCocoa
 

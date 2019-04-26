@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import class RxSwift.Observable
-import protocol RxSwift.SchedulerType
+import RxSwift
 
 internal protocol StateObservableBuilder {
 

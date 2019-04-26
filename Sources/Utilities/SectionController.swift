@@ -6,8 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import struct CoreGraphics.CGFloat
-import struct CoreGraphics.CGSize
+import CoreGraphics
 
 /**
  SectionController represents a section of a UICollectionView/UITableView. It consists of two main properties:
