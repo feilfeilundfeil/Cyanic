@@ -122,7 +122,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         - Observable that monitors the size of the UITableView and the States of the ViewModels inside
           the **viewModels** array.
     */
-    internal final override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
+    internal override func setUpObservables(with viewModels: [AnyViewModel]) -> Observable<(CGSize, [Any])> {
         let throttledStateObservable: Observable<(CGSize, [Any])> = super.setUpObservables(with: viewModels)
 
         throttledStateObservable
