@@ -11,6 +11,7 @@
 */
 public enum Async<T: Hashable>: Hashable {
 
+    // MARK: Static Methods
     public static func == (lhs: Async<T>, rhs: Async<T>) -> Bool {
         switch (lhs, rhs) {
             case let (.success(lhsValue), .success(rhsValue)):
@@ -51,6 +52,16 @@ public enum Async<T: Hashable>: Hashable {
     */
     case uninitialized
 
+    // MARK: Computed Properties
+    /**
+     Returns the underlying model if this instance is a .success case. Otherwise, returns nil.
+    */
+    public var value: T? {
+        guard case let .success(model) = self else { return nil }
+        return model
+    }
+
+    // MARK: Instance Methods
     public func hash(into hasher: inout Hasher) {
         switch self {
             case .success(let value):
