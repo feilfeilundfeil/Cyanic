@@ -56,10 +56,12 @@ public struct SectionController {
     }
 
     /**
-     The height of the UICollectionView/UITableView where the components will be displayed.
+     The height of all the Components managed by this SectionController.
     */
     public var height: CGFloat {
-        return self.size.height
+        let componentsControllerHeight: CGFloat = self.componentsController.height
+        let headerHeight: CGFloat = self.sectionComponent.layout.measurement(within: size).size.height
+        return componentsControllerHeight + headerHeight
     }
 
     /**

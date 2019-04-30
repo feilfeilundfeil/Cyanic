@@ -37,10 +37,16 @@ public struct ComponentsController {
     }
 
     /**
-     The height of the UICollectionView/UITableView where the Components will be displayed.
+     The total height of the Components will be displayed.
     */
     public var height: CGFloat {
-        return self.size.height
+        return self.components.reduce(into: 0.0, { (currentHeight: inout CGFloat, component: AnyComponent) -> Void in
+            currentHeight += component.layout.measurement(
+                within: CGSize(width: self.size.width, height: CGFloat.greatestFiniteMagnitude)
+            )
+                .size
+                .height
+        })
     }
 
     /**

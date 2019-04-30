@@ -7,6 +7,7 @@
 //
 
 import Cyanic
+import UIKit
 
 public struct ExampleListState: ExpandableState {
 
@@ -52,8 +53,8 @@ public struct ExampleListState: ExpandableState {
                 """
                 It's an old habit. I spent my whole life trying not to be careless. Women and children can afford to be careless, but not men. What's the matter with you? Is this what you've become, a Hollywood finocchio who cries like a woman? "Oh, what do I do? What do I do?" What is that nonsense? Ridiculous! You talk about vengeance. Is vengeance going to bring your son back to you? Or my boy to me? I don't like violence, Tom. I'm a businessman; blood is a big expense.
                 """
-            ],
-            textFieldText: "Hello, World"
+            ]
+
         )
     }
 
@@ -62,7 +63,6 @@ public struct ExampleListState: ExpandableState {
     public var expandableDict: [String: Bool]
     public var strings: [String]
     public var otherStrings: [String]
-    public var textFieldText: String
 
 }
 

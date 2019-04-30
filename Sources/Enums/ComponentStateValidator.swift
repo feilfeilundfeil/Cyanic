@@ -6,7 +6,7 @@
 //  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
 //
 
-import CoreGraphics
+import UIKit
 
 public enum ComponentStateValidator {
 
@@ -56,7 +56,7 @@ public enum ComponentStateValidator {
     */
     public static func validateChildVCComponent(_ component: ChildVCComponent) -> Bool {
         var mutableComponent: ChildVCComponent = component
-        let childVC: ChildComponentVC = mutableComponent.childVC
+        let childVC: UIViewController & CyanicChildVCType = mutableComponent.childVC
         let isInvalidChildComponentVC: Bool = childVC is InvalidChildComponentVC
         return !isInvalidChildComponentVC && component.parentVC != nil
     }

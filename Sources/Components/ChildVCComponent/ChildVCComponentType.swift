@@ -17,7 +17,7 @@ public protocol ChildVCComponentType: StaticHeightComponent {
     // sourcery: skipHashing, skipEquality
     // sourcery: defaultValue = "InvalidChildComponentVC()", isLazy
     /// The child UIViewController instance to be shown on the UICollectionView.
-    var childVC: ChildComponentVC { mutating get set }
+    var childVC: UIViewController & CyanicChildVCType { mutating get set }
 
     // sourcery: skipHashing, skipEquality
     // sourcery: isWeak

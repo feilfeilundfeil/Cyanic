@@ -75,7 +75,7 @@
 		14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */; };
 		14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */; };
 		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
-		14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */; };
+		14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */; };
 		14DE09D7226620ED001C395F /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		14DE09D8226620ED001C395F /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */; };
@@ -220,7 +220,7 @@
 		14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentType.swift; sourceTree = "<group>"; };
 		14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponent.swift; sourceTree = "<group>"; };
 		14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentLayout.swift; sourceTree = "<group>"; };
-		14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildComponentVC.swift; sourceTree = "<group>"; };
+		14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicChildVCType.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -454,7 +454,6 @@
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				14A4576A22468E0F006E75C6 /* AnyViewModel.swift */,
 				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
-				14D5112F2231B2E500EEAC0F /* ChildComponentVC.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
 				14609BAD226378A5007B2AFC /* ComponentViewController.swift */,
@@ -542,6 +541,7 @@
 				14CBC9CC220C57BB00597FAA /* Component.swift */,
 				14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */,
 				14F6BD7F2229738A008B0692 /* Copyable.swift */,
+				14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */,
 				14CBB02A222E7C1C002D2768 /* Selectable.swift */,
 				1437BDCB22157FC300A35FFE /* State.swift */,
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
@@ -955,7 +955,7 @@
 				14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */,
-				14D511302231B2E500EEAC0F /* ChildComponentVC.swift in Sources */,
+				14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
 				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,

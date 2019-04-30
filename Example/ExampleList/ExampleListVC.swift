@@ -65,122 +65,128 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
 
     // MARK: Stored Properties
     private let viewModel: ExampleListViewModel
+    private let childVCViewModel: ChildVCViewModel = ChildVCViewModel(initialState: ChildVCState.default)
 
     // MARK: Overridden SingleSectionComponentViewController Properties
     public override var throttleType: ThrottleType { return ThrottleType.none }
 
-    public override var viewModels: [AnyViewModel] { return [self.viewModel.asAnyViewModel] }
+    public override var viewModels: [AnyViewModel] {
+        return [
+            self.viewModel.asAnyViewModel,
+            self.childVCViewModel.asAnyViewModel
+        ]
+    }
 
     // MARK: Overridden CollectionComponentViewController Methods
     public override func buildComponents(_ components: inout ComponentsController) {
-        withState(of: self.viewModel) { (state: ExampleListState) -> Void in
+        withState(viewModel1: self.viewModel, viewModel2: self.childVCViewModel) { (state1: ExampleListState, state2: ChildVCState) -> Void in
             let width: CGFloat = components.width
 
-            components.staticTextComponent {
-                $0.id = "First"
-                $0.text = Text.unattributed("Hello, World")
-                $0.font = UIFont.systemFont(ofSize: 17.0)
-                $0.backgroundColor = UIColor.gray
-                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+//            components.staticTextComponent {
+//                $0.id = "First"
+//                $0.text = Text.unattributed("Hello, World")
+//                $0.font = UIFont.systemFont(ofSize: 17.0)
+//                $0.backgroundColor = UIColor.gray
+//                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+//            }
+//
+//            components.staticTextComponent {
+//                $0.id = "Second"
+//                $0.text = Text.unattributed("This is Cyanic!")
+//                $0.font = UIFont.systemFont(ofSize: 17.0)
+//                $0.backgroundColor = UIColor.white
+//                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+//            }
+//
+            if state1.isTrue {
+                components.childVCComponent { [weak self] in
+                    guard let s = self else { return }
+                    $0.id = "Child"
+                    $0.childVC = ChildVC(viewModel: s.childVCViewModel)
+                    $0.parentVC = s
+                    $0.height = state2.height
+                }
             }
 
-            components.staticTextComponent {
-                $0.id = "Second"
-                $0.text = Text.unattributed("This is Cyanic!")
-                $0.font = UIFont.systemFont(ofSize: 17.0)
+            let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+            let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+            let firstID: String = ExampleListState.Expandable.first.rawValue
+            let firstExpandable: ExpandableComponent = components.expandableComponent { [weak self] in
+                guard let s = self else { return }
+                $0.id = firstID
+                $0.contentLayout = ImageLabelContentLayout(
+                    text: Text.unattributed("First Expandable"),
+                    labelConfiguration: AlacrityStyle<UILabel> { $0.textColor = .green }.style,
+                    image: UIImage(),
+                    imageSize: CGSize(width: 30.0, height: 30.0),
+                    imageConfiguration: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green }.style,
+                    spacing: 16.0
+                )
+                $0.isExpanded = state1.expandableDict[firstID] ?? false
+                $0.setExpandableState = s.viewModel.setExpandableState
                 $0.backgroundColor = UIColor.white
-                $0.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+                $0.height = 55.0
+                $0.width = 999_999_999.0
+                $0.insets = expandableContentInsets
+                $0.dividerLine = DividerLine(
+                    backgroundColor: UIColor.green,
+                    insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0),
+                    height: 5.0
+                )
             }
-//
-//            if state.isTrue {
-//                components.childVCComponent { [weak self] in
-//                    guard let s = self else { return }
-//                    $0.id = "Child"
-//                    $0.childVC = ChildVC()
-//                    $0.parentVC = s
-//                    $0.height = 200.0
-//                }
-//            }
-//
-//            let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-//            let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-//            let firstID: String = ExampleListState.Expandable.first.rawValue
-//            let firstExpandable: ExpandableComponent = components.expandableComponent { [weak self] in
-//                guard let s = self else { return }
-//                $0.id = firstID
-//                $0.contentLayout = ImageLabelContentLayout(
-//                    text: Text.unattributed("First Expandable"),
-//                    labelStyle: AlacrityStyle<UILabel> { $0.textColor = .green },
-//                    image: UIImage(),
-//                    imageSize: CGSize(width: 30.0, height: 30.0),
-//                    imageStyle: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green },
-//                    spacing: 16.0
-//                )
-//                $0.isExpanded = state.expandableDict[firstID] ?? false
-//                $0.setExpandableState = s.viewModel.setExpandableState
-//                $0.backgroundColor = UIColor.white
-//                $0.height = 55.0
-//                $0.width = 999_999_999.0
-//                $0.insets = expandableContentInsets
-//                $0.dividerLine = DividerLine(
-//                    backgroundColor: UIColor.green,
-//                    insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0),
-//                    height: 5.0
-//                )
-//            }
-//
-//            let randomColor: () -> UIColor = {
-//                return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
-//            }
-//
-//            if firstExpandable.isExpanded {
-//                state.strings.enumerated().forEach { (offset: Int, element: String) -> Void in
-//                    components.staticTextComponent {
-//                        $0.id = "Text \(offset.description)"
-//                        $0.text = Text.unattributed(element)
-//                        $0.font = UIFont.systemFont(ofSize: 17.0)
-//                        $0.backgroundColor = randomColor()
-//                        $0.insets = insets
-//                        $0.width = width
-//                    }
-//                }
-//            }
-//
-//            components.staticSpacingComponent {
-//                $0.id = "Second"
-//                $0.height = 50.0
-//                $0.backgroundColor = UIColor.black
-//            }
-//
-//            let secondId: String = ExampleListState.Expandable.second.rawValue
-//
-//            let secondExpandable = components.expandableComponent { [weak self] in
-//                guard let s = self else { return }
-//                $0.id = secondId
-//                $0.contentLayout = LabelContentLayout(
-//                    text: Text.unattributed(
-//                        "This is also Expandable \(!state.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"
-//                    )
-//                )
-//                $0.isExpanded = state.expandableDict[secondId] ?? false
-//                $0.setExpandableState = s.viewModel.setExpandableState
-//                $0.insets = expandableContentInsets
-//                $0.backgroundColor = UIColor.lightGray
-//                $0.height = 55.0
-//            }
-//
-//            if secondExpandable.isExpanded {
-//                state.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
-//                    components.staticTextComponent {
-//                        $0.id = "Other \(offset.description)"
-//                        $0.text = Text.unattributed(value)
-//                        $0.font = UIFont.systemFont(ofSize: 17.0)
-//                        $0.backgroundColor = randomColor()
-//                        $0.insets = insets
-//                        $0.width = width
-//                    }
-//                }
-//            }
+
+            let randomColor: () -> UIColor = {
+                return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
+            }
+
+            if firstExpandable.isExpanded {
+                state1.strings.enumerated().forEach { (offset: Int, element: String) -> Void in
+                    components.staticTextComponent {
+                        $0.id = "Text \(offset.description)"
+                        $0.text = Text.unattributed(element)
+                        $0.font = UIFont.systemFont(ofSize: 17.0)
+                        $0.backgroundColor = randomColor()
+                        $0.insets = insets
+                        $0.width = width
+                    }
+                }
+            }
+
+            components.staticSpacingComponent {
+                $0.id = "Second"
+                $0.height = 50.0
+                $0.backgroundColor = UIColor.black
+            }
+
+            let secondId: String = ExampleListState.Expandable.second.rawValue
+
+            let secondExpandable = components.expandableComponent { [weak self] in
+                guard let s = self else { return }
+                $0.id = secondId
+                $0.contentLayout = LabelContentLayout(
+                    text: Text.unattributed(
+                        "This is also Expandable \(!state1.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"
+                    )
+                )
+                $0.isExpanded = state1.expandableDict[secondId] ?? false
+                $0.setExpandableState = s.viewModel.setExpandableState
+                $0.insets = expandableContentInsets
+                $0.backgroundColor = UIColor.lightGray
+                $0.height = 55.0
+            }
+
+            if secondExpandable.isExpanded {
+                state1.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
+                    components.staticTextComponent {
+                        $0.id = "Other \(offset.description)"
+                        $0.text = Text.unattributed(value)
+                        $0.font = UIFont.systemFont(ofSize: 17.0)
+                        $0.backgroundColor = randomColor()
+                        $0.insets = insets
+                        $0.width = width
+                    }
+                }
+            }
 //
             let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                 $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -195,25 +201,25 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 button.onTap = { print("Hello World, \(id)") }
             }
 //
-//            if state.isTrue {
-//                components.buttonComponent {
-//                    buttonConfiguration("First", UIColor.red, &$0)
-//                }
-//            }
-//
-//            components.staticSpacingComponent {
-//                $0.id = "Second"
-//                $0.height = 100.0
-//                $0.backgroundColor = UIColor.brown
-//            }
+            if state1.isTrue {
+                components.buttonComponent {
+                    buttonConfiguration("First", UIColor.red, &$0)
+                }
+            }
+
+            components.staticSpacingComponent {
+                $0.id = "Second"
+                $0.height = 100.0
+                $0.backgroundColor = UIColor.brown
+            }
 //
             components.buttonComponent {
                 buttonConfiguration("Second", UIColor.orange, &$0)
             }
 
-//            components.buttonComponent {
-//                buttonConfiguration("Third", .yellow, &$0)
-//            }
+            components.buttonComponent {
+                buttonConfiguration("Third", .yellow, &$0)
+            }
         }
     }
 
