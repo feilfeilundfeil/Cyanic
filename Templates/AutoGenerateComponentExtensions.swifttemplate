@@ -10,6 +10,7 @@ func lowerCamelCaseName(for type: Type) -> String {
 import Cyanic
 
 <%_ } -%>
+// swiftlint:disable all
 public extension ComponentsController {
 <%_ for type in types.all where type.annotations["AutoGenerateComponentExtension"] != nil {-%>
 <%_ let functionName: String = lowerCamelCaseName(for: type) -%>

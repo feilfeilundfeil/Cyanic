@@ -1,5 +1,5 @@
 // sourcery:file:AutoEquatableComponent+{% if argument.project %}{{ argument.project }}{% else %}Cyanic{%endif %}.swift
-// swiftlint:disable private_over_fileprivate
+// swiftlint:disable all
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
     switch (lhs, rhs) {
         case let (lValue?, rValue?):
