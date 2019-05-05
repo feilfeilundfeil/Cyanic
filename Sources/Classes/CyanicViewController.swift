@@ -75,15 +75,19 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
         let combinedStatesObservables: Observable<[Any]> = viewModels
             .combineStateObservables()
 
-        let throttledStateObservable: Observable<[Any]> = self.setUpThrottleType(
+        var throttledStateObservable: Observable<[Any]> = self.setUpThrottleType(
             on: combinedStatesObservables,
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
-        .debug("\(type(of: self)) \(#line)", trimOutput: false)
         .observeOn(self.scheduler)
         .subscribeOn(self.scheduler)
         .share()
+
+        if viewModels.contains(where: { $0.isDebugMode }) {
+            throttledStateObservable = throttledStateObservable
+                .debug("\(type(of: self)) \(#line)", trimOutput: false)
+        }
 
         throttledStateObservable
             .observeOn(MainScheduler.instance)

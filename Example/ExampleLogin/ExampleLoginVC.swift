@@ -69,7 +69,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
 
     // MARK: Overridden SingleSectionCollectionComponentViewController Properties
     public override var throttleType: ThrottleType {
-        return ThrottleType.debounce(0.1)
+        return ThrottleType.debounce(.milliseconds(100))
     }
 
     public override var viewModels: [AnyViewModel] {
@@ -120,7 +120,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 }
 
                 component.textDidChange = { (textField: UITextField) -> Void in
-                    withState(of: viewModelOne) { [weak self] (_: ExampleLoginStateA) -> Void in
+                    withState(of: viewModelOne) { (_: ExampleLoginStateA) -> Void in
                         guard let text = textField.text else { return }
                         viewModelOne.setUserName(text)
                     }
@@ -152,8 +152,8 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     self.passwordTextField = textField
                 }
 
-                component.textDidChange = { [weak self] (textField: UITextField) -> Void in
-                    withState(of: viewModelTwo) { [weak self] (_: ExampleLoginStateB) -> Void in
+                component.textDidChange = { (textField: UITextField) -> Void in
+                    withState(of: viewModelTwo) { (_: ExampleLoginStateB) -> Void in
                         guard let text = textField.text else { return }
                         viewModelTwo.setPassword(text)
                     }

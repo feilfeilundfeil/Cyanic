@@ -24,7 +24,6 @@ open class TableComponentViewController: ComponentViewController, UITableViewDel
 
         // Set up as the UITableView's UITableViewDelegate
         self.tableView.delegate = self
-        self.tableView.tableFooterView = UIView()
     }
 
     // MARK: Views

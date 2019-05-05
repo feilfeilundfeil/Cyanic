@@ -44,7 +44,7 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
                         .map({ (_: String) -> UITextField in
                             return view
                         })
-                        .debounce(0.5, scheduler: MainScheduler.instance)
+                        .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                         .bind(
                             onNext: { (view: UITextField) -> Void in
                                 component.textDidChange(view)

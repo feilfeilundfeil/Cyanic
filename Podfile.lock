@@ -1,24 +1,27 @@
 PODS:
   - Alacrity (0.5.4)
-  - Cyanic (0.6.3):
+  - Cyanic (0.6.7):
     - LayoutKit
     - RxDataSources
     - RxSwift
     - Sourcery
-  - Differentiator (3.1.0)
+  - Differentiator (4.0.1)
   - Kio (2.2.0)
   - LayoutKit (10.1.3)
   - Nimble (8.0.1)
   - Quick (2.1.0)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxDataSources (3.1.0):
-    - Differentiator (~> 3.0)
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-  - RxSwift (4.5.0)
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
   - SideMenu (5.0.3)
-  - Sourcery (0.16.0)
+  - Sourcery (0.16.1)
 
 DEPENDENCIES:
   - Alacrity
@@ -42,6 +45,7 @@ SPEC REPOS:
     - Quick
     - RxCocoa
     - RxDataSources
+    - RxRelay
     - RxSwift
     - SideMenu
     - Sourcery
@@ -57,17 +61,18 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alacrity: f69c0bbe4917912d83a63c981884420f857ddeff
-  Cyanic: 2c1e3da7495346dd98d8b747db450c229f292fbc
-  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  Cyanic: 49dd559c3ccc414a42fb343d5260b2bcefb65c5c
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Kio: fd92d41add2216a5db33590e7f4fd273deb70224
   LayoutKit: 281c57fe24d01feca399c4693aa98ae6aa61ba0f
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   SideMenu: 1dcaabce84538c53325c287f7fe62999379a641c
-  Sourcery: 3e55aad9719ee5782ab81eb16addd44d272e4d13
+  Sourcery: 16779170d35ee204666843b09031f36721a84bcc
 
 PODFILE CHECKSUM: 99f19879bfac20a2fdf550be647a2a8a152faaec
 

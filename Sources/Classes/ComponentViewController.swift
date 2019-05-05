@@ -86,7 +86,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     /**
      The CGSize of this UIViewController.
     */
-    internal var _size: CGSize = CGSize.zero
+    public var _size: CGSize = CGSize.zero
 
     /**
      When the UITableView/UICollectionView is loaded, its width and height are initially all zero. When viewWillAppear
@@ -111,12 +111,12 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     /**
      DisposeBag for Rx-related subscriptions.
     */
-    internal let disposeBag: DisposeBag = DisposeBag()
+    public let disposeBag: DisposeBag = DisposeBag()
 
     /**
      The serial scheduler where the ViewModel's state changes are observed on and mapped to the _components
     */
-    internal let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
+    public let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
         qos: DispatchQoS.userInitiated,
         internalSerialQueueName: "\(UUID().uuidString)"
     )
@@ -199,13 +199,12 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
         )
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
+            .share()
 
         if self.viewModels.contains(where: { $0.isDebugMode }) {
             throttledStateObservable = throttledStateObservable
                 .debug("\(type(of: self))", trimOutput: false)
         }
-
-        throttledStateObservable = throttledStateObservable.share()
 
         throttledStateObservable
             .map({ (width: CGSize, states: [Any]) -> [Any] in

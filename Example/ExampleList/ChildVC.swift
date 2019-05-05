@@ -7,11 +7,15 @@
 //
 
 import Cyanic
+import Differentiator
 import LayoutKit
+import RxCocoa
 import RxSwift
+import RxRelay
+import RxDataSources
 import UIKit
 
-class ChildVC: MultiSectionTableComponentViewController, CyanicChildVCType {
+class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
 
     // MARK: Initializers
     init(viewModel: ChildVCViewModel) {
@@ -32,12 +36,34 @@ class ChildVC: MultiSectionTableComponentViewController, CyanicChildVCType {
     // MARK: UIViewController Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.brown
         self.tableView.isScrollEnabled = false
+
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tableView.tableFooterView = UIView(
+            frame: CGRect(
+                origin: CGPoint.zero,
+                size: CGSize(width: UIView.noIntrinsicMetric, height: 1.0)
+            )
+        )
+
+        self.height
+            .debug("Height", trimOutput: false)
+            .bind(onNext: { [weak self] (height: CGFloat) -> Void in
+                self?.viewModel.setState(with: { $0.height = height })
+            })
+            .disposed(by: self.disposeBag)
     }
 
     // MARK: Stored Properties
     private let viewModel: ChildVCViewModel
+    private lazy var height = self.tableView.rx
+        .observeWeakly(CGSize.self, "contentSize")
+        .filter { $0 != nil && $0!.height != 0.0 && $0!.width != 0.0 }
+        .map { $0!.height }
+        .distinctUntilChanged()
+        .debounce(RxTimeInterval.milliseconds(100), scheduler: self.scheduler)
 
     // MARK: Computed Properties
     override var viewModels: [AnyViewModel] {
@@ -46,67 +72,169 @@ class ChildVC: MultiSectionTableComponentViewController, CyanicChildVCType {
         ]
     }
 
-    override func buildSections(_ sectionsController: inout MultiSectionController) {
+    // MARK: Methods
+    override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
+        let dataSource = super.setUpDataSource()
+        dataSource.animationConfiguration = AnimationConfiguration(
+            insertAnimation: UITableView.RowAnimation.fade,
+            reloadAnimation: UITableView.RowAnimation.fade,
+            deleteAnimation: UITableView.RowAnimation.fade
+        )
+        return dataSource
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let component: AnyComponent = self.component(at: indexPath) else { return }
+        guard let selectable = component.identity.base as? Selectable else { return }
+        selectable.onSelect()
+    }
+
+    override func buildComponents(_ componentsController: inout ComponentsController) {
         Cyanic.withState(of: self.viewModel) { (state: ChildVCState) -> Void in
-
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
-                let expandable = sectionController.expandableComponent(configuration: { (component: inout ExpandableComponent) -> Void in
-                    let id: String = "First"
-                    component.id = id
-                    component.height = 60.0
-                    component.contentLayout = LabelContentLayout(
-                        text: Text.unattributed("Super Test for Child")
-                    )
-                    component.backgroundColor = UIColor.gray
-                    component.isExpanded = state.expandableDict[id] ?? false
-                    component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
-                        self.viewModel.setState { (state: inout ChildVCState) -> Void in
-                            state.expandableDict[id] = isExpanded
-                            switch isExpanded {
-                                case true:
-                                    state.height = 280.0
-                                case false:
-                                    state.height = 60.0
-                            }
-                        }
+            let first = componentsController.expandableComponent(configuration: { (component: inout ExpandableComponent) -> Void in
+                let id: String = "First"
+                component.id = id
+                component.height = 60.0
+                component.contentLayout = LabelContentLayout(
+                    text: Text.unattributed("Super Test for Child")
+                )
+                component.backgroundColor = UIColor.yellow
+                component.isExpanded = state.expandableDict[id] ?? false
+                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                        state.expandableDict[id] = isExpanded
                     }
-                })
-
-                if expandable.isExpanded {
-
-                    sectionController.buildComponents({ (componentsController: inout ComponentsController) -> Void in
-                        componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
-                            component.id = "0"
-                            component.height = 44.0
-                            component.backgroundColor = UIColor.green
-                        }
-
-                        componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
-                            component.id = "1"
-                            component.height = 44.0
-                            component.backgroundColor = UIColor.blue
-                        }
-
-                        componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
-                            component.id = "2"
-                            component.height = 44.0
-                            component.backgroundColor = UIColor.red
-                        }
-
-                        componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
-                            component.id = "3"
-                            component.height = 44.0
-                            component.backgroundColor = UIColor.yellow
-                        }
-
-                        componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
-                            component.id = "3"
-                            component.height = 44.0
-                            component.backgroundColor = UIColor.cyan
-                        }
-                    })
                 }
             })
+
+            if first.isExpanded {
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "0"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.green
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "1"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.blue
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "2"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.red
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "3"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.yellow
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "3"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.cyan
+                }
+            }
+
+            let second = componentsController.expandableComponent(configuration: { (component: inout ExpandableComponent) -> Void in
+                let id: String = "Second"
+                component.id = id
+                component.height = 60.0
+                component.contentLayout = LabelContentLayout(
+                    text: Text.unattributed("Super Test for Child")
+                )
+                component.backgroundColor = UIColor.yellow
+                component.isExpanded = state.expandableDict[id] ?? false
+                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                        state.expandableDict[id] = isExpanded
+                    }
+                }
+            })
+
+            if second.isExpanded {
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "4"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.green
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "5"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.blue
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "6"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.red
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "7"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.yellow
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "8"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.cyan
+                }
+            }
+
+            let third = componentsController.expandableComponent(configuration: { (component: inout ExpandableComponent) -> Void in
+                let id: String = "Third"
+                component.id = id
+                component.height = 60.0
+                component.contentLayout = LabelContentLayout(
+                    text: Text.unattributed("Super Test for Child")
+                )
+                component.backgroundColor = UIColor.yellow
+                component.isExpanded = state.expandableDict[id] ?? false
+                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
+                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                        state.expandableDict[id] = isExpanded
+                    }
+                }
+            })
+
+            if third.isExpanded {
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "9"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.green
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "10"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.blue
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "11"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.red
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "12"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.yellow
+                }
+
+                componentsController.staticSpacingComponent { (component: inout StaticSpacingComponent) -> Void in
+                    component.id = "13"
+                    component.height = 44.0
+                    component.backgroundColor = UIColor.cyan
+                }
+            }
         }
     }
 }

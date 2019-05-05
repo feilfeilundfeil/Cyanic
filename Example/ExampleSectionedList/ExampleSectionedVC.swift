@@ -13,12 +13,12 @@ import LayoutKit
 import RxCocoa
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
+public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.collectionView.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
     }
 
     // MARK: Stored Properties
@@ -30,6 +30,12 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
     }
 
     // MARK: Methods
+//    public override func createUICollectionViewLayout() -> UICollectionViewLayout {
+//        let layout: UICollectionViewFlowLayout = super.createUICollectionViewLayout() as! UICollectionViewFlowLayout
+//        layout.sectionHeadersPinToVisibleBounds = true
+//        return layout
+//    }
+
     public override func buildSections(_ sectionsController: inout MultiSectionController) {
 
         withState(of: self.viewModel) { (state: ExampleSectionedState) -> Void in
@@ -52,7 +58,7 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                 }
             }
 
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+            let firstSection = sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
 
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in

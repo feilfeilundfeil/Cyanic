@@ -26,7 +26,6 @@ internal class StateStore<ConcreteState: State> {
         self.executionRelay
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
-            .debug("Execution Relay", trimOutput: false)
             .bind(
                 onNext: { [weak self] () -> Void in
                     self?.resolveClosureQueue()

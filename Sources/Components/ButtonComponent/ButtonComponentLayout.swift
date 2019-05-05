@@ -38,7 +38,6 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             config: { (view: UIButton) -> Void in
                 component.configuration(view)
                 serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
-                    .debug(component.id, trimOutput: false)
                     .bind(onNext: component.onTap)
             }
         )

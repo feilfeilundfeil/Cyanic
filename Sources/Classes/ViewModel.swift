@@ -118,13 +118,19 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
-        self.stateStore.state
+        var observable: Observable<T> = self.stateStore.state
             .map({ (state: StateType) -> T in
                 return state[keyPath: keyPath]
             })
             .distinctUntilChanged()
             .skip(1)
-            .debug("Select Subscribe state change", trimOutput: false)
+
+        if self.isDebugMode {
+            observable = observable
+                .debug("Select Subscribe state change", trimOutput: false)
+        }
+
+        observable
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
                 onNext: { (value: T) -> Void in
