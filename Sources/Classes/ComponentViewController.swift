@@ -23,6 +23,12 @@ import UIKit
 */
 open class ComponentViewController: UIViewController, StateObservableBuilder {
 
+    deinit {
+        if self.viewModels.contains(where: { $0.isDebugMode }) {
+            print("\(type(of: self)) was deallocated")
+        }
+    }
+
     open override func loadView() {
         self.view = UIView()
         self._listView = self.setUpListView()
@@ -203,7 +209,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
 
         if self.viewModels.contains(where: { $0.isDebugMode }) {
             throttledStateObservable = throttledStateObservable
-                .debug("\(type(of: self))", trimOutput: false)
+                .debug("\(type(of: self))", trimOutput: true)
         }
 
         throttledStateObservable

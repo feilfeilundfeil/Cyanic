@@ -62,6 +62,7 @@
 		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
 		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
+		14BC91F5228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
@@ -85,8 +86,8 @@
 		14F06056224B593500CC62B0 /* ChildVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06055224B593500CC62B0 /* ChildVC.swift */; };
 		14F06058224B5A9A00CC62B0 /* ExampleCounterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06057224B5A9A00CC62B0 /* ExampleCounterViewModel.swift */; };
 		14F0605A224B5AB900CC62B0 /* ExampleCounterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F06059224B5AB900CC62B0 /* ExampleCounterState.swift */; };
-		14F0605C224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */; };
-		14F0605E224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */; };
+		14F0605C224B5B8500CC62B0 /* UsernameViewModel+PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605B224B5B8500CC62B0 /* UsernameViewModel+PasswordViewModel.swift */; };
+		14F0605E224B5BC400CC62B0 /* UsernameState+PasswordState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0605D224B5BC400CC62B0 /* UsernameState+PasswordState.swift */; };
 		14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */; };
 		14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */; };
 		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
@@ -204,6 +205,7 @@
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
+		14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedRxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
@@ -229,8 +231,8 @@
 		14F06055224B593500CC62B0 /* ChildVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVC.swift; sourceTree = "<group>"; };
 		14F06057224B5A9A00CC62B0 /* ExampleCounterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCounterViewModel.swift; sourceTree = "<group>"; };
 		14F06059224B5AB900CC62B0 /* ExampleCounterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCounterState.swift; sourceTree = "<group>"; };
-		14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExampleLoginViewModelA+ExampleLoginViewModelB.swift"; sourceTree = "<group>"; };
-		14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExampleLoginStateA+ExampleLoginStateB.swift"; sourceTree = "<group>"; };
+		14F0605B224B5B8500CC62B0 /* UsernameViewModel+PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsernameViewModel+PasswordViewModel.swift"; sourceTree = "<group>"; };
+		14F0605D224B5BC400CC62B0 /* UsernameState+PasswordState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UsernameState+PasswordState.swift"; sourceTree = "<group>"; };
 		14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticSpacingComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
@@ -465,8 +467,8 @@
 			isa = PBXGroup;
 			children = (
 				141315B42235924500513FD9 /* ExampleLoginVC.swift */,
-				14F0605D224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift */,
-				14F0605B224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift */,
+				14F0605B224B5B8500CC62B0 /* UsernameViewModel+PasswordViewModel.swift */,
+				14F0605D224B5BC400CC62B0 /* UsernameState+PasswordState.swift */,
 			);
 			path = ExampleLogin;
 			sourceTree = "<group>";
@@ -564,6 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				1498048D22607A720044194C /* ExampleViewModel.swift */,
+				14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1034,11 +1037,12 @@
 				14F06056224B593500CC62B0 /* ChildVC.swift in Sources */,
 				141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */,
 				1498049C2260CE030044194C /* ExampleSectionedVC.swift in Sources */,
+				14BC91F5228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				14F06052224B58E700CC62B0 /* ExampleListState.swift in Sources */,
-				14F0605E224B5BC400CC62B0 /* ExampleLoginStateA+ExampleLoginStateB.swift in Sources */,
+				14F0605E224B5BC400CC62B0 /* UsernameState+PasswordState.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
 				14F0605A224B5AB900CC62B0 /* ExampleCounterState.swift in Sources */,
-				14F0605C224B5B8500CC62B0 /* ExampleLoginViewModelA+ExampleLoginViewModelB.swift in Sources */,
+				14F0605C224B5B8500CC62B0 /* UsernameViewModel+PasswordViewModel.swift in Sources */,
 				1443607D2247BC0E0090FCF9 /* ExampleCounterVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

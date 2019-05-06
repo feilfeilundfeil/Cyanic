@@ -12,7 +12,6 @@ public final class ExampleListViewModel: ExampleViewModel<ExampleListState> {
 
     // MARK: Methods
     func buttonWasTapped() {
-        print("IS TRUE IS SET")
         self.setState { $0.isTrue = !$0.isTrue }
     }
 

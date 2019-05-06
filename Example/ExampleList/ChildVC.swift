@@ -30,7 +30,6 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
 
     deinit {
         self.cleanUp()
-        print("ChildVC deallocated")
     }
 
     // MARK: UIViewController Lifecycle Methods
@@ -49,7 +48,6 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
         )
 
         self.height
-            .debug("Height", trimOutput: false)
             .bind(onNext: { [weak self] (height: CGFloat) -> Void in
                 self?.viewModel.setState(with: { $0.height = height })
             })
@@ -63,7 +61,7 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
         .filter { $0 != nil && $0!.height != 0.0 && $0!.width != 0.0 }
         .map { $0!.height }
         .distinctUntilChanged()
-        .debounce(RxTimeInterval.milliseconds(100), scheduler: self.scheduler)
+        .debounce(RxTimeInterval.milliseconds(250), scheduler: self.scheduler)
 
     // MARK: Computed Properties
     override var viewModels: [AnyViewModel] {
@@ -101,8 +99,8 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
                 )
                 component.backgroundColor = UIColor.yellow
                 component.isExpanded = state.expandableDict[id] ?? false
-                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
-                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                component.setExpandableState = { [weak self] (id: String, isExpanded: Bool) -> Void in
+                    self?.viewModel.setState { (state: inout ChildVCState) -> Void in
                         state.expandableDict[id] = isExpanded
                     }
                 }
@@ -149,8 +147,8 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
                 )
                 component.backgroundColor = UIColor.yellow
                 component.isExpanded = state.expandableDict[id] ?? false
-                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
-                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                component.setExpandableState = { [weak self] (id: String, isExpanded: Bool) -> Void in
+                    self?.viewModel.setState { (state: inout ChildVCState) -> Void in
                         state.expandableDict[id] = isExpanded
                     }
                 }
@@ -197,8 +195,8 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
                 )
                 component.backgroundColor = UIColor.yellow
                 component.isExpanded = state.expandableDict[id] ?? false
-                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
-                    self.viewModel.setState { (state: inout ChildVCState) -> Void in
+                component.setExpandableState = { [weak self] (id: String, isExpanded: Bool) -> Void in
+                    self?.viewModel.setState { (state: inout ChildVCState) -> Void in
                         state.expandableDict[id] = isExpanded
                     }
                 }
@@ -251,5 +249,5 @@ struct ChildVCState: ExpandableState {
 
 }
 
-class ChildVCViewModel: ViewModel<ChildVCState> {
+class ChildVCViewModel: ExampleViewModel<ChildVCState> {
 }

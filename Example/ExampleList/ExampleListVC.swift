@@ -33,33 +33,21 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
         self.view.backgroundColor = UIColor.white
         self.collectionView.backgroundColor = UIColor.white
 
-        let button: UIBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: UIBarButtonItem.SystemItem.done,
-            target: self,
-            action: #selector(buttonTapped)
-        )
-        self.navigationItem.leftBarButtonItem = button
-
         let navigationVCButton: UIBarButtonItem = UIBarButtonItem(
-            title: "Nav",
+            title: "MultiSectionVC",
             style: .plain,
             target: self,
-            action: #selector(navButtonTapped)
+            action: #selector(showMultiSectionVC)
         )
 
-        let sideMenuButton: UIBarButtonItem = UIBarButtonItem(
-            title: "Side",
-            style: .plain,
-            target: self,
-            action: #selector(sideMenuButtonTapped)
-        )
-
-        self.navigationItem.rightBarButtonItems = [sideMenuButton, navigationVCButton]
+        self.navigationItem.rightBarButtonItems = [navigationVCButton]
 
         self.viewModel.selectSubscribe(
             keyPath1: \ExampleListState.isTrue,
             keyPath2: \ExampleListState.expandableDict,
-            onNewValue: { print("from a different subscription: \($0)") }
+            onNewValue: {
+                print("from a different subscription: \($0)")
+            }
         )
     
     }
@@ -70,7 +58,6 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
     private lazy var childVC: ChildVC = ChildVC(viewModel: self.childVCViewModel)
 
     // MARK: Overridden SingleSectionComponentViewController Properties
-
     public override var viewModels: [AnyViewModel] {
         return [
             self.viewModel.asAnyViewModel,
@@ -87,88 +74,16 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
     }
 
     public override func buildComponents(_ components: inout ComponentsController) {
-        withState(viewModel1: self.viewModel, viewModel2: self.childVCViewModel) { (state1: ExampleListState, state2: ChildVCState) -> Void in
-            let width: CGFloat = components.width
-
-//            let expandableContentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-//            let insets: UIEdgeInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
-//            let firstID: String = ExampleListState.Expandable.first.rawValue
-//            let firstExpandable: ExpandableComponent = components.expandableComponent { [weak self] in
-//                guard let s = self else { return }
-//                $0.id = firstID
-//                $0.contentLayout = ImageLabelContentLayout(
-//                    text: Text.unattributed("First Expandable"),
-//                    labelConfiguration: AlacrityStyle<UILabel> { $0.textColor = .green }.style,
-//                    image: UIImage(),
-//                    imageSize: CGSize(width: 30.0, height: 30.0),
-//                    imageConfiguration: AlacrityStyle<UIImageView> { $0.backgroundColor = UIColor.green }.style,
-//                    spacing: 16.0
-//                )
-//                $0.isExpanded = state1.expandableDict[firstID] ?? false
-//                $0.setExpandableState = s.viewModel.setExpandableState
-//                $0.backgroundColor = UIColor.white
-//                $0.height = 55.0
-//                $0.width = 999_999_999.0
-//                $0.insets = expandableContentInsets
-//                $0.dividerLine = DividerLine(
-//                    backgroundColor: UIColor.green,
-//                    insets: UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 0.0),
-//                    height: 5.0
-//                )
-//            }
-//
-//            let randomColor: () -> UIColor = {
-//                return UIColor.kio.color(red: UInt8.random(in: 0...255), green: UInt8.random(in: 0...255), blue: UInt8.random(in: 0...255))
-//            }
-//
-//            if firstExpandable.isExpanded {
-//                state1.strings.enumerated().forEach { (offset: Int, element: String) -> Void in
-//                    components.staticTextComponent {
-//                        $0.id = "Text \(offset.description)"
-//                        $0.text = Text.unattributed(element)
-//                        $0.font = UIFont.systemFont(ofSize: 17.0)
-//                        $0.backgroundColor = randomColor()
-//                        $0.insets = insets
-//                        $0.width = width
-//                    }
-//                }
-//            }
-
+        let childVC: ChildVC = self.childVC
+        Cyanic.withState(
+            viewModel1: self.viewModel,
+            viewModel2: self.childVCViewModel
+        ) { (state1: ExampleListState, state2: ChildVCState) -> Void in
             components.staticSpacingComponent {
                 $0.id = "Second"
                 $0.height = 50.0
                 $0.backgroundColor = UIColor.black
             }
-
-//            let secondId: String = ExampleListState.Expandable.second.rawValue
-//
-//            let secondExpandable = components.expandableComponent { [weak self] in
-//                guard let s = self else { return }
-//                $0.id = secondId
-//                $0.contentLayout = LabelContentLayout(
-//                    text: Text.unattributed(
-//                        "This is also Expandable \(!state1.isTrue ? "a dsio adsiopd aisopda sipo dsaiopid aosoipdas iopdas iop dasiopdasiods apopid asiodpai opdaiopdisa poidasopi dpoiad sopidsopi daspoi dapsoid opais dopiaps podai podaisop disaopi dposai dpodsa opidspoai saopid opaisdo aspodi paosjckaj jxknyjknj n" : "")"
-//                    )
-//                )
-//                $0.isExpanded = state1.expandableDict[secondId] ?? false
-//                $0.setExpandableState = s.viewModel.setExpandableState
-//                $0.insets = expandableContentInsets
-//                $0.backgroundColor = UIColor.lightGray
-//                $0.height = 55.0
-//            }
-//
-//            if secondExpandable.isExpanded {
-//                state1.otherStrings.enumerated().forEach { (offset: Int, value: String) -> Void in
-//                    components.staticTextComponent {
-//                        $0.id = "Other \(offset.description)"
-//                        $0.text = Text.unattributed(value)
-//                        $0.font = UIFont.systemFont(ofSize: 17.0)
-//                        $0.backgroundColor = randomColor()
-//                        $0.insets = insets
-//                        $0.width = width
-//                    }
-//                }
-//            }
 
             let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                 $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -194,13 +109,35 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 $0.height = 100.0
                 $0.backgroundColor = UIColor.brown
             }
-//
-            components.buttonComponent {
-                buttonConfiguration("Second", UIColor.orange, &$0)
+
+            components.buttonComponent { (component: inout ButtonComponent) -> Void in
+                component.id = "Show"
+                component.title = "Show side menu"
+                component.height = 44.0
+                component.configuration = { (view: UIButton) -> Void in
+                    view.backgroundColor = UIColor.orange
+                    view.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                }
+                component.onTap = { [weak self] () -> Void in
+                    guard
+                        let vc = SideMenuManager.default.menuRightNavigationController,
+                        let s = self
+                    else { return }
+                    s.present(vc, animated: true, completion: nil)
+                }
             }
 
-            components.buttonComponent {
-                buttonConfiguration("Third", .yellow, &$0)
+            components.buttonComponent { (component: inout ButtonComponent) -> Void in
+                component.id = "Toggle"
+                component.title = "Toggle isTrue"
+                component.height = 44.0
+                component.configuration = { (view: UIButton) -> Void in
+                    view.backgroundColor = UIColor.yellow
+                    view.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                }
+                component.onTap = { [weak self] () -> Void in
+                    self?.viewModel.setState(with: { $0.isTrue = !$0.isTrue })
+                }
             }
 
             if state1.isTrue {
@@ -208,7 +145,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 components.childVCComponent { [weak self] in
                     guard let s = self else { return }
                     $0.id = "Child"
-                    $0.childVC = s.childVC
+                    $0.childVC = childVC
                     $0.parentVC = s
                     $0.height = state2.height
                 }
@@ -217,7 +154,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
             components.staticSpacingComponent {
                 $0.id = "blah"
                 $0.height = 500.0
-                $0.backgroundColor = .black
+                $0.backgroundColor = UIColor.cyan
             }
         }
     }
@@ -234,12 +171,8 @@ private extension ExampleListVC {
         self.present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
     }
 
-    @objc func navButtonTapped() {
-        let vc: ExampleLoginVC = ExampleLoginVC(
-            viewModelOne: ExampleLoginViewModelA(initialState: ExampleLoginStateA.default),
-            viewModelTwo: ExampleLoginViewModelB(initialState: ExampleLoginStateB.default)
-        )
-
+    @objc func showMultiSectionVC() {
+        let vc: ExampleSectionedVC = ExampleSectionedVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

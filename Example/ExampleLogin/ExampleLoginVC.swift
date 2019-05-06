@@ -13,7 +13,8 @@ import RxCocoa
 import RxSwift
 
 /**
- An example of a hypothetical login screen built in a SingleSectionComponentViewController. Example includes usage of UITextFieldDelegate.
+ An example of a hypothetical login screen built in a SingleSectionComponentViewController. Example includes
+ usage of UITextFieldDelegate.
 */
 public final class ExampleLoginVC: SingleSectionCollectionComponentViewController {
 
@@ -22,7 +23,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
      An example custom initializer that demostrates dependency injection via initializer. One way to
      give a UIViewController its business logic controllers aka "ViewModels" in the context of Cyanic.
     */
-    public init(viewModelOne: ExampleLoginViewModelA, viewModelTwo: ExampleLoginViewModelB) {
+    public init(viewModelOne: UsernameViewModel, viewModelTwo: PasswordViewModel) {
         self.viewModelOne = viewModelOne
         self.viewModelTwo = viewModelTwo
         super.init(nibName: nil, bundle: nil)
@@ -32,35 +33,26 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
         fatalError("init(coder:) has not been implemented")
     }
 
-    deinit {
-        print("ExampleLoginVC Deallocated")
-    }
-
     // MARK: UIViewController Lifecycle Methods
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.collectionView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
 
-        self.kio.setUpNavigationItem {
-            $0.rightBarButtonItems = [
+        self.kio.setUpNavigationItem { (item: UINavigationItem) -> Void in
+            item.rightBarButtonItems = [
                 UIBarButtonItem(
-                    title: "Second", style: UIBarButtonItem.Style.plain,
+                    title: "Single Section List", style: UIBarButtonItem.Style.plain,
                     target: self,
-                    action: #selector(ExampleLoginVC.secondButtonTapped)
-                ),
-                UIBarButtonItem(
-                    title: "Third", style: UIBarButtonItem.Style.plain,
-                    target: self,
-                    action: #selector(ExampleLoginVC.thirdButtonTapped)
+                    action: #selector(ExampleLoginVC.pushToSingleSectionList)
                 )
-            ].reversed()
+            ]
         }
     }
 
     // MARK: Stored Properties
-    private let viewModelOne: ExampleLoginViewModelA
-    private let viewModelTwo: ExampleLoginViewModelB
+    private let viewModelOne: UsernameViewModel
+    private let viewModelTwo: PasswordViewModel
 
     // MARK: TextFields
     private weak var userTextField: UITextField?
@@ -69,7 +61,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
 
     // MARK: Overridden SingleSectionCollectionComponentViewController Properties
     public override var throttleType: ThrottleType {
-        return ThrottleType.debounce(.milliseconds(100))
+        return ThrottleType.debounce(RxTimeInterval.milliseconds(100))
     }
 
     public override var viewModels: [AnyViewModel] {
@@ -83,7 +75,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
     public override func buildComponents(_ componentsController: inout ComponentsController) {
         let viewModelOne = self.viewModelOne
         let viewModelTwo = self.viewModelTwo
-        withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) { [weak self] (state1: ExampleLoginStateA, state2: ExampleLoginStateB) -> Void in
+        withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) { [weak self] (state1: UsernameState, state2: PasswordState) -> Void in
 
             componentsController.staticSpacingComponent(configuration: { (component: inout StaticSpacingComponent) -> Void in
                 component.height = 70.0
@@ -120,7 +112,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 }
 
                 component.textDidChange = { (textField: UITextField) -> Void in
-                    withState(of: viewModelOne) { (_: ExampleLoginStateA) -> Void in
+                    withState(of: viewModelOne) { (_: UsernameState) -> Void in
                         guard let text = textField.text else { return }
                         viewModelOne.setUserName(text)
                     }
@@ -153,7 +145,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                 }
 
                 component.textDidChange = { (textField: UITextField) -> Void in
-                    withState(of: viewModelTwo) { (_: ExampleLoginStateB) -> Void in
+                    withState(of: viewModelTwo) { (_: PasswordState) -> Void in
                         guard let text = textField.text else { return }
                         viewModelTwo.setPassword(text)
                     }
@@ -182,7 +174,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
 
                 component.onTap = {
                     withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) {
-                        (s1: ExampleLoginStateA, s2: ExampleLoginStateB) -> Void in
+                        (s1: UsernameState, s2: PasswordState) -> Void in
                         print(
                             """
                             Username: \(s1.userName)
@@ -200,14 +192,14 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
 // MARK: - Target Action Methods
 private extension ExampleLoginVC {
 
-    @objc func secondButtonTapped() {
-        self.viewModelOne.secondButtonTapped()
-        self.viewModelTwo.secondButtonTapped()
-    }
+    @objc func pushToSingleSectionList() {
+        let vc: ExampleListVC = ExampleListVC(
+            viewModel: ExampleListViewModel(
+                initialState: ExampleListState.default
+            )
+        )
 
-    @objc func thirdButtonTapped() {
-        self.viewModelOne.thirdButtonTapped()
-        self.viewModelTwo.thirdButtonTapped()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

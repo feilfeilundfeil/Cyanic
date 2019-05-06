@@ -11,6 +11,7 @@ import Cyanic
 import Alacrity
 import LayoutKit
 import RxCocoa
+import RxDataSources
 import RxSwift
 
 public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
@@ -19,6 +20,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 
     // MARK: Stored Properties
@@ -30,11 +32,25 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
     }
 
     // MARK: Methods
-//    public override func createUICollectionViewLayout() -> UICollectionViewLayout {
-//        let layout: UICollectionViewFlowLayout = super.createUICollectionViewLayout() as! UICollectionViewFlowLayout
-//        layout.sectionHeadersPinToVisibleBounds = true
-//        return layout
-//    }
+    public override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
+        return ModifiedRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+            animationConfiguration: AnimationConfiguration(
+                insertAnimation: UITableView.RowAnimation.fade,
+                reloadAnimation: UITableView.RowAnimation.fade,
+                deleteAnimation: UITableView.RowAnimation.fade
+            ),
+            configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
+                guard let cell = tv.dequeueReusableCell(
+                    withIdentifier: TableComponentCell.identifier,
+                    for: indexPath
+                    ) as? TableComponentCell
+                    else { fatalError("Cell not registered to UITableView") }
+
+                cell.configure(with: component)
+                return cell
+            }
+        )
+    }
 
     public override func buildSections(_ sectionsController: inout MultiSectionController) {
 
@@ -58,7 +74,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                 }
             }
 
-            let firstSection = sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
 
                 let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
                     configuration: { (component: inout ExpandableComponent) -> Void in
@@ -109,7 +125,6 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                                 view.textColor = UIColor.black
                             }
                         )
-
 
                         component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
                         component.backgroundColor = UIColor.lightGray
