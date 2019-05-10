@@ -26,6 +26,7 @@ internal class StateStore<ConcreteState: State> {
         self.executionRelay
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
+            .debounce(RxTimeInterval.milliseconds(1), scheduler: self.scheduler)
             .bind(
                 onNext: { [weak self] () -> Void in
                     self?.resolveClosureQueue()

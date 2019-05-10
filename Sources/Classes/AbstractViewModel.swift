@@ -24,6 +24,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     public init(initialState: StateType, isDebugMode: Bool = false) {
         self.stateStore = StateStore<StateType>(initialState: initialState)
         self.isDebugMode = isDebugMode
+//        super.init()
     }
 
     deinit {
@@ -47,6 +48,13 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     */
     public let disposeBag: DisposeBag = DisposeBag()
 
+    /**
+     Accessor for the current State of the AbstractViewModel.
+    */
+    public var currentState: StateType {
+        return self.stateStore.currentState
+    }
+
 }
 
 internal extension AbstractViewModel {
@@ -56,13 +64,6 @@ internal extension AbstractViewModel {
     */
     var state: Observable<StateType> {
         return self.stateStore.state
-    }
-
-    /**
-     Accessor for the current State of the AbstractViewModel.
-    */
-    var currentState: StateType {
-        return self.stateStore.currentState
     }
 
 }

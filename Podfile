@@ -14,7 +14,6 @@ target 'Cyanic' do
 end
 
 target 'Tests' do
-  pod 'Cyanic'
   pod 'Quick'
   pod 'Nimble'
 end

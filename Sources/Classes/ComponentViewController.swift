@@ -205,12 +205,15 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
         )
             .observeOn(self.scheduler)
             .subscribeOn(self.scheduler)
-            .share()
 
         if self.viewModels.contains(where: { $0.isDebugMode }) {
-            throttledStateObservable = throttledStateObservable
-                .debug("\(type(of: self))", trimOutput: true)
+            throttledStateObservable = throttledStateObservable.debug(
+                "\(type(of: self))",
+                trimOutput: false
+            )
         }
+
+        throttledStateObservable = throttledStateObservable.share()
 
         throttledStateObservable
             .map({ (width: CGSize, states: [Any]) -> [Any] in
