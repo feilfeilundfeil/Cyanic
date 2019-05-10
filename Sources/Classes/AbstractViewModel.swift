@@ -12,7 +12,7 @@ import RxSwift
 /**
  AbstractViewModel is a class that provides the essential functionality that must exist in all ViewModel subclasses.
 */
-open class AbstractViewModel<StateType: State>: ViewModelType {
+open class AbstractViewModel<StateType: State>: NSObject, ViewModelType {
 
     /**
      Initializer for the ViewModel.
@@ -24,7 +24,7 @@ open class AbstractViewModel<StateType: State>: ViewModelType {
     public init(initialState: StateType, isDebugMode: Bool = false) {
         self.stateStore = StateStore<StateType>(initialState: initialState)
         self.isDebugMode = isDebugMode
-//        super.init()
+        super.init()
     }
 
     deinit {
