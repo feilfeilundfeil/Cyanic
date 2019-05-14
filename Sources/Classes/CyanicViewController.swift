@@ -39,7 +39,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
     /**
      DisposeBag for Rx-related subscriptions.
     */
-    internal let disposeBag: DisposeBag = DisposeBag()
+    public let disposeBag: DisposeBag = DisposeBag()
 
     // MARK: Computed Properties
     /**

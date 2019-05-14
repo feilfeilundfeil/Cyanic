@@ -70,4 +70,5 @@ public extension SectionController {
     }
 <%_ } -%>
 }
+// swiftlint:enable all
 // sourcery:end

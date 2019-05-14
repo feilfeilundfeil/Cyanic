@@ -32,30 +32,30 @@ public struct TextFieldComponent: TextFieldComponentType {
 
     public var placeholder: String = ""
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var text: String = ""
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
     public var backgroundColor: UIColor = UIColor.clear
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var alignment: Alignment = Alignment.centerLeading
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var flexibility: Flexibility = Flexibility.flexible
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var configuration: (UITextField) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality 
-    public var textDidChange: (UITextField) -> Void = { (_: UITextField) -> Void in print("TextField has new text") }
+    // sourcery: skipHashing, skipEquality
+    public var editingChanged: (UITextField) -> Void = { (_: UITextField) -> Void in print("TextField has new text") }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var textFieldType: UITextField.Type = UITextField.self
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return TextFieldComponentLayout(component: self) }
 
     public var identity: TextFieldComponent { return self }

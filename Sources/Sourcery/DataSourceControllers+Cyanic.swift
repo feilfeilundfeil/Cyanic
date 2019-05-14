@@ -69,6 +69,26 @@ public extension ComponentsController {
     }
 
     /**
+        Generates a SizedComponent instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable SizedComponent.
+            - mutableComponent: The SizedComponent instance to be mutated/configured.
+        - Returns:
+            SizedComponent
+    */
+    @discardableResult
+    mutating func sizedComponent(configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
+        var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+        self.add(mutableComponent)
+        return mutableComponent
+    }
+
+    /**
         Generates a StaticSpacingComponent instance and configures its properties with the given closure. You must provide a
         unique id in the configuration block, otherwise it will force a fatalError.
         - Parameters:
@@ -191,6 +211,26 @@ public extension SectionController {
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateExpandableComponent(mutableComponent)
             else { fatalError("You did not configure all required variables in this component") }
+        self.sectionComponent = mutableComponent.asAnyComponent
+        return mutableComponent
+    }
+
+    /**
+        Generates a SizedComponent instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable SizedComponent.
+            - mutableComponent: The SizedComponent instance to be mutated/configured.
+        - Returns:
+            SizedComponent
+    */
+    @discardableResult
+    mutating func sizedComponent(configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
+        var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
         self.sectionComponent = mutableComponent.asAnyComponent
         return mutableComponent
     }

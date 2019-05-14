@@ -1,7 +1,7 @@
 // Generated using Sourcery 0.16.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
-// swiftlint:disable private_over_fileprivate
+// swiftlint:disable all
 fileprivate func compareOptionals<T>(lhs: T?, rhs: T?, compare: (_ lhs: T, _ rhs: T) -> Bool) -> Bool {
     switch (lhs, rhs) {
         case let (lValue?, rValue?):
@@ -51,6 +51,15 @@ public func == (lhs: ExpandableComponent, rhs: ExpandableComponent) -> Bool {
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.accessoryViewSize == rhs.accessoryViewSize else { return false }
     guard lhs.isExpanded == rhs.isExpanded else { return false }
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
+    guard lhs.height == rhs.height else { return false }
+    return true
+}
+// MARK: - SizedComponent AutoEquatableComponent
+extension SizedComponent: Equatable {}
+public func == (lhs: SizedComponent, rhs: SizedComponent) -> Bool {
+    guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.id == rhs.id else { return false }
     guard lhs.width == rhs.width else { return false }
     guard lhs.height == rhs.height else { return false }

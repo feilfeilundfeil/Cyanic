@@ -40,14 +40,14 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
                 view.placeholder = component.placeholder
 
                 let disposables: [Disposable] = [
-                    view.rx.text.orEmpty
-                        .map({ (_: String) -> UITextField in
+                    view.rx.controlEvent([UIControl.Event.editingChanged])
+                        .map({ () -> UITextField in
                             return view
                         })
                         .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
                         .bind(
                             onNext: { (view: UITextField) -> Void in
-                                component.textDidChange(view)
+                                component.editingChanged(view)
                             }
                         )
                 ]

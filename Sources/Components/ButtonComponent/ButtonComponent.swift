@@ -28,21 +28,21 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var title: String = ""
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
     public var backgroundColor: UIColor = UIColor.clear
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var alignment: Alignment = ButtonLayoutDefaults.defaultAlignment
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var flexibility: Flexibility = ButtonLayoutDefaults.defaultFlexibility
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var configuration: (UIButton) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var onTap: () -> Void = { print("Hello World \(#file)") }
 
     public var id: String
@@ -51,7 +51,7 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return ButtonComponentLayout(component: self) }
 
     public var identity: ButtonComponent { return self }

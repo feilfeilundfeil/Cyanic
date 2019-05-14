@@ -12,7 +12,7 @@ public final class ExampleListViewModel: ExampleViewModel<ExampleListState> {
 
     // MARK: Methods
     func buttonWasTapped() {
-        self.setState { $0.isTrue = !$0.isTrue }
+        self.setState { $0.hasTextInTextField = !$0.hasTextInTextField }
     }
 
 }

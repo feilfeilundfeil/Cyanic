@@ -20,8 +20,7 @@ public protocol TextFieldComponentType: StaticHeightComponent {
 
     // sourcery: defaultValue = """"
     // sourcery: skipHashing, skipEquality
-    /// The String displayed as text on the UITextField. The default value is an empty string: "". This is intentionally not
-    /// used in the Equatable and Hashable implementations due to firstResponder issues.
+    /// The String displayed as text on the UITextField. The default value is an empty string: "". 
     var text: String { get set }
 
     // sourcery: defaultValue = UIEdgeInsets.zero
@@ -52,7 +51,7 @@ public protocol TextFieldComponentType: StaticHeightComponent {
     // sourcery: defaultValue = "{ (_: UITextField) -> Void in print("TextField has new text") }"
     // sourcery: skipHashing, skipEquality
     /// This closure is executed 0.5 seconds after the user has stopped typing on the UITextField.
-    var textDidChange: (UITextField) -> Void { get set }
+    var editingChanged: (UITextField) -> Void { get set }
 
     // sourcery: defaultValue = "UITextField.self"
     // sourcery: skipHashing, skipEquality

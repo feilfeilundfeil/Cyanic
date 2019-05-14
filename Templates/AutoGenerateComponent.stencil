@@ -10,7 +10,13 @@
     }
 
 {% for var in type.allVariables|!annotated:"isExcluded" %}
-{% if var.annotations.skipHashing and var.annotations.skipEquality %}    // sourcery: skipHashing, skipEquality {% endif %}
+{% if var.annotations.skipHashing and var.annotations.skipEquality %}
+    // sourcery: skipHashing, skipEquality
+{% elif var.annotations.skipHashing %}
+    // sourcery: skipHashing
+{% elif var.annotations.skipEquality %}
+    // sourcery: skipEquality
+{% endif %}
 {% if var.annotations.defaultValue %}
     {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.annotations.isLazy %}lazy {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
 

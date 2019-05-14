@@ -36,19 +36,19 @@ public struct StaticTextComponent: StaticTextComponentType {
 
     public var lineFragmentPadding: CGFloat = 0.0
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var alignment: Alignment = Alignment.centerLeading
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var flexibility: Flexibility = TextViewLayoutDefaults.defaultFlexibility
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var configuration: (UITextView) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return StaticTextComponentLayout(component: self) }
 
     public var identity: StaticTextComponent { return self }

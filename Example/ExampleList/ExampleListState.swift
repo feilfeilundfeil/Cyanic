@@ -20,7 +20,7 @@ public struct ExampleListState: ExpandableState {
     // MARK: Static Properties
     public static var `default`: ExampleListState {
         return ExampleListState(
-            isTrue: true,
+            hasTextInTextField: true,
             expandableDict: ExampleListState.Expandable.allCases.map { $0.rawValue }
                 .reduce(into: [String: Bool](), { (current, element) -> Void in
                     current[element] = false
@@ -53,16 +53,18 @@ public struct ExampleListState: ExpandableState {
                 """
                 It's an old habit. I spent my whole life trying not to be careless. Women and children can afford to be careless, but not men. What's the matter with you? Is this what you've become, a Hollywood finocchio who cries like a woman? "Oh, what do I do? What do I do?" What is that nonsense? Ridiculous! You talk about vengeance. Is vengeance going to bring your son back to you? Or my boy to me? I don't like violence, Tom. I'm a businessman; blood is a big expense.
                 """
-            ]
+            ],
+            text: Async.uninitialized
 
         )
     }
 
     // MARK: Stored Properties
-    public var isTrue: Bool
+    public var hasTextInTextField: Bool
     public var expandableDict: [String: Bool]
     public var strings: [String]
     public var otherStrings: [String]
+    public var text: Async<String>
 
 }
 

@@ -23,10 +23,10 @@ public struct ChildVCComponent: ChildVCComponentType {
         self.id = id
     }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public lazy var childVC: UIViewController & CyanicChildVCType = InvalidChildComponentVC()
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public weak var parentVC: UIViewController?
 
     public var id: String
@@ -35,7 +35,7 @@ public struct ChildVCComponent: ChildVCComponentType {
 
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return ChildVCComponentLayout(component: self) }
 
     public var identity: ChildVCComponent { return self }

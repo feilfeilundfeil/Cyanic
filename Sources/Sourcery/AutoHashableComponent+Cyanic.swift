@@ -36,6 +36,15 @@ extension ExpandableComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
+// MARK: - SizedComponent AutoHashableComponent
+extension SizedComponent: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.backgroundColor.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+        self.width.hash(into: &hasher)
+        self.height.hash(into: &hasher)
+    }
+}
 // MARK: - StaticSpacingComponent AutoHashableComponent
 extension StaticSpacingComponent: Hashable {
     public func hash(into hasher: inout Hasher) {

@@ -32,33 +32,33 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var backgroundColor: UIColor = UIColor.clear
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var accessoryViewType: UIView.Type = UIView.self
 
     public var accessoryViewSize: CGSize = CGSize(width: 12.0, height: 12.0)
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var accessoryViewConfiguration: (UIView) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var configuration: (UIView) -> Void = { _ in }
 
     public var isExpanded: Bool = false
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in
         fatalError("This default closure must be replaced!")
     }
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var dividerLine: DividerLine?
 
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return ExpandableComponentLayout(component: self) }
 
     public var identity: ExpandableComponent { return self }

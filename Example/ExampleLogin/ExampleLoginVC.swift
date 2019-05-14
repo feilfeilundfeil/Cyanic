@@ -111,12 +111,12 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     self.userTextField = textField
                 }
 
-                component.textDidChange = { (textField: UITextField) -> Void in
-                    withState(of: viewModelOne) { (_: UsernameState) -> Void in
-                        guard let text = textField.text else { return }
-                        viewModelOne.setUserName(text)
-                    }
-                }
+//                component.textDidChange = { (textField: UITextField) -> Void in
+//                    withState(of: viewModelOne) { (_: UsernameState) -> Void in
+//                        guard let text = textField.text else { return }
+//                        viewModelOne.setUserName(text)
+//                    }
+//                }
 
                 component.textFieldType = TestTextField.self
             })
@@ -144,12 +144,12 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     self.passwordTextField = textField
                 }
 
-                component.textDidChange = { (textField: UITextField) -> Void in
-                    withState(of: viewModelTwo) { (_: PasswordState) -> Void in
-                        guard let text = textField.text else { return }
-                        viewModelTwo.setPassword(text)
-                    }
-                }
+//                component.textDidChange = { (textField: UITextField) -> Void in
+//                    withState(of: viewModelTwo) { (_: PasswordState) -> Void in
+//                        guard let text = textField.text else { return }
+//                        viewModelTwo.setPassword(text)
+//                    }
+//                }
 
                 component.textFieldType = TestTextField.self
             })

@@ -31,7 +31,7 @@ public struct StaticSpacingComponent: StaticSpacingComponentType {
 
     public var backgroundColor: UIColor = UIColor.clear
 
-    // sourcery: skipHashing, skipEquality 
+    // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return StaticSpacingComponentLayout(component: self) }
 
     public var identity: StaticSpacingComponent { return self }

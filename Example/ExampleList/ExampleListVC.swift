@@ -40,10 +40,17 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
             action: #selector(showMultiSectionVC)
         )
 
-        self.navigationItem.rightBarButtonItems = [navigationVCButton]
+        let isTrueButton: UIBarButtonItem = UIBarButtonItem(
+            title: "isTrue",
+            style: .plain,
+            target: self,
+            action: #selector(buttonTapped)
+        )
+
+        self.navigationItem.rightBarButtonItems = [navigationVCButton, isTrueButton]
 
         self.viewModel.selectSubscribe(
-            keyPath1: \ExampleListState.isTrue,
+            keyPath1: \ExampleListState.hasTextInTextField,
             keyPath2: \ExampleListState.expandableDict,
             onNewValue: {
                 print("from a different subscription: \($0)")
@@ -56,6 +63,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
     private let viewModel: ExampleListViewModel
     private let childVCViewModel: ChildVCViewModel = ChildVCViewModel(initialState: ChildVCState.default)
     private lazy var childVC: ChildVC = ChildVC(viewModel: self.childVCViewModel)
+    private weak var activeTextField: UITextField?
 
     // MARK: Overridden SingleSectionComponentViewController Properties
     public override var viewModels: [AnyViewModel] {
@@ -75,15 +83,82 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
 
     public override func buildComponents(_ components: inout ComponentsController) {
         let childVC: ChildVC = self.childVC
+        let viewModel: ExampleListViewModel = self.viewModel
         Cyanic.withState(
-            viewModel1: self.viewModel,
+            viewModel1: viewModel,
             viewModel2: self.childVCViewModel
-        ) { (state1: ExampleListState, state2: ChildVCState) -> Void in
-            components.staticSpacingComponent {
-                $0.id = "Second"
-                $0.height = 50.0
-                $0.backgroundColor = UIColor.black
+        ) { [weak self] (state1: ExampleListState, state2: ChildVCState) -> Void in
+            guard let self = self else { return }
+
+            if state1.hasTextInTextField {
+                
+                components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
+                    component.id = "TextField"
+                    component.placeholder = "Hi"
+                    if let value = state1.text.value {
+                        component.text = value
+                    }
+                    component.configuration = { [weak self] (view: UITextField) -> Void in
+                        guard let self = self, view.delegate !== self else {
+                            return
+                        }
+                        view.delegate = self
+                    }
+                    component.editingChanged = { (view: UITextField) -> Void in
+                        let hasTextInTextField: Bool = view.text?.isEmpty == false
+                        viewModel.setState(with: {
+                            $0.hasTextInTextField = hasTextInTextField
+                        })
+                    }
+                })
+
+                components.staticSpacingComponent {
+                    $0.id = "Second"
+                    $0.height = 50.0
+                    $0.backgroundColor = UIColor.black
+                }
             }
+
+            if !state1.hasTextInTextField {
+                components.staticSpacingComponent {
+                    $0.id = "first"
+                    $0.height = 50.0
+                    $0.backgroundColor = UIColor.yellow
+                }
+
+                components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
+                    component.id = "TextField"
+                    component.placeholder = "Hi"
+                    if let value = state1.text.value {
+                        component.text = value
+                    }
+
+                    component.configuration = { [weak self] (view: UITextField) -> Void in
+                        guard let self = self, view.delegate !== self else {
+                            return
+                        }
+                        view.delegate = self
+                    }
+                    component.editingChanged = { (view: UITextField) -> Void in
+                        let hasTextInTextField: Bool = view.text?.isEmpty == false
+                        viewModel.setState(with: {
+                            $0.hasTextInTextField = hasTextInTextField
+                        })
+                    }
+                })
+            }
+
+            components.sizedComponent(configuration: { (component: inout SizedComponent) -> Void in
+                component.id = "Fixed View"
+                component.backgroundColor = UIColor.yellow
+                component.viewClass = UIView.self
+                component.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+                component.height = 50.0
+                component.configuration = { (view: UIView) -> Void in
+                    view.backgroundColor = UIColor.orange
+                    print("Fixed View: \(view.bounds)")
+                }
+            })
 
             let style: AlacrityStyle<UIButton> = AlacrityStyle<UIButton> {
                 $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -98,7 +173,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 button.onTap = { print("Hello World, \(id)") }
             }
 
-            if state1.isTrue {
+            if state1.hasTextInTextField {
                 components.buttonComponent {
                     buttonConfiguration("First", UIColor.red, &$0)
                 }
@@ -136,11 +211,11 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                     view.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
                 component.onTap = { [weak self] () -> Void in
-                    self?.viewModel.setState(with: { $0.isTrue = !$0.isTrue })
+                    self?.viewModel.setState(with: { $0.hasTextInTextField = !$0.hasTextInTextField })
                 }
             }
 
-            if state1.isTrue {
+            if state1.hasTextInTextField {
 
                 components.childVCComponent { [weak self] in
                     guard let s = self else { return }
@@ -157,6 +232,35 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 $0.backgroundColor = UIColor.cyan
             }
         }
+    }
+
+}
+
+extension ExampleListVC: UITextFieldDelegate {
+
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("Did begin editting")
+        self.activeTextField = textField
+    }
+
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        print("Did end editting")
+        self.activeTextField = nil
+    }
+
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        if let text = textField.text, !text.isEmpty {
+
+            self.viewModel.setState(with: { $0.text = .success(text) })
+
+        } else {
+
+            self.viewModel.setState(with: { $0.text = .uninitialized })
+
+        }
+        textField.resignFirstResponder()
+        return true
     }
 
 }

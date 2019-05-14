@@ -59,6 +59,9 @@
 		14A4576422464434006E75C6 /* StateObservableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576322464434006E75C6 /* StateObservableBuilder.swift */; };
 		14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576822468D9E006E75C6 /* Array+Cyanic.swift */; };
 		14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A4576A22468E0F006E75C6 /* AnyViewModel.swift */; };
+		14A5606C228ABEAE009DEEA3 /* SizedComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */; };
+		14A5606E228ABFF2009DEEA3 /* SizedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */; };
+		14A56070228AC06F009DEEA3 /* SizedComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */; };
 		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
 		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
@@ -200,6 +203,9 @@
 		14A4576322464434006E75C6 /* StateObservableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateObservableBuilder.swift; sourceTree = "<group>"; };
 		14A4576822468D9E006E75C6 /* Array+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Cyanic.swift"; sourceTree = "<group>"; };
 		14A4576A22468E0F006E75C6 /* AnyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyViewModel.swift; sourceTree = "<group>"; };
+		14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponentType.swift; sourceTree = "<group>"; };
+		14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponent.swift; sourceTree = "<group>"; };
+		14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponentLayout.swift; sourceTree = "<group>"; };
 		14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
@@ -491,6 +497,16 @@
 			path = TextFieldComponent;
 			sourceTree = "<group>";
 		};
+		14A5606A228ABE83009DEEA3 /* SizedComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */,
+				14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */,
+				14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */,
+			);
+			path = SizedComponent;
+			sourceTree = "<group>";
+		};
 		14B01E3F222723E200EE0A9A /* Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +524,7 @@
 				14C96F092211EE9600731265 /* ButtonComponent */,
 				14D5112822313D8400EEAC0F /* ChildVCComponent */,
 				1437BDDA2216C14100A35FFE /* ExpandableComponent */,
+				14A5606A228ABE83009DEEA3 /* SizedComponent */,
 				1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */,
 				1437BDD42215B57800A35FFE /* StaticTextComponent */,
 				14A16527225C68B90031517C /* TextFieldComponent */,
@@ -976,6 +993,7 @@
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
 				149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
+				14A5606C228ABEAE009DEEA3 /* SizedComponentType.swift in Sources */,
 				14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */,
 				14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,
@@ -985,6 +1003,7 @@
 				142C45002235A105002360F5 /* ThrottleType.swift in Sources */,
 				14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */,
 				1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */,
+				14A56070228AC06F009DEEA3 /* SizedComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
@@ -1005,6 +1024,7 @@
 				14CBB02B222E7C1C002D2768 /* Selectable.swift in Sources */,
 				14A4576B22468E0F006E75C6 /* AnyViewModel.swift in Sources */,
 				14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */,
+				14A5606E228ABFF2009DEEA3 /* SizedComponent.swift in Sources */,
 				14A16529225C68F50031517C /* TextFieldComponentType.swift in Sources */,
 				142C451F223B0175002360F5 /* StateStore.swift in Sources */,
 				14A4576922468D9E006E75C6 /* Array+Cyanic.swift in Sources */,
