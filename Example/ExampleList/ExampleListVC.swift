@@ -151,12 +151,16 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
             components.sizedComponent(configuration: { (component: inout SizedComponent) -> Void in
                 component.id = "Fixed View"
                 component.backgroundColor = UIColor.yellow
-                component.viewClass = UIView.self
+                component.viewClass = UILabel.self
                 component.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
                 component.height = 50.0
                 component.configuration = { (view: UIView) -> Void in
-                    view.backgroundColor = UIColor.orange
-                    print("Fixed View: \(view.bounds)")
+                    guard let typedView = view as? UILabel else {
+                        view.backgroundColor = UIColor.black
+                        return
+                    }
+                    typedView.backgroundColor = UIColor.orange
+                    print("Fixed View: \(typedView.bounds)")
                 }
             })
 

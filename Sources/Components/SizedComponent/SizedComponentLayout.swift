@@ -23,6 +23,7 @@ public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
             maxHeight: component.height,
             alignment: component.alignment,
             viewReuseId: "\(SizedComponentLayout.identifier)ViewSize",
+            viewClass: component.viewClass,
             sublayout: nil,
             config: component.configuration
         )
