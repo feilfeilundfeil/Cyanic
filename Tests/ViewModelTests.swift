@@ -35,10 +35,10 @@ class ViewModelTests: QuickSpec {
 
     class TestViewModel: ViewModel<TestState> {}
 
-    enum AsyncError: Error {
+    enum AsyncError: CyanicError {
         case failed
 
-        var localizedDescription: String {
+        var errorDescription: String {
             return "Async Property failed"
         }
     }

@@ -19,7 +19,7 @@ public enum Async<T: Hashable>: Hashable {
 
             case let (.failure(lhsError), .failure(rhsError)):
                 return type(of: lhsError) == type(of: rhsError) &&
-                    lhsError.localizedDescription == rhsError.localizedDescription
+                    lhsError.errorDescription == rhsError.errorDescription
 
             case (.loading, .loading):
                 return true
@@ -40,7 +40,7 @@ public enum Async<T: Hashable>: Hashable {
     /**
      An error was encountered while trying to fetched the data/model.
     */
-    case failure(Error)
+    case failure(CyanicError)
 
     /**
      The data/model is being fetched.

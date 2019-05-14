@@ -62,6 +62,8 @@
 		14A5606C228ABEAE009DEEA3 /* SizedComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */; };
 		14A5606E228ABFF2009DEEA3 /* SizedComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */; };
 		14A56070228AC06F009DEEA3 /* SizedComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */; };
+		14A56072228B5D77009DEEA3 /* AsyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A56071228B5D77009DEEA3 /* AsyncTests.swift */; };
+		14A56074228B6541009DEEA3 /* CyanicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A56073228B6541009DEEA3 /* CyanicError.swift */; };
 		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
 		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
@@ -206,6 +208,8 @@
 		14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponentType.swift; sourceTree = "<group>"; };
 		14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponent.swift; sourceTree = "<group>"; };
 		14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizedComponentLayout.swift; sourceTree = "<group>"; };
+		14A56071228B5D77009DEEA3 /* AsyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncTests.swift; sourceTree = "<group>"; };
+		14A56073228B6541009DEEA3 /* CyanicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicError.swift; sourceTree = "<group>"; };
 		14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
@@ -394,6 +398,7 @@
 				1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */,
 				1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */,
 				145AD75D220B1EBF004F02C2 /* Info.plist */,
+				14A56071228B5D77009DEEA3 /* AsyncTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				1437BDCB22157FC300A35FFE /* State.swift */,
 				14CBB026222D71E9002D2768 /* UserInterfaceModel.swift */,
 				14A4576322464434006E75C6 /* StateObservableBuilder.swift */,
+				14A56073228B6541009DEEA3 /* CyanicError.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -988,6 +994,7 @@
 				142C451C223939DB002360F5 /* Async.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
+				14A56074228B6541009DEEA3 /* CyanicError.swift in Sources */,
 				14609BAE226378A5007B2AFC /* ComponentViewController.swift in Sources */,
 				14CBC9CD220C57BB00597FAA /* Component.swift in Sources */,
 				14E424CD220E8CB6006BAA4F /* ComponentLayout.swift in Sources */,
@@ -1040,6 +1047,7 @@
 				145AD75C220B1EBF004F02C2 /* ViewModelTests.swift in Sources */,
 				14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */,
 				1443607B2247B70F0090FCF9 /* CyanicViewControllerTests.swift in Sources */,
+				14A56072228B5D77009DEEA3 /* AsyncTests.swift in Sources */,
 				1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
