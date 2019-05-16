@@ -147,6 +147,26 @@ public extension ComponentsController {
         self.add(mutableComponent)
         return mutableComponent
     }
+
+    /**
+        Generates a TextViewComponent instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable TextViewComponent.
+            - mutableComponent: The TextViewComponent instance to be mutated/configured.
+        - Returns:
+            TextViewComponent
+    */
+    @discardableResult
+    mutating func textViewComponent(configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
+        var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+        self.add(mutableComponent)
+        return mutableComponent
+    }
 }
 
 public extension SectionController {
@@ -287,6 +307,26 @@ public extension SectionController {
     @discardableResult
     mutating func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
         var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
+        configuration(&mutableComponent)
+        mutableComponent.width = self.width
+        guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
+            else { fatalError("You must have a unique identifier for this component") }
+        self.sectionComponent = mutableComponent.asAnyComponent
+        return mutableComponent
+    }
+
+    /**
+        Generates a TextViewComponent instance and configures its properties with the given closure. You must provide a
+        unique id in the configuration block, otherwise it will force a fatalError.
+        - Parameters:
+            - configuration: The closure that mutates the mutable TextViewComponent.
+            - mutableComponent: The TextViewComponent instance to be mutated/configured.
+        - Returns:
+            TextViewComponent
+    */
+    @discardableResult
+    mutating func textViewComponent(configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
+        var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)

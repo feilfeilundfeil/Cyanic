@@ -49,7 +49,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   LayoutKit:
-    :commit: 49e8b7ad0f0bff60f5ed214cabc36dfdbbf3217c
+    :commit: 0015c2956f54634cae5cf2c5ec9945faf74dc90c
     :git: https://github.com/hooliooo/LayoutKit.git
 
 SPEC CHECKSUMS:

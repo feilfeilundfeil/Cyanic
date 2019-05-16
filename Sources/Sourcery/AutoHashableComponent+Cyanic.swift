@@ -75,3 +75,12 @@ extension TextFieldComponent: Hashable {
         self.height.hash(into: &hasher)
     }
 }
+// MARK: - TextViewComponent AutoHashableComponent
+extension TextViewComponent: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.backgroundColor.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+        self.width.hash(into: &hasher)
+        self.height.hash(into: &hasher)
+    }
+}

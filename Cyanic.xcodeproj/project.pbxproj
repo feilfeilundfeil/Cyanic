@@ -66,6 +66,9 @@
 		14A56074228B6541009DEEA3 /* CyanicError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A56073228B6541009DEEA3 /* CyanicError.swift */; };
 		14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */; };
 		14A7EE0A224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */; };
+		14AB6B0C228DE0700039C0EF /* TextViewComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */; };
+		14AB6B0E228DE15D0039C0EF /* TextViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */; };
+		14AB6B10228DE1CF0039C0EF /* TextViewComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14BC91F5228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
@@ -212,6 +215,9 @@
 		14A56073228B6541009DEEA3 /* CyanicError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicError.swift; sourceTree = "<group>"; };
 		14A7EE05224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoEquatableComponent+Cyanic.swift"; sourceTree = "<group>"; };
 		14A7EE07224F6B13007FAB4D /* AutoHashableComponent+Cyanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoHashableComponent+Cyanic.swift"; sourceTree = "<group>"; };
+		14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewComponentType.swift; sourceTree = "<group>"; };
+		14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewComponent.swift; sourceTree = "<group>"; };
+		14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewComponentLayout.swift; sourceTree = "<group>"; };
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
@@ -512,6 +518,16 @@
 			path = SizedComponent;
 			sourceTree = "<group>";
 		};
+		14AB6B0A228DDFA90039C0EF /* TextViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */,
+				14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */,
+				14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */,
+			);
+			path = TextViewComponent;
+			sourceTree = "<group>";
+		};
 		14B01E3F222723E200EE0A9A /* Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +549,7 @@
 				1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */,
 				1437BDD42215B57800A35FFE /* StaticTextComponent */,
 				14A16527225C68B90031517C /* TextFieldComponent */,
+				14AB6B0A228DDFA90039C0EF /* TextViewComponent */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -979,9 +996,11 @@
 				14F6BD7A2229461A008B0692 /* StaticSpacingComponentType.swift in Sources */,
 				1437BDCA22157C4F00A35FFE /* ViewModel.swift in Sources */,
 				142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */,
+				14AB6B0C228DE0700039C0EF /* TextViewComponentType.swift in Sources */,
 				14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */,
 				14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
+				14AB6B0E228DE15D0039C0EF /* TextViewComponent.swift in Sources */,
 				149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */,
 				14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
@@ -991,6 +1010,7 @@
 				1498048B225F27320044194C /* CyanicNoFadeFlowLayout.swift in Sources */,
 				149804952260ABEA0044194C /* MultiSectionCollectionComponentViewController.swift in Sources */,
 				14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */,
+				14AB6B10228DE1CF0039C0EF /* TextViewComponentLayout.swift in Sources */,
 				142C451C223939DB002360F5 /* Async.swift in Sources */,
 				1437BDCC22157FC300A35FFE /* State.swift in Sources */,
 				14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */,
