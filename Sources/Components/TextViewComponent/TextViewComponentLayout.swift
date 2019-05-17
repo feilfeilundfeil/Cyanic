@@ -25,7 +25,7 @@ public final class TextViewComponentLayout: SizeLayout<UIView>, ComponentLayout 
             text: Text.unattributed(component.text),
             font: component.font,
             lineFragmentPadding: 0,
-            textContainerInset: component.insets,
+            textContainerInset: UIEdgeInsets.zero,
             layoutAlignment: component.alignment,
             flexibility: component.flexibility,
             viewReuseId: "\(TextViewComponentLayout.identifier)TextView",
@@ -39,13 +39,18 @@ public final class TextViewComponentLayout: SizeLayout<UIView>, ComponentLayout 
             }
         )
 
+        let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
+            insets: component.insets,
+            sublayout: textLayout
+        )
+
         super.init(
             minWidth: component.width,
             maxWidth: component.width,
             minHeight: component.height,
             maxHeight: component.height,
             viewReuseId: "\(TextViewComponentLayout.identifier)Size",
-            sublayout: textLayout,
+            sublayout: insetLayout,
             config: {
                 $0.backgroundColor = component.backgroundColor
             }
