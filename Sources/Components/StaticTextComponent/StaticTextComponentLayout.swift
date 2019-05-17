@@ -32,6 +32,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             config: { (view: UITextView) -> Void in
                 view.backgroundColor = UIColor.clear
                 view.isEditable = false
+                view.isScrollEnabled = false
                 component.configuration(view)
             }
         )
