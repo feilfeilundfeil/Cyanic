@@ -23,6 +23,8 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
      */
     public init(component: ButtonComponent) {
         let size: CGSize = component.size
+        let insets: UIEdgeInsets = component.insets
+        let adjustedHeight: CGFloat = size.height + insets.top + insets.bottom
 
         let serialDisposable: SerialDisposable = SerialDisposable()
         let disposeBag: DisposeBag = DisposeBag()
@@ -32,7 +34,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         let buttonLayout: ButtonLayout<UIButton> = ButtonLayout<UIButton>(
             type: component.type,
             title: component.title,
-            image: ButtonLayoutImage.size(size),
+            image: ButtonLayoutImage.size(CGSize(width: size.width, height: adjustedHeight)),
             alignment: component.alignment,
             flexibility: component.flexibility,
             config: { (view: UIButton) -> Void in
@@ -44,6 +46,7 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
         let insetLayout: InsetLayout = InsetLayout(
             insets: component.insets,
+            flexibility: Flexibility.inflexible,
             viewReuseId: "\(ButtonComponentLayout.identifier)InsetLayout",
             sublayout: buttonLayout
         )
@@ -51,8 +54,8 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
         super.init(
             minWidth: size.width,
             maxWidth: size.width,
-            minHeight: size.height,
-            maxHeight: size.height,
+            minHeight: size.height + insets.top + insets.bottom,
+            maxHeight: size.height + insets.top + insets.bottom,
             alignment: component.alignment,
             flexibility: component.flexibility,
             viewReuseId: "\(ButtonComponentLayout.identifier)SizeLayout",

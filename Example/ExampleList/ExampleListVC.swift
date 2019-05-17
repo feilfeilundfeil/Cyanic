@@ -208,6 +208,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 component.id = "Show"
                 component.title = "Show side menu"
                 component.height = 44.0
+                component.insets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
                 component.configuration = { (view: UIButton) -> Void in
                     view.backgroundColor = UIColor.orange
                     view.setTitleColor(UIColor.black, for: UIControl.State.normal)
