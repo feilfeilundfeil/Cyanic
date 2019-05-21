@@ -13,7 +13,7 @@ import RxCocoa
 
 open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
 
-    public init(component: TextFieldComponent) {
+    public init(component: TextFieldComponent) { // swiftlint:disable:this function_body_length
         let insets: UIEdgeInsets = component.insets
 
         let serialDisposable: SerialDisposable = SerialDisposable()
@@ -54,6 +54,16 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
 
                 let compositeDisposable: CompositeDisposable = CompositeDisposable(disposables: disposables)
                 serialDisposable.disposable = compositeDisposable
+                view.delegate = component.delegate
+
+                guard let delegate = component.delegate as? CyanicTextFieldDelegateProxy else { return }
+                delegate.shouldBeginEditing = component.shouldBeginEditing
+                delegate.didBeginEditing = component.didBeginEditing
+                delegate.shouldEndEditing = component.shouldEndEditing
+                delegate.didEndEditing = component.didEndEditing
+                delegate.maximumCharacterCount = component.maximumCharacterCount
+                delegate.shouldClear = component.shouldClear
+                delegate.shouldReturn = component.shouldReturn
             }
         )
 

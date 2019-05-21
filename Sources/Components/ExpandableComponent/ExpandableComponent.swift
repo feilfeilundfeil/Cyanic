@@ -49,7 +49,9 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var isExpanded: Bool = false
 
     // sourcery: skipHashing, skipEquality
-    public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in fatalError("This default closure must be replaced!") }
+    public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in
+        fatalError("This default closure must be replaced!")
+    }
 
     // sourcery: skipHashing, skipEquality
     public var dividerLine: DividerLine?

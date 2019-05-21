@@ -12,6 +12,8 @@ import UIKit
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = TextFieldComponentLayout
 /// TextFieldComponent is a Component that represents a UITextField.
+/// - Note:
+///   When configuring the UITextfield, do not assign a UITextFieldDelegate because it will be overwritten.
 public struct TextFieldComponent: TextFieldComponentType {
 
 // sourcery:inline:auto:TextFieldComponent.AutoGenerateComponent
@@ -54,6 +56,30 @@ public struct TextFieldComponent: TextFieldComponentType {
 
     // sourcery: skipHashing, skipEquality
     public var textFieldType: UITextField.Type = UITextField.self
+
+    // sourcery: skipHashing, skipEquality
+    public let delegate: UITextFieldDelegate = CyanicTextFieldDelegateProxy()
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldBeginEditing: (UITextField) -> Bool = { _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var didBeginEditing: (UITextField) -> Void = { _ in }
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldEndEditing: (UITextField) -> Bool = { _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var didEndEditing: (UITextField) -> Void = { _ in }
+
+    // sourcery: skipHashing, skipEquality
+    public var maximumCharacterCount: Int = Int.max
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldClear: (UITextField) -> Bool = { _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldReturn: (UITextField) -> Bool = { _ in return true }
 
     // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return TextFieldComponentLayout(component: self) }

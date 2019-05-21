@@ -57,4 +57,45 @@ public protocol TextFieldComponentType: StaticHeightComponent {
     // sourcery: skipHashing, skipEquality
     var textFieldType: UITextField.Type { get set }
 
+    // sourcery: defaultValue = "CyanicTextFieldDelegateProxy()"
+    // sourcery: skipHashing, skipEquality
+    /// The UITextFieldDelegate for the underlying UITextField. This cannot be set, Cyanic takes care of the
+    /// implementation. Use the closures to customize functionality.
+    var delegate: UITextFieldDelegate { get }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldShouldBeginEditing delegate method is called.
+    var shouldBeginEditing: (UITextField) -> Bool { get set }
+
+    // sourcery: defaultValue = "{ _ in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldDidBeginEditing delegate method is called.
+    var didBeginEditing: (UITextField) -> Void { get set }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldShouldEndEditing delegate method is called.
+    var shouldEndEditing: (UITextField) -> Bool { get set }
+
+    // sourcery: defaultValue = "{ _ in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldDidEndEditing delegate method is called.
+    var didEndEditing: (UITextField) -> Void { get set }
+
+    // sourcery: defaultValue = "Int.max"
+    // sourcery: skipHashing, skipEquality
+    /// The maximum number of characters allowed on the UITextField.
+    var maximumCharacterCount: Int { get set }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldShouldClear delegate method is called.
+    var shouldClear: (UITextField) -> Bool { get set }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textFieldShouldReturn delegate method is called.
+    var shouldReturn: (UITextField) -> Bool { get set }
+
 }

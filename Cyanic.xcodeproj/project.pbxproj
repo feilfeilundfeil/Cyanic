@@ -85,6 +85,7 @@
 		14D5112C2231A15200EEAC0F /* ChildVCComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */; };
 		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
 		14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */; };
+		14DB258E22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */; };
 		14DE09D7226620ED001C395F /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		14DE09D8226620ED001C395F /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */; };
@@ -239,6 +240,7 @@
 		14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponent.swift; sourceTree = "<group>"; };
 		14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentLayout.swift; sourceTree = "<group>"; };
 		14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicChildVCType.swift; sourceTree = "<group>"; };
+		14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicTextFieldDelegateProxy.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -504,6 +506,7 @@
 				14A16528225C68F50031517C /* TextFieldComponentType.swift */,
 				14A1652A225C69050031517C /* TextFieldComponent.swift */,
 				14A1652C225C69190031517C /* TextFieldComponentLayout.swift */,
+				14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */,
 			);
 			path = TextFieldComponent;
 			sourceTree = "<group>";
@@ -1044,6 +1047,7 @@
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
 				1498049E2260D8340044194C /* MultiSectionController.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
+				14DB258E22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
 				149A29DF22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift in Sources */,
 				14980493226097610044194C /* DataSourceControllers+Cyanic.swift in Sources */,

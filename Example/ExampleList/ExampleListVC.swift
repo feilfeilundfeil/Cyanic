@@ -94,7 +94,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
             if state1.hasTextInTextField {
                 
                 components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
-                    component.id = "TextField"
+                    component.id = "First TextField"
                     component.placeholder = "Hi"
                     if let value = state1.text.value {
                         component.text = value
@@ -110,6 +110,16 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                         viewModel.setState(with: {
                             $0.hasTextInTextField = hasTextInTextField
                         })
+                    }
+                    component.didBeginEditing = { _ in
+                        print("Did begin editing First TextField")
+                    }
+                    component.didEndEditing = { _ in
+                        print("Did end editing First TextField")
+                    }
+                    component.shouldReturn = { (textField: UITextField) -> Bool in
+                        textField.resignFirstResponder()
+                        return true
                     }
                 })
 
@@ -128,23 +138,33 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 }
 
                 components.textFieldComponent(configuration: { (component: inout TextFieldComponent) -> Void in
-                    component.id = "TextField"
+                    component.id = "Second TextField"
                     component.placeholder = "Hi"
                     if let value = state1.text.value {
                         component.text = value
                     }
 
-                    component.configuration = { [weak self] (view: UITextField) -> Void in
-                        guard let self = self, view.delegate !== self else {
-                            return
-                        }
-                        view.delegate = self
+                    component.configuration = { (view: UITextField) -> Void in
+                        view.clearButtonMode = UITextField.ViewMode.whileEditing
                     }
                     component.editingChanged = { (view: UITextField) -> Void in
-                        let hasTextInTextField: Bool = view.text?.isEmpty == false
-                        viewModel.setState(with: {
-                            $0.hasTextInTextField = hasTextInTextField
-                        })
+                        print(view.text ?? "")
+                    }
+
+                    component.didBeginEditing = { _ in
+                        print("Did begin editing Second TextField")
+                    }
+                    component.didEndEditing = { _ in
+                        print("Did end editing Second TextField")
+                    }
+                    component.shouldReturn = { (textField: UITextField) -> Bool in
+                        textField.resignFirstResponder()
+                        return true
+                    }
+                    component.maximumCharacterCount = 10
+                    component.shouldClear = { (view: UITextField) -> Bool in
+                        print("Cleared")
+                        return true
                     }
                 })
             }
