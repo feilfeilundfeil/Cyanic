@@ -86,6 +86,7 @@
 		14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */; };
 		14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */; };
 		14DB258E22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */; };
+		14DB25902295528700ADADA8 /* CyanicTextViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB258F2295528700ADADA8 /* CyanicTextViewDelegateProxy.swift */; };
 		14DE09D7226620ED001C395F /* Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; };
 		14DE09D8226620ED001C395F /* Cyanic.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145AD74D220B1EBE004F02C2 /* Cyanic.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E424C7220E5B8D006BAA4F /* CollectionComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */; };
@@ -241,6 +242,7 @@
 		14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildVCComponentLayout.swift; sourceTree = "<group>"; };
 		14D5112F2231B2E500EEAC0F /* CyanicChildVCType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicChildVCType.swift; sourceTree = "<group>"; };
 		14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicTextFieldDelegateProxy.swift; sourceTree = "<group>"; };
+		14DB258F2295528700ADADA8 /* CyanicTextViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicTextViewDelegateProxy.swift; sourceTree = "<group>"; };
 		14E424C6220E5B8D006BAA4F /* CollectionComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionComponentCell.swift; sourceTree = "<group>"; };
 		14E424CC220E8CB6006BAA4F /* ComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentLayout.swift; sourceTree = "<group>"; };
 		14E424CF220EE51C006BAA4F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -527,6 +529,7 @@
 				14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */,
 				14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */,
 				14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */,
+				14DB258F2295528700ADADA8 /* CyanicTextViewDelegateProxy.swift */,
 			);
 			path = TextViewComponent;
 			sourceTree = "<group>";
@@ -1042,6 +1045,7 @@
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */,
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
+				14DB25902295528700ADADA8 /* CyanicTextViewDelegateProxy.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,

@@ -9,6 +9,8 @@
 import LayoutKit
 import UIKit
 
+// swiftlint:disable line_length weak_delegate
+
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = TextViewComponentLayout
 public struct TextViewComponent: TextViewComponentType {
@@ -51,6 +53,36 @@ public struct TextViewComponent: TextViewComponentType {
 
     // sourcery: skipHashing, skipEquality
     public var textViewType: UITextView.Type = UITextView.self
+
+    // sourcery: skipHashing, skipEquality
+    public let delegate: UITextViewDelegate = CyanicTextViewDelegateProxy()
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldBeginEditing: (UITextView) -> Bool = { _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldEndEditing: (UITextView) -> Bool = { _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var didBeginEditing: (UITextView) -> Void = { _ in }
+
+    // sourcery: skipHashing, skipEquality
+    public var didEndEditing: (UITextView) -> Void = { _  in }
+
+    // sourcery: skipHashing, skipEquality
+    public var maximumCharacterCount: Int = Int.max
+
+    // sourcery: skipHashing, skipEquality
+    public var didChange: (UITextView) -> Void = { _ in }
+
+    // sourcery: skipHashing, skipEquality
+    public var didChangeSelection: (UITextView) -> Void = { _ in }
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldInteractWithURLInCharacterRange: (UITextView, URL, NSRange, UITextItemInteraction) -> Bool = { _, _, _, _ in return true }
+
+    // sourcery: skipHashing, skipEquality
+    public var shouldInteractWithTextAttachmentInCharacterRange: (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool = { _, _, _, _ in return true }
 
     // sourcery: skipHashing, skipEquality
     public var layout: ComponentLayout { return TextViewComponentLayout(component: self) }

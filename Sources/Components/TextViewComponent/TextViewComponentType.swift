@@ -52,4 +52,56 @@ public protocol TextViewComponentType: StaticHeightComponent {
     // sourcery: skipHashing, skipEquality
     var textViewType: UITextView.Type { get set }
 
+    // sourcery: defaultValue = "CyanicTextViewDelegateProxy()"
+    // sourcery: skipHashing, skipEquality
+    /// The UITextViewDelegate for the underlying UITextView. This cannot be set, Cyanic takes care of the
+    /// implementation. Use the closures to customize functionality.
+    var delegate: UITextViewDelegate { get }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewShouldBeginEditing delegate method is called.
+    var shouldBeginEditing: (UITextView) -> Bool { get set }
+
+    // sourcery: defaultValue = "{ _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewShouldEndEditing delegate method is called.
+    var shouldEndEditing: (UITextView) -> Bool { get set }
+
+    // sourcery: defaultValue = "{ _ in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewDidBeginEditing delegate method is called.
+    var didBeginEditing: (UITextView) -> Void { get set }
+
+    // sourcery: defaultValue = "{ _  in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewDidEndEditing delegate method is called.
+    var didEndEditing: (UITextView) -> Void { get set }
+
+    // sourcery: defaultValue = "Int.max"
+    // sourcery: skipHashing, skipEquality
+    /// The maximum number of characters allowed on the UITextView.
+    var maximumCharacterCount: Int { get set }
+
+    // sourcery: defaultValue = "{ _ in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewDidChange delegate method is called.
+    var didChange: (UITextView) -> Void { get set }
+
+    // sourcery: defaultValue = "{ _ in }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textViewDidChangeSelection delegate method is called.
+    var didChangeSelection: (UITextView) -> Void { get set }
+
+    // sourcery: defaultValue = " { _, _, _, _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textView:shouldInteractWithURL:characterRange:interaction delegate method is called.
+    var shouldInteractWithURLInCharacterRange: (UITextView, URL, NSRange, UITextItemInteraction) -> Bool { get set } // swiftlint:disable:this line_length
+
+    // sourcery: defaultValue = " { _, _, _, _ in return true }"
+    // sourcery: skipHashing, skipEquality
+    /// The closure executed when the textView:shouldInteractWithTextAttachement:characterRange:interaction delegate
+    /// method is called.
+    var shouldInteractWithTextAttachmentInCharacterRange: (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool { get set }
+
 }

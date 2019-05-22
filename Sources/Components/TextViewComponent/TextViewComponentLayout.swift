@@ -36,6 +36,8 @@ public final class TextViewComponentLayout: SizeLayout<UIView>, ComponentLayout 
                 view.isUserInteractionEnabled = true
                 view.isScrollEnabled = true
                 component.configuration(view)
+
+                view.delegate = component.delegate
             }
         )
 
