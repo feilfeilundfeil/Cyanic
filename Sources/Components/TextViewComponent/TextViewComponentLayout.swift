@@ -38,6 +38,18 @@ public final class TextViewComponentLayout: SizeLayout<UIView>, ComponentLayout 
                 component.configuration(view)
 
                 view.delegate = component.delegate
+                guard let delegate = component.delegate as? CyanicTextViewDelegateProxy else { return }
+                delegate.shouldBeginEditing = component.shouldBeginEditing
+                delegate.didBeginEditing = component.didBeginEditing
+                delegate.shouldEndEditing = component.shouldEndEditing
+                delegate.didEndEditing = component.didEndEditing
+                delegate.maximumCharacterCount = component.maximumCharacterCount
+                delegate.didChange = component.didChange
+                delegate.didChangeSelection = component.didChangeSelection
+                delegate.shouldInteractWithURLInCharacterRange = component.shouldInteractWithURLInCharacterRange
+                delegate
+                    .shouldInteractWithTextAttachmentInCharacterRange = component
+                        .shouldInteractWithTextAttachmentInCharacterRange
             }
         )
 
