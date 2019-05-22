@@ -9,6 +9,8 @@
 import LayoutKit
 import UIKit
 
+// swiftlint:disable weak_delegate
+
 // sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 // sourcery: ComponentLayout = TextFieldComponentLayout
 /// TextFieldComponent is a Component that represents a UITextField.
@@ -72,7 +74,6 @@ public struct TextFieldComponent: TextFieldComponentType {
     // sourcery: skipHashing, skipEquality
     public var didEndEditing: (UITextField) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality
     public var maximumCharacterCount: Int = Int.max
 
     // sourcery: skipHashing, skipEquality

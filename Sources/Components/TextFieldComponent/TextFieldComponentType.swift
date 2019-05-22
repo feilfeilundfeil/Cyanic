@@ -84,7 +84,6 @@ public protocol TextFieldComponentType: StaticHeightComponent {
     var didEndEditing: (UITextField) -> Void { get set }
 
     // sourcery: defaultValue = "Int.max"
-    // sourcery: skipHashing, skipEquality
     /// The maximum number of characters allowed on the UITextField.
     var maximumCharacterCount: Int { get set }
 
