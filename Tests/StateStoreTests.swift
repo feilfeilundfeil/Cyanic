@@ -63,5 +63,34 @@ class StateStoreTests: QuickSpec {
                 expect(count).toEventually(equal(2))
             }
         }
+
+        describe("stress test") {
+            let store: StateStore<TestState> = self.createStore()
+            it("should be able to handle concurrency") {
+                var count: Int = 0
+                let limit: Int = 50_000
+
+                let concurrentQueue: DispatchQueue = DispatchQueue(
+                    label: "Concurrent",
+                    qos: DispatchQoS.userInitiated,
+                    attributes: .concurrent
+                )
+
+                let otherLimit: Int = 60_000
+                for num in 50_001...otherLimit {
+                    store.setState(with: { $0.count = num })
+                    count = num
+                }
+
+                concurrentQueue.async {
+                    for num in 1...limit {
+                        store.setState(with: { $0.count = num })
+                        count = num
+                    }
+                }
+
+                expect(count).toEventually(equal(50_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count")
+            }
+        }
     }
 }

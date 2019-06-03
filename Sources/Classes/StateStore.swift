@@ -25,7 +25,6 @@ internal class StateStore<ConcreteState: State> {
         self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
         self.executionRelay
             .observeOn(self.scheduler)
-            .subscribeOn(self.scheduler)
             .debounce(RxTimeInterval.milliseconds(1), scheduler: self.scheduler)
             .bind(
                 onNext: { [weak self] () -> Void in
@@ -39,9 +38,11 @@ internal class StateStore<ConcreteState: State> {
      The scheduler where all pending closures related to State are resolved.
     */
     private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
-        qos: DispatchQoS.default,
+        qos: DispatchQoS.userInitiated,
         internalSerialQueueName: "\(UUID().uuidString)"
     )
+
+    private let lock = NSRecursiveLock()
 
     /**
      The BehaviorRelay that encapsulates State.
@@ -108,6 +109,7 @@ internal class StateStore<ConcreteState: State> {
 
     */
     internal func getState(with block: @escaping (_ currentState: ConcreteState) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(block: block)
         self.executionRelay.accept(())
     }
@@ -118,6 +120,7 @@ internal class StateStore<ConcreteState: State> {
         - reducer: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(reducer: reducer)
         self.executionRelay.accept(())
     }
@@ -125,7 +128,7 @@ internal class StateStore<ConcreteState: State> {
 }
 
 /**
- The ClosureQueue is a helper struct that manages the withState and setState calls from the viewModel
+ The ClosureQueue is a helper class that manages the withState and setState calls from the viewModel
  by storing each callback in a withState array or setState array.
 */
 fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
