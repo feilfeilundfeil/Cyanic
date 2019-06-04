@@ -23,6 +23,12 @@ internal class StateStore<ConcreteState: State> {
     */
     internal init(initialState: ConcreteState) {
         self.stateRelay = BehaviorRelay<ConcreteState>(value: initialState)
+
+        let id: String = UUID().uuidString
+        let queue: DispatchQueue = DispatchQueue(label: id, qos: DispatchQoS.userInitiated)
+        self.queue = queue
+        self.scheduler = SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: "\(id) internal")
+
         self.executionRelay
             .observeOn(self.scheduler)
             .debounce(RxTimeInterval.milliseconds(1), scheduler: self.scheduler)
@@ -37,12 +43,12 @@ internal class StateStore<ConcreteState: State> {
     /**
      The scheduler where all pending closures related to State are resolved.
     */
-    private let scheduler: SerialDispatchQueueScheduler = SerialDispatchQueueScheduler(
-        qos: DispatchQoS.userInitiated,
-        internalSerialQueueName: "\(UUID().uuidString)"
-    )
+    private let scheduler: SerialDispatchQueueScheduler
 
-    private let lock = NSRecursiveLock()
+    /**
+     The DispatchQueue that runs the getState and setState method calls.
+    */
+    private let queue: DispatchQueue
 
     /**
      The BehaviorRelay that encapsulates State.
@@ -106,12 +112,12 @@ internal class StateStore<ConcreteState: State> {
      - Parameters:
         - block: The closure executed on the latest value of the StateType.
         - currentState: The current value of the State.
-
     */
     internal func getState(with block: @escaping (_ currentState: ConcreteState) -> Void) {
-        self.lock.lock(); defer { self.lock.unlock() }
-        self.closureQueue.add(block: block)
-        self.executionRelay.accept(())
+        self.queue.sync {
+            self.closureQueue.add(block: block)
+            self.executionRelay.accept(())
+        }
     }
 
     /**
@@ -120,9 +126,10 @@ internal class StateStore<ConcreteState: State> {
         - reducer: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
-        self.lock.lock(); defer { self.lock.unlock() }
-        self.closureQueue.add(reducer: reducer)
-        self.executionRelay.accept(())
+        self.queue.sync {
+            self.closureQueue.add(reducer: reducer)
+            self.executionRelay.accept(())
+        }
     }
 
 }

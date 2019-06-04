@@ -67,29 +67,47 @@ class StateStoreTests: QuickSpec {
         describe("stress test") {
             let store: StateStore<TestState> = self.createStore()
             it("should be able to handle concurrency") {
-                var count: Int = 0
-                let limit: Int = 50_000
+                var concurrentQueue1Count: [Int] = []
+                var concurrentQueue2Count: [Int] = []
+                var finalCount: Int = 0
 
-                let concurrentQueue: DispatchQueue = DispatchQueue(
-                    label: "Concurrent",
-                    qos: DispatchQoS.userInitiated,
+                let concurrentQueue1: DispatchQueue = DispatchQueue(
+                    label: "Concurrent1",
+                    qos: DispatchQoS.default,
                     attributes: .concurrent
                 )
 
-                let otherLimit: Int = 60_000
-                for num in 50_001...otherLimit {
-                    store.setState(with: { $0.count = num })
-                    count = num
-                }
+                let concurrentQueue2: DispatchQueue = DispatchQueue(
+                    label: "Concurrent2",
+                    qos: DispatchQoS.default,
+                    attributes: .concurrent
+                )
 
-                concurrentQueue.async {
-                    for num in 1...limit {
+                let concurrentQueue1Start: Int = 0
+                let concurrentQueue1End: Int = 50_000
+
+                let concurrentQueue2Start: Int = 50_001
+                let concurrentQueue2Limit: Int = 100_000
+
+                concurrentQueue1.async {
+                    for num in concurrentQueue1Start...concurrentQueue1End {
                         store.setState(with: { $0.count = num })
-                        count = num
+                        print("Async Num from Concurrent1: \(num)")
+                        concurrentQueue1Count.append(num)
+                        finalCount = num
+                    }
+                }
+                concurrentQueue2.async {
+                    for num in concurrentQueue2Start...concurrentQueue2Limit {
+                        store.setState(with: { $0.count = num })
+                        print("Async Num from Concurrent2: \(num)")
+                        concurrentQueue2Count.append(num)
+                        finalCount = num
                     }
                 }
 
-                expect(count).toEventually(equal(50_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count")
+                expect(concurrentQueue1Count).toEventually(contain(50_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count for async loop")
+                expect(concurrentQueue2Count).toEventually(contain(100_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count for async loop")
             }
         }
     }

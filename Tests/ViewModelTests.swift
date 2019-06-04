@@ -52,26 +52,44 @@ class ViewModelTests: QuickSpec {
         describe("withState and setState methods") {
             it("setState closure should be executed before withState closures even if withState is called first.") {
                 let viewModel: TestViewModel = self.createViewModel()
+
                 var currentState: TestState = viewModel.currentState
                 var isCurrentState: Bool = false
+                var value: Double = -1000.0
+
+                let finalValue: Double = 5.0
+
 
                 viewModel.withState(block: { (state: TestState) -> Void in
                     currentState = state
                 })
-                var isZero: Bool = false
+                var isEqual: Bool = false
 
-                viewModel.setState(with: { $0.double = 0.0 })
+                viewModel.setState(with: {
+                    $0.double = 0.0
+                    value = 0.0
+                })
 
                 viewModel.withState(block: { (state: TestState) -> Void in
-                    isZero = state.double == 0.0
+                    isEqual = state.double == finalValue
                 })
 
                 viewModel.withState(block: { (state: TestState) -> Void in
                     isCurrentState = currentState == state
                 })
 
+                viewModel.setState(with: {
+                    $0.double = 1.0
+                    value = 1.0
+                })
+
+                viewModel.setState(with: {
+                    $0.double = finalValue
+                    value = finalValue
+                })
+
                 expect(isCurrentState).toEventually(equal(true), timeout: 1.0, pollInterval: 1.0, description: "isSameState")
-                expect(isZero).toEventually(equal(true), timeout: 3.0, pollInterval: 3.0, description: "isStillSame")
+                expect(isEqual).toEventually(equal(true), timeout: 3.0, pollInterval: 3.0, description: "Value is \(value).")
             }
         }
 
