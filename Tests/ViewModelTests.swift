@@ -71,10 +71,13 @@ class ViewModelTests: QuickSpec {
                 })
 
                 viewModel.withState(block: { (state: TestState) -> Void in
+                    print("Double: \(state.double), FinalValue: \(finalValue)")
                     isEqual = state.double == finalValue
                 })
 
                 viewModel.withState(block: { (state: TestState) -> Void in
+                    print("CurrentState: \(currentState)")
+                    print("State: \(state)")
                     isCurrentState = currentState == state
                 })
 
@@ -88,8 +91,8 @@ class ViewModelTests: QuickSpec {
                     value = finalValue
                 })
 
-                expect(isCurrentState).toEventually(equal(true), timeout: 1.0, pollInterval: 1.0, description: "isSameState")
-                expect(isEqual).toEventually(equal(true), timeout: 3.0, pollInterval: 3.0, description: "Value is \(value).")
+                expect(isCurrentState).toEventually(equal(true), description: "isCurrentState is \(isCurrentState)")
+                expect(isEqual).toEventually(equal(true), description: "Value is \(value).")
             }
         }
 

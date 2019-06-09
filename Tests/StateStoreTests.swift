@@ -69,45 +69,53 @@ class StateStoreTests: QuickSpec {
             it("should be able to handle concurrency") {
                 var concurrentQueue1Count: [Int] = []
                 var concurrentQueue2Count: [Int] = []
-                var finalCount: Int = 0
 
-                let concurrentQueue1: DispatchQueue = DispatchQueue(
+                let concurrentQueue: DispatchQueue = DispatchQueue(
                     label: "Concurrent1",
                     qos: DispatchQoS.default,
                     attributes: .concurrent
                 )
 
-                let concurrentQueue2: DispatchQueue = DispatchQueue(
-                    label: "Concurrent2",
-                    qos: DispatchQoS.default,
-                    attributes: .concurrent
-                )
+                let firstLoopStart: Int = 0
+                let firstLoopEnd: Int = 100
 
-                let concurrentQueue1Start: Int = 0
-                let concurrentQueue1End: Int = 50_000
+                let secondLoopStart: Int = firstLoopEnd + 1
+                let secondLoopEnd: Int = firstLoopEnd * 2
 
-                let concurrentQueue2Start: Int = 50_001
-                let concurrentQueue2Limit: Int = 100_000
+                var finalCount: Int = 0
 
-                concurrentQueue1.async {
-                    for num in concurrentQueue1Start...concurrentQueue1End {
-                        store.setState(with: { $0.count = num })
-                        print("Async Num from Concurrent1: \(num)")
-                        concurrentQueue1Count.append(num)
-                        finalCount = num
-                    }
-                }
-                concurrentQueue2.async {
-                    for num in concurrentQueue2Start...concurrentQueue2Limit {
-                        store.setState(with: { $0.count = num })
-                        print("Async Num from Concurrent2: \(num)")
-                        concurrentQueue2Count.append(num)
-                        finalCount = num
+                concurrentQueue.async {
+                    for num in secondLoopStart...secondLoopEnd {
+                        store.setState(with: {
+                            $0.count = num
+                            print("Async Num from Second Loop: \(num)")
+                            concurrentQueue2Count.append(num)
+                        })
                     }
                 }
 
-                expect(concurrentQueue1Count).toEventually(contain(50_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count for async loop")
-                expect(concurrentQueue2Count).toEventually(contain(100_000), timeout: 10.0, pollInterval: 10.0, description: "Stress count for async loop")
+                concurrentQueue.async {
+                    for _ in firstLoopStart...firstLoopEnd {
+                        store.getState(with: {
+                            finalCount = $0.count
+                        })
+                    }
+                }
+
+                concurrentQueue.async {
+                    for num in firstLoopStart...firstLoopEnd {
+                        store.setState(with: {
+                            $0.count = num
+                            print("Async Num from First Loop: \(num)")
+                            concurrentQueue1Count.append(num)
+                        })
+                    }
+                }
+
+                expect(concurrentQueue1Count).toEventually(contain(firstLoopEnd), description: "Stress count for async loop")
+                expect(concurrentQueue2Count).toEventually(contain(secondLoopEnd), description: "Stress count for async loop")
+                expect(finalCount).toEventually(satisfyAnyOf(equal(firstLoopEnd), equal(secondLoopEnd)), description: "\(finalCount) should equal \(firstLoopEnd) or \(secondLoopEnd)")
+
             }
         }
     }
