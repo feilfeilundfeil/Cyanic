@@ -75,6 +75,10 @@ internal class StateStore<ConcreteState: State> {
     */
     private func resolveClosureQueue() {
         self.resolveSetStateQueue()
+
+        // When unit testing, stress testing around 2_310 withState calls will cause a crash due to
+        // a bad access crash when removeFirst() is called.
+        // The only alternative is to resolve all withState blocks after all the current setState calls are resolved.
         guard let getBlock = self.closureQueue.dequeueFirstWithStateCallback() else { return }
         getBlock(self.currentState)
         self.resolveClosureQueue()
