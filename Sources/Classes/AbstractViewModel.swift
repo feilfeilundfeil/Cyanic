@@ -57,7 +57,7 @@ open class AbstractViewModel<StateType: State>: NSObject, ViewModelType {
 
 }
 
-internal extension AbstractViewModel {
+public extension AbstractViewModel {
 
     /**
      Accessor for the State Observable of the AbstractViewModel.
