@@ -33,12 +33,18 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
             maxHeight: size.height,
             viewReuseId: "\(ChildVCComponentLayout.identifier)Size",
             config: { [weak childVC, weak parentVC] (view: UIView) -> Void in
-                if let childVC = childVC, let parentVC = parentVC {
+                guard let childVC = childVC, let parentVC = parentVC else { return }
+
+                if childVC.parent !== parentVC {
                     parentVC.addChild(childVC)
-                    childVC.didMove(toParent: parentVC)
-                    view.addSubview(childVC.view)
                 }
-                childVC?.view.frame = view.bounds
+
+                childVC.view.frame = view.bounds
+                view.addSubview(childVC.view)
+
+                if childVC.parent !== parentVC {
+                    childVC.didMove(toParent: parentVC)
+                }
             }
         )
     }
