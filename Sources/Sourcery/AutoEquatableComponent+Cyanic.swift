@@ -28,6 +28,7 @@ extension ButtonComponent: Equatable {}
 public func == (lhs: ButtonComponent, rhs: ButtonComponent) -> Bool {
     guard lhs.type == rhs.type else { return false }
     guard lhs.title == rhs.title else { return false }
+    guard lhs.font == rhs.font else { return false }
     guard lhs.backgroundColor == rhs.backgroundColor else { return false }
     guard lhs.id == rhs.id else { return false }
     guard lhs.width == rhs.width else { return false }

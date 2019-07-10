@@ -59,6 +59,16 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
         }
     }
 
+    private func resolveInitialValue<T>(for observable: Observable<T>, postInitialValue: Bool) -> Observable<T> {
+        switch postInitialValue {
+            case true:
+                return observable
+            case false:
+                return observable.skip(1)
+
+        }
+    }
+
     /**
      Subscribes to changes in an Async property of StateType. The closures are executed on the main thread asynchronously.
      - Parameters:
@@ -72,6 +82,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
     */
     public final func asyncSubscribe<T>(
         to keyPath: KeyPath<StateType, Async<T>>,
+        postInitialValue: Bool,
         onSuccess: @escaping (_ newValue: T) -> Void = { _ in },
         onFailure: @escaping (_ error: Error) -> Void = { _ in }
     ) {
@@ -79,12 +90,13 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
-        self.stateStore.state
+        let obs: Observable<Async<T>> = self.stateStore.state
             .map({ (state: StateType) -> Async<T> in
                 return state[keyPath: keyPath]
             })
             .distinctUntilChanged()
-            .skip(1)
+
+        self.resolveInitialValue(for: obs, postInitialValue: postInitialValue)
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
                 onNext: { (async: Async<T>) -> Void in
@@ -112,6 +124,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
     */
     public final func selectSubscribe<T: Equatable>(
         to keyPath: KeyPath<StateType, T>,
+        postInitialValue: Bool,
         onNewValue: @escaping (_ newValue: T) -> Void
     ) {
 
@@ -123,7 +136,8 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
                 return state[keyPath: keyPath]
             })
             .distinctUntilChanged()
-            .skip(1)
+
+        observable = self.resolveInitialValue(for: observable, postInitialValue: postInitialValue)
 
         if self.isDebugMode {
             observable = observable
@@ -151,18 +165,20 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
     public final func selectSubscribe<T: Equatable, U: Equatable>(
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
+        postInitialValue: Bool,
         onNewValue: @escaping (_ newValue: (T, U)) -> Void
     ) {
 
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
-        self.stateStore.state
+        let observable: Observable<SubscribeSelect2<T, U>> = self.stateStore.state
             .map({ (state: StateType) -> SubscribeSelect2<T, U> in
                 return SubscribeSelect2<T, U>(t: state[keyPath: keyPath1], u: state[keyPath: keyPath2])
             })
             .distinctUntilChanged()
-            .skip(1)
+
+        self.resolveInitialValue(for: observable, postInitialValue: postInitialValue)
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
                 onNext: { (value: SubscribeSelect2<T, U>) -> Void in
@@ -185,13 +201,14 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
         keyPath1: KeyPath<StateType, T>,
         keyPath2: KeyPath<StateType, U>,
         keyPath3: KeyPath<StateType, V>,
+        postInitialValue: Bool,
         onNewValue: @escaping (_ newValue: (T, U, V)) -> Void // swiftlint:disable:this large_tuple
     ) {
 
         // BehaviorRelay emits its current/initial value to new subscribers therefore use that as
         // starting value to compare against in the distinctUntilChanged operator
         // and skip it so it doesn't trigger onNewValue when subscribing.
-        self.stateStore.state
+        let observable: Observable<SubscribeSelect3<T, U, V>> = self.stateStore.state
             .map({ (state: StateType) -> SubscribeSelect3<T, U, V> in
                 return SubscribeSelect3<T, U, V>(
                     t: state[keyPath: keyPath1],
@@ -200,7 +217,8 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
                 )
             })
             .distinctUntilChanged()
-            .skip(1)
+
+        self.resolveInitialValue(for: observable, postInitialValue: postInitialValue)
             .observeOn(MainScheduler.asyncInstance)
             .subscribe(
                 onNext: { (value: SubscribeSelect3<T, U, V>) -> Void in

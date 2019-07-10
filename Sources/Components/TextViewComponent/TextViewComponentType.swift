@@ -103,5 +103,6 @@ public protocol TextViewComponentType: StaticHeightComponent {
     /// The closure executed when the textView:shouldInteractWithTextAttachement:characterRange:interaction delegate
     /// method is called.
     var shouldInteractWithTextAttachmentInCharacterRange: (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool { get set }
+    // swiftlint:disable:previous line_length
 
 }

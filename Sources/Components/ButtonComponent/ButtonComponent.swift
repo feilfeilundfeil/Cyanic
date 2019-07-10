@@ -28,6 +28,8 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var title: String = ""
 
+    public var font: UIFont = UIFont.systemFont(ofSize: 15.0)
+
     // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
@@ -43,7 +45,7 @@ public struct ButtonComponent: ButtonComponentType {
     public var configuration: (UIButton) -> Void = { _ in }
 
     // sourcery: skipHashing, skipEquality
-    public var onTap: () -> Void = { print("Hello World \(#file)") }
+    public var onTap: (UIButton) -> Void = { _ in print("Hello World \(#file)") }
 
     public var id: String
 

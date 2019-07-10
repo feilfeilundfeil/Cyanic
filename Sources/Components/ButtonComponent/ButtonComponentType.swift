@@ -22,6 +22,10 @@ public protocol ButtonComponentType: StaticHeightComponent {
     /// The title displayed as text on the UIButton. The default value is an empty string: "".
     var title: String { get set }
 
+    // sourcery: defaultValue = "UIFont.systemFont(ofSize: 15.0)"
+    /// The title displayed as text on the UIButton. The default value is an empty string: "".
+    var font: UIFont { get set }
+
     // sourcery: defaultValue = UIEdgeInsets.zero
     // sourcery: skipHashing, skipEquality
     /// The insets on the UIButton relative to its root UIView. This is NOT the insets on the content inside the
@@ -49,9 +53,9 @@ public protocol ButtonComponentType: StaticHeightComponent {
     /// The styling applied to the UIButton. The default value is an empty style.
     var configuration: (UIButton) -> Void { get set }
 
-    // sourcery: defaultValue = { print("Hello World \(#file)") }
+    // sourcery: defaultValue = { _ in print("Hello World \(#file)") }
     // sourcery: skipHashing, skipEquality
     /// The code executed when the UIButton is tapped.
-    var onTap: () -> Void { get set }
+    var onTap: (UIButton) -> Void { get set }
 
 }

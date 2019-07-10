@@ -8,6 +8,7 @@ extension ButtonComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.type.hash(into: &hasher)
         self.title.hash(into: &hasher)
+        self.font.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
         self.width.hash(into: &hasher)

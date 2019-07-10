@@ -172,7 +172,7 @@ public final class ExampleLoginVC: SingleSectionCollectionComponentViewControlle
                     view.kio.cornerRadius(of: 5.0)
                 }
 
-                component.onTap = {
+                component.onTap = { (_: UIButton) -> Void in
                     withState(viewModel1: viewModelOne, viewModel2: viewModelTwo) {
                         (s1: UsernameState, s2: PasswordState) -> Void in
                         print(

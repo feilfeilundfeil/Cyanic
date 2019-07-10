@@ -35,11 +35,15 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
             type: component.type,
             title: component.title,
             image: ButtonLayoutImage.size(CGSize(width: size.width, height: adjustedHeight)),
+            font: component.font,
             alignment: component.alignment,
             flexibility: component.flexibility,
             config: { (view: UIButton) -> Void in
                 component.configuration(view)
                 serialDisposable.disposable = view.rx.controlEvent(UIControl.Event.touchUpInside)
+                    .map { () -> UIButton in
+                        return view
+                    }
                     .bind(onNext: component.onTap)
             }
         )

@@ -105,6 +105,7 @@ class ViewModelTests: QuickSpec {
 
                     viewModel.asyncSubscribe(
                         to: \TestState.asyncOnSuccess,
+                        postInitialValue: false,
                         onSuccess: { (value: Bool) -> Void in
                             wasSuccess = value
                         },
@@ -128,6 +129,7 @@ class ViewModelTests: QuickSpec {
 
                     viewModel.asyncSubscribe(
                         to: \TestState.asyncOnFailure,
+                        postInitialValue: false,
                         onSuccess: { (value: Bool) -> Void in
                             fail()
                         },
@@ -156,6 +158,7 @@ class ViewModelTests: QuickSpec {
 
                     viewModel.asyncSubscribe(
                         to: \TestState.asyncOnSuccess,
+                        postInitialValue: false,
                         onSuccess: { (value: Bool) -> Void in
                             fail()
                         },
@@ -188,6 +191,7 @@ class ViewModelTests: QuickSpec {
 
                     viewModel.selectSubscribe(
                         to: \TestState.string,
+                        postInitialValue: false,
                         onNewValue: { (newValue: String) -> Void in
                             newProperty = newValue
                         }
@@ -208,6 +212,7 @@ class ViewModelTests: QuickSpec {
 
                     viewModel.selectSubscribe(
                         to: \TestState.string,
+                        postInitialValue: false,
                         onNewValue: { (value: String) -> Void in
                             guard value != initialString
                                 else { fail("\(value) is equal to \(initialString)"); return }
@@ -244,6 +249,7 @@ class ViewModelTests: QuickSpec {
                     viewModel.selectSubscribe(
                         keyPath1: \TestState.double,
                         keyPath2: \TestState.string,
+                        postInitialValue: false,
                         onNewValue: { (double: Double, string: String) -> Void in
                             counter += 1
                         }
@@ -296,6 +302,7 @@ class ViewModelTests: QuickSpec {
                         keyPath1: \TestState.double,
                         keyPath2: \TestState.string,
                         keyPath3: \TestState.isTrue,
+                        postInitialValue: false,
                         onNewValue: { (double: Double, string: String, isTrue: Bool) -> Void in
                             counter += 1
                         }

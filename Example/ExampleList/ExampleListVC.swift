@@ -52,6 +52,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
         self.viewModel.selectSubscribe(
             keyPath1: \ExampleListState.hasTextInTextField,
             keyPath2: \ExampleListState.expandableDict,
+            postInitialValue: false,
             onNewValue: {
                 print("from a different subscription: \($0)")
             }
@@ -195,7 +196,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 button.title = "This is a UIButton"
                 button.height = 44.0
                 button.configuration = style.modifying(with: { $0.backgroundColor = color }).style
-                button.onTap = { print("Hello World, \(id)") }
+                button.onTap = { (_: UIButton) -> Void in print("Hello World, \(id)") }
             }
 
             if state1.hasTextInTextField {
@@ -233,7 +234,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                     view.backgroundColor = UIColor.orange
                     view.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
-                component.onTap = { [weak self] () -> Void in
+                component.onTap = { [weak self] (_: UIButton) -> Void in
                     guard
                         let vc = SideMenuManager.default.menuRightNavigationController,
                         let s = self
@@ -250,7 +251,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                     view.backgroundColor = UIColor.yellow
                     view.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }
-                component.onTap = { [weak self] () -> Void in
+                component.onTap = { [weak self] (_: UIButton) -> Void in
                     self?.viewModel.setState(with: { $0.hasTextInTextField = !$0.hasTextInTextField })
                 }
             }
