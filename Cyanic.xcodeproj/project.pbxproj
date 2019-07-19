@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141315B42235924500513FD9 /* ExampleLoginVC.swift */; };
+		1417A50622E07DD500216FDB /* CyanicDataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC91F4228061F600464771 /* CyanicDataSources.swift */; };
 		142C45002235A105002360F5 /* ThrottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C44FF2235A105002360F5 /* ThrottleType.swift */; };
 		142C451922392C09002360F5 /* ComponentStateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451822392C09002360F5 /* ComponentStateValidator.swift */; };
 		142C451C223939DB002360F5 /* Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142C451B223939DB002360F5 /* Async.swift */; };
@@ -70,7 +71,6 @@
 		14AB6B0E228DE15D0039C0EF /* TextViewComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */; };
 		14AB6B10228DE1CF0039C0EF /* TextViewComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
-		14BC91F5228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
@@ -223,7 +223,7 @@
 		14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentType.swift; sourceTree = "<group>"; };
 		14B01E40222723E200EE0A9A /* AutoHashableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoHashableComponent.stencil; sourceTree = "<group>"; };
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
-		14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedRxTableViewSectionedAnimatedDataSource.swift; sourceTree = "<group>"; };
+		14BC91F4228061F600464771 /* CyanicDataSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicDataSources.swift; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
@@ -563,6 +563,7 @@
 		14C96F062211C2EF00731265 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				14BC91F4228061F600464771 /* CyanicDataSources.swift */,
 				14C96F072211C30F00731265 /* Constants.swift */,
 				142C4520223BB36C002360F5 /* GlobalFunctions.swift */,
 				149D5B8E221B33A100482F28 /* ComponentsController.swift */,
@@ -612,7 +613,6 @@
 			isa = PBXGroup;
 			children = (
 				1498048D22607A720044194C /* ExampleViewModel.swift */,
-				14BC91F4228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1050,6 +1050,7 @@
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
 				1498049E2260D8340044194C /* MultiSectionController.swift in Sources */,
+				1417A50622E07DD500216FDB /* CyanicDataSources.swift in Sources */,
 				1437BDD32215B56F00A35FFE /* StaticTextComponentLayout.swift in Sources */,
 				14DB258E22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift in Sources */,
 				14F6BD802229738A008B0692 /* Copyable.swift in Sources */,
@@ -1091,7 +1092,6 @@
 				14F06056224B593500CC62B0 /* ChildVC.swift in Sources */,
 				141315B52235924600513FD9 /* ExampleLoginVC.swift in Sources */,
 				1498049C2260CE030044194C /* ExampleSectionedVC.swift in Sources */,
-				14BC91F5228061F600464771 /* ModifiedRxTableViewSectionedAnimatedDataSource.swift in Sources */,
 				14F06052224B58E700CC62B0 /* ExampleListState.swift in Sources */,
 				14F0605E224B5BC400CC62B0 /* UsernameState+PasswordState.swift in Sources */,
 				1478E995220C59B9006AF8B3 /* AppDelegate.swift in Sources */,
