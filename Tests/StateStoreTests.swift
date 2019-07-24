@@ -90,6 +90,20 @@ class StateStoreTests: QuickSpec {
                             $0.count = num
                             print("Async Num from Second Loop: \(num)")
                             concurrentQueue2Count.append(num)
+
+                            store.setState(with: {
+                                $0.string = "\(Int.random(in: Int.min...Int.max))"
+                                store.setState(with: {
+                                    $0.count = num
+                                    print("Async Num from Second Loop: \(num)")
+                                    concurrentQueue2Count.append(num)
+
+                                    store.setState(with: {
+                                        $0.string = "\(Int.random(in: Int.min...Int.max))"
+
+                                    })
+                                })
+                            })
                         })
                     }
                 }

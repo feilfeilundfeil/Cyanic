@@ -33,7 +33,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
 
     // MARK: Methods
     public override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return ModifiedRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+        return CyanicRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
             animationConfiguration: AnimationConfiguration(
                 insertAnimation: UITableView.RowAnimation.fade,
                 reloadAnimation: UITableView.RowAnimation.fade,
@@ -43,7 +43,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                 guard let cell = tv.dequeueReusableCell(
                     withIdentifier: TableComponentCell.identifier,
                     for: indexPath
-                    ) as? TableComponentCell
+                ) as? TableComponentCell
                     else { fatalError("Cell not registered to UITableView") }
 
                 cell.configure(with: component)
