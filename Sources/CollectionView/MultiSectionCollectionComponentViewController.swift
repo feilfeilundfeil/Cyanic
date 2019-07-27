@@ -10,18 +10,20 @@ import UIKit
 import RxDataSources
 import RxSwift
 import RxCocoa
+import Differ
 
 /**
  MultiSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView
  with one or more sections that is displayed with supplementary views. It has most of the boilerplate needed to have a
  reactive UICollectionView with a multiple sections. It responds to new elements emitted by its  ViewModel(s) State(s).
 */
-open class MultiSectionCollectionComponentViewController: CollectionComponentViewController { // swiftlint:disable:this type_name
+open class MultiSectionCollectionComponentViewController: CollectionComponentViewController, UICollectionViewDataSource { // swiftlint:disable:this type_name
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self.setUpDataSource()
+        self.collectionView.dataSource = self
+//        self.dataSource = self.setUpDataSource()
         self.collectionView.register(
             ComponentSupplementaryView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
@@ -30,17 +32,15 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
 
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._sections
-            .map({ (sections: MultiSectionController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
-                let models: [AnimatableSectionModel<AnyComponent, AnyComponent>] = sections.sectionControllers
-                    .map({ (section: SectionController) -> AnimatableSectionModel<AnyComponent, AnyComponent> in
-                        return AnimatableSectionModel<AnyComponent, AnyComponent>(
-                            model: section.sectionComponent,
-                            items: section.componentsController.components
-                        )
-                    })
-                return models
-            })
-            .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
+            .scan(into: MultiSectionSnapshot()) { (current: inout MultiSectionSnapshot, new: MultiSectionController) -> Void in
+                current.old = current.new
+                current.new = new.sectionControllers
+                    .map { Section(header: $0.sectionComponent, items: $0.componentsController.components) }
+            }
+            .observeOn(MainScheduler.instance)
+            .bind { [weak self] (snapshot: MultiSectionSnapshot) -> Void in
+                self?.collectionView.animateItemAndSectionChanges(oldData: snapshot.old, newData: snapshot.new)
+            }
             .disposed(by: self.disposeBag)
     }
 
@@ -52,46 +52,6 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
     internal let _sections: BehaviorRelay<MultiSectionController> = BehaviorRelay<MultiSectionController>(
         value: MultiSectionController(size: CGSize.zero)
     )
-
-    /**
-     The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
-    */ // swiftlint:disable:next implicitly_unwrapped_optional line_length
-    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
-
-    // MARK: Methods
-    /**
-     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
-     - Returns:
-        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
-    */
-    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
-            decideViewTransition: { _, _, _ in .animated },
-            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-                guard let cell = cv.dequeueReusableCell(
-                    withReuseIdentifier: CollectionComponentCell.identifier,
-                    for: indexPath
-                ) as? CollectionComponentCell
-                    else { fatalError("Cell not registered to UICollectionView") }
-
-                cell.configure(with: component)
-                return cell
-            },
-            // swiftlint:disable:next line_length
-            configureSupplementaryView: { (dataSource: CollectionViewSectionedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>, cv: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView in
-                let sectionModel: AnimatableSectionModel<AnyComponent, AnyComponent> = dataSource[indexPath.section]
-                guard let view = cv.dequeueReusableSupplementaryView(
-                    ofKind: kind,
-                    withReuseIdentifier: ComponentSupplementaryView.identifier,
-                    for: indexPath
-                ) as? ComponentSupplementaryView
-                    else { fatalError("Cell not registered to UICollectionView") }
-
-                view.configure(with: sectionModel.model)
-                return view
-            }
-        )
-    }
 
     public override final func component(at indexPath: IndexPath) -> AnyComponent? {
         guard let sectionController = self.sectionController(at: indexPath.section)
@@ -172,6 +132,45 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
     */
     open func buildSections(_ sectionsController: inout MultiSectionController) {}
 
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return self._sections.value.sectionControllers.count
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self._sections.value.sectionControllers[section].componentsController.components.count
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: CollectionComponentCell.identifier,
+                for: indexPath
+            ) as? CollectionComponentCell,
+            let component = self.component(at: indexPath)
+        else { fatalError("Cell not registered to UICollectionView") }
+
+        cell.configure(with: component)
+        return cell
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                guard let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: ComponentSupplementaryView.identifier,
+                    for: indexPath
+                ) as? ComponentSupplementaryView
+                    else { fatalError("Cell not registered to UICollectionView") }
+
+                view.configure(with: self._sections.value.sectionControllers[indexPath.section].sectionComponent)
+                return view
+            default:
+                return UICollectionReusableView()
+        }
+    }
+
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
@@ -203,4 +202,42 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         return headerSize
 
     }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return .zero
+    }
+}
+
+struct MultiSectionSnapshot {
+
+    var old: [Section]
+    var new: [Section]
+}
+
+extension MultiSectionSnapshot {
+    init() {
+        self.old = []
+        self.new = []
+    }
+}
+
+struct Section: Collection, Equatable {
+
+    var startIndex: Int { return self.items.startIndex }
+    var endIndex: Int { return self.items.endIndex }
+
+    subscript(position: Int) -> AnyComponent {
+        return self.items[position]
+    }
+
+    func index(after i: Int) -> Int {
+        return self.items.index(after: i)
+    }
+
+    typealias Element = AnyComponent
+    typealias Index = Int
+
+    var header: AnyComponent! // swiftlint:disable:this implicitly_unwrapped_optional
+    var items: [AnyComponent]
+
 }

@@ -82,9 +82,9 @@ open class CollectionComponentCell: UICollectionViewCell {
         self.contentView.frame.size = self.intrinsicContentSize
 
         self.layout?.arrangement(
-            origin: self.contentView.frame.origin,
-            width: self.contentView.frame.size.width,
-            height: self.contentView.frame.size.height
+            origin: self.contentView.bounds.origin,
+            width: self.contentView.bounds.size.width,
+            height: self.contentView.bounds.size.height
         )
             .makeViews(in: self.contentView)
     }

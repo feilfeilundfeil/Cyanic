@@ -131,9 +131,9 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
         }
 
         self.layout?.arrangement(
-            origin: self.frame.origin,
-            width: self.frame.size.width,
-            height: self.frame.size.height
+            origin: self.bounds.origin,
+            width: self.bounds.size.width,
+            height: self.bounds.size.height
         )
             .makeViews(in: self)
     }

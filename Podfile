@@ -7,6 +7,7 @@ def pods
   pod 'RxDataSources'
   pod 'LayoutKit', :git => 'https://github.com/hooliooo/LayoutKit.git'
   pod 'Sourcery'
+  pod 'Differ'
 end
 
 target 'Cyanic' do

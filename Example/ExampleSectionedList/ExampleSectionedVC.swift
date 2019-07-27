@@ -14,13 +14,13 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
+public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.collectionView.backgroundColor = UIColor.white
+//        self.collectionView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 
     // MARK: Stored Properties
@@ -32,25 +32,33 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
     }
 
     // MARK: Methods
-    public override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return CyanicRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
-            animationConfiguration: AnimationConfiguration(
-                insertAnimation: UITableView.RowAnimation.fade,
-                reloadAnimation: UITableView.RowAnimation.fade,
-                deleteAnimation: UITableView.RowAnimation.fade
-            ),
-            configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
-                guard let cell = tv.dequeueReusableCell(
-                    withIdentifier: TableComponentCell.identifier,
-                    for: indexPath
-                ) as? TableComponentCell
-                    else { fatalError("Cell not registered to UITableView") }
-
-                cell.configure(with: component)
-                return cell
-            }
-        )
+    public override func createUICollectionViewLayout() -> UICollectionViewLayout {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+        layout.sectionHeadersPinToVisibleBounds = true
+        return layout
     }
+
+//    public override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
+//        return CyanicRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+//            animationConfiguration: AnimationConfiguration(
+//                insertAnimation: UITableView.RowAnimation.fade,
+//                reloadAnimation: UITableView.RowAnimation.fade,
+//                deleteAnimation: UITableView.RowAnimation.fade
+//            ),
+//            configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
+//                guard let cell = tv.dequeueReusableCell(
+//                    withIdentifier: TableComponentCell.identifier,
+//                    for: indexPath
+//                ) as? TableComponentCell
+//                    else { fatalError("Cell not registered to UITableView") }
+//
+//                cell.configure(with: component)
+//                return cell
+//            }
+//        )
+//    }
 
     public override func buildSections(_ sectionsController: inout MultiSectionController) {
 

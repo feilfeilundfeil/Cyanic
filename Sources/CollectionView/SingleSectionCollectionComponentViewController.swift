@@ -10,6 +10,7 @@ import UIKit
 import RxDataSources
 import RxSwift
 import RxCocoa
+import Differ
 
 /**
  SingleSectionCollectionComponentViewController is a CollectionComponentViewController subclass that manages a UICollectionView
@@ -17,28 +18,26 @@ import RxCocoa
  use MultiSectionCollectionComponentViewController. It has most of the boilerplate needed to have a reactive UICollectionView
  with a single section. It responds to new elements emitted by its ViewModel(s) State(s).
 */
-open class SingleSectionCollectionComponentViewController: CollectionComponentViewController { // swiftlint:disable:this type_name
+open class SingleSectionCollectionComponentViewController: CollectionComponentViewController, UICollectionViewDataSource { // swiftlint:disable:this type_name
 
     // MARK: Overridden UIViewController Lifecycle Methods
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self.setUpDataSource()
-
+        self.collectionView.dataSource = self
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._components
-            .map({ (components: [AnyComponent]) -> [AnimatableSectionModel<String, AnyComponent>] in
-                return [AnimatableSectionModel<String, AnyComponent>(model: "Cyanic", items: components)]
-            })
-            .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
+            .scan(into: Snapshot(old: [], new: [])) { (current: inout Snapshot, new: [AnyComponent]) -> Void in
+                current.old = current.new
+                current.new = new
+            }
+            .observeOn(MainScheduler.instance)
+            .bind { (snapshot: Snapshot) -> Void in
+                self.collectionView.animateItemChanges(oldData: snapshot.old, newData: snapshot.new)
+            }
             .disposed(by: self.disposeBag)
     }
 
     // MARK: Stored Properties
-    /**
-     The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
-    */ // swiftlint:disable:next implicitly_unwrapped_optional
-    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
-
     /**
      The AnyComponent BehaviorRelay. Every time a new element is emitted by this relay, the UICollectionView performs a batch
      update based on the diffing produced by RxDataSources.
@@ -46,26 +45,6 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
     // MARK: Methods
-    /**
-     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
-     - Returns:
-        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
-    */
-    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
-        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-                guard let cell = cv.dequeueReusableCell(
-                    withReuseIdentifier: CollectionComponentCell.identifier,
-                    for: indexPath
-                ) as? CollectionComponentCell
-                    else { fatalError("Cell not registered to UICollectionView")}
-
-                cell.configure(with: component)
-                return cell
-            }
-        )
-    }
-
     open override func component(at indexPath: IndexPath) -> AnyComponent {
         let component: AnyComponent = self._components.value[indexPath.item]
         return component
@@ -124,6 +103,25 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
     */
     open func buildComponents(_ componentsController: inout ComponentsController) {}
 
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self._components.value.count
+    }
+
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: CollectionComponentCell.identifier,
+            for: indexPath
+        ) as? CollectionComponentCell
+            else { fatalError("Cell not registered to UICollectionView")}
+
+        cell.configure(with: self.component(at: indexPath))
+        return cell
+    }
+
     // MARK: UICollectionViewDelegateFlowLayout Methods
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
@@ -139,4 +137,9 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         return cellSize
     }
 
+}
+
+struct Snapshot {
+    var old: [AnyComponent]
+    var new: [AnyComponent]
 }
