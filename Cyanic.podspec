@@ -26,6 +26,7 @@ Pod::Spec.new do |spec|
   spec.dependency "RxDataSources"
   spec.dependency "RxSwift"
   spec.dependency "Sourcery"
+  spec.dependency "Differ"
 
   spec.test_spec "Tests" do |test_spec|
     test_spec.source_files = "Tests/*.swift"
