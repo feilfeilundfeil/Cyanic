@@ -31,31 +31,6 @@ open class TableComponentCell: UITableViewCell {
         super.prepareForReuse()
         self.layout = nil
     }
-
-    override public final func layoutSubviews() {
-
-        // Get the rect of the contentView in the main thread.
-        let bounds: CGRect = self.contentView.bounds
-
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { () -> Void in
-            guard let layout = self.layout else { return }
-
-            // Do the size calculation in a background thread
-            let measurement: LayoutMeasurement = layout.measurement(
-                within: bounds.size
-            )
-
-            // Do the arrangement calculation in a background thread
-            let arrangement: LayoutArrangement = measurement
-                .arrangement(within: bounds)
-
-            // Size and place the subviews on the main thread
-            DispatchQueue.main.async(execute: { () -> Void in
-                arrangement.makeViews(in: self.contentView)
-            })
-        })
-    }
-
     override public final func sizeThatFits(_ size: CGSize) -> CGSize {
         guard let size = self.layout?.measurement(within: size).size else { return CGSize.zero }
         return size
@@ -79,7 +54,13 @@ open class TableComponentCell: UITableViewCell {
     open func configure(with component: AnyComponent) {
         self.layout = component.layout
         self.contentView.frame.size = self.intrinsicContentSize
-        self.setNeedsLayout()
+
+        self.layout?.arrangement(
+            origin: self.contentView.bounds.origin,
+            width: self.contentView.bounds.size.width,
+            height: self.contentView.bounds.size.height
+        )
+            .makeViews(in: self.contentView)
     }
 
 }

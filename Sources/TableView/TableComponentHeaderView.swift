@@ -65,30 +65,6 @@ public final class TableComponentHeaderView: UIView {
     }
 
     // MARK: Overridden Methods
-    public override final func layoutSubviews() {
-
-        // Get the rect of the contentView in the main thread.
-        let bounds: CGRect = self.bounds
-
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { () -> Void in
-            guard let layout = self.layout else { return }
-
-            // Do the size calculation in a background thread
-            let measurement: LayoutMeasurement = layout.measurement(
-                within: bounds.size
-            )
-
-            // Do the arrangement calculation in a background thread
-            let arrangement: LayoutArrangement = measurement
-                .arrangement(within: bounds)
-
-            // Size and place the subviews on the main thread
-            DispatchQueue.main.async(execute: { () -> Void in
-                arrangement.makeViews(in: self)
-            })
-        })
-    }
-
     public override final func sizeThatFits(_ size: CGSize) -> CGSize {
         guard let size = self.layout?.measurement(within: size).size else { return CGSize.zero }
         return size
@@ -116,7 +92,12 @@ public final class TableComponentHeaderView: UIView {
             self.tap = tap
         }
 
-        self.setNeedsLayout()
+        self.layout?.arrangement(
+            origin: self.bounds.origin,
+            width: self.bounds.size.width,
+            height: self.bounds.size.height
+        )
+            .makeViews(in: self)
     }
 
 }
