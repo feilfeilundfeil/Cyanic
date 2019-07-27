@@ -116,7 +116,7 @@ public final class TableComponentHeaderView: UIView {
             self.tap = tap
         }
 
-        component.layout.arrangement(
+        self.layout?.arrangement(
             origin: self.frame.origin,
             width: self.frame.size.width,
             height: self.frame.size.height

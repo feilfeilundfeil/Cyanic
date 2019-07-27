@@ -80,11 +80,11 @@ open class TableComponentCell: UITableViewCell {
         self.layout = component.layout
         self.contentView.frame.size = self.intrinsicContentSize
 
-        component.layout.arrangement(
+        self.layout?.arrangement(
             origin: self.contentView.frame.origin,
             width: self.contentView.frame.size.width,
             height: self.contentView.frame.size.height
-        )
+            )
             .makeViews(in: self.contentView)
     }
 
