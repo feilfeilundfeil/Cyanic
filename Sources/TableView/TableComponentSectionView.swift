@@ -1,5 +1,5 @@
 //
-//  TableComponentHeaderView.swift
+//  TableComponentSectionView.swift
 //  Cyanic
 //
 //  Created by Julio Miguel Alorro on 4/14/19.
@@ -12,13 +12,13 @@ import RxSwift
 import UIKit
 
 /**
- TableComponentHeaderView serves as the root UIView for any section UIView for UITableViews.
+ TableComponentSectionView serves as the root UIView for any section UIView for UITableViews.
 */
-public final class TableComponentHeaderView: UIView {
+public final class TableComponentSectionView: UIView {
 
     // MARK: Class Properties
     /**
-     The String identifier used by the TableComponentHeaderView.
+     The String identifier used by the TableComponentSectionView.
     */
     public class var identifier: String {
         return String(describing: Mirror(reflecting: self).subjectType)
@@ -35,7 +35,7 @@ public final class TableComponentHeaderView: UIView {
 
     // MARK: Stored Properties
     /**
-     The current ComponentLayout instance that creates and arranges the subviews in this TableComponentHeaderView.
+     The current ComponentLayout instance that creates and arranges the subviews in this TableComponentSectionView.
     */
     private var layout: ComponentLayout?
 
@@ -71,10 +71,10 @@ public final class TableComponentHeaderView: UIView {
     }
 
     /**
-     Reads the layout from the AnyComponent instance to create the subviews in this TableComponentHeaderView instance. T
+     Reads the layout from the AnyComponent instance to create the subviews in this TableComponentSectionView instance. T
      his also sets the frame.size equal to its intrinsicContentSize and calls setNeedsLayout.
      - Parameters:
-        - component: The AnyComponent instance that represents this TableComponentHeaderView.
+        - component: The AnyComponent instance that represents this TableComponentSectionView.
     */
     public func configure(with component: AnyComponent) {
         self.layout = component.layout

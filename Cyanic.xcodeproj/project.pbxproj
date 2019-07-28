@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -33,7 +33,7 @@
 		145AD75E220B1EBF004F02C2 /* FFUFComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 145AD750220B1EBE004F02C2 /* FFUFComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145D4E9F225DF602005F3531 /* DividerLine.swift */; };
 		14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA322635B77007B2AFC /* TableComponentCell.swift */; };
-		14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */; };
+		14609BA622635BF3007B2AFC /* TableComponentSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA522635BF3007B2AFC /* TableComponentSectionView.swift */; };
 		14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA722635C70007B2AFC /* TableComponentViewController.swift */; };
 		14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */; };
 		14609BAC22636805007B2AFC /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14609BAB22636805007B2AFC /* Size.swift */; };
@@ -170,7 +170,7 @@
 		145AD75D220B1EBF004F02C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		145D4E9F225DF602005F3531 /* DividerLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerLine.swift; sourceTree = "<group>"; };
 		14609BA322635B77007B2AFC /* TableComponentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentCell.swift; sourceTree = "<group>"; };
-		14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentHeaderView.swift; sourceTree = "<group>"; };
+		14609BA522635BF3007B2AFC /* TableComponentSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentSectionView.swift; sourceTree = "<group>"; };
 		14609BA722635C70007B2AFC /* TableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableComponentViewController.swift; sourceTree = "<group>"; };
 		14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSectionTableComponentViewController.swift; sourceTree = "<group>"; };
 		14609BAB22636805007B2AFC /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
@@ -446,7 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				14609BA322635B77007B2AFC /* TableComponentCell.swift */,
-				14609BA522635BF3007B2AFC /* TableComponentHeaderView.swift */,
+				14609BA522635BF3007B2AFC /* TableComponentSectionView.swift */,
 				14609BA722635C70007B2AFC /* TableComponentViewController.swift */,
 				149A29DE22648FFB0074AC08 /* SingleSectionTableComponentViewController.swift */,
 				14609BA922635E06007B2AFC /* MultiSectionTableComponentViewController.swift */,
@@ -1000,7 +1000,7 @@
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
-				14609BA622635BF3007B2AFC /* TableComponentHeaderView.swift in Sources */,
+				14609BA622635BF3007B2AFC /* TableComponentSectionView.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */,
 				1437BDD62215B75100A35FFE /* StaticTextComponent.swift in Sources */,
 				14609BA422635B77007B2AFC /* TableComponentCell.swift in Sources */,

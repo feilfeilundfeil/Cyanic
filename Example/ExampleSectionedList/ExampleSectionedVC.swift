@@ -14,13 +14,13 @@ import RxCocoa
 import RxDataSources
 import RxSwift
 
-public final class ExampleSectionedVC: MultiSectionTableComponentViewController {
+public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.tableView.backgroundColor = UIColor.white
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.collectionView.backgroundColor = UIColor.white
+//        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 
     // MARK: Stored Properties
@@ -32,24 +32,22 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
     }
 
     // MARK: Methods
-    public override func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return CyanicRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
-            animationConfiguration: AnimationConfiguration(
-                insertAnimation: UITableView.RowAnimation.fade,
-                reloadAnimation: UITableView.RowAnimation.fade,
-                deleteAnimation: UITableView.RowAnimation.fade
-            ),
-            configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
-                guard let cell = tv.dequeueReusableCell(
-                    withIdentifier: TableComponentCell.identifier,
-                    for: indexPath
-                ) as? TableComponentCell
-                    else { fatalError("Cell not registered to UITableView") }
+    public override func setUpDataSource() -> CyanicRxCollectionViewSectionedAnimatedDataSource<SectionController> {
 
-                cell.configure(with: component)
-                return cell
-            }
+        let dataSource = super.setUpDataSource()
+        return CyanicRxCollectionViewSectionedAnimatedDataSource(
+            configureCell: dataSource.configureCell,
+            configureSupplementaryView: dataSource.configureSupplementaryView
         )
+    }
+
+    public override func createUICollectionViewLayout() -> UICollectionViewLayout {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+        layout.sectionFootersPinToVisibleBounds = true
+        layout.sectionHeadersPinToVisibleBounds = true
+        return layout
     }
 
     public override func buildSections(_ sectionsController: inout MultiSectionController) {
@@ -74,26 +72,25 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                 }
             }
 
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
+            sectionsController.sectionController { (sectionController: inout SectionController) -> Void in
 
-                let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
-                    configuration: { (component: inout ExpandableComponent) -> Void in
-                        let id: String = "First Section"
-                        component.id = id
+                let expandableComponent: ExpandableComponent = sectionController.expandableComponent(for: .header) {
+                    (component: inout ExpandableComponent) -> Void in
+                    let id: String = "First Section"
+                    component.id = id
 
-                        component.contentLayout = LabelContentLayout(
-                            text: Text.unattributed(id),
-                            font: UIFont.boldSystemFont(ofSize: 17.0),
-                            alignment: Alignment.centerLeading,
-                            configuration: { (view: UILabel) -> Void in
-                                view.textColor = UIColor.black
-                            }
-                        )
-                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
-                        component.backgroundColor = UIColor.lightGray
-                        expandableComponentConfiguration(id, &component)
-                    }
-                )
+                    component.contentLayout = LabelContentLayout(
+                        text: Text.unattributed(id),
+                        font: UIFont.boldSystemFont(ofSize: 17.0),
+                        alignment: Alignment.centerLeading,
+                        configuration: { (view: UILabel) -> Void in
+                            view.textColor = UIColor.black
+                        }
+                    )
+                    component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
+                    component.backgroundColor = UIColor.lightGray
+                    expandableComponentConfiguration(id, &component)
+                }
 
                 if expandableComponent.isExpanded {
 
@@ -109,28 +106,38 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                         }
                     })
                 }
-            })
 
-            sectionsController.sectionController(with: { (sectionController: inout SectionController) -> Void in
-                let expandableComponent: ExpandableComponent = sectionController.expandableComponent(
-                    configuration: { (component: inout ExpandableComponent) -> Void in
-                        let id: String = "Second Section"
-                        component.id = id
-
-                        component.contentLayout = LabelContentLayout(
-                            text: Text.unattributed(id),
-                            font: UIFont.boldSystemFont(ofSize: 17.0),
-                            alignment: Alignment.centerLeading,
-                            configuration: { (view: UILabel) -> Void in
-                                view.textColor = UIColor.black
-                            }
-                        )
-
-                        component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
-                        component.backgroundColor = UIColor.lightGray
-                        expandableComponentConfiguration(id, &component)
+                sectionController.buttonComponent(for: .footer) { (component: inout ButtonComponent) -> Void in
+                    component.id = "Button Footer"
+                    component.title = "Footer Button"
+                    component.height = 44.0
+                    component.insets = UIEdgeInsets(top: 10.0, left: 20.0, bottom: 10.0, right: 20.0)
+                    component.configuration = {
+                        $0.backgroundColor = .orange
                     }
-                )
+                    component.backgroundColor = UIColor.white
+                }
+            }
+
+            sectionsController.sectionController { (sectionController: inout SectionController) -> Void in
+                let expandableComponent: ExpandableComponent = sectionController.expandableComponent(for: .header) {
+                    (component: inout ExpandableComponent) -> Void in
+                    let id: String = "Second Section"
+                    component.id = id
+
+                    component.contentLayout = LabelContentLayout(
+                        text: Text.unattributed(id),
+                        font: UIFont.boldSystemFont(ofSize: 17.0),
+                        alignment: Alignment.centerLeading,
+                        configuration: { (view: UILabel) -> Void in
+                            view.textColor = UIColor.black
+                        }
+                    )
+
+                    component.insets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
+                    component.backgroundColor = UIColor.lightGray
+                    expandableComponentConfiguration(id, &component)
+                }
 
                 if expandableComponent.isExpanded {
                     sectionController.buildComponents({ (components: inout ComponentsController) -> Void in
@@ -145,7 +152,7 @@ public final class ExampleSectionedVC: MultiSectionTableComponentViewController 
                         }
                     })
                 }
-            })
+            }
         }
     }
 

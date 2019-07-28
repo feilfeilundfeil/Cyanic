@@ -55,7 +55,7 @@ public extension SectionController {
             <%= type.name %>
     */
     @discardableResult
-    mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
+    mutating func <%= functionName %>(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
         var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
@@ -65,7 +65,14 @@ public extension SectionController {
         guard ComponentStateValidator.validate<%= type.name %>(mutableComponent)
             else { fatalError("You did not configure all required variables in this component") }
     <%_ } -%>
-        self.sectionComponent = mutableComponent.asAnyComponent
+
+        switch supplementaryView {
+            case .header:
+                self.headerComponent = mutableComponent.asAnyComponent
+            case .footer:
+                self.footerComponent = mutableComponent.asAnyComponent
+        }
+
         return mutableComponent
     }
 <%_ } -%>

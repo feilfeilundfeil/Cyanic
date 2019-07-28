@@ -28,17 +28,16 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             withReuseIdentifier: ComponentSupplementaryView.identifier
         )
 
+        self.collectionView.register(
+            ComponentSupplementaryView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+            withReuseIdentifier: ComponentSupplementaryView.identifier
+        )
+
         // When _components emits a new element, bind the new element to the UICollectionView.
         self._sections
-            .map({ (sections: MultiSectionController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
-                let models: [AnimatableSectionModel<AnyComponent, AnyComponent>] = sections.sectionControllers
-                    .map({ (section: SectionController) -> AnimatableSectionModel<AnyComponent, AnyComponent> in
-                        return AnimatableSectionModel<AnyComponent, AnyComponent>(
-                            model: section.sectionComponent,
-                            items: section.componentsController.components
-                        )
-                    })
-                return models
+            .map({ (sections: MultiSectionController) -> [SectionController] in
+                return sections.sectionControllers
             })
             .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
@@ -56,7 +55,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
     /**
      The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
     */ // swiftlint:disable:next implicitly_unwrapped_optional line_length
-    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
+    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<SectionController>!
 
     // MARK: Methods
     /**
@@ -64,8 +63,8 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
      - Returns:
         A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
     */
-    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<SectionController> {
+        return RxCollectionViewSectionedAnimatedDataSource<SectionController>(
             decideViewTransition: { _, _, _ in .animated },
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(
@@ -78,8 +77,8 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                 return cell
             },
             // swiftlint:disable:next line_length
-            configureSupplementaryView: { (dataSource: CollectionViewSectionedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>, cv: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView in
-                let sectionModel: AnimatableSectionModel<AnyComponent, AnyComponent> = dataSource[indexPath.section]
+            configureSupplementaryView: { (dataSource: CollectionViewSectionedDataSource<SectionController>, cv: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView in
+                let section: SectionController = dataSource[indexPath.section]
                 guard let view = cv.dequeueReusableSupplementaryView(
                     ofKind: kind,
                     withReuseIdentifier: ComponentSupplementaryView.identifier,
@@ -87,7 +86,15 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                 ) as? ComponentSupplementaryView
                     else { fatalError("Cell not registered to UICollectionView") }
 
-                view.configure(with: sectionModel.model)
+                switch kind {
+                    case UICollectionView.elementKindSectionHeader:
+                        view.configure(with: section.headerComponent!)
+                    case UICollectionView.elementKindSectionFooter:
+                        view.configure(with: section.footerComponent!)
+                    default:
+                        break
+                }
+
                 return view
             }
         )
@@ -194,7 +201,23 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             return CGSize.zero
         }
 
-        guard let layout = self.sectionController(at: section)?.sectionComponent?.layout
+        guard let layout = self.sectionController(at: section)?.headerComponent?.layout
+            else { return CGSize.zero }
+
+        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
+
+        let headerSize: CGSize = layout.measurement(within: size).size
+        return headerSize
+
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+
+        if self._sections.value.sectionControllers.count < section {
+            return CGSize.zero
+        }
+
+        guard let layout = self.sectionController(at: section)?.footerComponent?.layout
             else { return CGSize.zero }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)

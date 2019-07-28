@@ -7,6 +7,7 @@
 //
 
 import CoreGraphics
+import RxDataSources
 
 /**
  SectionController represents a section of a UICollectionView/UITableView. It consists of two main properties:
@@ -17,18 +18,23 @@ import CoreGraphics
 
  It is essentially the data source for a section in a UICollectionView/UITableView.
 */
-public struct SectionController {
+public struct SectionController: AnimatableSectionModelType {
 
     // MARK: Initializer
     /**
      Initializer.
      - Parameters:
         - size: The size of the UICollectionView/UITableView. SectionController mutates the width property of the
-                sectionComponent and initializes its ComponentsController instance with it.
+                headerComponent and initializes its ComponentsController instance with it.
     */
     public init(size: CGSize) {
         self.size = size
         self.componentsController = ComponentsController(size: size)
+    }
+
+    public init(original: SectionController, items: [AnyComponent]) {
+        self = original
+        self.componentsController.components = items
     }
 
     // MARK: Stored Properties
@@ -38,9 +44,14 @@ public struct SectionController {
     public let size: CGSize
 
     /**
-     The Component representing the section header in the UICollectionView/UITableView.
+     The Component representing the header view for the section in the UICollectionView/UITableView.
     */
-    public var sectionComponent: AnyComponent! // swiftlint:disable:this implicitly_unwrapped_optional
+    public var headerComponent: AnyComponent?
+
+    /**
+     The Component representing the footer view for the section in the UICollectionView/UITableView.
+     */
+    public var footerComponent: AnyComponent?
 
     /**
      The components for this section of the UICollectionView/UITableView.
@@ -55,13 +66,25 @@ public struct SectionController {
         return self.size.width
     }
 
+    public var identity: Int {
+        var hasher: Hasher = Hasher()
+        hasher.combine(self.headerComponent)
+        hasher.combine(self.footerComponent)
+        return hasher.finalize()
+    }
+
+    public var items: [AnyComponent] {
+        return self.componentsController.components
+    }
+
     /**
      The height of all the Components managed by this SectionController.
     */
     public var height: CGFloat {
         let componentsControllerHeight: CGFloat = self.componentsController.height
-        let headerHeight: CGFloat = self.sectionComponent.layout.measurement(within: size).size.height
-        return componentsControllerHeight + headerHeight
+        let headerHeight: CGFloat = self.headerComponent?.layout.measurement(within: size).size.height ?? 0.0
+        let footerHeight: CGFloat = self.footerComponent?.layout.measurement(within: size).size.height ?? 0.0
+        return componentsControllerHeight + headerHeight + footerHeight
     }
 
     /**
@@ -73,6 +96,25 @@ public struct SectionController {
     */
     public mutating func buildComponents(_ configuration: (_ componentsController: inout ComponentsController) -> Void) {
         configuration(&self.componentsController)
+    }
+
+}
+
+public extension SectionController {
+
+    /**
+     Represents the two options when adding a Component to a SectionContoller
+    */
+    enum SupplementaryView {
+        /**
+         Adds the Component as a header in the UICollectionView/UITableView
+        */
+        case header
+
+        /**
+         Adds the Component as a footer in the UICollectionView/UITableView
+        */
+        case footer
     }
 
 }

@@ -24,15 +24,8 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         self.dataSource = self.setUpDataSource()
         // When _components emits a new element, bind the new element to the UITableView.
         self._sections
-            .map({ (sections: MultiSectionController) -> [AnimatableSectionModel<AnyComponent, AnyComponent>] in
-                let models: [AnimatableSectionModel<AnyComponent, AnyComponent>] = sections.sectionControllers
-                    .map({ (section: SectionController) -> AnimatableSectionModel<AnyComponent, AnyComponent> in
-                        return AnimatableSectionModel<AnyComponent, AnyComponent>(
-                            model: section.sectionComponent,
-                            items: section.componentsController.components
-                        )
-                    })
-                return models
+            .map({ (sections: MultiSectionController) -> [SectionController] in
+                return sections.sectionControllers
             })
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
@@ -49,8 +42,8 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
 
     /**
      The RxDataSource instance used for the Rx aspect of the UITableViewDataSource.
-    */ // swiftlint:disable:next line_length implicitly_unwrapped_optional
-    public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>!
+    */ // swiftlint:disable:next implicitly_unwrapped_optional
+    public private(set) var dataSource: RxTableViewSectionedAnimatedDataSource<SectionController>!
 
     // MARK: Methods
     /**
@@ -58,8 +51,8 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
      - Returns:
         A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
     */
-    open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> {
-        return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>>(
+    open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<SectionController> {
+        return RxTableViewSectionedAnimatedDataSource<SectionController>(
             animationConfiguration: AnimationConfiguration(
                 insertAnimation: UITableView.RowAnimation.fade,
                 reloadAnimation: UITableView.RowAnimation.automatic,
@@ -171,7 +164,21 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
             return 0.0
         }
 
-        guard let layout = self.sectionController(at: section)?.sectionComponent?.layout
+        guard let layout = self.sectionController(at: section)?.headerComponent?.layout
+            else { return 0.0 }
+
+        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
+
+        let headerSize: CGSize = layout.measurement(within: size).size
+        return headerSize.height
+    }
+
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if self._sections.value.sectionControllers.count < section {
+            return 0.0
+        }
+
+        guard let layout = self.sectionController(at: section)?.footerComponent?.layout
             else { return 0.0 }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
@@ -181,8 +188,15 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let component = self.sectionController(at: section)?.sectionComponent else { return nil }
-        let headerView: TableComponentHeaderView = TableComponentHeaderView()
+        guard let component = self.sectionController(at: section)?.headerComponent else { return nil }
+        let headerView: TableComponentSectionView = TableComponentSectionView()
+        headerView.configure(with: component)
+        return headerView
+    }
+
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let component = self.sectionController(at: section)?.footerComponent else { return nil }
+        let headerView: TableComponentSectionView = TableComponentSectionView()
         headerView.configure(with: component)
         return headerView
     }

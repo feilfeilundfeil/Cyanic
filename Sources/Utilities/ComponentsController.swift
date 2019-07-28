@@ -52,7 +52,7 @@ public struct ComponentsController {
     /**
      The Array of AnyComponents managed by this ComponentsController.
     */
-    public private(set) var components: [AnyComponent] = []
+    public internal(set) var components: [AnyComponent] = []
 
     /**
      Adds a Component to the array as an AnyComponent instance.
