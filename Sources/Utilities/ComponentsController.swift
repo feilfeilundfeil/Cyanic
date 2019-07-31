@@ -20,7 +20,7 @@ public struct ComponentsController {
         - size: The size of the UICollectionView/UITableView. ComponentsController mutates the width property of every
                 Component that is added to its Array.
     */
-    internal init(size: CGSize) {
+    public init(size: CGSize) {
         self.size = size
     }
 
