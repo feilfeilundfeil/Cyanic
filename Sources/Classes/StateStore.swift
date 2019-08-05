@@ -45,11 +45,6 @@ internal class StateStore<ConcreteState: State> {
     private let scheduler: SerialDispatchQueueScheduler
 
     /**
-     The NSRecursiveLock instance used to add getState and setState closures to the ClosureQueue in a serial manner.
-    */
-    private let lock: NSRecursiveLock = NSRecursiveLock()
-
-    /**
      The BehaviorRelay that encapsulates State.
     */
     internal let stateRelay: BehaviorRelay<ConcreteState>
@@ -62,7 +57,7 @@ internal class StateStore<ConcreteState: State> {
     /**
      The ClosureQueue instance that manages the setState and withState queues.
     */
-    private var closureQueue: ClosureQueue<ConcreteState> = ClosureQueue<ConcreteState>()
+    private let closureQueue: ClosureQueue<ConcreteState> = ClosureQueue<ConcreteState>()
 
     /**
      The DisposeBag for Rx related subcriptions
@@ -117,7 +112,6 @@ internal class StateStore<ConcreteState: State> {
         - currentState: The current value of the State.
     */
     internal func getState(with block: @escaping (_ currentState: ConcreteState) -> Void) {
-        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(block: block)
         self.executionRelay.accept(())
     }
@@ -128,7 +122,6 @@ internal class StateStore<ConcreteState: State> {
         - reducer: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
-        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(reducer: reducer)
         self.executionRelay.accept(())
     }
@@ -139,7 +132,7 @@ internal class StateStore<ConcreteState: State> {
  The ClosureQueue is a helper class that manages the withState and setState calls from the viewModel
  by storing each callback in a withState array or setState array.
 */
-fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
+fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
 
     /**
      The pending withState closures.
@@ -152,12 +145,18 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
     var setStateQueue: [(inout State) -> Void] = []
 
     /**
+     The NSRecursiveLock instance used to add getState and setState closures to the ClosureQueue in a serial manner.
+    */
+    private let lock: NSRecursiveLock = NSRecursiveLock()
+
+    /**
      Adds a withState closure to the withStateQueue.
      - Parameters:
         - block: The withState closure to be added.
         - state: The current value of the State.
     */
-    mutating func add(block: @escaping (_ state: State) -> Void) {
+    func add(block: @escaping (_ state: State) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.withStateQueue.append(block)
     }
 
@@ -167,7 +166,8 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
         - reducer: The setState closure to be added.
         - mutableState: The State to be mutated.
     */
-    mutating func add(reducer: @escaping (_ mutableState: inout State) -> Void) {
+    func add(reducer: @escaping (_ mutableState: inout State) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.setStateQueue.append(reducer)
     }
 
@@ -176,7 +176,8 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
      - Returns:
         An optional withState closure
     */
-    mutating func dequeueFirstWithStateCallback() -> ((State) -> Void)? {
+    func dequeueFirstWithStateCallback() -> ((State) -> Void)? {
+        self.lock.lock(); defer { self.lock.unlock() }
         guard !self.withStateQueue.isEmpty else { return nil }
         return self.withStateQueue.removeFirst()
     }
@@ -186,7 +187,8 @@ fileprivate struct ClosureQueue<State> { // swiftlint:disable:this private_over_
      - Returns:
         All the setState closures currently in the setStateQueue.
     */
-    mutating func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
+    func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
+        self.lock.lock(); defer { self.lock.unlock() }
         guard !self.setStateQueue.isEmpty else { return [] }
         let callbacks: [(inout State) -> Void] = self.setStateQueue
         self.setStateQueue = []
