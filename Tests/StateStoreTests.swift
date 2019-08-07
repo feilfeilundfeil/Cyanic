@@ -77,7 +77,7 @@ class StateStoreTests: QuickSpec {
                 )
 
                 let firstLoopStart: Int = 0
-                let firstLoopEnd: Int = 100
+                let firstLoopEnd: Int = 5_000
 
                 let secondLoopStart: Int = firstLoopEnd + 1
                 let secondLoopEnd: Int = firstLoopEnd * 2

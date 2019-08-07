@@ -1,9 +1,7 @@
 //
-//  StaticSpacingComponent.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 2/14/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 14.02.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import UIKit

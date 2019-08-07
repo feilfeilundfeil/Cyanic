@@ -1,9 +1,7 @@
 //
-//  ComponentStateValidator.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 3/13/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 13.03.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import UIKit

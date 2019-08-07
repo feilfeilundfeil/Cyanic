@@ -1,9 +1,7 @@
 //
-//  SingleSectionCollectionComponentViewController.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 2/7/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 07.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import UIKit
@@ -52,7 +50,7 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
     */
     open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
-        return RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
+        return CyanicRxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(
                     withReuseIdentifier: CollectionComponentCell.identifier,

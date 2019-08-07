@@ -1,9 +1,7 @@
 //
-//  SingleSectionTableComponentViewController.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 4/15/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 15.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import RxCocoa
@@ -51,7 +49,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
         A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
     */
     open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
-        return RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
+        return CyanicRxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
             configureCell: { (_, tv: UITableView, indexPath: IndexPath, component: AnyComponent) -> UITableViewCell in
                 guard let cell = tv.dequeueReusableCell(
                     withIdentifier: TableComponentCell.identifier,

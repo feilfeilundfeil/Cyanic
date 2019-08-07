@@ -1,9 +1,7 @@
 //
-//  MultiSectionTableComponentViewController.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 4/14/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 14.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import RxCocoa
@@ -52,7 +50,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
         A RxTableViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
     */
     open func setUpDataSource() -> RxTableViewSectionedAnimatedDataSource<SectionController> {
-        return RxTableViewSectionedAnimatedDataSource<SectionController>(
+        return CyanicRxTableViewSectionedAnimatedDataSource<SectionController>(
             animationConfiguration: AnimationConfiguration(
                 insertAnimation: UITableView.RowAnimation.fade,
                 reloadAnimation: UITableView.RowAnimation.automatic,

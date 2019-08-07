@@ -1,9 +1,7 @@
 //
-//  SectionController.swift
-//  Example
-//
-//  Created by Julio Miguel Alorro on 4/12/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Cyanic
+//  Created by Julio Miguel Alorro on 12.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import CoreGraphics

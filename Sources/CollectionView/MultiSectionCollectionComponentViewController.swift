@@ -1,9 +1,7 @@
 //
-//  MultiSectionCollectionComponentViewController.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 4/12/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 12.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import UIKit
@@ -64,7 +62,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<AnyComponent, AnyComponent>> instance.
     */
     open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<SectionController> {
-        return RxCollectionViewSectionedAnimatedDataSource<SectionController>(
+        return CyanicRxCollectionViewSectionedAnimatedDataSource<SectionController>(
             decideViewTransition: { _, _, _ in .animated },
             configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
                 guard let cell = cv.dequeueReusableCell(

@@ -1,9 +1,7 @@
 //
-//  ExpandableComponentLayout.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 2/15/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 15.02.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import LayoutKit

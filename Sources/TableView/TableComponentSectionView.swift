@@ -1,9 +1,7 @@
 //
-//  TableComponentSectionView.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 4/14/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 14.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import Foundation

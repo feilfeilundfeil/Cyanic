@@ -102,6 +102,7 @@
 		14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */; };
 		14F6BD7E22295A3E008B0692 /* ExpandableComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */; };
 		14F6BD802229738A008B0692 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6BD7F2229738A008B0692 /* Copyable.swift */; };
+		14FB368522FB2AD300681985 /* ComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FB368422FB2AD300681985 /* ComponentView.swift */; };
 		3CBB8E98E4B0FCB3EF6121D8 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 730F77D4A7854D2322155566 /* Pods_Tests.framework */; };
 		A04C2BBF254770C7996B36CE /* Pods_Cyanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 685742A8C23801FBEAE7465F /* Pods_Cyanic.framework */; };
 		D925B76B81288DEF77D9C3D3 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 862E1FCF7C1377E32F906DC0 /* Pods_Example.framework */; };
@@ -257,6 +258,7 @@
 		14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTextComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentType.swift; sourceTree = "<group>"; };
 		14F6BD7F2229738A008B0692 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
+		14FB368422FB2AD300681985 /* ComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentView.swift; sourceTree = "<group>"; };
 		1BF31DBC741F7929C83DE40F /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		3257F016F9341966539EC776 /* Pods-Cyanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cyanic.debug.xcconfig"; path = "Target Support Files/Pods-Cyanic/Pods-Cyanic.debug.xcconfig"; sourceTree = "<group>"; };
 		479EBB0F43D74C3AD9AFAEF1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		145AD767220B1ED6004F02C2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				14FB368122FB28CC00681985 /* Views */,
 				F000D2A7221C1D6F00D10D0D /* Sourcery */,
 				142C44FE2235A0EA002360F5 /* Enums */,
 				1437BDD72215BA4400A35FFE /* Extensions */,
@@ -636,6 +639,14 @@
 				14F06055224B593500CC62B0 /* ChildVC.swift */,
 			);
 			path = ExampleList;
+			sourceTree = "<group>";
+		};
+		14FB368122FB28CC00681985 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				14FB368422FB2AD300681985 /* ComponentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		98F8D2D4C2A9710903B34A80 /* Frameworks */ = {
@@ -999,6 +1010,7 @@
 				14A56070228AC06F009DEEA3 /* SizedComponentLayout.swift in Sources */,
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
+				14FB368522FB2AD300681985 /* ComponentView.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
 				14609BA622635BF3007B2AFC /* TableComponentSectionView.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */,

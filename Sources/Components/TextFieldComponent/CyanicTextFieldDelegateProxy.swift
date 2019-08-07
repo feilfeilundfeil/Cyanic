@@ -1,9 +1,7 @@
 //
-//  CyanicTextFieldDelegateProxy.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 5/21/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 21.05.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import UIKit

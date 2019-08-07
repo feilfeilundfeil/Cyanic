@@ -1,9 +1,7 @@
 //
-//  TextFieldComponentType.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 4/9/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 09.04.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import LayoutKit

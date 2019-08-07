@@ -1,9 +1,7 @@
 //
-//  StateStore.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 3/14/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 14.03.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import Foundation
@@ -53,6 +51,12 @@ internal class StateStore<ConcreteState: State> {
      The PublishRelay that is responsible for resolving the withState and setState closures on State.
     */
     private let executionRelay: PublishRelay<Void> = PublishRelay<Void>()
+
+    /**
+     The NSRecursiveLock instance used to add getState and setState closures to the ClosureQueue and emit an executionRelay element in
+     a serial manner.
+    */
+    private let lock: NSRecursiveLock = NSRecursiveLock()
 
     /**
      The ClosureQueue instance that manages the setState and withState queues.
@@ -112,6 +116,7 @@ internal class StateStore<ConcreteState: State> {
         - currentState: The current value of the State.
     */
     internal func getState(with block: @escaping (_ currentState: ConcreteState) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(block: block)
         self.executionRelay.accept(())
     }
@@ -122,6 +127,7 @@ internal class StateStore<ConcreteState: State> {
         - reducer: The closure to set/mutate the StateType.
     */
     internal func setState(with reducer: @escaping (inout ConcreteState) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.closureQueue.add(reducer: reducer)
         self.executionRelay.accept(())
     }
@@ -145,7 +151,7 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
     var setStateQueue: [(inout State) -> Void] = []
 
     /**
-     The NSRecursiveLock instance used to add getState and setState closures to the ClosureQueue in a serial manner.
+     The NSRecursiveLock instance used to add closures to their respective queues in a serial manner.
     */
     private let lock: NSRecursiveLock = NSRecursiveLock()
 

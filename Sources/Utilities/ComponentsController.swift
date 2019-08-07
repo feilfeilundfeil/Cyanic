@@ -1,9 +1,7 @@
 //
-//  ComponentsController.swift
 //  Cyanic
-//
-//  Created by Julio Miguel Alorro on 2/18/19.
-//  Copyright © 2019 Feil, Feil, & Feil  GmbH. All rights reserved.
+//  Created by Julio Miguel Alorro on 18.02.19.
+//  Licensed under the MIT license. See LICENSE file
 //
 
 import CoreGraphics
