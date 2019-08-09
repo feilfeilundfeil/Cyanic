@@ -70,7 +70,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     */
     public lazy var leadingAnchorConstraint: NSLayoutConstraint = {
         return self._listView.leadingAnchor
-            .constraint(equalTo: self.view.readableContentGuide.leadingAnchor, constant: 0.0)
+            .constraint(equalTo: self.view.leadingAnchor, constant: 0.0)
     }()
 
     /**
@@ -78,7 +78,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     */
     public lazy var trailingAnchorConstraint: NSLayoutConstraint = {
         return self._listView.trailingAnchor
-            .constraint(equalTo: self.view.readableContentGuide.trailingAnchor, constant: 0.0)
+            .constraint(equalTo: self.view.trailingAnchor, constant: 0.0)
     }()
 
     // MARK: Stored Properties
