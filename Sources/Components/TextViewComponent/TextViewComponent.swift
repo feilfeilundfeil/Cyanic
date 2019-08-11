@@ -38,6 +38,9 @@ public struct TextViewComponent: TextViewComponentType {
     // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
+    // sourcery: skipHashing, skipEquality
+    public var textContainerInset: UIEdgeInsets = UIEdgeInsets.zero
+
     public var backgroundColor: UIColor = UIColor.clear
 
     // sourcery: skipHashing, skipEquality

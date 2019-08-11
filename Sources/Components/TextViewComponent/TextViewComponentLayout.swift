@@ -23,7 +23,7 @@ public final class TextViewComponentLayout: SizeLayout<UIView>, ComponentLayout 
             text: Text.unattributed(component.text),
             font: component.font,
             lineFragmentPadding: 0,
-            textContainerInset: UIEdgeInsets.zero,
+            textContainerInset: component.textContainerInset,
             layoutAlignment: component.alignment,
             flexibility: component.flexibility,
             viewReuseId: "\(TextViewComponentLayout.identifier)TextView",
