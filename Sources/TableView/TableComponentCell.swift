@@ -29,6 +29,7 @@ open class TableComponentCell: UITableViewCell {
         super.prepareForReuse()
         self.layout = nil
     }
+
     override public final func sizeThatFits(_ size: CGSize) -> CGSize {
         guard let size = self.layout?.measurement(within: size).size else { return CGSize.zero }
         return size
@@ -37,8 +38,8 @@ open class TableComponentCell: UITableViewCell {
     override public final var intrinsicContentSize: CGSize {
         return self.sizeThatFits(
             CGSize(
-                width: Constants.screenWidth,
-                height: CGFloat.greatestFiniteMagnitude
+                width: self.bounds.width,
+                height: self.bounds.height
             )
         )
     }

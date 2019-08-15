@@ -93,7 +93,7 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 s._size = size
-                var controller: ComponentsController = ComponentsController(size: size)
+                var controller: ComponentsController = ComponentsController(width: size.width)
                 s.buildComponents(&controller)
                 return controller.components
             })

@@ -16,18 +16,18 @@ public struct MultiSectionController {
     /**
      Initializer.
      - Parameters:
-        - size: The size of the UICollectionView/UITableView. MultiSectionController initializes its SectionController
+        - width: The width of the UICollectionView/UITableView. MultiSectionController initializes its SectionController
                 instances with it.
     */
-    public init(size: CGSize) {
-        self.size = size
+    public init(width: CGFloat) {
+        self.width = width
     }
 
     // MARK: Stored Properties
     /**
-     The CGSize of the UICollectionView where the components will be displayed.
+     The CGFloat of the UICollectionView where the components will be displayed.
     */
-    public let size: CGSize
+    public let width: CGFloat
 
     /**
      The SectionControllers representing the sections in the UICollectionView.
@@ -36,17 +36,12 @@ public struct MultiSectionController {
 
     // MARK: Computed Properties
     /**
-     The width of the UICollectionView where the components will be displayed.
-    */
-    public var width: CGFloat {
-        return self.size.width
-    }
-
-    /**
      The height of the UICollectionView where the components will be displayed.
     */
     public var height: CGFloat {
-        return self.size.height
+        return self.sectionControllers.reduce(into: 0.0, { (currentHeight: inout CGFloat, section: SectionController) -> Void in
+            currentHeight += section.height
+        })
     }
 
     /**
@@ -60,7 +55,7 @@ public struct MultiSectionController {
     */
     @discardableResult
     public mutating func sectionController(with configuration: (_ sectionController: inout SectionController) -> Void) -> SectionController {
-        var sectionController: SectionController = SectionController(size: self.size)
+        var sectionController: SectionController = SectionController(width: self.width)
         configuration(&sectionController)
         guard sectionController.headerComponent != nil else { fatalError("Missing a sectionComponent!")}
         self.sectionControllers.append(sectionController)

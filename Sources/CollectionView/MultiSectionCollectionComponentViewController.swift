@@ -47,7 +47,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
      batch update based on the diffing produced by RxDataSources.
     */
     internal let _sections: BehaviorRelay<MultiSectionController> = BehaviorRelay<MultiSectionController>(
-        value: MultiSectionController(size: CGSize.zero)
+        value: MultiSectionController(width: 0.0)
     )
 
     /**
@@ -153,9 +153,9 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         // in executing operations in quick succession when it is throttled anyway.
         throttledStateObservable
             .map({ [weak self] (size: CGSize, _: [Any]) -> MultiSectionController in
-                guard let s = self else { return MultiSectionController(size: CGSize.zero) }
+                guard let s = self else { return MultiSectionController(width: 0.0) }
                 s._size = size
-                var controller: MultiSectionController = MultiSectionController(size: size)
+                var controller: MultiSectionController = MultiSectionController(width: size.width)
                 s.buildSections(&controller)
                 return controller
             })

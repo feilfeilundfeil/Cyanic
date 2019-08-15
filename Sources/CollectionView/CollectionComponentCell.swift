@@ -39,8 +39,8 @@ open class CollectionComponentCell: UICollectionViewCell {
     override public final var intrinsicContentSize: CGSize {
         return self.sizeThatFits(
             CGSize(
-                width: Constants.screenWidth,
-                height: CGFloat.greatestFiniteMagnitude
+                width: self.bounds.width,
+                height: self.bounds.height
             )
         )
     }

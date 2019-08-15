@@ -15,24 +15,17 @@ public struct ComponentsController {
     /**
      Initializer.
      - Parameters:
-        - size: The size of the UICollectionView/UITableView. ComponentsController mutates the width property of every
+        - width: The width of the UICollectionView/UITableView. ComponentsController mutates the width property of every
                 Component that is added to its Array.
     */
-    public init(size: CGSize) {
-        self.size = size
+    public init(width: CGFloat) {
+        self.width = width
     }
-
-    /**
-     The CGSize of the UICollectionView/UITableView where the Components will be displayed.
-    */
-    public let size: CGSize
 
     /**
      The width of the UICollectionView/UITableView where the Components will be displayed.
     */
-    public var width: CGFloat {
-        return self.size.width
-    }
+    public let width: CGFloat
 
     /**
      The total height of the Components will be displayed.
@@ -40,7 +33,7 @@ public struct ComponentsController {
     public var height: CGFloat {
         return self.components.reduce(into: 0.0, { (currentHeight: inout CGFloat, component: AnyComponent) -> Void in
             currentHeight += component.layout.measurement(
-                within: CGSize(width: self.size.width, height: CGFloat.greatestFiniteMagnitude)
+                within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude)
             )
                 .size
                 .height

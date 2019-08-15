@@ -22,12 +22,12 @@ public struct SectionController: AnimatableSectionModelType {
     /**
      Initializer.
      - Parameters:
-        - size: The size of the UICollectionView/UITableView. SectionController mutates the width property of the
+        - width: The width of the UICollectionView/UITableView. SectionController mutates the width property of the
                 headerComponent and initializes its ComponentsController instance with it.
     */
-    public init(size: CGSize) {
-        self.size = size
-        self.componentsController = ComponentsController(size: size)
+    public init(width: CGFloat) {
+        self.width = width
+        self.componentsController = ComponentsController(width: width)
     }
 
     public init(original: SectionController, items: [AnyComponent]) {
@@ -37,9 +37,9 @@ public struct SectionController: AnimatableSectionModelType {
 
     // MARK: Stored Properties
     /**
-     The CGSize of the UICollectionView/UITableView where the components will be displayed.
+     The width of the UICollectionView/UITableView where the components will be displayed.
     */
-    public let size: CGSize
+    public let width: CGFloat
 
     /**
      The Component representing the header view for the section in the UICollectionView/UITableView.
@@ -57,13 +57,6 @@ public struct SectionController: AnimatableSectionModelType {
     public private(set) var componentsController: ComponentsController
 
     // MARK: Computed Properties
-    /**
-     The width of the UICollectionView/UITableView where the components will be displayed.
-    */
-    public var width: CGFloat {
-        return self.size.width
-    }
-
     public var identity: Int {
         var hasher: Hasher = Hasher()
         hasher.combine(self.headerComponent)
@@ -80,8 +73,16 @@ public struct SectionController: AnimatableSectionModelType {
     */
     public var height: CGFloat {
         let componentsControllerHeight: CGFloat = self.componentsController.height
-        let headerHeight: CGFloat = self.headerComponent?.layout.measurement(within: size).size.height ?? 0.0
-        let footerHeight: CGFloat = self.footerComponent?.layout.measurement(within: size).size.height ?? 0.0
+        let headerHeight: CGFloat = self.headerComponent?
+            .layout
+            .measurement(within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude))
+            .size
+            .height ?? 0.0
+        let footerHeight: CGFloat = self.footerComponent?
+            .layout
+            .measurement(within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude))
+            .size
+            .height ?? 0.0
         return componentsControllerHeight + headerHeight + footerHeight
     }
 

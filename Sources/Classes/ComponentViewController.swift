@@ -222,7 +222,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
             .disposed(by: self.disposeBag)
 
         throttledStateObservable
-            .observeOn(MainScheduler.asyncInstance)
+            .observeOn(MainScheduler.instance)
             .bind(
                 onNext: { [weak self] (_: CGSize, _: [Any]) -> Void in
                     self?.invalidate()
