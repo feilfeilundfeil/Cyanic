@@ -4,6 +4,8 @@
 //  Licensed under the MIT license. See LICENSE file
 //
 
+import os
+
 /**
  Synchronously access the state of the viewModel instance.
  - parameters:
@@ -113,4 +115,26 @@ public func withState< // swiftlint:disable:this function_parameter_count
         viewModel4.currentState,
         viewModel5.currentState
     )
+}
+
+/**
+ Logs the deallocation of a class if it is a class, otherwise logs that it isn't a class.
+ - parameters:
+    - instance: The class instance to be logged when deallocating.
+    - log     : The OSLog instance.
+*/
+internal func logDeallocation<T>(of instance: T, log: OSLog) {
+    let mirroredInstance: Mirror = Mirror(reflecting: instance)
+    let instanceType: String = String(describing: mirroredInstance.subjectType)
+
+    guard let style = mirroredInstance.displayStyle else {
+        os_log("Could not determine display style for %s", log: log, type: OSLogType.error, instanceType)
+        return
+    }
+
+    guard style == .class else {
+        os_log("%s is not a class", log: log, type: OSLogType.error, instanceType)
+        return
+    }
+    os_log("%s was deallocated", log: log, type: OSLogType.info, instanceType)
 }

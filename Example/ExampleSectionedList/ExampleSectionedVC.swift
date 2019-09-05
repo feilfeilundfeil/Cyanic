@@ -16,10 +16,6 @@ import RxSwift
 
 public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
-    deinit {
-        print("\(type(of: self)) was deallocated")
-    }
-
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white

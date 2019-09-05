@@ -72,11 +72,14 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 
+
 ### Xcode ###
 build
 ##*.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
+
+.idea/
 
 # End of https://www.gitignore.io/api/xcode,swift

@@ -29,8 +29,7 @@ open class AbstractViewModel<StateType: State>: NSObject, ViewModelType {
     }
 
     deinit {
-        let type: String = String(describing: Mirror(reflecting: self).subjectType)
-        os_log("%s was deallocated", log: CyanicViewModelLog, type: OSLogType.info, type)
+        logDeallocation(of: self, log: CyanicViewModelLog)
     }
 
     /**

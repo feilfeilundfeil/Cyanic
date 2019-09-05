@@ -7,6 +7,9 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import os
+
+internal let CyanicStateStorelLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "StateStore")
 
 /**
  StateStore manages the State of the ViewModel instance. It ensures that all setState calls are
@@ -35,6 +38,10 @@ internal class StateStore<ConcreteState: State> {
                 }
             )
             .disposed(by: self.disposeBag)
+    }
+
+    deinit {
+        logDeallocation(of: self, log: CyanicStateStorelLog)
     }
 
     /**
@@ -139,6 +146,10 @@ internal class StateStore<ConcreteState: State> {
  by storing each callback in a withState array or setState array.
 */
 fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
+
+    deinit {
+        logDeallocation(of: self, log: CyanicStateStorelLog)
+    }
 
     /**
      The pending withState closures.

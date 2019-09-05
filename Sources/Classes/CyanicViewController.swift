@@ -8,12 +8,19 @@ import Foundation
 import RxCocoa
 import RxSwift
 import UIKit
+import os
+
+internal let CyanicViewControllerLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "CyanicViewController")
 
 /**
  CyanicViewController is a UIViewController subclass that can listen to State changes to its ViewModels. Whenever the
  State of at least one of its ViewModels changes, its invalidate method is called.
 */
 open class CyanicViewController: UIViewController, StateObservableBuilder {
+
+    deinit {
+        logDeallocation(of: self, log: CyanicViewControllerLog)
+    }
 
     open override func viewDidLoad() {
         super.viewDidLoad()

@@ -29,8 +29,7 @@ public extension ChildVCComponentType {
     /// The class name of the childVC.
     // sourcery: isExcluded
     var name: String {
-        var mutableSelf: Self = self
-        return String(describing: Mirror(reflecting: mutableSelf.childVC).subjectType)
+        return String(describing: Mirror(reflecting: self.childVC).subjectType)
     }
 
 }

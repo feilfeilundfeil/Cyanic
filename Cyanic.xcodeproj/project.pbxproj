@@ -190,6 +190,7 @@
 		1470FDE9223BCE0C008CDD25 /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDEB223BCE0C008CDD25 /* RxDataSources.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxDataSources.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1470FDED223BCE0C008CDD25 /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		147425FC23214EA0008344D5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1478E992220C59B9006AF8B3 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1478E994220C59B9006AF8B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1478E996220C59B9006AF8B3 /* ExampleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleListVC.swift; sourceTree = "<group>"; };
@@ -365,6 +366,7 @@
 		14496DB822286A0A00C5C278 /* Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				147425FC23214EA0008344D5 /* .gitignore */,
 				14CBB02C222E8CF3002D2768 /* Cyanic.podspec */,
 				F000D2A6221C1B6800D10D0D /* .sourcery.yml */,
 				14CBB02F222EA929002D2768 /* .swiftlint.yml */,
@@ -1332,6 +1334,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.ffuf.de.MvRx-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

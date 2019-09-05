@@ -8,6 +8,9 @@ import Foundation
 import RxCocoa
 import RxSwift
 import UIKit
+import os
+
+internal let CyanicComponentViewControllerLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "ComponentViewController")
 
 /**
  ComponentViewController contains all the logic that is shared between the CollectionComponentViewController and
@@ -22,9 +25,7 @@ import UIKit
 open class ComponentViewController: UIViewController, StateObservableBuilder {
 
     deinit {
-        if self.viewModels.contains(where: { $0.isDebugMode }) {
-            print("\(type(of: self)) was deallocated")
-        }
+        logDeallocation(of: self, log: CyanicComponentViewControllerLog)
     }
 
     open override func loadView() {
