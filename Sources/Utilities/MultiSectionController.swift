@@ -57,7 +57,6 @@ public struct MultiSectionController {
     public mutating func sectionController(with configuration: (_ sectionController: inout SectionController) -> Void) -> SectionController {
         var sectionController: SectionController = SectionController(width: self.width)
         configuration(&sectionController)
-        guard sectionController.headerComponent != nil else { fatalError("Missing a sectionComponent!")}
         self.sectionControllers.append(sectionController)
         return sectionController
     }

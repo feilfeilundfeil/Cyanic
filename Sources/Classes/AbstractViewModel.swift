@@ -6,6 +6,9 @@
 
 import RxCocoa
 import RxSwift
+import os
+
+internal let CyanicViewModelLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "ViewModel")
 
 /**
  AbstractViewModel is a class that provides the essential functionality that must exist in all ViewModel subclasses.
@@ -26,9 +29,7 @@ open class AbstractViewModel<StateType: State>: NSObject, ViewModelType {
     }
 
     deinit {
-        if self.isDebugMode {
-            print("\(self) was deallocated")
-        }
+        os_log("%@ was deallocated", log: CyanicViewModelLog, type: OSLogType.info, self)
     }
 
     /**

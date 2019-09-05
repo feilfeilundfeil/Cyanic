@@ -27,7 +27,6 @@ public protocol TextViewComponentType: StaticHeightComponent {
     /// The insets on the UITextView relative to its root UIView. The default value is UIEdgeInsets.zero.
     var insets: UIEdgeInsets { get set }
 
-
     // sourcery: defaultValue = UIEdgeInsets.zero
     // sourcery: skipHashing, skipEquality
     /// The textContainerInset on the UITextView. The default value is UIEdgeInsets.zero.

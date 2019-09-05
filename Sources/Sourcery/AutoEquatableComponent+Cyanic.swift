@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.16.1 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.16.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable all
@@ -64,6 +64,18 @@ public func == (lhs: SizedComponent, rhs: SizedComponent) -> Bool {
     guard lhs.id == rhs.id else { return false }
     guard lhs.width == rhs.width else { return false }
     guard lhs.height == rhs.height else { return false }
+    return true
+}
+// MARK: - StaticLabelComponent AutoEquatableComponent
+extension StaticLabelComponent: Equatable {}
+public func == (lhs: StaticLabelComponent, rhs: StaticLabelComponent) -> Bool {
+    guard lhs.text == rhs.text else { return false }
+    guard lhs.font == rhs.font else { return false }
+    guard lhs.backgroundColor == rhs.backgroundColor else { return false }
+    guard lhs.numberOfLines == rhs.numberOfLines else { return false }
+    guard lhs.lineBreakMode == rhs.lineBreakMode else { return false }
+    guard lhs.id == rhs.id else { return false }
+    guard lhs.width == rhs.width else { return false }
     return true
 }
 // MARK: - StaticSpacingComponent AutoEquatableComponent

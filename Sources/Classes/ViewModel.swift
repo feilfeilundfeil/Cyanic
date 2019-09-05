@@ -5,6 +5,7 @@
 //
 
 import RxSwift
+import os
 
 /**
  The base class for custom ViewModels to subclass. It contains the basic functionality necessary for
@@ -104,9 +105,11 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
                         case .failure(let error):
                             onFailure(error)
                         default:
-                            if self.isDebugMode {
-                                print("Not a success/failure yet")
-                            }
+                            os_log(
+                                "Emitted value was neither a success or failure",
+                                log: CyanicViewModelLog,
+                                type: OSLogType.info
+                            )
                     }
                 }
             )

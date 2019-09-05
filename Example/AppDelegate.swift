@@ -26,24 +26,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nvc
         self.window?.makeKeyAndVisible()
 
-        let rightVC: UISideMenuNavigationController = UISideMenuNavigationController(
+        let rightVC: SideMenuNavigationController = SideMenuNavigationController(
             rootViewController: ExampleCounterVC()
         )
-
-        SideMenuManager.default.menuRightNavigationController = rightVC
-        SideMenuManager.default.menuLeftNavigationController = nil
-        SideMenuManager.default.menuEnableSwipeGestures = false
-        SideMenuManager.default.menuLeftSwipeToDismissGesture = nil
-        SideMenuManager.default.menuRightSwipeToDismissGesture = nil
-        SideMenuManager.default.menuShadowRadius = 0.0
-        SideMenuManager.default.menuShadowColor = UIColor.clear
-        SideMenuManager.default.menuShadowOpacity = 0.0
-        SideMenuManager.default.menuDismissOnPush = false
-        SideMenuManager.default.menuFadeStatusBar = false
-        SideMenuManager.default.menuPresentMode = SideMenuManager.MenuPresentMode.menuSlideIn
-
+        SideMenuManager.default.rightMenuNavigationController = rightVC
+        rightVC.enableSwipeToDismissGesture = false
+        rightVC.presentationStyle = .menuSlideIn
+        rightVC.presentationStyle.onTopShadowRadius = 0.0
+        rightVC.presentationStyle.onTopShadowColor = UIColor.clear
+        rightVC.presentationStyle.onTopShadowOpacity = 0.0
+        rightVC.dismissOnPush = false
+        rightVC.statusBarEndAlpha = 0.0
         return true
     }
 
+}
+
+extension AppDelegate: SideMenuNavigationControllerDelegate {
+    func sideMenuWillAppear(menu: SideMenuNavigationController, animated: Bool) {
+        print("Side Menu Will Appear")
+    }
+    func sideMenuDidAppear(menu: SideMenuNavigationController, animated: Bool) {
+        print("Side Menu Did Appear")
+    }
+    func sideMenuWillDisappear(menu: SideMenuNavigationController, animated: Bool) {
+        print("Side Menu Will Disappear")
+    }
+    func sideMenuDidDisappear(menu: SideMenuNavigationController, animated: Bool) {
+        print("Side Menu Did Disappear")
+    }
 }
 

@@ -52,7 +52,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
 
     /**
      The RxDataSource instance used for the Rx aspect of the UICollectionViewDataSource.
-    */ // swiftlint:disable:next implicitly_unwrapped_optional line_length
+    */ // swiftlint:disable:next implicitly_unwrapped_optional
     public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<SectionController>!
 
     // MARK: Methods
@@ -84,6 +84,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                 ) as? ComponentSupplementaryView
                     else { fatalError("Cell not registered to UICollectionView") }
 
+                // swiftlint:disable force_unwrapping
                 switch kind {
                     case UICollectionView.elementKindSectionHeader:
                         view.configure(with: section.headerComponent!)
@@ -92,6 +93,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
                     default:
                         break
                 }
+                // swiftlint:enable force_unwrapping
 
                 return view
             }

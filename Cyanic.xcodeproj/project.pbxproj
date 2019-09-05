@@ -72,6 +72,9 @@
 		14AB6B10228DE1CF0039C0EF /* TextViewComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */; };
 		14B01E3E22271D5C00EE0A9A /* ButtonComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */; };
 		14C1E3E022104A330053E318 /* ButtonComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */; };
+		14C2372A231293DF00E97DDE /* StaticLabelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C23729231293DF00E97DDE /* StaticLabelComponent.swift */; };
+		14C2372C2312940400E97DDE /* StaticLabelComponentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2372B2312940400E97DDE /* StaticLabelComponentType.swift */; };
+		14C2372E2312943900E97DDE /* StaticLabelComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
@@ -226,6 +229,9 @@
 		14B01E41222723E200EE0A9A /* AutoEquatableComponent.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = AutoEquatableComponent.stencil; sourceTree = "<group>"; };
 		14BC91F4228061F600464771 /* CyanicDataSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicDataSources.swift; sourceTree = "<group>"; };
 		14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponentLayout.swift; sourceTree = "<group>"; };
+		14C23729231293DF00E97DDE /* StaticLabelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticLabelComponent.swift; sourceTree = "<group>"; };
+		14C2372B2312940400E97DDE /* StaticLabelComponentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticLabelComponentType.swift; sourceTree = "<group>"; };
+		14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticLabelComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -551,6 +557,7 @@
 		14C1E3DC2210491E0053E318 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				14C23728231293C900E97DDE /* StaticLabelComponent */,
 				14C96F092211EE9600731265 /* ButtonComponent */,
 				14D5112822313D8400EEAC0F /* ChildVCComponent */,
 				1437BDDA2216C14100A35FFE /* ExpandableComponent */,
@@ -561,6 +568,16 @@
 				14AB6B0A228DDFA90039C0EF /* TextViewComponent */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		14C23728231293C900E97DDE /* StaticLabelComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14C2372B2312940400E97DDE /* StaticLabelComponentType.swift */,
+				14C23729231293DF00E97DDE /* StaticLabelComponent.swift */,
+				14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */,
+			);
+			path = StaticLabelComponent;
 			sourceTree = "<group>";
 		};
 		14C96F062211C2EF00731265 /* Utilities */ = {
@@ -978,9 +995,11 @@
 				14A1652D225C69190031517C /* TextFieldComponentLayout.swift in Sources */,
 				1437BDD12215AFF900A35FFE /* StaticSpacingComponentLayout.swift in Sources */,
 				14AB6B0E228DE15D0039C0EF /* TextViewComponent.swift in Sources */,
+				14C2372C2312940400E97DDE /* StaticLabelComponentType.swift in Sources */,
 				149804972260ACA20044194C /* CollectionComponentViewController.swift in Sources */,
 				14D511302231B2E500EEAC0F /* CyanicChildVCType.swift in Sources */,
 				1437BDCE2215AEA400A35FFE /* StaticSpacingComponent.swift in Sources */,
+				14C2372A231293DF00E97DDE /* StaticLabelComponent.swift in Sources */,
 				145D4EA0225DF602005F3531 /* DividerLine.swift in Sources */,
 				14D5112A22313DBF00EEAC0F /* ChildVCComponentType.swift in Sources */,
 				14609BAA22635E06007B2AFC /* MultiSectionTableComponentViewController.swift in Sources */,
@@ -998,6 +1017,7 @@
 				149804992260C2070044194C /* ComponentSupplementaryView.swift in Sources */,
 				14F6BD7C22294CFC008B0692 /* StaticTextComponentType.swift in Sources */,
 				14A5606C228ABEAE009DEEA3 /* SizedComponentType.swift in Sources */,
+				14C2372E2312943900E97DDE /* StaticLabelComponentLayout.swift in Sources */,
 				14A7EE08224F6B13007FAB4D /* AutoEquatableComponent+Cyanic.swift in Sources */,
 				14609BA822635C70007B2AFC /* TableComponentViewController.swift in Sources */,
 				14CBB029222E7287002D2768 /* CGSize+Cyanic.swift in Sources */,

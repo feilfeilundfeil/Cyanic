@@ -16,6 +16,10 @@ import RxSwift
 
 public final class ExampleSectionedVC: MultiSectionCollectionComponentViewController {
 
+    deinit {
+        print("\(type(of: self)) was deallocated")
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -58,8 +62,8 @@ public final class ExampleSectionedVC: MultiSectionCollectionComponentViewContro
                 (id: String, component: inout ExpandableComponent) -> Void in
                 let isExpanded: Bool = state.expandableDict[id] == true
                 component.isExpanded = isExpanded
-                component.setExpandableState = { (id: String, isExpanded: Bool) -> Void in
-                    self.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
+                component.setExpandableState = { [weak self] (id: String, isExpanded: Bool) -> Void in
+                    self?.viewModel.setExpandableState(id: id, isExpanded: isExpanded)
                 }
 
                 component.accessoryViewConfiguration = { (view: UIView) -> Void in

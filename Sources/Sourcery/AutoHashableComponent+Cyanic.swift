@@ -1,4 +1,4 @@
-// Generated using Sourcery 0.16.1 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 0.16.2 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 
 // swiftlint:disable all
@@ -44,6 +44,18 @@ extension SizedComponent: Hashable {
         self.id.hash(into: &hasher)
         self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
+    }
+}
+// MARK: - StaticLabelComponent AutoHashableComponent
+extension StaticLabelComponent: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        self.text.hash(into: &hasher)
+        self.font.hash(into: &hasher)
+        self.backgroundColor.hash(into: &hasher)
+        self.numberOfLines.hash(into: &hasher)
+        self.lineBreakMode.hash(into: &hasher)
+        self.id.hash(into: &hasher)
+        self.width.hash(into: &hasher)
     }
 }
 // MARK: - StaticSpacingComponent AutoHashableComponent

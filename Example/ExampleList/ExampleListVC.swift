@@ -27,6 +27,10 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        print("\(type(of: self)) was deallocated")
+    }
+
     // MARK: UIViewController Lifecycle Methods
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,7 +240,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 }
                 component.onTap = { [weak self] (_: UIButton) -> Void in
                     guard
-                        let vc = SideMenuManager.default.menuRightNavigationController,
+                        let vc = SideMenuManager.default.rightMenuNavigationController,
                         let s = self
                     else { return }
                     s.present(vc, animated: true, completion: nil)
@@ -349,7 +353,7 @@ private extension ExampleListVC {
     }
 
     @objc func sideMenuButtonTapped() {
-        self.present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
+        self.present(SideMenuManager.default.rightMenuNavigationController!, animated: true, completion: nil)
     }
 
     @objc func showMultiSectionVC() {
