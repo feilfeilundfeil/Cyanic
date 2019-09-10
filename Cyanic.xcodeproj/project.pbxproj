@@ -796,6 +796,7 @@
 		145AD744220B1EBE004F02C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Feil, Feil, & Feil  GmbH";
@@ -1296,6 +1297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = de.ffuf.Cyanic;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

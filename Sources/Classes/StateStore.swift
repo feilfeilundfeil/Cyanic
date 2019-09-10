@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import os
 
-internal let CyanicStateStorelLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "StateStore")
+internal let CyanicStateStorelLog: OSLog = OSLog(subsystem: Constants.bundleIdentifier, category: "StateStore")
 
 /**
  StateStore manages the State of the ViewModel instance. It ensures that all setState calls are

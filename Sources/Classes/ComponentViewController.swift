@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 import os
 
-internal let CyanicComponentViewControllerLog: OSLog = OSLog(subsystem: "de.ffuf.Cyanic", category: "ComponentViewController")
+internal let CyanicComponentViewControllerLog: OSLog = OSLog(subsystem: Constants.bundleIdentifier, category: "ComponentViewController")
 
 /**
  ComponentViewController contains all the logic that is shared between the CollectionComponentViewController and

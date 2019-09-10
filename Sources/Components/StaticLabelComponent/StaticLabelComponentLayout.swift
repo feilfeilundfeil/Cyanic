@@ -25,15 +25,19 @@ public final class StaticLabelComponentLayout: SizeLayout<UIView>, ComponentLayo
             config: component.configuration
         )
 
-        let size: CGSize = CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude)
-
         let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(insets: component.insets, sublayout: labelLayout)
+        let height: CGFloat = insetLayout
+            .measurement(within: CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude))
+            .size
+            .height
+
+        let width: CGFloat = component.width
 
         super.init(
-            minWidth: size.width,
-            maxWidth: size.width,
-            minHeight: size.height,
-            maxHeight: size.height,
+            minWidth: width,
+            maxWidth: width,
+            minHeight: height,
+            maxHeight: height,
             viewReuseId: "\(StaticTextComponentLayout.identifier)Size",
             sublayout: insetLayout,
             config: {

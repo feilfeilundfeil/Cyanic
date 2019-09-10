@@ -26,18 +26,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = nvc
         self.window?.makeKeyAndVisible()
 
-//        let rightVC: SideMenuNavigationController = SideMenuNavigationController(
-//            rootViewController: ExampleCounterVC()
-//        )
-//        SideMenuManager.default.rightMenuNavigationController = rightVC
-//        rightVC.sideMenuDelegate = self
-//        rightVC.enableSwipeToDismissGesture = false
-//        rightVC.presentationStyle = .menuSlideIn
-//        rightVC.presentationStyle.onTopShadowRadius = 0.0
-//        rightVC.presentationStyle.onTopShadowColor = UIColor.clear
-//        rightVC.presentationStyle.onTopShadowOpacity = 0.0
-//        rightVC.dismissOnPush = false
-//        rightVC.statusBarEndAlpha = 0.0
+        let rightVC: SideMenuNavigationController = SideMenuNavigationController(
+            rootViewController: ExampleCounterVC()
+        )
+        SideMenuManager.default.rightMenuNavigationController = rightVC
+        rightVC.sideMenuDelegate = self
+        rightVC.enableSwipeToDismissGesture = false
+        rightVC.presentationStyle = .menuSlideIn
+        rightVC.presentationStyle.onTopShadowRadius = 0.0
+        rightVC.presentationStyle.onTopShadowColor = UIColor.clear
+        rightVC.presentationStyle.onTopShadowOpacity = 0.0
+        rightVC.dismissOnPush = false
+        rightVC.statusBarEndAlpha = 0.0
         return true
     }
 

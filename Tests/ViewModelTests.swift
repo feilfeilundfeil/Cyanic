@@ -59,7 +59,6 @@ class ViewModelTests: QuickSpec {
 
                 let finalValue: Double = 5.0
 
-
                 viewModel.withState(block: { (state: TestState) -> Void in
                     currentState = state
                 })
@@ -369,4 +368,3 @@ class ViewModelTests: QuickSpec {
         }
     }
 }
-
