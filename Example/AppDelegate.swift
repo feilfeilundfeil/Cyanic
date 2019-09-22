@@ -8,6 +8,7 @@
 
 import UIKit
 import Cyanic
+import RxSwift
 import SideMenu
 
 @UIApplicationMain
@@ -38,6 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rightVC.presentationStyle.onTopShadowOpacity = 0.0
         rightVC.dismissOnPush = false
         rightVC.statusBarEndAlpha = 0.0
+
+         _ = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+               .subscribe(onNext: { _ in
+                   print("Resource count \(RxSwift.Resources.total)")
+               })
+
         return true
     }
 

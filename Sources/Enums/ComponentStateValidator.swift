@@ -53,6 +53,7 @@ public enum ComponentStateValidator {
         Bool indicating whether or not the component's state is valid.
     */
     public static func validateChildVCComponent(_ component: ChildVCComponent) -> Bool {
+        var component: ChildVCComponent = component
         let childVC: UIViewController & CyanicChildVCType = component.childVC
         let isInvalidChildComponentVC: Bool = childVC is InvalidChildComponentVC
         return !isInvalidChildComponentVC && component.parentVC != nil

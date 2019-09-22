@@ -61,13 +61,13 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 print("from a different subscription: \($0)")
             }
         )
-    
+        self.childVC = ChildVC(viewModel: self.childVCViewModel)
     }
 
     // MARK: Stored Properties
     private let viewModel: ExampleListViewModel
     private let childVCViewModel: ChildVCViewModel = ChildVCViewModel(initialState: ChildVCState.default)
-    private lazy var childVC: ChildVC = ChildVC(viewModel: self.childVCViewModel)
+    private var childVC: ChildVC!
     private weak var activeTextField: UITextField?
     private weak var textView: UITextView?
 
@@ -88,7 +88,6 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
     }
 
     public override func buildComponents(_ components: inout ComponentsController) {
-        let childVC: ChildVC = self.childVC
         let viewModel: ExampleListViewModel = self.viewModel
         Cyanic.withState(
             viewModel1: viewModel,
@@ -265,7 +264,7 @@ public final class ExampleListVC: SingleSectionCollectionComponentViewController
                 components.childVCComponent { [weak self] in
                     guard let s = self else { return }
                     $0.id = "Child"
-                    $0.childVC = childVC
+                    $0.childVC = s.childVC
                     $0.parentVC = s
                     $0.height = state2.height
                 }

@@ -22,7 +22,7 @@ public struct ChildVCComponent: ChildVCComponentType {
     }
 
     // sourcery: skipHashing, skipEquality
-    public var childVC: UIViewController & CyanicChildVCType = InvalidChildComponentVC()
+    public lazy var childVC: UIViewController & CyanicChildVCType = InvalidChildComponentVC()
 
     // sourcery: skipHashing, skipEquality
     public weak var parentVC: UIViewController?

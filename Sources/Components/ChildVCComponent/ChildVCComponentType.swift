@@ -12,10 +12,11 @@ import UIKit
 /// child UIViewController to the SingleSectionComponentViewController.
 public protocol ChildVCComponentType: StaticHeightComponent {
 
-    // sourcery: skipHashing, skipEquality
+    // sourcery: skipHashing, skipEquality, isLazy
     // sourcery: defaultValue = "InvalidChildComponentVC()"
-    /// The child UIViewController instance to be shown on the UICollectionView.
-    var childVC: UIViewController & CyanicChildVCType { get set }
+    /// The child UIViewController instance to be shown on the UICollectionView. This must be a lazy property otherwise you
+    /// may run into threading issues.
+    var childVC: UIViewController & CyanicChildVCType { mutating get set }
 
     // sourcery: skipHashing, skipEquality
     // sourcery: isWeak
@@ -29,7 +30,8 @@ public extension ChildVCComponentType {
     /// The class name of the childVC.
     // sourcery: isExcluded
     var name: String {
-        return String(describing: Mirror(reflecting: self.childVC).subjectType)
+        var component: Self = self
+        return String(describing: Mirror(reflecting: component.childVC).subjectType)
     }
 
 }
