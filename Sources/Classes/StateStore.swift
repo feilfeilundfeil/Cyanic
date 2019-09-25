@@ -187,7 +187,6 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
     */
     func add(reducer: @escaping (_ mutableState: inout State) -> Void) {
         self.setStateQueue.append(reducer)
-        print("LOCK: \(self._withStateQueue.lock === self._setStateQueue.lock)")
     }
 
     /**
