@@ -19,25 +19,29 @@ import UIKit
 open class CyanicNoFadeFlowLayout: UICollectionViewFlowLayout {
 
     open override func initialLayoutAttributesForAppearingSupplementaryElement(ofKind elementKind: String, at elementIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes: UICollectionViewLayoutAttributes? = super.initialLayoutAttributesForAppearingSupplementaryElement(ofKind: elementKind, at: elementIndexPath)
+        let attributes: UICollectionViewLayoutAttributes? = super
+            .initialLayoutAttributesForAppearingSupplementaryElement(ofKind: elementKind, at: elementIndexPath)
         attributes?.alpha = 1.0
         return attributes
     }
 
     open override func finalLayoutAttributesForDisappearingSupplementaryElement(ofKind elementKind: String, at elementIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes: UICollectionViewLayoutAttributes? = super.finalLayoutAttributesForDisappearingSupplementaryElement(ofKind: elementKind, at: elementIndexPath)
+        let attributes: UICollectionViewLayoutAttributes? = super
+            .finalLayoutAttributesForDisappearingSupplementaryElement(ofKind: elementKind, at: elementIndexPath)
         attributes?.alpha = 1.0
         return attributes
     }
 
     override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes: UICollectionViewLayoutAttributes? = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+        let attributes: UICollectionViewLayoutAttributes? = super
+            .initialLayoutAttributesForAppearingItem(at: itemIndexPath)
         attributes?.alpha = 1.0
         return attributes
     }
 
     override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes: UICollectionViewLayoutAttributes? = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+        let attributes: UICollectionViewLayoutAttributes? = super
+            .finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
         attributes?.alpha = 1.0
         return attributes
     }
