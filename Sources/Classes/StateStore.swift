@@ -147,26 +147,23 @@ internal class StateStore<ConcreteState: State> {
 */
 fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_fileprivate
 
-    init() {
-        let lock: NSRecursiveLock = NSRecursiveLock()
-        self._setStateQueue.lock = lock
-        self._withStateQueue.lock = lock
-    }
-
     deinit {
         logDeallocation(of: self, log: CyanicStateStorelLog)
     }
 
     /**
+     The NSRecursiveLock instance used to add closures to their respective queues in a serial manner.
+    */
+    private let lock: NSRecursiveLock = NSRecursiveLock()
+
+    /**
      The pending withState closures.
     */
-    @ThreadSafe
     var withStateQueue: [(State) -> Void] = []
 
     /**
      The pending setState closures.
     */
-    @ThreadSafe
     var setStateQueue: [(inout State) -> Void] = []
 
     /**
@@ -176,6 +173,7 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
         - state: The current value of the State.
     */
     func add(block: @escaping (_ state: State) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.withStateQueue.append(block)
     }
 
@@ -186,6 +184,7 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
         - mutableState: The State to be mutated.
     */
     func add(reducer: @escaping (_ mutableState: inout State) -> Void) {
+        self.lock.lock(); defer { self.lock.unlock() }
         self.setStateQueue.append(reducer)
     }
 
@@ -195,6 +194,7 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
         An optional withState closure
     */
     func dequeueFirstWithStateCallback() -> ((State) -> Void)? {
+        self.lock.lock(); defer { self.lock.unlock() }
         guard !self.withStateQueue.isEmpty else { return nil }
         return self.withStateQueue.removeFirst()
     }
@@ -205,6 +205,7 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
         All the setState closures currently in the setStateQueue.
     */
     func dequeueAllSetStateClosures() -> [(inout State) -> Void] {
+        self.lock.lock(); defer { self.lock.unlock() }
         guard !self.setStateQueue.isEmpty else { return [] }
         let callbacks: [(inout State) -> Void] = self.setStateQueue
         self.setStateQueue = []
@@ -212,6 +213,8 @@ fileprivate class ClosureQueue<State> { // swiftlint:disable:this private_over_f
     }
 
 }
+
+#if swift(>=5.1)
 
 /**
  Propety wrapper that ensures mutations of the annotated property are thread safe.
@@ -246,3 +249,5 @@ struct ThreadSafe<Value> {
     }
 
 }
+
+#endif
