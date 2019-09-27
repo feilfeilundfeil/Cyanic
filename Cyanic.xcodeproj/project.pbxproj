@@ -310,6 +310,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14295624233DE8F5001916A3 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				14C2372B2312940400E97DDE /* StaticLabelComponentType.swift */,
+				14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */,
+				14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */,
+				14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */,
+				14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */,
+				14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */,
+				14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */,
+				14A16528225C68F50031517C /* TextFieldComponentType.swift */,
+				14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		142C44FE2235A0EA002360F5 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,7 +340,6 @@
 		1437BDCF2215AEB200A35FFE /* StaticSpacingComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14F6BD792229461A008B0692 /* StaticSpacingComponentType.swift */,
 				1437BDCD2215AEA400A35FFE /* StaticSpacingComponent.swift */,
 				1437BDD02215AFF900A35FFE /* StaticSpacingComponentLayout.swift */,
 			);
@@ -334,7 +349,6 @@
 		1437BDD42215B57800A35FFE /* StaticTextComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14F6BD7B22294CFC008B0692 /* StaticTextComponentType.swift */,
 				1437BDD52215B75100A35FFE /* StaticTextComponent.swift */,
 				1437BDD22215B56F00A35FFE /* StaticTextComponentLayout.swift */,
 			);
@@ -354,7 +368,6 @@
 		1437BDDA2216C14100A35FFE /* ExpandableComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14F6BD7D22295A3E008B0692 /* ExpandableComponentType.swift */,
 				1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */,
 				1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */,
 				14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */,
@@ -516,7 +529,6 @@
 		14A16527225C68B90031517C /* TextFieldComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14A16528225C68F50031517C /* TextFieldComponentType.swift */,
 				14A1652A225C69050031517C /* TextFieldComponent.swift */,
 				14A1652C225C69190031517C /* TextFieldComponentLayout.swift */,
 				14DB258D22949E4F00ADADA8 /* CyanicTextFieldDelegateProxy.swift */,
@@ -527,7 +539,6 @@
 		14A5606A228ABE83009DEEA3 /* SizedComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14A5606B228ABEAE009DEEA3 /* SizedComponentType.swift */,
 				14A5606D228ABFF2009DEEA3 /* SizedComponent.swift */,
 				14A5606F228AC06F009DEEA3 /* SizedComponentLayout.swift */,
 			);
@@ -537,7 +548,6 @@
 		14AB6B0A228DDFA90039C0EF /* TextViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14AB6B0B228DE0700039C0EF /* TextViewComponentType.swift */,
 				14AB6B0D228DE15D0039C0EF /* TextViewComponent.swift */,
 				14AB6B0F228DE1CF0039C0EF /* TextViewComponentLayout.swift */,
 				14DB258F2295528700ADADA8 /* CyanicTextViewDelegateProxy.swift */,
@@ -559,6 +569,7 @@
 		14C1E3DC2210491E0053E318 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				14295624233DE8F5001916A3 /* Protocols */,
 				14C23728231293C900E97DDE /* StaticLabelComponent */,
 				14C96F092211EE9600731265 /* ButtonComponent */,
 				14D5112822313D8400EEAC0F /* ChildVCComponent */,
@@ -575,7 +586,6 @@
 		14C23728231293C900E97DDE /* StaticLabelComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14C2372B2312940400E97DDE /* StaticLabelComponentType.swift */,
 				14C23729231293DF00E97DDE /* StaticLabelComponent.swift */,
 				14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */,
 			);
@@ -598,7 +608,6 @@
 		14C96F092211EE9600731265 /* ButtonComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14B01E3D22271D5C00EE0A9A /* ButtonComponentType.swift */,
 				14496DB522273CE000C5C278 /* ButtonComponent.swift */,
 				14C1E3DF22104A330053E318 /* ButtonComponentLayout.swift */,
 			);
@@ -624,7 +633,6 @@
 		14D5112822313D8400EEAC0F /* ChildVCComponent */ = {
 			isa = PBXGroup;
 			children = (
-				14D5112922313DBF00EEAC0F /* ChildVCComponentType.swift */,
 				14D5112B2231A15200EEAC0F /* ChildVCComponent.swift */,
 				14D5112D2231A6CA00EEAC0F /* ChildVCComponentLayout.swift */,
 			);
