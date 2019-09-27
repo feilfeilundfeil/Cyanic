@@ -7,7 +7,7 @@
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = ExpandableComponent
+// sourcery: Component = ExpandableComponent,isFrameworkComponent
 /// ExpandableComponentType is a protocol for Component data structures that want to function like section headers
 /// with content that can be hidden / shown on tap.
 public protocol ExpandableComponentType: StaticHeightComponent {

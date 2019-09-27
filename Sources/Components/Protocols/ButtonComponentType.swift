@@ -8,7 +8,7 @@ import LayoutKit
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = ButtonComponent
+// sourcery: Component = ButtonComponent,isFrameworkComponent
 /// ButtonComponentType is a protocol for Components that represents a UIButton.
 public protocol ButtonComponentType: StaticHeightComponent {
 

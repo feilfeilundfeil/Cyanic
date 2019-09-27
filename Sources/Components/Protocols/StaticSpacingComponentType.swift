@@ -7,7 +7,7 @@
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = StaticSpacingComponent
+// sourcery: Component = StaticSpacingComponent,isFrameworkComponent
 /// StaticSpacingComponentType is a protocol for Components that represent space between
 /// other components / content on the screen.
 public protocol StaticSpacingComponentType: StaticHeightComponent {

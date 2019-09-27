@@ -8,7 +8,7 @@ import LayoutKit
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = StaticTextComponent
+// sourcery: Component = StaticTextComponent,isFrameworkComponent
 /// StaticTextComponentType is a protocol for Component data structures that represent static text.
 public protocol StaticTextComponentType: Component {
 

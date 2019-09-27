@@ -8,7 +8,7 @@ import LayoutKit
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = TextFieldComponent
+// sourcery: Component = TextFieldComponent,isFrameworkComponent
 /// TextFieldComponentType is a protocol for Components that represents a UITextField.
 public protocol TextFieldComponentType: StaticHeightComponent {
 

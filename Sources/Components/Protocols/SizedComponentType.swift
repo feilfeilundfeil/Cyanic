@@ -8,7 +8,7 @@ import LayoutKit
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = SizedComponent
+// sourcery: Component = SizedComponent,isFrameworkComponent
 /// StaticTextComponentType is a protocol for Component data structures that represent UI of a fixed size.
 public protocol SizedComponentType: StaticHeightComponent {
 

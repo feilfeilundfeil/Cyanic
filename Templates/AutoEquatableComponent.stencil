@@ -26,6 +26,8 @@ fileprivate func compareArrays<T>(lhs: [T], rhs: [T], compare: (_ lhs: T, _ rhs:
 {% endmacro %}
 // MARK: - AutoEquatableComponent
 {% for type in types.types|!enum where type|annotated:"AutoEquatableComponent" %}
+{% if !argument.isFramework and type.annotations.isFrameworkComponent %}
+{% else %}
 // MARK: - {{ type.annotations.Component }} AutoEquatableComponent
 extension {{ type.annotations.Component }}: Equatable {}
 {{ type.accessLevel }} func == (lhs: {{ type.annotations.Component }}, rhs: {{ type.annotations.Component }}) -> Bool {
@@ -36,5 +38,6 @@ extension {{ type.annotations.Component }}: Equatable {}
     {% endif %}
     return true
 }
+{% endif %}
 {% endfor %}
 // sourcery:end

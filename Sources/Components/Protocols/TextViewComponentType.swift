@@ -8,7 +8,7 @@ import LayoutKit
 import UIKit
 
 // sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = TextViewComponent
+// sourcery: Component = TextViewComponent,isFrameworkComponent
 /// TextViewComponentType is a protocol for Components that represents a UITextView.
 public protocol TextViewComponentType: StaticHeightComponent {
 

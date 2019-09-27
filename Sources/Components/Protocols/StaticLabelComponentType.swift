@@ -7,8 +7,8 @@
 import LayoutKit
 import UIKit
 
-// sourcery: AutoEquatableComponent,AutoHashableComponent
-// sourcery: Component = StaticLabelComponent
+// sourcery: AutoEquatableComponent,AutoHashableComponent,
+// sourcery: Component = StaticLabelComponent,isFrameworkComponent
 /// A StaticLabelComponentType is a protocol adopted by Components that represent a UICollectionViewCell/UITableViewCell that
 /// displays static text on a UILabel in its contentView.
 public protocol StaticLabelComponentType: Component {
