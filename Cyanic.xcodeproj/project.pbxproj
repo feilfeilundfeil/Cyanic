@@ -77,6 +77,7 @@
 		14C2372E2312943900E97DDE /* StaticLabelComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */; };
 		14C324DA2243728600FA6496 /* CyanicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324D92243728600FA6496 /* CyanicViewController.swift */; };
 		14C324DC2243827E00FA6496 /* StateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C324DB2243827E00FA6496 /* StateStoreTests.swift */; };
+		14C3AAEE233E106D009BCFA0 /* NestedCollectionComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C3AAED233E106D009BCFA0 /* NestedCollectionComponent.swift */; };
 		14C96F082211C30F00731265 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C96F072211C30F00731265 /* Constants.swift */; };
 		14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */; };
 		14CBB025222D4899002D2768 /* ExpandableContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */; };
@@ -235,6 +236,7 @@
 		14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticLabelComponentLayout.swift; sourceTree = "<group>"; };
 		14C324D92243728600FA6496 /* CyanicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewController.swift; sourceTree = "<group>"; };
 		14C324DB2243827E00FA6496 /* StateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateStoreTests.swift; sourceTree = "<group>"; };
+		14C3AAED233E106D009BCFA0 /* NestedCollectionComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionComponent.swift; sourceTree = "<group>"; };
 		14C96F072211C30F00731265 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
 		14CBB024222D4899002D2768 /* ExpandableContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContentLayout.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 		14C1E3DC2210491E0053E318 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				14C3AAEC233E1041009BCFA0 /* NestedCollectionComponent */,
 				14295624233DE8F5001916A3 /* Protocols */,
 				14C23728231293C900E97DDE /* StaticLabelComponent */,
 				14C96F092211EE9600731265 /* ButtonComponent */,
@@ -590,6 +593,14 @@
 				14C2372D2312943900E97DDE /* StaticLabelComponentLayout.swift */,
 			);
 			path = StaticLabelComponent;
+			sourceTree = "<group>";
+		};
+		14C3AAEC233E1041009BCFA0 /* NestedCollectionComponent */ = {
+			isa = PBXGroup;
+			children = (
+				14C3AAED233E106D009BCFA0 /* NestedCollectionComponent.swift */,
+			);
+			path = NestedCollectionComponent;
 			sourceTree = "<group>";
 		};
 		14C96F062211C2EF00731265 /* Utilities */ = {
@@ -1042,6 +1053,7 @@
 				14C96F082211C30F00731265 /* Constants.swift in Sources */,
 				14D5112E2231A6CA00EEAC0F /* ChildVCComponentLayout.swift in Sources */,
 				14FB368522FB2AD300681985 /* ComponentView.swift in Sources */,
+				14C3AAEE233E106D009BCFA0 /* NestedCollectionComponent.swift in Sources */,
 				142C4521223BB36D002360F5 /* GlobalFunctions.swift in Sources */,
 				14609BA622635BF3007B2AFC /* TableComponentSectionView.swift in Sources */,
 				1478E9B1220C5D1E006AF8B3 /* SingleSectionCollectionComponentViewController.swift in Sources */,
