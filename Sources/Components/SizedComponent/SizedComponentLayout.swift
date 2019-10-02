@@ -12,11 +12,11 @@ import LayoutKit
 */
 public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
-    public init(component: SizedComponent) {
+    public init(component: SizedComponent, width: CGFloat) {
         let insets: UIEdgeInsets = component.insets
         let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
-            minWidth: component.width,
-            maxWidth: component.width,
+            minWidth: width,
+            maxWidth: width,
             minHeight: component.height,
             maxHeight: component.height,
             alignment: component.alignment,
@@ -34,8 +34,8 @@ public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
         )
 
         super.init(
-            minWidth: component.width,
-            maxWidth: component.width,
+            minWidth: width,
+            maxWidth: width,
             minHeight: component.height,
             maxHeight: component.height,
             alignment: component.alignment,

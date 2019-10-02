@@ -25,8 +25,6 @@ public struct StaticLabelComponent: StaticLabelComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var text: Text = Text.unattributed("")
 
     public var font: UIFont = UIFont.systemFont(ofSize: 13.0)
@@ -49,9 +47,10 @@ public struct StaticLabelComponent: StaticLabelComponentType {
     // sourcery: skipHashing, skipEquality
     public var configuration: (UILabel) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return StaticLabelComponentLayout(component: self) }
-
     public var identity: StaticLabelComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return StaticLabelComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

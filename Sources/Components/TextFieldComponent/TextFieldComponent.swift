@@ -28,8 +28,6 @@ public struct TextFieldComponent: TextFieldComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var height: CGFloat = 44.0
 
     public var placeholder: String = ""
@@ -80,9 +78,10 @@ public struct TextFieldComponent: TextFieldComponentType {
     // sourcery: skipHashing, skipEquality
     public var shouldReturn: (UITextField) -> Bool = { _ in return true }
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return TextFieldComponentLayout(component: self) }
-
     public var identity: TextFieldComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return TextFieldComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

@@ -11,7 +11,7 @@ import RxCocoa
 
 open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
 
-    public init(component: TextFieldComponent) { // swiftlint:disable:this function_body_length
+    public init(component: TextFieldComponent, width: CGFloat) { // swiftlint:disable:this function_body_length
         let insets: UIEdgeInsets = component.insets
 
         let serialDisposable: SerialDisposable = SerialDisposable()
@@ -19,7 +19,7 @@ open class TextFieldComponentLayout: InsetLayout<UIView>, ComponentLayout {
 
         serialDisposable.disposed(by: disposeBag)
 
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: width, height: component.height)
 
         let textFieldLayout: SizeLayout<UITextField> = SizeLayout<UITextField>(
             minWidth: size.width,

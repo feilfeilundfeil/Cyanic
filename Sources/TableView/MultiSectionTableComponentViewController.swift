@@ -148,7 +148,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
             return 0.0
         }
 
-        guard let layout = self.component(at: indexPath)?.layout
+        guard let layout = self.component(at: indexPath)?.layout(width: tableView.bounds.width)
             else { return 0.0 }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
@@ -162,7 +162,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
             return 0.0
         }
 
-        guard let layout = self.sectionController(at: section)?.headerComponent?.layout
+        guard let layout = self.sectionController(at: section)?.headerComponent?.layout(width: tableView.bounds.width)
             else { return 0.0 }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
@@ -176,7 +176,7 @@ open class MultiSectionTableComponentViewController: TableComponentViewControlle
             return 0.0
         }
 
-        guard let layout = self.sectionController(at: section)?.footerComponent?.layout
+        guard let layout = self.sectionController(at: section)?.footerComponent?.layout(width: tableView.bounds.width)
             else { return 0.0 }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)

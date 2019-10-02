@@ -25,8 +25,6 @@ public struct TextViewComponent: TextViewComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var height: CGFloat = 44.0
 
     // sourcery: skipHashing, skipEquality
@@ -85,9 +83,10 @@ public struct TextViewComponent: TextViewComponentType {
     // sourcery: skipHashing, skipEquality
     public var shouldInteractWithTextAttachmentInCharacterRange: (UITextView, NSTextAttachment, NSRange, UITextItemInteraction) -> Bool = { _, _, _, _ in return true }
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return TextViewComponentLayout(component: self) }
-
     public var identity: TextViewComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return TextViewComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

@@ -24,8 +24,6 @@ public struct StaticTextComponent: StaticTextComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var text: Text = Text.unattributed("")
 
     public var font: UIFont = UIFont.systemFont(ofSize: 13.0)
@@ -46,9 +44,10 @@ public struct StaticTextComponent: StaticTextComponentType {
     // sourcery: skipHashing, skipEquality
     public var configuration: (UITextView) -> Void = { _ in }
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return StaticTextComponentLayout(component: self) }
-
     public var identity: StaticTextComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return StaticTextComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

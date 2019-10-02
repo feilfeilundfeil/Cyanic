@@ -18,9 +18,9 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
      - Parameters:
         - component: The ChildVCComponent whose properties define the UI characters of the subviews to be created.
     */
-    public init(component: ChildVCComponent) {
+    public init(component: ChildVCComponent, width: CGFloat) {
         var component: ChildVCComponent = component
-        let size: CGSize = component.size
+        let size: CGSize = CGSize(width: width, height: component.height)
         let childVC: UIViewController & CyanicChildVCType = component.childVC
         let parentVC: UIViewController? = component.parentVC
 

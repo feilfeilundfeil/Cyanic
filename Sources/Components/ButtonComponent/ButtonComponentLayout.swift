@@ -19,8 +19,8 @@ open class ButtonComponentLayout: SizeLayout<UIView>, ComponentLayout {
      - Parameters:
         - component: The ButtonComponent whose properties define the UI characters of the subviews to be created.
      */
-    public init(component: ButtonComponent) {
-        let size: CGSize = component.size
+    public init(component: ButtonComponent, width: CGFloat) {
+        let size: CGSize = CGSize(width: width, height: component.height)
         let insets: UIEdgeInsets = component.insets
         let adjustedHeight: CGFloat = size.height + insets.top + insets.bottom
 

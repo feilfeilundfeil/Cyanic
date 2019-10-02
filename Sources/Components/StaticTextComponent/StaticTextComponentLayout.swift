@@ -18,7 +18,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
      - Parameters:
         - component: The StaticTextComponent whose properties define the UI characters of the subviews to be created.
     */
-    public init(component: StaticTextComponent) {
+    public init(component: StaticTextComponent, width: CGFloat) {
         let textLayout: TextViewLayout<UITextView> = TextViewLayout<UITextView>(
             text: component.text,
             font: component.font,
@@ -35,7 +35,7 @@ public final class StaticTextComponentLayout: SizeLayout<UIView>, ComponentLayou
             }
         )
 
-        let size: CGSize = CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
 
         super.init(
             minWidth: size.width,

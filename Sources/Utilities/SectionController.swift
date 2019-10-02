@@ -74,12 +74,12 @@ public struct SectionController: AnimatableSectionModelType {
     public var height: CGFloat {
         let componentsControllerHeight: CGFloat = self.componentsController.height
         let headerHeight: CGFloat = self.headerComponent?
-            .layout
+            .layout(width: self.width)
             .measurement(within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude))
             .size
             .height ?? 0.0
         let footerHeight: CGFloat = self.footerComponent?
-            .layout
+            .layout(width: self.width)
             .measurement(within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude))
             .size
             .height ?? 0.0

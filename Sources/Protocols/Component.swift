@@ -22,11 +22,6 @@ public protocol Component: IdentifiableType, Copyable, UserInterfaceModel, Custo
     /// value types) via the Copyable protocol's copy method.
     var id: String { get set }
 
-    // sourcery: defaultValue = "0.0"
-    /// The width of the UICollectionViewCell/UITableViewCell that hosts the content created by the Component.
-    /// This should not be modified because it will be set by the framework. Mutating this won't do anything.
-    var width: CGFloat { get set }
-
 }
 
 public extension Component {
@@ -57,16 +52,5 @@ public protocol StaticHeightComponent: Component {
     /// The height of the UICollectionViewCell/UITableViewCell that hosts the content created by the Component.
     /// The default value is 44.0
     var height: CGFloat { get set }
-
-}
-
-public extension StaticHeightComponent {
-
-    // sourcery: isExcluded
-    // sourcery: skipHashing, skipEquality
-    /// The size of the StaticHeightComponent.
-    var size: CGSize {
-        return CGSize(width: self.width, height: self.height)
-    }
 
 }

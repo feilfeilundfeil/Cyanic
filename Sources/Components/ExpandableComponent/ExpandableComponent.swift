@@ -24,8 +24,6 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var contentLayout: ExpandableContentLayout = EmptyContentLayout()
 
     public var backgroundColor: UIColor = UIColor.clear
@@ -47,19 +45,18 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var isExpanded: Bool = false
 
     // sourcery: skipHashing, skipEquality
-    public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in
-        fatalError("This default closure must be replaced!")
-    }
+    public var setExpandableState: (String, Bool) -> Void = { (_: String, _: Bool) -> Void in fatalError("This default closure must be replaced!") }
 
     // sourcery: skipHashing, skipEquality
     public var dividerLine: DividerLine?
 
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return ExpandableComponentLayout(component: self) }
-
     public var identity: ExpandableComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return ExpandableComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 
     public func onSelect() {

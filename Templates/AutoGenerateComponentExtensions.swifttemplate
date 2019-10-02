@@ -28,7 +28,6 @@ public extension ComponentsController {
     mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
         var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
     <%_ if type.annotations["RequiredVariables"] != nil { -%>
@@ -58,7 +57,6 @@ public extension SectionController {
     mutating func <%= functionName %>(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
         var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
     <%_ if type.annotations["RequiredVariables"] != nil { -%>

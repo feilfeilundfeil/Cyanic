@@ -13,7 +13,7 @@ import UIKit
  */
 public final class StaticLabelComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
-    public init(component: StaticLabelComponent) {
+    public init(component: StaticLabelComponent, width: CGFloat) {
         let labelLayout: LabelLayout<UILabel> = LabelLayout<UILabel>(
             text: component.text,
             font: component.font,
@@ -27,11 +27,11 @@ public final class StaticLabelComponentLayout: SizeLayout<UIView>, ComponentLayo
 
         let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(insets: component.insets, sublayout: labelLayout)
         let height: CGFloat = insetLayout
-            .measurement(within: CGSize(width: component.width, height: CGFloat.greatestFiniteMagnitude))
+            .measurement(within: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))
             .size
             .height
 
-        let width: CGFloat = component.width
+        let width: CGFloat = width
 
         super.init(
             minWidth: width,

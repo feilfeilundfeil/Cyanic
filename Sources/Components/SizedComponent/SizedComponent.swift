@@ -24,8 +24,6 @@ public struct SizedComponent: SizedComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     // sourcery: skipHashing, skipEquality
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
 
@@ -45,9 +43,10 @@ public struct SizedComponent: SizedComponentType {
 
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return SizedComponentLayout(component: self) }
-
     public var identity: SizedComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return SizedComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

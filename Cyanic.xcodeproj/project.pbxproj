@@ -502,10 +502,10 @@
 				14CBAFEA222D1351002D2768 /* AbstractViewModel.swift */,
 				1437BDC52215573300A35FFE /* AnyComponent.swift */,
 				14A4576A22468E0F006E75C6 /* AnyViewModel.swift */,
-				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
+				14609BAD226378A5007B2AFC /* ComponentViewController.swift */,
 				14C324D92243728600FA6496 /* CyanicViewController.swift */,
 				142C451E223B0175002360F5 /* StateStore.swift */,
-				14609BAD226378A5007B2AFC /* ComponentViewController.swift */,
+				1437BDC922157C4F00A35FFE /* ViewModel.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

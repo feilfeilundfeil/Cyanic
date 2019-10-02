@@ -186,7 +186,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             return CGSize.zero
         }
 
-        guard let layout = self.component(at: indexPath)?.layout
+        guard let layout = self.component(at: indexPath)?.layout(width: collectionView.bounds.width)
             else { return CGSize.zero }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
@@ -201,7 +201,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             return CGSize.zero
         }
 
-        guard let layout = self.sectionController(at: section)?.headerComponent?.layout
+        guard let layout = self.sectionController(at: section)?.headerComponent?.layout(width: collectionView.bounds.width)
             else { return CGSize.zero }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
@@ -217,7 +217,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
             return CGSize.zero
         }
 
-        guard let layout = self.sectionController(at: section)?.footerComponent?.layout
+        guard let layout = self.sectionController(at: section)?.footerComponent?.layout(width: collectionView.bounds.width)
             else { return CGSize.zero }
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)

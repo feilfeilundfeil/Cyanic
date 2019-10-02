@@ -19,8 +19,8 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
         - component: ExpandableComponent instance. Properties from this instance are used to configure the view's
                      appearance and determine the size of the content.
     */
-    public init(component: ExpandableComponent) {  // swiftlint:disable:this function_body_length
-        let size: CGSize = component.size
+    public init(component: ExpandableComponent, width: CGFloat) {  // swiftlint:disable:this function_body_length
+        let size: CGSize = CGSize(width: width, height: component.height)
         let insets: UIEdgeInsets = component.insets
         let contentInsetLayout: InsetLayout<UIView> = InsetLayout(
             insets: UIEdgeInsets(top: insets.top, left: insets.left, bottom: insets.bottom, right: 0.0),
@@ -69,8 +69,8 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
         )
 
         let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
-            minWidth: component.width,
-            maxWidth: component.width,
+            minWidth: width,
+            maxWidth: width,
             minHeight: component.height,
             maxHeight: component.height,
             flexibility: Flexibility.inflexible,
@@ -83,8 +83,8 @@ public final class ExpandableComponentLayout: OverlayLayout<UIView>, ComponentLa
         if let dividerLine = component.dividerLine {
 
             let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
-                minWidth: component.width - dividerLine.insets.left - dividerLine.insets.right,
-                maxWidth: component.width,
+                minWidth: width - dividerLine.insets.left - dividerLine.insets.right,
+                maxWidth: width,
                 minHeight: dividerLine.height,
                 maxHeight: dividerLine.height,
                 alignment: Alignment.bottomCenter,

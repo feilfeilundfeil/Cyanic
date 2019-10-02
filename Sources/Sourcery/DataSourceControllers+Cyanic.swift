@@ -17,7 +17,6 @@ public extension ComponentsController {
     mutating func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
         var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -37,7 +36,6 @@ public extension ComponentsController {
     mutating func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
         var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateChildVCComponent(mutableComponent)
@@ -59,7 +57,6 @@ public extension ComponentsController {
     mutating func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
         var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateExpandableComponent(mutableComponent)
@@ -81,7 +78,6 @@ public extension ComponentsController {
     mutating func sizedComponent(configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
         var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -101,7 +97,6 @@ public extension ComponentsController {
     mutating func staticLabelComponent(configuration: (_ mutableComponent: inout StaticLabelComponent) -> Void) -> StaticLabelComponent {
         var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -121,7 +116,6 @@ public extension ComponentsController {
     mutating func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
         var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -141,7 +135,6 @@ public extension ComponentsController {
     mutating func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
         var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -161,7 +154,6 @@ public extension ComponentsController {
     mutating func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
         var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -181,7 +173,6 @@ public extension ComponentsController {
     mutating func textViewComponent(configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
         var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         self.add(mutableComponent)
@@ -204,7 +195,6 @@ public extension SectionController {
     mutating func buttonComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
         var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -231,7 +221,6 @@ public extension SectionController {
     mutating func childVCComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
         var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateChildVCComponent(mutableComponent)
@@ -260,7 +249,6 @@ public extension SectionController {
     mutating func expandableComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
         var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
         guard ComponentStateValidator.validateExpandableComponent(mutableComponent)
@@ -289,7 +277,6 @@ public extension SectionController {
     mutating func sizedComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
         var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -316,7 +303,6 @@ public extension SectionController {
     mutating func staticLabelComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticLabelComponent) -> Void) -> StaticLabelComponent {
         var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -343,7 +329,6 @@ public extension SectionController {
     mutating func staticSpacingComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
         var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -370,7 +355,6 @@ public extension SectionController {
     mutating func staticTextComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
         var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -397,7 +381,6 @@ public extension SectionController {
     mutating func textFieldComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
         var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 
@@ -424,7 +407,6 @@ public extension SectionController {
     mutating func textViewComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
         var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
         configuration(&mutableComponent)
-        mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
             else { fatalError("You must have a unique identifier for this component") }
 

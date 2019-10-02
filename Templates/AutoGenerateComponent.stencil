@@ -20,15 +20,16 @@
 {% if var.annotations.defaultValue %}
     {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.annotations.isLazy %}lazy {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }} = {{ var.annotations.defaultValue }}
 
-{% elif var.annotations.isLayout %}
-    {{ type.accessLevel }} var layout: ComponentLayout { return {{ type.annotations.ComponentLayout }}(component: self) }
-
 {% else %}
     {{ type.accessLevel }} {% if var.annotations.isWeak %}weak {% endif %}{% if var.isMutable %}var{% else %}let{% endif %} {{ var.name }}: {{ var.typeName }}
 
 {% endif %}
 {% endfor %}
     {{ type.accessLevel }} var identity: {{ type.name }} { return self }
+
+    {{ type.accessLevel }} func layout(width: CGFloat) -> ComponentLayout {
+        return {{ type.annotations.ComponentLayout }}(component: self, width: width)
+    }
 
 // sourcery:end
 {% endfor %}

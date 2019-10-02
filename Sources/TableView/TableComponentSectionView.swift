@@ -56,8 +56,8 @@ public final class TableComponentSectionView: UIView {
     public override final var intrinsicContentSize: CGSize {
         return self.sizeThatFits(
             CGSize(
-                width: Constants.screenWidth,
-                height: CGFloat.greatestFiniteMagnitude
+                width: self.bounds.width,
+                height: self.bounds.height
             )
         )
     }
@@ -75,7 +75,7 @@ public final class TableComponentSectionView: UIView {
         - component: The AnyComponent instance that represents this TableComponentSectionView.
     */
     public func configure(with component: AnyComponent) {
-        self.layout = component.layout
+        self.layout = component.layout(width: self.bounds.width)
         self.frame.size = self.intrinsicContentSize
 
         if let selectable = component.identity.base as? Selectable {

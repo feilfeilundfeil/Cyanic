@@ -52,7 +52,7 @@ open class CollectionComponentCell: UICollectionViewCell {
         - component: The AnyComponent instance that represents this CollectionComponentCell
     */
     open func configure(with component: AnyComponent) {
-        self.layout = component.layout
+        self.layout = component.layout(width: self.bounds.width)
         self.contentView.frame.size = self.intrinsicContentSize
 
         self.layout?.arrangement(

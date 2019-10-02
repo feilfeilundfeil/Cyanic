@@ -44,7 +44,7 @@ import UIKit
 //    var configuration: (UICollectionView) -> Void { get set }
 //
 //}
-//
+
 //// sourcery: AutoGenerateComponent,AutoGenerateComponentExtension
 //// sourcery: ComponentLayout = NestedCollectionComponentLayout
 //public struct NestedCollectionComponent: NestedCollectionComponentType {
@@ -91,72 +91,75 @@ import UIKit
 //        fatalError("Must implement this")
 //    }
 //}
-//
-//public protocol NestedCollectionDelegate: class, UICollectionViewDelegateFlowLayout {
-//
-//    associatedtype Element: Hashable
-//
-//    /**
-//     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
-//     - Returns:
-//        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
-//    */
-//    func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>
-//
-//}
-//
-//open class AbstractNestedCollectionDelegate<Model: Hashable>: NSObject, NestedCollectionDelegate {
-//
-//    public typealias Element = Model
-//
-//    // MARK: Initializers
-//    public init(models: BehaviorRelay<[Model]>(value: [])) {
+
+public protocol NestedCollectionDelegate: class, UICollectionViewDelegateFlowLayout {
+
+    /**
+     Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
+     - Returns:
+        A RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> instance.
+    */
+    func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>
+
+}
+
+open class AbstractNestedCollectionDelegate<ConcreteState: State, ConcreteViewModel: ViewModel<ConcreteState>>: NSObject, NestedCollectionDelegate {
+
+    // MARK: Initializers
+//    public init(models: BehaviorRelay<[Model]> = .init(value: [])) {
 //        self.models = models
-//
-//        self.models
-//            .map {
-//
-//            }
 //    }
-//
-//    // MARK: Stored Properties
+
+    // MARK: Stored Properties
+//    public let mininumHeight: CGFloat
+//    public let maximumHeight: CGFloat
+//    public let minimumWidth: CGFloat
+//    public let maximumWidth: CGFloat
 //    public let models: BehaviorRelay<[Model]>
-//    // swiftlint:disable:next implicitly_unwrapped_optional
-//    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
-//
-//    /**
-//     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this CollectionComponentViewController.
-//     The default implementation creates a UICollectionViewFlowLayout with a minimumLineSpacing and minimumInteritemSpacing of
-//     0.0.
-//     - Returns:
-//        A UICollectionViewLayout instance.
-//    */
-//    open func createUICollectionViewLayout() -> UICollectionViewLayout {
-//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 0.0
-//        layout.minimumInteritemSpacing = 0.0
-//        return layout
-//    }
-//
-//    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
-//        return CyanicRxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
-//            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
-//                guard let cell = cv.dequeueReusableCell(
-//                    withReuseIdentifier: CollectionComponentCell.identifier,
-//                    for: indexPath
-//                ) as? CollectionComponentCell
-//                    else { fatalError("Cell not registered to UICollectionView")}
-//
-//                cell.configure(with: component)
-//                return cell
-//            }
-//        )
-//    }
-//
-//    public final func bind(to cv: UICollectionView) {
-//        cv.register(CollectionComponentCell.self, forCellWithReuseIdentifier: CollectionComponentCell.identifier)
-//        cv.collectionViewLayout = self.createUICollectionViewLayout()
-////        cv.rx.items(dataSource: self.dataSource)
-//    }
-//
-//}
+    // swiftlint:disable:next implicitly_unwrapped_optional
+    public private(set) var dataSource: RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>!
+
+    /**
+     Creates the UICollectionViewLayout to be used by the UICollectionView managed by this CollectionComponentViewController.
+     The default implementation creates a UICollectionViewFlowLayout with a minimumLineSpacing and minimumInteritemSpacing of
+     0.0.
+     - Returns:
+        A UICollectionViewLayout instance.
+    */
+    open func createUICollectionViewLayout() -> UICollectionViewLayout {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0.0
+        layout.minimumInteritemSpacing = 0.0
+        return layout
+    }
+
+    open func setUpDataSource() -> RxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>> {
+        return CyanicRxCollectionViewSectionedAnimatedDataSource<AnimatableSectionModel<String, AnyComponent>>(
+            configureCell: { (_, cv: UICollectionView, indexPath: IndexPath, component: AnyComponent) -> UICollectionViewCell in
+                guard let cell = cv.dequeueReusableCell(
+                    withReuseIdentifier: CollectionComponentCell.identifier,
+                    for: indexPath
+                ) as? CollectionComponentCell
+                    else { fatalError("Cell not registered to UICollectionView")}
+
+                cell.configure(with: component)
+                return cell
+            }
+        )
+    }
+
+    public final func bind(to cv: UICollectionView) {
+        cv.register(CollectionComponentCell.self, forCellWithReuseIdentifier: CollectionComponentCell.identifier)
+        cv.collectionViewLayout = self.createUICollectionViewLayout()
+    }
+
+}
+
+public struct NestedCollectionController {
+
+    public let minimumWidth: CGFloat
+    public let maximumWith: CGFloat
+
+    public let height: CGFloat
+
+}

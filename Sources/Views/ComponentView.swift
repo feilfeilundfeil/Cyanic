@@ -28,7 +28,7 @@ open class ComponentView: UIView {
 
     public var component: AnyComponent? {
         didSet {
-            self.layout = self.component?.layout
+            self.layout = self.component?.layout(width: self.bounds.width)
             self.frame.size = self.intrinsicContentSize
 
             self.layout?.arrangement(

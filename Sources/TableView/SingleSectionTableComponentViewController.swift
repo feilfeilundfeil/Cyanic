@@ -122,10 +122,10 @@ open class SingleSectionTableComponentViewController: TableComponentViewControll
             return 0.0
         }
 
-        guard let layout = self.component(at: indexPath)?.layout
+        guard let layout = self.component(at: indexPath)?.layout(width: tableView.bounds.width)
             else { return 0.0 }
 
-        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: tableView.bounds.width, height: CGFloat.greatestFiniteMagnitude)
 
         let rowSize: CGSize = layout.measurement(within: size).size
         return rowSize.height

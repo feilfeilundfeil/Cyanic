@@ -129,9 +129,9 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
             return CGSize.zero
         }
 
-        let layout: ComponentLayout = self.component(at: indexPath).layout
+        let layout: ComponentLayout = self.component(at: indexPath).layout(width: collectionView.bounds.width)
 
-        let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
+        let size: CGSize = CGSize(width: collectionView.bounds.width, height: CGFloat.greatestFiniteMagnitude)
 
         let cellSize: CGSize = layout.measurement(within: size).size
         return cellSize

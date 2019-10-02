@@ -47,13 +47,12 @@ public struct ButtonComponent: ButtonComponentType {
 
     public var id: String
 
-    public var width: CGFloat = 0.0
-
     public var height: CGFloat = 44.0
 
-    // sourcery: skipHashing, skipEquality
-    public var layout: ComponentLayout { return ButtonComponentLayout(component: self) }
-
     public var identity: ButtonComponent { return self }
+
+    public func layout(width: CGFloat) -> ComponentLayout {
+        return ButtonComponentLayout(component: self, width: width)
+    }
 // sourcery:end
 }

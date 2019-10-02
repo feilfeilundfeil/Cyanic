@@ -18,13 +18,12 @@ public final class StaticSpacingComponentLayout: SizeLayout<UIView>, ComponentLa
      - Parameters:
         - component: The StaticSpacingComponent whose properties define the UI characters of the subviews to be created.
     */
-    public init(component: StaticSpacingComponent) {
-        let size: CGSize = component.size
+    public init(component: StaticSpacingComponent, width: CGFloat) {
         super.init(
-            minWidth: size.width,
-            maxWidth: size.width,
-            minHeight: size.height,
-            maxHeight: size.height,
+            minWidth: width,
+            maxWidth: width,
+            minHeight: component.height,
+            maxHeight: component.height,
             alignment: Alignment.center,
             flexibility: Flexibility.inflexible,
             viewReuseId: StaticSpacingComponentLayout.identifier,

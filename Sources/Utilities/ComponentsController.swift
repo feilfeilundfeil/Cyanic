@@ -32,7 +32,7 @@ public struct ComponentsController {
     */
     public var height: CGFloat {
         return self.components.reduce(into: 0.0, { (currentHeight: inout CGFloat, component: AnyComponent) -> Void in
-            currentHeight += component.layout.measurement(
+            currentHeight += component.layout(width: self.width).measurement(
                 within: CGSize(width: self.width, height: CGFloat.greatestFiniteMagnitude)
             )
                 .size

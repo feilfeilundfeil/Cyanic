@@ -11,7 +11,6 @@ extension ButtonComponent: Hashable {
         self.font.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -21,7 +20,6 @@ extension ChildVCComponent: Hashable {
         self.name.hash(into: &hasher)
         self.description.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -33,7 +31,6 @@ extension ExpandableComponent: Hashable {
         self.accessoryViewSize.hash(into: &hasher)
         self.isExpanded.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -42,7 +39,6 @@ extension SizedComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -55,7 +51,6 @@ extension StaticLabelComponent: Hashable {
         self.numberOfLines.hash(into: &hasher)
         self.lineBreakMode.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
     }
 }
 // MARK: - StaticSpacingComponent AutoHashableComponent
@@ -63,7 +58,6 @@ extension StaticSpacingComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -75,7 +69,6 @@ extension StaticTextComponent: Hashable {
         self.backgroundColor.hash(into: &hasher)
         self.lineFragmentPadding.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
     }
 }
 // MARK: - TextFieldComponent AutoHashableComponent
@@ -85,7 +78,6 @@ extension TextFieldComponent: Hashable {
         self.backgroundColor.hash(into: &hasher)
         self.maximumCharacterCount.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }
@@ -94,7 +86,6 @@ extension TextViewComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.backgroundColor.hash(into: &hasher)
         self.id.hash(into: &hasher)
-        self.width.hash(into: &hasher)
         self.height.hash(into: &hasher)
     }
 }

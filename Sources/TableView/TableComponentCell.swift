@@ -51,7 +51,7 @@ open class TableComponentCell: UITableViewCell {
         - component: The AnyComponent instance that represents this TableComponentCell
     */
     open func configure(with component: AnyComponent) {
-        self.layout = component.layout
+        self.layout = component.layout(width: self.contentView.bounds.width)
         self.contentView.frame.size = self.intrinsicContentSize
 
         self.layout?.arrangement(
