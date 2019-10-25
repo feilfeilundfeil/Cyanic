@@ -25,14 +25,15 @@ open class CollectionComponentViewController: ComponentViewController, UICollect
 
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        self.collectionView?.collectionViewLayout.invalidateLayout()
+        guard self._listView != nil else { return }
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     // MARK: Computed Properties
     /**
      The UICollectionView instance managed by this CollectionComponentViewController instance.
     */
-    public var collectionView: UICollectionView! {
+    public var collectionView: UICollectionView {
         return self._listView as! UICollectionView // swiftlint:disable:this force_cast
     }
 
