@@ -123,3 +123,4 @@ class YourComponentViewController: SingleSectionCollectionComponentViewControlle
 
 * Julio Alorro (julio.alorro@ffuf.de)
 * Jonas Bark (jonas.bark@ffuf.de)
+* Alexander Korus (alexander.korus@ffuf.de)
