@@ -22,13 +22,15 @@ public final class ___VARIABLE_productName:identifier___ComponentLayout: SizeLay
 
     public init(component: ___VARIABLE_productName:identifier___Component) {
         let size: CGSize = CGSize(width: component.width, height: component.height)
+
+        #warning("Please consider that sublayout parameter must not be nil")
         super.init(
             minWidth: size.width,
             maxWidth: size.width,
             minHeight: size.height,
             maxHeight: size.height,
-            alignment: Alignment.center,
-            flexibility: Flexibility.inflexible,
+            alignment: Alignment.fill,
+            flexibility: Flexibility.flexible,
             viewReuseId: ___VARIABLE_productName:identifier___ComponentLayout.identifier,
             sublayout: nil,
             config: { (view: UIView) -> Void in
