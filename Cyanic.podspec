@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = "10.0"
   spec.source                = { :git => "https://github.com/feilfeilundfeil/Cyanic.git", :tag => spec.version }
   spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"
-  spec.resources             = ["Templates/*", "Xcode Templates/*"]
+  spec.resources             = ["Templates/*"]
   spec.requires_arc          = true
   spec.swift_version         = "5.0"
 
