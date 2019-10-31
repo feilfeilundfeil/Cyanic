@@ -106,13 +106,14 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         throttledStateObservable
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
+                s._size = size
+                var controller: ComponentsController
                 switch s.cellSize {
                     case .list:
-                        s._size = size
+                        controller = ComponentsController(width: size.width)
                     case .exactly(let cellSize):
-                        s._size = cellSize(size)
+                        controller = ComponentsController(width: cellSize().width)
                 }
-                var controller: ComponentsController = ComponentsController(width: size.width)
                 s.buildComponents(&controller)
                 return controller.components
             })

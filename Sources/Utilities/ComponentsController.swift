@@ -15,7 +15,7 @@ public struct ComponentsController {
     /**
      Initializer.
      - Parameters:
-        - width: The width of the UICollectionView/UITableView. ComponentsController mutates the width property of every
+        - width: The width of the UICollectionViewCell/UITableViewCell. ComponentsController mutates the width property of every
                 Component that is added to its Array.
     */
     public init(width: CGFloat) {
@@ -23,7 +23,7 @@ public struct ComponentsController {
     }
 
     /**
-     The width of the UICollectionView/UITableView where the Components will be displayed.
+     The width of the UICollectionView/UITableViewCell where the Components will be displayed.
     */
     public let width: CGFloat
 

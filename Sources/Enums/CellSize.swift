@@ -18,8 +18,8 @@ public enum CellSize {
     case list
 
     /**
-     Configures the UICollectionViewCell size to be the associated CGSize. The CGSize argument is the size of the UICollectionView.
+     Configures the UICollectionViewCell size to be the associated CGSize.
     */
-    case exactly((CGSize) -> CGSize)
+    case exactly(() -> CGSize)
 
 }
