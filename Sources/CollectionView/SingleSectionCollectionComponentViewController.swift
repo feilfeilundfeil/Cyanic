@@ -110,7 +110,7 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
                     case .list:
                         s._size = size
                     case .exactly(let cellSize):
-                        s._size = cellSize()
+                        s._size = cellSize(size)
                 }
                 var controller: ComponentsController = ComponentsController(width: size.width)
                 s.buildComponents(&controller)
