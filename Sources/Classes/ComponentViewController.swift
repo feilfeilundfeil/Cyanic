@@ -94,7 +94,7 @@ open class ComponentViewController: UIViewController, StateObservableBuilder {
     /**
      The CGSize of this UIViewController.
     */
-    public var _size: CGSize = CGSize.zero
+    public internal(set) var _size: CGSize = CGSize.zero
 
     /**
      When the UITableView/UICollectionView is loaded, its width and height are initially all zero. When viewWillAppear

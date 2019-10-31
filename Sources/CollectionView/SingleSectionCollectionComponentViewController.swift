@@ -43,6 +43,14 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
     */
     internal let _components: BehaviorRelay<[AnyComponent]> = BehaviorRelay<[AnyComponent]>(value: [])
 
+    // MARK: Computed Properties
+    /**
+     Determines the size of each cell in the collectionView.
+    */
+    open var cellSize: CellSize {
+        return CellSize.list
+    }
+
     // MARK: Methods
     /**
      Instantiates the RxCollectionViewSectionedAnimatedDataSource for the UICollectionView.
@@ -98,7 +106,12 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
         throttledStateObservable
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
-                s._size = size
+                switch s.cellSize {
+                    case .exactly(let cellSize):
+                        s._size = cellSize
+                    case .list:
+                        s._size = size
+                }
                 var controller: ComponentsController = ComponentsController(width: size.width)
                 s.buildComponents(&controller)
                 return controller.components

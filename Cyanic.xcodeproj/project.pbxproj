@@ -24,6 +24,7 @@
 		1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDD82215BA6000A35FFE /* Text+Cyanic.swift */; };
 		1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */; };
 		1437BDDE2216C18A00A35FFE /* ExpandableComponentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */; };
+		143C8E1C236AE770006060ED /* CellSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C8E1B236AE770006060ED /* CellSize.swift */; };
 		1443607B2247B70F0090FCF9 /* CyanicViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */; };
 		1443607D2247BC0E0090FCF9 /* ExampleCounterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607C2247BC0E0090FCF9 /* ExampleCounterVC.swift */; };
 		1443607F2247CF800090FCF9 /* BaseComponentVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */; };
@@ -161,6 +162,7 @@
 		1437BDD82215BA6000A35FFE /* Text+Cyanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Cyanic.swift"; sourceTree = "<group>"; };
 		1437BDDB2216C17200A35FFE /* ExpandableComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponent.swift; sourceTree = "<group>"; };
 		1437BDDD2216C18A00A35FFE /* ExpandableComponentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableComponentLayout.swift; sourceTree = "<group>"; };
+		143C8E1B236AE770006060ED /* CellSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSize.swift; sourceTree = "<group>"; };
 		1443607A2247B70F0090FCF9 /* CyanicViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CyanicViewControllerTests.swift; sourceTree = "<group>"; };
 		1443607C2247BC0E0090FCF9 /* ExampleCounterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleCounterVC.swift; sourceTree = "<group>"; };
 		1443607E2247CF800090FCF9 /* BaseComponentVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseComponentVCTests.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				142C451822392C09002360F5 /* ComponentStateValidator.swift */,
 				142C44FF2235A105002360F5 /* ThrottleType.swift */,
 				14609BAB22636805007B2AFC /* Size.swift */,
+				143C8E1B236AE770006060ED /* CellSize.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -1050,6 +1053,7 @@
 				1437BDDC2216C17200A35FFE /* ExpandableComponent.swift in Sources */,
 				14DB25902295528700ADADA8 /* CyanicTextViewDelegateProxy.swift in Sources */,
 				14CBAFEB222D1351002D2768 /* AbstractViewModel.swift in Sources */,
+				143C8E1C236AE770006060ED /* CellSize.swift in Sources */,
 				1437BDD92215BA6000A35FFE /* Text+Cyanic.swift in Sources */,
 				14A1652B225C69050031517C /* TextFieldComponent.swift in Sources */,
 				1498049E2260D8340044194C /* MultiSectionController.swift in Sources */,
