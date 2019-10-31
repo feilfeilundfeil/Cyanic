@@ -62,7 +62,7 @@ public struct ExpandableComponent: ExpandableComponentType, Selectable {
     public var identity: ExpandableComponent { return self }
 // sourcery:end
 
-    public func onSelect() {
+    public func onSelect(_ view: UIView) {
         self.setExpandableState(self.id, !self.isExpanded)
     }
 }

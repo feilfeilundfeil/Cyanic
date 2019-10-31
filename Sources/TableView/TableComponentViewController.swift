@@ -51,6 +51,7 @@ open class TableComponentViewController: ComponentViewController, UITableViewDel
         tableView.deselectRow(at: indexPath, animated: true)
         guard let component: AnyComponent = self.component(at: indexPath) else { return }
         guard let selectable = component.identity.base as? Selectable else { return }
-        selectable.onSelect()
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        selectable.onSelect(cell.contentView)
     }
 }

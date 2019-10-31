@@ -72,6 +72,7 @@ open class CollectionComponentViewController: ComponentViewController, UICollect
         collectionView.deselectItem(at: indexPath, animated: false)
         guard let component: AnyComponent = self.component(at: indexPath) else { return }
         guard let selectable = component.identity.base as? Selectable else { return }
-        selectable.onSelect()
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        selectable.onSelect(cell.contentView)
     }
 }

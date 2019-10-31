@@ -48,8 +48,9 @@ open class ComponentView: UIView {
 
         if let component = self.component?.identity.base as? Selectable {
             self.disposable.disposable = self.tap.rx.event.subscribe(
-                onNext: { (_: UITapGestureRecognizer) -> Void in
-                    component.onSelect()
+                onNext: { [weak self] (_: UITapGestureRecognizer) -> Void in
+                    guard let s = self else { return }
+                    component.onSelect(s)
                 },
                 onDisposed: { [weak self] () -> Void in
                     guard let s = self else { return }

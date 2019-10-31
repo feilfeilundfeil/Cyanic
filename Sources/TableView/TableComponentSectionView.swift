@@ -82,7 +82,7 @@ public final class TableComponentSectionView: UIView {
             let tap: UITapGestureRecognizer = UITapGestureRecognizer()
 
             let disposable: Disposable = tap.rx.event.bind(onNext: { (_: UITapGestureRecognizer) -> Void in
-                selectable.onSelect()
+                selectable.onSelect(self)
             })
 
             self.addGestureRecognizer(tap)
