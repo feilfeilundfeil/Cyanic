@@ -20,6 +20,6 @@ public enum CellSize {
     /**
      Configures the UICollectionViewCell size to be the associated CGSize.
     */
-    case exactly(CGSize)
+    case exactly(() -> CGSize)
 
 }

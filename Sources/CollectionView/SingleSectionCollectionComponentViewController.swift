@@ -107,10 +107,10 @@ open class SingleSectionCollectionComponentViewController: CollectionComponentVi
             .map({ [weak self] (size: CGSize, _: [Any]) -> [AnyComponent] in
                 guard let s = self else { return [] }
                 switch s.cellSize {
-                    case .exactly(let cellSize):
-                        s._size = cellSize
                     case .list:
                         s._size = size
+                    case .exactly(let cellSize):
+                        s._size = cellSize()
                 }
                 var controller: ComponentsController = ComponentsController(width: size.width)
                 s.buildComponents(&controller)
