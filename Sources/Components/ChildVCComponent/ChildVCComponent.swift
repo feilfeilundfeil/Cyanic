@@ -28,7 +28,7 @@ public struct ChildVCComponent: ChildVCComponentType {
     public weak var parentVC: UIViewController?
 
     // sourcery: skipHashing, skipEquality
-    public var configuration: (UIViewController) -> Void
+    public var configuration: (UIViewController) -> Void = { _ in }
 
     public var id: String
 
