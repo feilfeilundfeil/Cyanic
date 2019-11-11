@@ -23,6 +23,11 @@ public protocol ChildVCComponentType: StaticHeightComponent {
     /// The parent UIViewController instance of the child VC. It is usually the BaseComponentVC.
     var parentVC: UIViewController? { get set }
 
+    // sourcery: skipHashing, skipEquality
+    // sourcery: defaultValue = "{ _ in }"
+    /// Additional configuration of the childVC. Called in the Layout's config closure
+    var configuration: (UIViewController) -> Void { get set }
+
 }
 
 public extension ChildVCComponentType {

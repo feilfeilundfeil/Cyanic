@@ -42,6 +42,8 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
                     childVC.view.frame = view.bounds
                     view.addSubview(childVC.view)
                 }
+
+                component.configuration(childVC)
             }
         )
     }

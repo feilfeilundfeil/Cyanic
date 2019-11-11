@@ -27,6 +27,9 @@ public struct ChildVCComponent: ChildVCComponentType {
     // sourcery: skipHashing, skipEquality
     public weak var parentVC: UIViewController?
 
+    // sourcery: skipHashing, skipEquality
+    public var configuration: (UIViewController) -> Void
+
     public var id: String
 
     public var width: CGFloat = 0.0
