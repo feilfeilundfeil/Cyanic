@@ -39,6 +39,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Tests
   - Example
+  - Templates
 
 line_length:
   ignores_function_declarations: true

@@ -28,6 +28,11 @@ public protocol ChildVCComponentType: StaticHeightComponent {
     /// Additional configuration of the childVC. Called in the Layout's config closure
     var configuration: (UIViewController) -> Void { get set }
 
+    // sourcery: skipHashing, skipEquality
+    // sourcery: defaultValue = "UIEdgeInsets.zero"
+    /// The insets of the  child VC. The default value is UIEdgeInsets.zero.
+    var insets: UIEdgeInsets { get set }
+
 }
 
 public extension ChildVCComponentType {

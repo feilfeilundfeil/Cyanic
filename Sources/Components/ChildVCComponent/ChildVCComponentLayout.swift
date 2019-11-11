@@ -21,16 +21,15 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
     public init(component: ChildVCComponent) {
         var component: ChildVCComponent = component
         let size: CGSize = component.size
+        let insets: UIEdgeInsets = component.insets
         let childVC: UIViewController & CyanicChildVCType = component.childVC
         let parentVC: UIViewController? = component.parentVC
 
-        super.init(
-            minWidth: size.width,
-            maxWidth: size.width,
-            minHeight: size.height,
-            maxHeight: size.height,
-            viewReuseId: "\(ChildVCComponentLayout.identifier)Size",
-            config: { [weak childVC, weak parentVC] (view: UIView) -> Void in
+        let sizeLayout: SizeLayout<UIView> = SizeLayout<UIView>(
+            size: size,
+            viewReuseId: "\(ChildVCComponentLayout.identifier)ChildVCView",
+            sublayout: nil,
+            config: {  [weak childVC, weak parentVC] (view: UIView) -> Void in
                 guard let childVC = childVC, let parentVC = parentVC else { return }
 
                 if childVC.parent !== parentVC {
@@ -45,6 +44,21 @@ public final class ChildVCComponentLayout: SizeLayout<UIView>, ComponentLayout {
 
                 component.configuration(childVC)
             }
+        )
+
+        let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
+            insets: insets,
+            sublayout: sizeLayout
+        )
+
+        super.init(
+            minWidth: size.width,
+            maxWidth: size.width,
+            minHeight: size.height + insets.top + insets.bottom,
+            maxHeight: size.height + insets.top + insets.bottom,
+            viewReuseId: "\(ChildVCComponentLayout.identifier)Size",
+            sublayout: insetLayout,
+            config: nil
         )
     }
 

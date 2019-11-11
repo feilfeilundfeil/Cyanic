@@ -30,6 +30,9 @@ public struct ChildVCComponent: ChildVCComponentType {
     // sourcery: skipHashing, skipEquality
     public var configuration: (UIViewController) -> Void = { _ in }
 
+    // sourcery: skipHashing, skipEquality
+    public var insets: UIEdgeInsets = UIEdgeInsets.zero
+
     public var id: String
 
     public var width: CGFloat = 0.0
