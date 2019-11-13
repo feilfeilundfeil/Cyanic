@@ -192,6 +192,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 
         let cellSize: CGSize = layout.measurement(within: size).size
+        guard cellSize.width >= 0.0 && cellSize.height >= 0.0 else { return CGSize.zero }
         return cellSize
     }
 
@@ -207,6 +208,7 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 
         let headerSize: CGSize = layout.measurement(within: size).size
+        guard headerSize.width >= 0.0 && headerSize.height >= 0.0 else { return CGSize.zero }
         return headerSize
 
     }
@@ -222,8 +224,9 @@ open class MultiSectionCollectionComponentViewController: CollectionComponentVie
 
         let size: CGSize = CGSize(width: self._size.width, height: CGFloat.greatestFiniteMagnitude)
 
-        let headerSize: CGSize = layout.measurement(within: size).size
-        return headerSize
+        let footerSize: CGSize = layout.measurement(within: size).size
+        guard footerSize.width >= 0.0 && footerSize.height >= 0.0 else { return CGSize.zero }
+        return footerSize
 
     }
 }
