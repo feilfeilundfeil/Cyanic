@@ -41,6 +41,10 @@ public protocol TextFieldComponentType: StaticHeightComponent {
     /// The flexibility of the underlying SizeLayout. The default value is Flexibility.flexible.
     var flexibility: Flexibility { get set }
 
+    // sourcery: defaultValue = "500"
+    /// The number of milliseconds that must elapse before editingChanged is called. The default value is 500 milliseconds.
+    var editingChangeDelay: Int { get set }
+
     // sourcery: defaultValue = "{ _ in }"
     // sourcery: skipHashing, skipEquality
     /// The configuration applied to the UITextField. The default closure does nothing.

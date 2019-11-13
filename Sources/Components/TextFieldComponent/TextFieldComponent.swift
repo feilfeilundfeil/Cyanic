@@ -48,6 +48,8 @@ public struct TextFieldComponent: TextFieldComponentType {
     // sourcery: skipHashing, skipEquality
     public var flexibility: Flexibility = Flexibility.flexible
 
+    public var editingChangeDelay: Int = 500
+
     // sourcery: skipHashing, skipEquality
     public var configuration: (UITextField) -> Void = { _ in }
 

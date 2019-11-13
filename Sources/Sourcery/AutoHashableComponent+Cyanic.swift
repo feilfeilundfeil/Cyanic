@@ -83,6 +83,7 @@ extension TextFieldComponent: Hashable {
     public func hash(into hasher: inout Hasher) {
         self.placeholder.hash(into: &hasher)
         self.backgroundColor.hash(into: &hasher)
+        self.editingChangeDelay.hash(into: &hasher)
         self.maximumCharacterCount.hash(into: &hasher)
         self.id.hash(into: &hasher)
         self.width.hash(into: &hasher)
