@@ -20,7 +20,7 @@ public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
             minHeight: component.height,
             maxHeight: component.height,
             alignment: component.alignment,
-            viewReuseId: "\(SizedComponentLayout.identifier)ViewSize",
+            viewReuseId: "\(SizedComponentLayout.identifier)ViewSize - \(component.id)",
             viewClass: component.viewClass,
             sublayout: nil,
             config: component.configuration
@@ -29,7 +29,7 @@ public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
         let insetLayout: InsetLayout<UIView> = InsetLayout<UIView>(
             insets: insets,
             flexibility: Flexibility.inflexible,
-            viewReuseId: "\(SizedComponentLayout.identifier)Inset",
+            viewReuseId: "\(SizedComponentLayout.identifier)Inset - \(component.id)",
             sublayout: sizeLayout
         )
 
@@ -40,7 +40,7 @@ public final class SizedComponentLayout: SizeLayout<UIView>, ComponentLayout {
             maxHeight: component.height,
             alignment: component.alignment,
             flexibility: component.flexibility,
-            viewReuseId: "\(SizedComponentLayout.identifier)Size",
+            viewReuseId: "\(SizedComponentLayout.identifier)Size - \(component.id)",
             sublayout: insetLayout,
             config: { (view: UIView) -> Void in
                 view.backgroundColor = component.backgroundColor
