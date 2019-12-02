@@ -40,10 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rightVC.dismissOnPush = false
         rightVC.statusBarEndAlpha = 0.0
 
-         _ = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-               .subscribe(onNext: { _ in
-                   print("Resource count \(RxSwift.Resources.total)")
-               })
+//         _ = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+//               .subscribe(onNext: { _ in
+//                   print("Resource count \(RxSwift.Resources.total)")
+//               })
 
         return true
     }

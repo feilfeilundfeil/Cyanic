@@ -81,13 +81,6 @@ class ChildVC: SingleSectionTableComponentViewController, CyanicChildVCType {
         return dataSource
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        guard let component: AnyComponent = self.component(at: indexPath) else { return }
-        guard let selectable = component.identity.base as? Selectable else { return }
-        selectable.onSelect()
-    }
-
     override func buildComponents(_ componentsController: inout ComponentsController) {
         Cyanic.withState(of: self.viewModel) { (state: ChildVCState) -> Void in
             let first = componentsController.expandableComponent(configuration: { (component: inout ExpandableComponent) -> Void in
