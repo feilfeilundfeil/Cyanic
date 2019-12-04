@@ -9,6 +9,8 @@ func lowerCamelCaseName(for type: Type) -> String {
 <%_ } else { -%>
 import Cyanic
 
+<%_ let constantsReference: String = argument["isFramework"] as? Bool == true ? Constants.invalidID : Cyanic.Constants.invalidID -%>
+
 <%_ } -%>
 // swiftlint:disable all
 public extension ComponentsController {
@@ -26,7 +28,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func <%= functionName %>(configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
-        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: <%= constantsReference %>)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -56,7 +58,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func <%= functionName %>(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout <%= type.name %>) -> Void) -> <%= type.name %> {
-        var mutableComponent: <%= type.name %> = <%= type.name %>(id: Constants.invalidID)
+        var mutableComponent: <%= type.name %> = <%= type.name %>(id: <%= constantsReference %>)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
