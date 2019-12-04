@@ -57,7 +57,7 @@ public final class ComponentSupplementaryView: UICollectionReusableView {
     public override final var intrinsicContentSize: CGSize {
         return self.sizeThatFits(
             CGSize(
-                width: self.bounds.width,
+                width: CyanicConstants.screenWidth,
                 height: CGFloat.greatestFiniteMagnitude
             )
         )
