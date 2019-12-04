@@ -15,7 +15,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func buttonComponent(configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
-        var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
+        var mutableComponent: ButtonComponent = ButtonComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -35,7 +35,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func childVCComponent(configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
-        var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
+        var mutableComponent: ChildVCComponent = ChildVCComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -57,7 +57,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func expandableComponent(configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
-        var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
+        var mutableComponent: ExpandableComponent = ExpandableComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -79,7 +79,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func sizedComponent(configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
-        var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
+        var mutableComponent: SizedComponent = SizedComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -99,7 +99,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func staticLabelComponent(configuration: (_ mutableComponent: inout StaticLabelComponent) -> Void) -> StaticLabelComponent {
-        var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: Constants.invalidID)
+        var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -119,7 +119,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func staticSpacingComponent(configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
-        var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
+        var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -139,7 +139,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func staticTextComponent(configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
-        var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
+        var mutableComponent: StaticTextComponent = StaticTextComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -159,7 +159,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func textFieldComponent(configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
-        var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
+        var mutableComponent: TextFieldComponent = TextFieldComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -179,7 +179,7 @@ public extension ComponentsController {
     */
     @discardableResult
     mutating func textViewComponent(configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
-        var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
+        var mutableComponent: TextViewComponent = TextViewComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -202,7 +202,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func buttonComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ButtonComponent) -> Void) -> ButtonComponent {
-        var mutableComponent: ButtonComponent = ButtonComponent(id: Constants.invalidID)
+        var mutableComponent: ButtonComponent = ButtonComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -229,7 +229,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func childVCComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ChildVCComponent) -> Void) -> ChildVCComponent {
-        var mutableComponent: ChildVCComponent = ChildVCComponent(id: Constants.invalidID)
+        var mutableComponent: ChildVCComponent = ChildVCComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -258,7 +258,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func expandableComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout ExpandableComponent) -> Void) -> ExpandableComponent {
-        var mutableComponent: ExpandableComponent = ExpandableComponent(id: Constants.invalidID)
+        var mutableComponent: ExpandableComponent = ExpandableComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -287,7 +287,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func sizedComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout SizedComponent) -> Void) -> SizedComponent {
-        var mutableComponent: SizedComponent = SizedComponent(id: Constants.invalidID)
+        var mutableComponent: SizedComponent = SizedComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -314,7 +314,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func staticLabelComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticLabelComponent) -> Void) -> StaticLabelComponent {
-        var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: Constants.invalidID)
+        var mutableComponent: StaticLabelComponent = StaticLabelComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -341,7 +341,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func staticSpacingComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticSpacingComponent) -> Void) -> StaticSpacingComponent {
-        var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: Constants.invalidID)
+        var mutableComponent: StaticSpacingComponent = StaticSpacingComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -368,7 +368,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func staticTextComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout StaticTextComponent) -> Void) -> StaticTextComponent {
-        var mutableComponent: StaticTextComponent = StaticTextComponent(id: Constants.invalidID)
+        var mutableComponent: StaticTextComponent = StaticTextComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -395,7 +395,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func textFieldComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout TextFieldComponent) -> Void) -> TextFieldComponent {
-        var mutableComponent: TextFieldComponent = TextFieldComponent(id: Constants.invalidID)
+        var mutableComponent: TextFieldComponent = TextFieldComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)
@@ -422,7 +422,7 @@ public extension SectionController {
     */
     @discardableResult
     mutating func textViewComponent(for supplementaryView: SectionController.SupplementaryView, configuration: (_ mutableComponent: inout TextViewComponent) -> Void) -> TextViewComponent {
-        var mutableComponent: TextViewComponent = TextViewComponent(id: Constants.invalidID)
+        var mutableComponent: TextViewComponent = TextViewComponent(id: CyanicConstants.invalidID)
         configuration(&mutableComponent)
         mutableComponent.width = self.width
         guard ComponentStateValidator.hasValidIdentifier(mutableComponent)

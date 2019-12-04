@@ -16,7 +16,7 @@ public enum ComponentStateValidator {
         Bool indicating whether or not the id is valid.
     */
     public static func hasValidIdentifier<ConcreteComponent: Component>(_ component: ConcreteComponent) -> Bool {
-        return component.id != Constants.invalidID
+        return component.id != CyanicConstants.invalidID
     }
 
     /**

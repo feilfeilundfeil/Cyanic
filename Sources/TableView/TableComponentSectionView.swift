@@ -56,7 +56,7 @@ public final class TableComponentSectionView: UIView {
     public override final var intrinsicContentSize: CGSize {
         return self.sizeThatFits(
             CGSize(
-                width: Constants.screenWidth,
+                width: self.bounds.width,
                 height: CGFloat.greatestFiniteMagnitude
             )
         )

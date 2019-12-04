@@ -8,7 +8,7 @@ import RxCocoa
 import RxSwift
 import os
 
-internal let CyanicViewModelLog: OSLog = OSLog(subsystem: Constants.bundleIdentifier, category: "ViewModel")
+internal let CyanicViewModelLog: OSLog = OSLog(subsystem: CyanicConstants.bundleIdentifier, category: "ViewModel")
 
 /**
  AbstractViewModel is a class that provides the essential functionality that must exist in all ViewModel subclasses.

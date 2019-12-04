@@ -11,7 +11,7 @@ import UIKit
 import os
 
 internal let CyanicComponentViewControllerLog: OSLog = OSLog(
-    subsystem: Constants.bundleIdentifier,
+    subsystem: CyanicConstants.bundleIdentifier,
     category: "ComponentViewController"
 )
 

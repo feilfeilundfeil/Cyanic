@@ -10,7 +10,7 @@ import RxSwift
 import UIKit
 import os
 
-internal let CyanicViewControllerLog: OSLog = OSLog(subsystem: Constants.bundleIdentifier, category: "CyanicViewController")
+internal let CyanicViewControllerLog: OSLog = OSLog(subsystem: CyanicConstants.bundleIdentifier, category: "CyanicViewController")
 
 /**
  CyanicViewController is a UIViewController subclass that can listen to State changes to its ViewModels. Whenever the

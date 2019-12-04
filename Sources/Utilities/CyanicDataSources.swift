@@ -10,7 +10,7 @@ import RxDataSources
 import RxSwift
 import os
 
-internal let CyanicDataSourceLog: OSLog = OSLog(subsystem: Constants.bundleIdentifier, category: "CyanicRxDataSource")
+internal let CyanicDataSourceLog: OSLog = OSLog(subsystem: CyanicConstants.bundleIdentifier, category: "CyanicRxDataSource")
 
 /**
  A subclass of CyanicRxTableViewSectionedAnimatedDataSource where the logic is mostly the same BUT performing the batch updates is different.

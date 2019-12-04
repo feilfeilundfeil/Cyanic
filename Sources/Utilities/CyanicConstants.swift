@@ -8,7 +8,7 @@ import CoreGraphics
 import Foundation
 import UIKit
 
-public enum Constants {
+public enum CyanicConstants {
     internal static var screenWidth: CGFloat { return UIScreen.main.bounds.width }
     internal static var bundleIdentifier: String { return Bundle.main.bundleIdentifier ?? "de.ffuf.Cyanic" }
     public static var invalidID: String = UUID().uuidString
