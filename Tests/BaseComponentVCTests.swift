@@ -55,8 +55,8 @@ class ComponentViewControllerTests: QuickSpec {
                         vc.viewModelOne.currentState.showStaticText)
                             .toEventually(
                                 equal(true),
-                                timeout: 0.5,
-                                pollInterval: 0.5
+                                timeout: .milliseconds(500),
+                                pollInterval: .milliseconds(500)
                             )
                 }
             }

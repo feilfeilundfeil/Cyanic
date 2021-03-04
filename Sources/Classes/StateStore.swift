@@ -30,7 +30,7 @@ internal class StateStore<ConcreteState: State> {
         self.scheduler = SerialDispatchQueueScheduler(queue: queue, internalSerialQueueName: "\(id) internal")
 
         self.executionRelay
-            .observeOn(self.scheduler)
+            .observe(on: self.scheduler)
             .debounce(RxTimeInterval.milliseconds(1), scheduler: self.scheduler)
             .bind(
                 onNext: { [weak self] () -> Void in

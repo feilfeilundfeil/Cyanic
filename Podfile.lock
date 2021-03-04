@@ -1,22 +1,22 @@
 PODS:
   - Alacrity (0.5.4)
-  - Differentiator (4.0.1)
+  - Differentiator (5.0.0)
   - Kio (2.2.2)
   - LayoutKit (10.1.4)
-  - Nimble (8.0.4)
-  - Quick (2.2.0)
-  - RxCocoa (5.0.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxDataSources (4.0.1):
-    - Differentiator (~> 4.0)
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
-  - RxRelay (5.0.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.0.1)
-  - SideMenu (6.4.7)
-  - Sourcery (0.17.0)
+  - Nimble (9.0.0)
+  - Quick (3.1.2)
+  - RxCocoa (6.1.0):
+    - RxRelay (= 6.1.0)
+    - RxSwift (= 6.1.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.1.0):
+    - RxSwift (= 6.1.0)
+  - RxSwift (6.1.0)
+  - SideMenu (6.5.0)
+  - Sourcery (1.3.1)
 
 DEPENDENCIES:
   - Alacrity
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - Sourcery
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alacrity
     - Differentiator
     - Kio
@@ -39,10 +39,9 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxRelay
+    - RxSwift
     - SideMenu
     - Sourcery
-  trunk:
-    - RxSwift
 
 EXTERNAL SOURCES:
   LayoutKit:
@@ -55,18 +54,18 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alacrity: f69c0bbe4917912d83a63c981884420f857ddeff
-  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   Kio: 320b6cb88a8c9175bb72880e8a85bea66027a0a8
   LayoutKit: 59016c1f920c022e39dc984e7d593ae8a503c8e5
-  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
-  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
-  SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
-  Sourcery: 3ed61be7c8a1218fce349266139379dba477efe0
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Quick: 60f0ea3b8e0cfc0df3259a5c06a238ad8b3c46e0
+  RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
+  RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  Sourcery: c36ef4f4acce0889653296901cb56011590e8e78
 
 PODFILE CHECKSUM: 22099bc707db07b0dcefe78335a992b98d8eb9f9
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1

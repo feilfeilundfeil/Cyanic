@@ -85,8 +85,8 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
             throttleType: self.throttleType,
             scheduler: self.scheduler
         )
-        .observeOn(self.scheduler)
-        .subscribeOn(self.scheduler)
+        .observe(on: self.scheduler)
+        .subscribe(on: self.scheduler)
 
         if viewModels.contains(where: { $0.isDebugMode }) {
             throttledStateObservable = throttledStateObservable
@@ -96,7 +96,7 @@ open class CyanicViewController: UIViewController, StateObservableBuilder {
         throttledStateObservable = throttledStateObservable.share()
 
         throttledStateObservable
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(
                 onNext: { [weak self] (_: [Any]) -> Void in
                     self?.invalidate()

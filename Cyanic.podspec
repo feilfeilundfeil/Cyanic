@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
   spec.source_files          = "Sources/**/*.swift", "Sources/Components/**/*.swift"
   spec.resources             = ["Templates/*"]
   spec.requires_arc          = true
-  spec.swift_version         = "5.0"
+  spec.swift_version         = "5.3"
 
   spec.dependency "LayoutKit"
   spec.dependency "RxDataSources"

@@ -96,7 +96,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
             .distinctUntilChanged()
 
         self.resolveInitialValue(for: obs, postInitialValue: postInitialValue)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { (async: Async<T>) -> Void in
                     switch async {
@@ -146,7 +146,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
         }
 
         observable
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { (value: T) -> Void in
                     onNewValue(value)
@@ -180,7 +180,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
             .distinctUntilChanged()
 
         self.resolveInitialValue(for: observable, postInitialValue: postInitialValue)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { (value: SubscribeSelect2<T, U>) -> Void in
                     onNewValue((value.t, value.u))
@@ -220,7 +220,7 @@ open class ViewModel<StateType: State>: AbstractViewModel<StateType> {
             .distinctUntilChanged()
 
         self.resolveInitialValue(for: observable, postInitialValue: postInitialValue)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .subscribe(
                 onNext: { (value: SubscribeSelect3<T, U, V>) -> Void in
                     onNewValue((value.t, value.u, value.v))

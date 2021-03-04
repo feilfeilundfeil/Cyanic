@@ -287,7 +287,7 @@ class ViewModelTests: QuickSpec {
                         })
                     }
 
-                    expect(counter).toEventually(equal(3), timeout: 0.5, pollInterval: 0.5, description: "")
+                    expect(counter).toEventually(equal(3), timeout: .milliseconds(500), pollInterval: .milliseconds(500), description: "")
                 }
 
                 it("should execute the onNewValue closure for two properties") {
@@ -362,7 +362,7 @@ class ViewModelTests: QuickSpec {
                     }
 
                     expect(counter)
-                        .toEventually(equal(4), timeout: 0.5, pollInterval: 0.5, description: "")
+                        .toEventually(equal(4), timeout: .milliseconds(500), pollInterval: .milliseconds(500), description: "")
                 }
             }
         }

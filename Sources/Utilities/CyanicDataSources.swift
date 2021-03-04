@@ -80,10 +80,11 @@ public final class CyanicRxTableViewSectionedAnimatedDataSource<Section: Animata
                                 tableView.endUpdates()
                             }
 
-                        case .reload:
+                        default:
                             dataSource.setSections(newSections)
                             tableView.reloadData()
                             return
+
                     }
                 } catch let e {
                     os_log("Diffing Error: %{public}s", log: CyanicDataSourceLog, type: OSLogType.error, e.localizedDescription)
@@ -133,22 +134,25 @@ public final class CyanicRxCollectionViewSectionedAnimatedDataSource<Section: An
                     )
 
                     switch dataSource.decideViewTransition(dataSource, collectionView, differences) {
-                    case .animated:
-                        guard !differences.isEmpty else { break }
-                        // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
-                        // this is a limitation of Diff tool
+                        case .animated:
+                            guard !differences.isEmpty else { break }
+                            // each difference must be run in a separate 'performBatchUpdates', otherwise it crashes.
+                            // this is a limitation of Diff tool
 
-                        collectionView.performBatchUpdates({
-                            for difference in differences {
-                                dataSource.setSections(difference.finalSections)
-                                collectionView.batchUpdates(difference, animationConfiguration: dataSource.animationConfiguration)
-                            }
-                        }, completion: nil)
+                            collectionView.performBatchUpdates({
+                                for difference in differences {
+                                    dataSource.setSections(difference.finalSections)
+                                    collectionView.batchUpdates(
+                                        difference,
+                                        animationConfiguration: dataSource.animationConfiguration
+                                    )
+                                }
+                            }, completion: nil)
 
-                    case .reload:
-                        dataSource.setSections(newSections)
-                        collectionView.reloadData()
-                        return
+                        default:
+                            dataSource.setSections(newSections)
+                            collectionView.reloadData()
+                            return
                     }
                 } catch let e {
                     os_log("Diffing Error: %{public}s", log: CyanicDataSourceLog, type: OSLogType.error, e.localizedDescription)

@@ -19,6 +19,8 @@ extension Text: Hashable {
                 return string
             case .attributed(let string):
                 return string.string
+            @unknown default:
+                fatalError("New case not handled")
         }
     }
 
@@ -39,6 +41,8 @@ extension Text: Hashable {
                 string.hash(into: &hasher)
             case .unattributed(let string):
                 string.hash(into: &hasher)
+            @unknown default:
+                fatalError("New case not handled")
         }
     }
 }
